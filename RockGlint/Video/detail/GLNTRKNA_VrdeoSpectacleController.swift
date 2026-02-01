@@ -9,14 +9,36 @@ import UIKit
 import AVFoundation
 
 class GLNTRKNA_VideoSpectacleController: UIViewController {
+    
+    private var GLNTRKNA_DataManifest: GLNTRKNA_MomentEntry
+    
+    init(gln_data: GLNTRKNA_MomentEntry) {
+        self.GLNTRKNA_DataManifest = gln_data
+        super.init(nibName: nil, bundle: nil)
+        
+        gln_data.glnt_comments.forEach { item in
+            GLNTRKNA_MockResponses.append(GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: ["Veyra","Elara","Galen Jax","Jone Mark","Me"].randomElement()!, GLNTRKNA_VoxAvatar: "GTRKnauserIId\(Int.random(in: 0...15))", GLNTRKNA_VoxProse: item))
+        }
+    }
+    
+    required init?(coder: NSCoder) { fatalError("GLNTRKNA_Init_Err") }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+   
     // MARK: - GLNTRKNA: Playback Engine
         private var GLNTRKNA_PlayerTube: AVPlayer?
         private var GLNTRKNA_MonitorLayer: AVPlayerLayer?
         private let GLNTRKNA_VideoContainer = UIView()
     
-    private let GLNTRKNA_CipherKey = "GLNTRKNA_KEY_888" // Your AES Key
-        private let GLNTRKNA_LocalScheme = "gln-secure"
-    
+  
     private let GLNTRKNA_CanvasWidth = UIScreen.main.bounds.width
     private let GLNTRKNA_CanvasHeight = UIScreen.main.bounds.height
     
@@ -32,56 +54,61 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     private let GLNTRKNA_CommentField = UITextField()
     
     private var GLNTRKNA_IsPlaybackActive = false
-    private var GLNTRKNA_Payload: GLNTRKNA_NailVideoModel?
+//    private var GLNTRKNA_Payload: GLNTRKNA_MomentEntry?
     
-    private let GLNTRKNA_MockResponses = [
-        ("Joren Veyra", "Nails > words!", "gln_ava_1"),
-        ("Cerys Elara", "Haha, YES! Who needs words when your nails are this fabulous? 🙌", "gln_ava_2"),
-        ("Galen Jax", "I'm here for nails that speak louder than my thoughts", "gln_ava_3")
-    ]
+    private var GLNTRKNA_MockResponses:[GLNTRKNA_FeedbackEntity] = []
 
-    func GLNTRKNA_SynchronizeData(gln_data: GLNTRKNA_NailVideoModel) {
-        self.GLNTRKNA_Payload = gln_data
-    }
+//    func GLNTRKNA_SynchronizeData(gln_data: GLNTRKNA_MomentEntry) {
+//        self.GLNTRKNA_Payload = gln_data
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        GLNTRKNA_PlayFreezeIcon.isHidden = true
         GLNTRKNA_AssembleScenery()
         GLNTRKNA_PopulateMockIntel()
+        GLNTRKNA_InitializeSecureTheater()
     }
     private func GLNTRKNA_InitializeSecureTheater() {
-            // GLNTRKNA: Setup Video Container inside the VisualPlate
-            GLNTRKNA_VideoContainer.frame = GLNTRKNA_VisualPlate.bounds
-            GLNTRKNA_VideoContainer.backgroundColor = .black
-            GLNTRKNA_VisualPlate.addSubview(GLNTRKNA_VideoContainer)
-            
-            // GLNTRKNA: Locate Encrypted Asset
-            guard let gln_path = Bundle.main.path(forResource: "gln_promo_vid", ofType: "aes"),
-                  var gln_url = URL(string: gln_path) else { return }
-            
-            // GLNTRKNA: Redirect URL to our custom loader
-            var gln_components = URLComponents(url: gln_url, resolvingAgainstBaseURL: false)
-            gln_components?.scheme = GLNTRKNA_LocalScheme
-            guard let gln_redirect_url = gln_components?.url else { return }
-
-            let gln_asset = AVURLAsset(url: gln_redirect_url)
-            // Important: Set the delegate to handle decryption
-//            gln_asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
-            
-            let gln_item = AVPlayerItem(asset: gln_asset)
-            GLNTRKNA_PlayerTube = AVPlayer(playerItem: gln_item)
-            
-            GLNTRKNA_MonitorLayer = AVPlayerLayer(player: GLNTRKNA_PlayerTube)
-            GLNTRKNA_MonitorLayer?.frame = GLNTRKNA_VideoContainer.bounds
-        GLNTRKNA_MonitorLayer?.videoGravity = .resizeAspectFill
-            GLNTRKNA_VideoContainer.layer.addSublayer(GLNTRKNA_MonitorLayer!)
-            
-            // Loop Playback
-            NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: gln_item, queue: .main) { _ in
-                self.GLNTRKNA_PlayerTube?.seek(to: .zero)
-                self.GLNTRKNA_PlayerTube?.play()
-            }
+        GLNTRKNA_VideoContainer.frame = GLNTRKNA_VisualPlate.bounds
+        GLNTRKNA_VideoContainer.backgroundColor = .black
+        GLNTRKNA_VisualPlate.addSubview(GLNTRKNA_VideoContainer)
+        
+        // 修复点 1: 确保文件名正确。从你的 plist  来看，
+        // 视频标识符可能是 "SPPuuuRRll10" 这种格式。
+        guard let gln_path = Bundle.main.path(forResource: GLNTRKNA_DataManifest.SPPuuuRRll, ofType: "mp4") else {
+            print("GLNTRKNA Error: Video asset not found in bundle")
+            return
         }
+        
+        // 修复点 2: 必须使用 fileURLWithPath
+        let gln_url = URL(fileURLWithPath: gln_path)
+        
+        let gln_asset = AVURLAsset(url: gln_url)
+        let gln_item = AVPlayerItem(asset: gln_asset)
+        GLNTRKNA_PlayerTube = AVPlayer(playerItem: gln_item)
+        
+        GLNTRKNA_MonitorLayer = AVPlayerLayer(player: GLNTRKNA_PlayerTube)
+        GLNTRKNA_MonitorLayer?.frame = GLNTRKNA_VideoContainer.bounds
+        GLNTRKNA_MonitorLayer?.videoGravity = .resizeAspectFill
+        
+        if let layer = GLNTRKNA_MonitorLayer {
+            GLNTRKNA_VideoContainer.layer.addSublayer(layer)
+        }
+        
+        // 修复点 3: 显式调用 play()，且处理音频会话
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        GLNTRKNA_PlayerTube?.play()
+        
+        // 循环播放监听
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: gln_item, queue: .main) { [weak self] _ in
+            self?.GLNTRKNA_PlayerTube?.seek(to: .zero)
+            self?.GLNTRKNA_PlayerTube?.play()
+        }
+        
+        GLNTRKNA_VisualPlate.addSubview(GLNTRKNA_PlayFreezeIcon)
+       
+    }
 
     private func GLNTRKNA_AssembleScenery() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.15, alpha: 1.0)
@@ -105,8 +132,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_PlayFreezeIcon.image = UIImage(named: "GLNTRKNAplauid")
         GLNTRKNA_PlayFreezeIcon.tintColor = .white
         GLNTRKNA_PlayFreezeIcon.alpha = 0.8
-        GLNTRKNA_VisualPlate.addSubview(GLNTRKNA_PlayFreezeIcon)
-        
+         
         let gln_back = UIButton(frame: CGRect(x: 20, y: 50, width: 40, height: 40))
         gln_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         gln_back.tintColor = .white
@@ -124,13 +150,15 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_UserAvatar.layer.borderWidth = 2
         GLNTRKNA_UserAvatar.layer.borderColor = UIColor.systemPink.cgColor
         GLNTRKNA_UserAvatar.clipsToBounds = true
-        GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_UserAvatar)
+        GLNTRKNA_UserAvatar.image = UIImage(named: GLNTRKNA_DataManifest.glnt_userId)
         
+        GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_UserAvatar)
+        GLNTRKNA_UserNameLabel.text =  GLNTRKNA_DataManifest.glnt_userName
         GLNTRKNA_UserNameLabel.frame = CGRect(x: 90, y: GLNTRKNA_MetricH(385), width: 200, height: 25)
         GLNTRKNA_UserNameLabel.textColor = .white
         GLNTRKNA_UserNameLabel.font = .boldSystemFont(ofSize: 18)
         GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_UserNameLabel)
-        
+        GLNTRKNA_MetricsLabel.text = "\(GLNTRKNA_DataManifest.glnt_content.count) comment"
         GLNTRKNA_MetricsLabel.frame = CGRect(x: 90, y: GLNTRKNA_MetricH(410), width: 200, height: 20)
         GLNTRKNA_MetricsLabel.textColor = .lightGray
         GLNTRKNA_MetricsLabel.font = .systemFont(ofSize: 14)
@@ -140,7 +168,8 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
      
         gln_heart.setImage(UIImage(named: "gln_heart"), for: .normal)
         gln_heart.setImage(UIImage(named: "gln_heart_fill"), for: .selected)
-       
+        gln_heart.addTarget(self, action: #selector(GLNTRKNA_Triggeractionlike(heiaufi: )), for: .touchUpInside)
+      
         GLNTRKNA_VesselScroll.addSubview(gln_heart)
         
         let gln_content_y = GLNTRKNA_MetricH(480)
@@ -148,6 +177,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_ProseBody.textColor = .white
         GLNTRKNA_ProseBody.numberOfLines = 3
         GLNTRKNA_ProseBody.font = .systemFont(ofSize: 15)
+        GLNTRKNA_ProseBody.text = GLNTRKNA_DataManifest.glnt_content
         GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_ProseBody)
         
         let gln_line = UIView(frame: CGRect(x: 20, y: gln_content_y + 75, width: GLNTRKNA_CanvasWidth - 40, height: 0.5))
@@ -160,12 +190,14 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         
         GLNTRKNA_CommentStack.axis = .vertical
         GLNTRKNA_CommentStack.spacing = 15
-        GLNTRKNA_CommentStack.frame = CGRect(x: 20, y: gln_content_y + 130, width: GLNTRKNA_CanvasWidth - 40, height: 0)
+        GLNTRKNA_CommentStack.frame = CGRect(x: 20, y: gln_content_y + 130, width: GLNTRKNA_CanvasWidth - 40, height:CGFloat(GLNTRKNA_DataManifest.glnt_comments.count)*40)
         GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_CommentStack)
         
         GLNTRKNA_SetupInputHarbor()
     }
-    //report
+    @objc private func GLNTRKNA_Triggeractionlike(heiaufi:UIButton) {
+        heiaufi.isSelected = !heiaufi.isSelected
+    }
    @objc func gln_reportTraiiler()  {
        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
        self.present(safetyvc, animated: true)
@@ -197,8 +229,10 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
             GLNTRKNA_IsPlaybackActive.toggle()
             
             if GLNTRKNA_IsPlaybackActive {
+                GLNTRKNA_PlayFreezeIcon.isHidden = true
                 GLNTRKNA_PlayerTube?.play()
             } else {
+                GLNTRKNA_PlayFreezeIcon.isHidden = false
                 GLNTRKNA_PlayerTube?.pause()
             }
             
@@ -209,13 +243,13 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         }
     
     private func GLNTRKNA_PopulateMockIntel() {
-        guard let gln_data = GLNTRKNA_Payload else { return }
-        GLNTRKNA_UserNameLabel.text = gln_data.gln_user
-        GLNTRKNA_MetricsLabel.text = "\(gln_data.gln_comments) comments"
-        GLNTRKNA_ProseBody.text = gln_data.gln_desc
+      
+        GLNTRKNA_UserNameLabel.text = GLNTRKNA_DataManifest.glnt_userName
+        GLNTRKNA_MetricsLabel.text = "\(GLNTRKNA_DataManifest.glnt_comments.count) comments"
+        GLNTRKNA_ProseBody.text = GLNTRKNA_DataManifest.glnt_content
         
         for gln_item in GLNTRKNA_MockResponses {
-            GLNTRKNA_AppendCommentRow(gln_name: gln_item.0, gln_text: gln_item.1)
+            GLNTRKNA_AppendCommentRow(gln_img: gln_item.GLNTRKNA_VoxAvatar, gln_name: gln_item.GLNTRKNA_VoxName, gln_text: gln_item.GLNTRKNA_VoxProse)
         }
     }
     
@@ -230,8 +264,11 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
             guard let self = self else { return }
-          
-            GLNTRKNA_AppendCommentRow(gln_name: "Me", gln_text: gln_txt, gln_top: true)
+            GLNTRKNA_DataManifest.glnt_comments.insert(gln_txt, at: 0)
+            GLNTRKNA_CommentStack.frame.size.height = CGFloat(GLNTRKNA_DataManifest.glnt_comments.count + 1)*40
+            
+            
+            GLNTRKNA_AppendCommentRow(gln_img: "", gln_name: "Me", gln_text: gln_txt, gln_top: true)
             GLNTRKNA_CommentField.text = ""
             GLNTRKNA_CommentField.resignFirstResponder()
             
@@ -248,13 +285,13 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         
     }
     
-    private func GLNTRKNA_AppendCommentRow(gln_name: String, gln_text: String, gln_top: Bool = false) {
+    private func GLNTRKNA_AppendCommentRow(gln_img:String,gln_name: String, gln_text: String, gln_top: Bool = false) {
         let gln_row = UIView()
         let gln_ava = UIImageView(frame: CGRect(x: 0, y: 0, width: 45, height: 45))
         gln_ava.backgroundColor = .gray
         gln_ava.layer.cornerRadius = 22.5
         gln_ava.clipsToBounds = true
-        
+        gln_ava.image = UIImage(named: gln_img)
         let gln_user = UILabel(frame: CGRect(x: 55, y: 0, width: 200, height: 20))
         gln_user.text = gln_name
         gln_user.textColor = .systemPurple

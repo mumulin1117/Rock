@@ -194,12 +194,26 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         if gln_mail.contains("@") && gln_pass.count >= 6 {
             GLNTRKNA_CommitTrigger.isEnabled = false
             GLNTRKNA_CommitTrigger.alpha = 0.5
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                if let gln_win = self.view.window {
-                   // Navigate to main workspace here
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Login....", on: self.view)
+            let result =  GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_VerifyIdentity(email: gln_mail, secret: gln_pass)
+            if result  {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    if let gln_win = self.view.window {
+                        let glnt_msg = "✨ " + "Login successful! "
+                                
+                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
+                        gln_win.rootViewController = GLNTRKNA_StudioTabController()
+                    }
                 }
+              
+                return
+            }else{
+                
+                let glnt_msg = "⚠️ " + "Login failed,please tra again later! "
+                        
+                GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
             }
+            
         } else {
             GLNTRKNA_PostAlert(msg: "Invalid Email or Password credentials.")
         }

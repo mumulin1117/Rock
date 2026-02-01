@@ -9,7 +9,15 @@ import UIKit
 //他人主页
 class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var GLNTRKNACelestialData: GLNTRKNA_ConvergeModel?
+    var GLNTRKNACelestialData: GLNTRKNA_MomentEntry
+    init(GLNTRKNACelestialData: GLNTRKNA_MomentEntry) {
+        self.GLNTRKNACelestialData = GLNTRKNACelestialData
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let GLNTRKNACanvasW = UIScreen.main.bounds.width
     private let GLNTRKNACanvasH = UIScreen.main.bounds.height
@@ -135,12 +143,12 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
     }
 
     private func GLNTRKNASyncPortalData() {
-        guard let yac_data = GLNTRKNACelestialData else { return }
-        GLNTRKNANomadLabel.text = yac_data.gln_name
-        GLNTRKNAMantraLabel.text = "Nail artist, creating little masterpieces one finger at a time."
+      
+        GLNTRKNANomadLabel.text = GLNTRKNACelestialData.glnt_userName
+        GLNTRKNAMantraLabel.text = GLNTRKNACelestialData.glnt_signature
         // Fake Network Placeholder
-        GLNTRKNAMirrorBack.image = UIImage(named: "gln_bg_placeholder")
-        GLNTRKNAAuraAvatar.image = UIImage(named: "gln_avatar_placeholder")
+        GLNTRKNAMirrorBack.image = UIImage(named:GLNTRKNACelestialData.glnt_userId )//"gln_bg_placeholder"
+        GLNTRKNAAuraAvatar.image = UIImage(named: GLNTRKNACelestialData.glnt_userId)
     }
 
     // MARK: - Logic Interaction
@@ -153,14 +161,25 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
     }
 
     @objc private func GLNTRKNAEnterDeepChat() {
-        let yac_chat_vc = GLNTRKNA_SoloDialogueController()
-        yac_chat_vc.GLNTRKNA_ContextCarrier = GLNTRKNACelestialData
+        if let gln_index = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.firstIndex(where: {
+            $0.userModel.glnt_userId == self.GLNTRKNACelestialData.glnt_userId
+            
+        }) {
+            let yac_chat_vc = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier:GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[gln_index])
+           
+            self.navigationController?.pushViewController(yac_chat_vc, animated: true)
+           
+            return
+        }
+        
+        let yac_chat_vc = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_ConvergeModel.init(userModel: GLNTRKNACelestialData, convert: []))
+       
         self.navigationController?.pushViewController(yac_chat_vc, animated: true)
     }
 
     @objc private func GLNTRKNAEstablishVisualLink() {
         let yac_face_vc = GLNTRKNA_FaceMirrorController()
-        yac_face_vc.GLNTRKNA_RemoteIdentity = GLNTRKNACelestialData?.gln_name ?? "User"
+        yac_face_vc.GLNTRKNA_RemoteIdentity = GLNTRKNACelestialData.glnt_userName
         yac_face_vc.modalPresentationStyle = .fullScreen
         self.present(yac_face_vc, animated: true)
     }

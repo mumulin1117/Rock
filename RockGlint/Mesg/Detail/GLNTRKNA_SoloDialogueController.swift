@@ -1,9 +1,8 @@
 import UIKit
 struct GLNTRKNA_ConvergeModel {
-    let gln_name: String
-    let gln_last: String
-    let gln_time: String
-    let gln_unread: Int
+    let userModel:GLNTRKNA_MomentEntry
+    var convert:[GLNTRKNA_MsgPacket]
+    
 }
 
 struct GLNTRKNA_MsgPacket {
@@ -14,12 +13,17 @@ struct GLNTRKNA_MsgPacket {
 class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // GLNTRKNA: External Data Injection
-    var GLNTRKNA_ContextCarrier: GLNTRKNA_ConvergeModel?
+    var GLNTRKNA_ContextCarrier: GLNTRKNA_ConvergeModel
+    init(GLNTRKNA_ContextCarrier: GLNTRKNA_ConvergeModel) {
+        self.GLNTRKNA_ContextCarrier = GLNTRKNA_ContextCarrier
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    // GLNTRKNA: Local Stream
-    private var GLNTRKNA_DialogueStream = [GLNTRKNA_MsgPacket]()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    // GLNTRKNA: UI Components
+
     private let GLNTRKNA_ChatVault = UITableView()
     private let GLNTRKNA_EntryPlate = UIView()
     private let GLNTRKNA_WriteField = UITextField()
@@ -48,7 +52,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         gln_top_nav.addSubview(gln_exit)
         
         let gln_partner_lbl = UILabel(frame: CGRect(x: 80, y: 60 * GLNTRKNA_RatioH, width: view.bounds.width - 160, height: 40))
-        gln_partner_lbl.text = GLNTRKNA_ContextCarrier?.gln_name ?? "User"
+        gln_partner_lbl.text = GLNTRKNA_ContextCarrier.userModel.glnt_userName
         gln_partner_lbl.textColor = .white
         gln_partner_lbl.textAlignment = .center
         gln_partner_lbl.font = .boldSystemFont(ofSize: 18)
@@ -115,11 +119,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
        self.present(safetyvc, animated: true)
     }
     private func GLNTRKNA_HydrateDialogue() {
-        // GLNTRKNA: Seed data based on incoming context carrier
-        GLNTRKNA_DialogueStream = [
-            GLNTRKNA_MsgPacket(gln_txt: "Hi 👋", gln_isSelf: false, gln_time: "09:06 am"),
-            GLNTRKNA_MsgPacket(gln_txt: "A great role never goes out of style, never.", gln_isSelf: false, gln_time: "09:06 am")
-        ]
+      
         GLNTRKNA_ChatVault.reloadData()
     }
     
@@ -130,12 +130,21 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         }
         
         let gln_new_packet = GLNTRKNA_MsgPacket(gln_txt: gln_text, gln_isSelf: true, gln_time: "09:15 am")
-        GLNTRKNA_DialogueStream.append(gln_new_packet)
+        self.GLNTRKNA_ContextCarrier.convert.append(gln_new_packet)
+        
+        if let gln_index = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.firstIndex(where: {
+            $0.userModel.glnt_userId == self.GLNTRKNA_ContextCarrier.userModel.glnt_userId
+            
+        }) {
+            // 更新全局数组中对应位置的消息包数组
+            GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[gln_index].convert = self.GLNTRKNA_ContextCarrier.convert
+            
+        }
         
         GLNTRKNA_WriteField.text = ""
         GLNTRKNA_ChatVault.reloadData()
         
-        let gln_path = IndexPath(row: GLNTRKNA_DialogueStream.count - 1, section: 0)
+        let gln_path = IndexPath(row: GLNTRKNA_ContextCarrier.convert.count - 1, section: 0)
         GLNTRKNA_ChatVault.scrollToRow(at: gln_path, at: .bottom, animated: true)
         
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -175,17 +184,17 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
 
     // MARK: - TableView Protocols
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GLNTRKNA_DialogueStream.count
+        return GLNTRKNA_ContextCarrier.convert.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gln_cell = tableView.dequeueReusableCell(withIdentifier: "GLNTRKNA_Bubble", for: indexPath) as! GLNTRKNA_DialogueBubbleCell
-        gln_cell.GLNTRKNA_Configure(gln_packet: GLNTRKNA_DialogueStream[indexPath.row])
+        gln_cell.GLNTRKNA_Configure(gln_packet: GLNTRKNA_ContextCarrier.convert[indexPath.row])
         return gln_cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let gln_item = GLNTRKNA_DialogueStream[indexPath.row]
+        let gln_item = GLNTRKNA_ContextCarrier.convert[indexPath.row]
         let gln_width = UIScreen.main.bounds.width * 0.65
         let gln_size = gln_item.gln_txt.boundingRect(with: CGSize(width: gln_width, height: 1000), options: .usesLineFragmentOrigin, attributes: [.font: UIFont.systemFont(ofSize: 16)], context: nil)
         return gln_size.height + 60

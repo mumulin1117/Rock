@@ -12,9 +12,9 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
     private let GLNTRKNA_BaseWidth: CGFloat = 393.0
     private let GLNTRKNA_BaseHeight: CGFloat = 852.0
     
-    private var GLNTRKNA_CurrentStream = [GLNTRKNA_NailVideoModel]()
+   
     private let GLNTRKNA_HeaderTags = ["Hot", "For you", "New", "Followed"]
-    private var GLNTRKNA_SelectedIndex = 0
+    private var GLNTRKNA_SelectedIndex = 400
     private let backGroundImagPickin:UIImageView = UIImageView.init(image: UIImage.init(named: "gln_ringball"))
    
     private lazy var GLNTRKNA_MainGallery: UICollectionView = {
@@ -32,13 +32,44 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
     
     private let GLNTRKNA_NavPlate = UIView()
  
-    private let GLNTRKNA_LoadingPlatter = UIActivityIndicatorView(style: .large)
-
+  
+    private var GLNTRKNAfeedItems: [GLNTRKNA_MomentEntry] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_InitializeCanvas()
-        GLNTRKNA_FetchRemoteCatalog()
+      
+        GLNTRKNA_HandleBlacklistUpdate()
+        GLNTRKNA_SetupObservers()
     }
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_HandleBlacklistUpdate),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
+    }
+    @objc private func GLNTRKNA_HandleBlacklistUpdate() {
+     
+        let logicEngine = GLNTRKNA_HomeLogicEngine()
+        self.GLNTRKNAfeedItems = logicEngine.GLNTRKNA_FilterVadio(by: GLNTRKNA_SelectedIndex - 400)
+        
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loading....", on: self.view)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+            self.GLNTRKNA_MainGallery.reloadData()
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        }))
+        
+    }
+        
+       
+    deinit {
+       
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     private func GLNTRKNA_InitializeCanvas() {
         view.backgroundColor = UIColor(red: 0.04, green: 0.04, blue: 0.16, alpha: 1.0)
@@ -61,10 +92,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
         
         GLNTRKNA_MainGallery.frame = CGRect(x: 0, y: GLNTRKNA_RatioH(127 + 40 + 20) , width: view.bounds.width, height: view.bounds.height - GLNTRKNA_RatioH(187))
         view.addSubview(GLNTRKNA_MainGallery)
-        
-        GLNTRKNA_LoadingPlatter.center = view.center
-        GLNTRKNA_LoadingPlatter.color = .systemPink
-        view.addSubview(GLNTRKNA_LoadingPlatter)
+     
     }
     @objc private func GLNTRKNA_RenderPostNodes() {
         self.navigationController?.pushViewController(GLNTRKNA_CreativeStudioController.init(gln_mode: .gln_artisan_video), animated: true)
@@ -103,47 +131,40 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
         if GLNTRKNA_SelectedIndex == sender.tag { return }
         GLNTRKNA_SelectedIndex = sender.tag
 //        GLNTRKNA_ConstructSegmentedInterface()
-        GLNTRKNA_FetchRemoteCatalog()
+        GLNTRKNA_HandleBlacklistUpdate()
         backGroundImagPickin.center = sender.center
         let gln_impact = UISelectionFeedbackGenerator()
         gln_impact.selectionChanged()
     }
     
-    private func GLNTRKNA_FetchRemoteCatalog() {
-        GLNTRKNA_LoadingPlatter.startAnimating()
-        GLNTRKNA_MainGallery.alpha = 0
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            self.GLNTRKNA_CurrentStream = [
-                GLNTRKNA_NailVideoModel(gln_user: "Daphne", gln_desc: "I went skiing with my family this weekend and it was really fun...", gln_likes: "108", gln_comments: "90", gln_img: "gln_demo_1"),
-                GLNTRKNA_NailVideoModel(gln_user: "Skylar", gln_desc: "Check out these new 3D nail charms I just got! #NailArt", gln_likes: "2.4k", gln_comments: "150", gln_img: "gln_demo_2")
-            ]
-            self.GLNTRKNA_LoadingPlatter.stopAnimating()
-            self.GLNTRKNA_MainGallery.reloadData()
-            UIView.animate(withDuration: 0.3) { self.GLNTRKNA_MainGallery.alpha = 1 }
-        }
-    }
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return GLNTRKNA_CurrentStream.count
+        return GLNTRKNAfeedItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let gln_cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLNTRKNA_VideoVesselCell", for: indexPath) as! GLNTRKNA_VideoVesselCell
-        gln_cell.GLNTRKNA_ConfigureProtocol(gln_data: GLNTRKNA_CurrentStream[indexPath.item])
+        gln_cell.GLNTRKNA_ConfigureProtocol(gln_data: GLNTRKNAfeedItems[indexPath.item])
+        gln_cell.GLNTRKNA_ReportBox.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
         return gln_cell
     }
-    
+    @objc func gln_reportTraiiler()  {
+        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
+        self.present(safetyvc, animated: true)
+     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.bounds.width - GLNTRKNA_RatioW(40), height: GLNTRKNA_RatioH(500))
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vcLNTRKNA = GLNTRKNA_VideoSpectacleController.init()
+        let vcLNTRKNA = GLNTRKNA_VideoSpectacleController.init(gln_data: GLNTRKNAfeedItems[indexPath.row])
         self.navigationController?.pushViewController(vcLNTRKNA, animated: true)
         
     }
+    
+  
     private func GLNTRKNA_RatioW(_ val: CGFloat) -> CGFloat { return (UIScreen.main.bounds.width / GLNTRKNA_BaseWidth) * val }
     private func GLNTRKNA_RatioH(_ val: CGFloat) -> CGFloat { return (UIScreen.main.bounds.height / GLNTRKNA_BaseHeight) * val }
 }
@@ -156,7 +177,7 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
     private let GLNTRKNA_PlayIndicator = UIImageView()
     private let GLNTRKNA_LikeBox = UIButton()
     private let GLNTRKNA_CommentBox = UIButton()
-    private let GLNTRKNA_ReportBox = UIButton()
+     let GLNTRKNA_ReportBox = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -171,6 +192,7 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         
         GLNTRKNA_CoverArt.frame = CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height - 80)
+        GLNTRKNA_CoverArt.layer.masksToBounds = true
         GLNTRKNA_CoverArt.contentMode = .scaleAspectFill
         GLNTRKNA_CoverArt.backgroundColor = .darkGray
         contentView.addSubview(GLNTRKNA_CoverArt)
@@ -216,17 +238,27 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_ReportBox.setImage(UIImage(named: "reporeintgg"), for: .normal)
     }
     
-    func GLNTRKNA_ConfigureProtocol(gln_data: GLNTRKNA_NailVideoModel) {
-        GLNTRKNA_BriefLabel.text = gln_data.gln_desc
-        GLNTRKNA_LikeBox.setTitle(" \(gln_data.gln_likes)", for: .normal)
-        GLNTRKNA_CommentBox.setTitle(" \(gln_data.gln_comments)", for: .normal)
+    func GLNTRKNA_ConfigureProtocol(gln_data: GLNTRKNA_MomentEntry) {
+        GLNTRKNA_BriefLabel.text = gln_data.glnt_content
+        GLNTRKNA_LikeBox.setTitle(" 0", for: .normal)
+        GLNTRKNA_CommentBox.setTitle(" \(gln_data.glnt_comments.count)", for: .normal)
+        GLNTRKNA_ConfigureVideoCell(with: gln_data.SPPuuuRRll)
+    }
+    
+    // 在你的 Cell 子类中
+    func GLNTRKNA_ConfigureVideoCell(with glnt_videoName: String) {
+        // 1. 构造本地路径
+        guard let glnt_path = Bundle.main.path(forResource: glnt_videoName, ofType: "mp4") else { return }
+        let glnt_url = URL(fileURLWithPath: glnt_path)
+        
+        // 2. 检查是否有内存缓存（可选逻辑）
+        // if let cached = MyCache.get(glnt_videoName) { self.imgView.image = cached; return }
+
+        // 3. 提取截图
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CaptureFrame(from: glnt_url) { [weak self] glnt_image in
+            self?.GLNTRKNA_CoverArt.image = glnt_image
+        }
     }
 }
 
-struct GLNTRKNA_NailVideoModel {
-    let gln_user: String
-    let gln_desc: String
-    let gln_likes: String
-    let gln_comments: String
-    let gln_img: String
-}
+

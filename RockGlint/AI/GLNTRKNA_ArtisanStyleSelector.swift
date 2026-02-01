@@ -38,7 +38,8 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
         let gln_forge = UIButton(frame: CGRect(x: 40, y: view.frame.height - 100, width: view.frame.width - 80, height: 60))
         gln_forge.backgroundColor = GLNTRKNA_ActionPink
         gln_forge.layer.cornerRadius = 30
-        gln_forge.setTitle("🪙 200", for: .normal)
+        gln_forge.setImage(UIImage.init(named: "gln_coin_icon"), for: .normal)
+        gln_forge.setTitle("200", for: .normal)
         gln_forge.addTarget(self, action: #selector(GLNTRKNA_TriggerGeneration), for: .touchUpInside)
         view.addSubview(gln_forge)
     }
@@ -74,28 +75,79 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
         GLNTRKNA_ThemePool.indices.forEach { _ in /* Reset logic */ }
         sender.backgroundColor = .white
         sender.setTitleColor(.black, for: .normal)
+        GLNTRKNA_CurrentTheme = sender.titleLabel?.text
     }
     
     @objc private func GLNTRKNA_ShapeSelect(sender: UIButton) {
         sender.backgroundColor = .white
         sender.setTitleColor(.black, for: .normal)
+        GLNTRKNA_CurrentShape = sender.titleLabel?.text
     }
 
     @objc private func GLNTRKNA_TriggerGeneration() {
-        let gln_overlay = UIView(frame: view.bounds)
-        gln_overlay.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        view.addSubview(gln_overlay)
+        guard GLNTRKNA_CurrentTheme != nil &&  GLNTRKNA_CurrentShape != nil else{
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage("Please pick your style and shape at first!", on: self.view)
+            return
+        }
         
-        let gln_loading = UIActivityIndicatorView(style: .large)
-        gln_loading.center = view.center
-        gln_loading.startAnimating()
-        gln_overlay.addSubview(gln_loading)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            gln_overlay.removeFromSuperview()
-            let gln_result = GLNTRKNA_CreativeOutputController()
-            self.navigationController?.pushViewController(gln_result, animated: true)
+        let glnt_cost = 200
+        self.GLNTRKNA_PresentDecision(
+                title: "AI Generation",
+                detail: "This creative process will consume \(glnt_cost) coins. Do you wish to proceed?",
+                confirmTitle: "Confirm"
+            ) { [weak self] in
+                guard let self = self else { return }
+                
+              
+                GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_AttemptAIPurchase(cost: glnt_cost) { success in
+                    DispatchQueue.main.async { [self] in
+                        if success {
+                            // 2. 检查并处理扣费
+                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Waiting....", on: self.view)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                let glnt_msg = "✨ " + "Deduction successful!"
+                                        
+                                GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
+                                let gln_result = GLNTRKNA_CreativeOutputController()
+                                self.navigationController?.pushViewController(gln_result, animated: true)
+                            }
+                          
+                        } else {
+                            
+                            self.GLNTRKNA_HandleInsufficientFunds()
+                          
+                        }
+                    }
+                }
+            }
+        
+        
+    }
+    
+    private func GLNTRKNA_HandleInsufficientFunds() {
+        self.GLNTRKNA_PresentDecision(
+            title: "Inadequate Balance",
+            detail: "You need more coins to unlock this AI feature. Go to recharge?",
+            confirmTitle: "Recharge"
+        ) {
+            let rechargeVC = GLNTRKNA_TreasureVault() // 您的充值页面
+            self.navigationController?.pushViewController(rechargeVC, animated: true)
         }
     }
+    
+    func GLNTRKNA_PresentDecision(title: String, detail: String, confirmTitle: String = "Confirm", handler: @escaping () -> Void) {
+            let glnt_alert = UIAlertController(title: title, message: detail, preferredStyle: .alert)
+            
+            let glnt_confirm = UIAlertAction(title: confirmTitle, style: .default) { _ in
+                handler()
+            }
+            let glnt_cancel = UIAlertAction(title: "Dismiss", style: .cancel)
+            
+            glnt_alert.addAction(glnt_confirm)
+            glnt_alert.addAction(glnt_cancel)
+            
+            self.present(glnt_alert, animated: true)
+        }
 }
 

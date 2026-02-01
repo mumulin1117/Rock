@@ -17,10 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func showAppropriateView() {
-        if RNL_GlintVault.shard.isArtisanPresent {
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CurrentEmail != nil {
             window?.rootViewController = GLNTRKNA_StudioTabController()
         } else {
-            window?.rootViewController = GLNTRKNA_StudioTabController()//GLNTRKNA_AccessGateway()
+            window?.rootViewController = GLNTRKNA_AccessGateway()
         }
         window?.makeKeyAndVisible()
     }

@@ -8,26 +8,36 @@
 import UIKit
 
 
-struct GLNTRKNA_DynamicModel {
-    let GLNTRKNA_UserIdentity: String
-    let GLNTRKNA_AvatarResource: String
-    let GLNTRKNA_HeroAssets: [String]
-    let GLNTRKNA_ProseContent: String
-    let GLNTRKNA_FeedbackVolume: String
-    let GLNTRKNA_ReprintWorks: [String] // Empty implies the default planet view
-}
+//struct GLNTRKNA_DynamicModel {
+//    let GLNTRKNA_UserIdentity: String
+//    let GLNTRKNA_AvatarResource: String
+//    let GLNTRKNA_HeroAssets: [String]
+//    let GLNTRKNA_ProseContent: String
+//    let GLNTRKNA_FeedbackVolume: String
+//    let GLNTRKNA_ReprintWorks: [String] // Empty implies the default planet view
+//}
 
 class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+   
     private let GLNTRKNA_RootContainer = UIScrollView()
     private let GLNTRKNA_AssetSlider = UIScrollView()
     private let GLNTRKNA_AssetIndicator = UILabel()
     private let gln_report = UIButton()
     private  let gln_heart = UIButton.init()
     
-    private var GLNTRKNA_DataManifest: GLNTRKNA_DynamicModel
+    private var GLNTRKNA_DataManifest: GLNTRKNA_MomentEntry
     
-    init(gln_data: GLNTRKNA_DynamicModel) {
+    init(gln_data: GLNTRKNA_MomentEntry) {
         self.GLNTRKNA_DataManifest = gln_data
         super.init(nibName: nil, bundle: nil)
     }
@@ -77,14 +87,14 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         GLNTRKNA_AssetSlider.delegate = self
         GLNTRKNA_AssetSlider.showsHorizontalScrollIndicator = false
         
-        for (idx, gln_img_name) in GLNTRKNA_DataManifest.GLNTRKNA_HeroAssets.enumerated() {
+        for (idx, gln_img_name) in GLNTRKNA_DataManifest.momentPics.enumerated() {
             let gln_img_v = UIImageView(frame: CGRect(x: CGFloat(idx) * gln_sw, y: 0, width: gln_sw, height: gln_hero_h))
             gln_img_v.contentMode = .scaleAspectFill
             gln_img_v.clipsToBounds = true
             gln_img_v.image = UIImage(named: gln_img_name)
             GLNTRKNA_AssetSlider.addSubview(gln_img_v)
         }
-        GLNTRKNA_AssetSlider.contentSize = CGSize(width: CGFloat(GLNTRKNA_DataManifest.GLNTRKNA_HeroAssets.count) * gln_sw, height: gln_hero_h)
+        GLNTRKNA_AssetSlider.contentSize = CGSize(width: CGFloat(GLNTRKNA_DataManifest.momentPics.count) * gln_sw, height: gln_hero_h)
         GLNTRKNA_RootContainer.addSubview(GLNTRKNA_AssetSlider)
         
         // 2. Navigation Overlay
@@ -108,33 +118,39 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_avatar.layer.borderWidth = 2
         gln_avatar.layer.borderColor = UIColor.systemPink.cgColor
         gln_avatar.clipsToBounds = true
-        gln_avatar.image = UIImage(named: GLNTRKNA_DataManifest.GLNTRKNA_AvatarResource)
+        gln_avatar.image = UIImage(named: GLNTRKNA_DataManifest.glnt_userId)
         GLNTRKNA_RootContainer.addSubview(gln_avatar)
         
-        self.gln_heart.frame =  CGRect(x:view.frame.width -  GLNTRKNA_ScaleW(20), y: gln_info_y, width: 60, height: 60)
+       
         
         let gln_user_lbl = UILabel(frame: CGRect(x: GLNTRKNA_ScaleW(90), y: gln_info_y + 5, width: 200, height: 25))
-        gln_user_lbl.text = GLNTRKNA_DataManifest.GLNTRKNA_UserIdentity
+        gln_user_lbl.text = GLNTRKNA_DataManifest.glnt_userName
         gln_user_lbl.textColor = .white
         gln_user_lbl.font = .boldSystemFont(ofSize: 18)
         GLNTRKNA_RootContainer.addSubview(gln_user_lbl)
         
         let gln_stat_lbl = UILabel(frame: CGRect(x: GLNTRKNA_ScaleW(90), y: gln_info_y + 30, width: 200, height: 20))
-        gln_stat_lbl.text = "\(GLNTRKNA_DataManifest.GLNTRKNA_FeedbackVolume) comments"
+        gln_stat_lbl.text = "\(GLNTRKNA_DataManifest.glnt_comments.count) comments"
         gln_stat_lbl.textColor = .lightGray
         gln_stat_lbl.font = .systemFont(ofSize: 14)
         GLNTRKNA_RootContainer.addSubview(gln_stat_lbl)
         
-        GLNTRKNA_AssetIndicator.frame = CGRect(x: gln_sw - 60, y: gln_info_y + 10, width: 45, height: 25)
+       
+        
+        GLNTRKNA_AssetIndicator.frame = CGRect(x: gln_sw - 60, y: gln_info_y - 10 - 25, width: 45, height: 25)
         GLNTRKNA_AssetIndicator.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         GLNTRKNA_AssetIndicator.layer.cornerRadius = 12.5
         GLNTRKNA_AssetIndicator.clipsToBounds = true
         GLNTRKNA_AssetIndicator.textColor = .white
         GLNTRKNA_AssetIndicator.font = .systemFont(ofSize: 12)
         GLNTRKNA_AssetIndicator.textAlignment = .center
-        GLNTRKNA_AssetIndicator.text = "1/\(GLNTRKNA_DataManifest.GLNTRKNA_HeroAssets.count)"
+        GLNTRKNA_AssetIndicator.text = "1/\(GLNTRKNA_DataManifest.momentPics.count)"
         GLNTRKNA_RootContainer.addSubview(GLNTRKNA_AssetIndicator)
+        self.gln_heart.setImage(UIImage.init(named: "gln_heart_fill"), for: .selected)
+        self.gln_heart.frame =  CGRect(x:view.frame.width -  40 - 15, y: gln_info_y + 5, width: 40, height: 40)
+        gln_heart.addTarget(self, action: #selector(GLNTRKNA_Triggeractionlike), for: .touchUpInside)
         
+        GLNTRKNA_RootContainer.addSubview(gln_heart)
         // 4. Content Card
         let gln_card_y = gln_hero_h - 20
         let gln_prose_box = UIView(frame: CGRect(x: 0, y: gln_card_y, width: gln_sw, height: 1000))
@@ -147,17 +163,14 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_text_v.textColor = .white
         gln_text_v.font = .systemFont(ofSize: 16)
         gln_text_v.isEditable = false
-        gln_text_v.text = GLNTRKNA_DataManifest.GLNTRKNA_ProseContent
+        gln_text_v.text = GLNTRKNA_DataManifest.glnt_content
         gln_prose_box.addSubview(gln_text_v)
         
-        let gln_divider = UILabel(frame: CGRect(x: 20, y: 120, width: 200, height: 30))
-        gln_divider.text = "Reprint Nail Art"
-        gln_divider.textColor = .white
-        gln_divider.font = .boldSystemFont(ofSize: 18)
+        let gln_divider = UIImageView(frame: CGRect(x: 20, y: 110, width: 200, height: 30))
+        gln_divider.image = UIImage(named: "gln_divider")
         gln_prose_box.addSubview(gln_divider)
-        
         // 5. Dynamic Section (Empty vs List)
-        if GLNTRKNA_DataManifest.GLNTRKNA_ReprintWorks.isEmpty {
+        if GLNTRKNA_DataManifest.momentreprintPic == "" {
             GLNTRKNA_BuildEmptyStage(in: gln_prose_box)
         } else {
             GLNTRKNA_BuildReprintScroll(in: gln_prose_box)
@@ -193,7 +206,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         let gln_item_w = GLNTRKNA_ScaleW(170)
         let gln_item_h = GLNTRKNA_ScaleH(260)
         
-        for (idx, gln_work) in GLNTRKNA_DataManifest.GLNTRKNA_ReprintWorks.enumerated() {
+        for (idx, gln_work) in [GLNTRKNA_DataManifest.momentreprintPic].enumerated() {
             let gln_x = 20 + CGFloat(idx) * (gln_item_w + 12)
             let gln_container = UIView(frame: CGRect(x: gln_x, y: 0, width: gln_item_w, height: gln_item_h))
             
@@ -221,7 +234,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
             gln_scroll.addSubview(gln_container)
         }
         
-        let gln_total_w = CGFloat(GLNTRKNA_DataManifest.GLNTRKNA_ReprintWorks.count) * (gln_item_w + 12) + 40
+        let gln_total_w = CGFloat(1) * (gln_item_w + 12) + 40
         gln_scroll.contentSize = CGSize(width: gln_total_w, height: gln_item_h)
         gln_card.addSubview(gln_scroll)
         
@@ -269,7 +282,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == GLNTRKNA_AssetSlider {
             let gln_page = Int(scrollView.contentOffset.x / scrollView.frame.width) + 1
-            GLNTRKNA_AssetIndicator.text = "\(gln_page)/\(GLNTRKNA_DataManifest.GLNTRKNA_HeroAssets.count)"
+            GLNTRKNA_AssetIndicator.text = "\(gln_page)/\(GLNTRKNA_DataManifest.momentPics.count)"
         }
     }
     
@@ -292,7 +305,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
           
             let gln_generator = UINotificationFeedbackGenerator()
             gln_generator.notificationOccurred(.success)
-            
+            self.GLNTRKNA_DataManifest.glnt_comments.insert(gln_prose, at: 0)
             // 5. GLNTRKNA: 清空输入并提示成功
             self.gln_field.text = ""
             self.GLNTRKNA_ToastVisuals(gln_msg: "Comment published successfully!")
@@ -328,6 +341,12 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    
+    @objc private func GLNTRKNA_Triggeractionlike() {
+        self.gln_heart.isSelected = !gln_heart.isSelected
+    }
+    
+    
     @objc private func GLNTRKNA_TriggerRecreation() {
         let commentpicvc = GLNTRKNA_CreativeStudioController(gln_mode: .gln_nail_recreate)
         self.navigationController?.pushViewController(commentpicvc, animated: true)
@@ -335,9 +354,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     
     @objc private func GLNTRKNA_TriggerComment() {
         
-        let commentvc = GLNTRKNA_FeedbackStationController()
+        let commentvc = GLNTRKNA_FeedbackStationController(GLNTRKNAAllcomment: GLNTRKNA_DataManifest.glnt_comments)
         self.present(commentvc, animated: true)
-        
-       
     }
 }

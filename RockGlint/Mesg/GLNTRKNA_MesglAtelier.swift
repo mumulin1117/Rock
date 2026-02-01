@@ -8,16 +8,19 @@
 import UIKit
 
 class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
-    private var GLNTRKNA_ArtisanPool: [String] = []
+    
+    private var GLNTRKNAtopUsers: [GLNTRKNA_MomentEntry] = []
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  GLNTRKNA_ArtisanPool.count
+        return  GLNTRKNAtopUsers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Artisan", for: indexPath) as! GLNTRKNA_ArtisanCell
-            return cell
+        let ArtisanCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Artisan", for: indexPath) as! GLNTRKNA_ArtisanCell
+        let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
+        ArtisanCell.gln_avatar.image = UIImage(named: ArtisanCelldata.glnt_userId)
+        ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
+        return ArtisanCell
         
     }
   
@@ -41,26 +44,49 @@ class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITab
     
     private let GLNTRKNA_BaseTable = UITableView()
 //    private let GLNTRKNA_SpotlightScroll = UIScrollView()
-    private var GLNTRKNA_NexusData = [GLNTRKNA_ConvergeModel]()
+  
     private let GLNTRKNA_Refresher = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_SetupAesthetics()
-        GLNTRKNA_SyncRemoteInbox()
-        GLNTRKNA_InitiateDataSync()
+        GLNTRKNA_HandleBlacklistUpdate()
+        GLNTRKNA_SetupObservers()
     }
-    @objc private func GLNTRKNA_InitiateDataSync() {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
-            self.GLNTRKNA_ArtisanPool = ["Artisan_1", "Artisan_2", "Artisan_3", "Artisan_4", "Artisan_5"]
-            
-            DispatchQueue.main.async {
-             
-                self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
-                
-            }
-        }
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_HandleBlacklistUpdate),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
     }
+    @objc private func GLNTRKNA_HandleBlacklistUpdate() {
+        // 当用户被拉黑时，执行静默刷新
+        // 1. 重新随机顶部用户（确保被拉黑的用户消失）
+       let logicEngine = GLNTRKNA_HomeLogicEngine()
+        self.GLNTRKNAtopUsers = logicEngine.GLNTRKNA_FetchRandomArtisans()
+      
+
+        
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loading....", on: self.view)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+            self.GLNTRKNA_BaseTable.reloadData()
+            self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        }))
+        
+        
+    }
+        
+       
+    deinit {
+       
+        NotificationCenter.default.removeObserver(self)
+    }
+ 
     private func GLNTRKNA_SetupAesthetics() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
         
@@ -98,7 +124,7 @@ class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITab
         GLNTRKNA_BaseTable.separatorStyle = .none
         GLNTRKNA_BaseTable.register(GLNTRKNA_NexusCell.self, forCellReuseIdentifier: "GLNTRKNA_NexusCell")
         GLNTRKNA_BaseTable.refreshControl = GLNTRKNA_Refresher
-        GLNTRKNA_Refresher.addTarget(self, action: #selector(GLNTRKNA_SyncRemoteInbox), for: .valueChanged)
+        GLNTRKNA_Refresher.addTarget(self, action: #selector(GLNTRKNA_HandleBlacklistUpdate), for: .valueChanged)
         view.addSubview(GLNTRKNA_BaseTable)
         
         view.addSubview(gln_planet)
@@ -107,30 +133,20 @@ class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITab
     
     private let GLNTRKNA_ArtisanHorizonStrip = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
-    @objc private func GLNTRKNA_SyncRemoteInbox() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.GLNTRKNA_NexusData = [
-                GLNTRKNA_ConvergeModel(gln_name: "Joren Veyra", gln_last: "Nails > words!", gln_time: "12:50", gln_unread: 0),
-                GLNTRKNA_ConvergeModel(gln_name: "Cerys Elara", gln_last: "Haha, YES! Who needs words...", gln_time: "12:50", gln_unread: 2),
-                GLNTRKNA_ConvergeModel(gln_name: "Galen Jax", gln_last: "I'm here for nails that speak...", gln_time: "12:50", gln_unread: 0)
-            ]
-            self.GLNTRKNA_Refresher.endRefreshing()
-            self.GLNTRKNA_BaseTable.reloadData()
-        }
-    }
+ 
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return GLNTRKNA_NexusData.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gln_cell = tableView.dequeueReusableCell(withIdentifier: "GLNTRKNA_NexusCell", for: indexPath) as! GLNTRKNA_NexusCell
         gln_cell.selectionStyle = .none
-        gln_cell.GLNTRKNA_Apply(gln_m: GLNTRKNA_NexusData[indexPath.row])
+        gln_cell.GLNTRKNA_Apply(gln_m: GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[indexPath.row])
         return gln_cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 90 }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gln_chat = GLNTRKNA_SoloDialogueController()
+        let gln_chat = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[indexPath.row])
         
 //        gln_chat.GLNTRKNA_PartnerName = GLNTRKNA_NexusData[indexPath.row].gln_name
         self.navigationController?.pushViewController(gln_chat, animated: true)
@@ -140,7 +156,7 @@ class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITab
 }
 
 class GLNTRKNA_NexusCell: UITableViewCell {
-    private let gln_ava = UIView()
+    private let gln_ava = UIImageView()
     private let gln_name = UILabel()
     private let gln_sub = UILabel()
     private let gln_time = UILabel()
@@ -173,8 +189,9 @@ class GLNTRKNA_NexusCell: UITableViewCell {
     required init?(coder: NSCoder) { fatalError() }
     
     func GLNTRKNA_Apply(gln_m: GLNTRKNA_ConvergeModel) {
-        gln_name.text = gln_m.gln_name
-        gln_sub.text = gln_m.gln_last
-        gln_time.text = gln_m.gln_time
+        gln_name.text = gln_m.userModel.glnt_userName
+        gln_ava.image = UIImage(named: gln_m.userModel.glnt_userId)
+        gln_sub.text = gln_m.convert.last?.gln_txt
+        gln_time.text = gln_m.convert.last?.gln_time
     }
 }

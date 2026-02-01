@@ -8,7 +8,21 @@
 import UIKit
 
 class GLNTRKNA_FeedbackStationController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    var GLNTRKNAAllcomment:[String] = []
+    init(GLNTRKNAAllcomment: [String]) {
+        self.GLNTRKNAAllcomment = GLNTRKNAAllcomment
+        super.init(nibName:nil, bundle: nil)
+        
+        GLNTRKNAAllcomment.forEach { item in
+            GLNTRKNA_EchoRegistry.append(GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: ["Joren Veyra","Cerys Elara","Galen Jax","Jone Mark"].randomElement()!, GLNTRKNA_VoxAvatar: "GTRKnauserIId\(Int.random(in: 0...15))", GLNTRKNA_VoxProse: item))
+        }
+      
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let GLNTRKNA_GlassOverlay = UIView()
     private let GLNTRKNA_ContentSheet = UIView()
     private let GLNTRKNA_SignalTable = UITableView()
@@ -16,9 +30,7 @@ class GLNTRKNA_FeedbackStationController: UIViewController, UITableViewDelegate,
     private let GLNTRKNA_Headliner = UILabel()
     
     private var GLNTRKNA_EchoRegistry: [GLNTRKNA_FeedbackEntity] = [
-        GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: "Joren Veyra", GLNTRKNA_VoxAvatar: "gln_ava_1", GLNTRKNA_VoxProse: "Nails > words!"),
-        GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: "Cerys Elara", GLNTRKNA_VoxAvatar: "gln_ava_2", GLNTRKNA_VoxProse: "Haha, YES! Who needs words when your nails are this fabulous? 🙌"),
-        GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: "Galen Jax", GLNTRKNA_VoxAvatar: "gln_ava_3", GLNTRKNA_VoxProse: "I'm here for nails that speak louder than my thoughts")
+      
     ]
 
     override func viewDidLoad() {

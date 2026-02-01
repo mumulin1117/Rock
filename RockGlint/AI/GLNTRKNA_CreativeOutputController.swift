@@ -18,6 +18,7 @@ class GLNTRKNA_CreativeOutputController: GLNTRKNA_NailAiBaseController {
     }
     
     private func GLNTRKNA_DisplayMasterpiece() {
+        GLNTRKNA_CanvasResult.image = UIImage(named: "AICreatOn\(0...2)")
         GLNTRKNA_MainCanvas.contentSize = CGSize(width: view.frame.width, height: 600)
         GLNTRKNA_CanvasResult.frame = CGRect(x: 20, y: GLNTRKNA_ScaleH(20), width: view.frame.width - 40, height: GLNTRKNA_ScaleH(450))
         GLNTRKNA_CanvasResult.backgroundColor = .darkGray

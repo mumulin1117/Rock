@@ -8,7 +8,12 @@
 import UIKit
 
 class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
-
+    private let logicEngine = GLNTRKNA_HomeLogicEngine()
+        
+    private var GLNTRKNAtopUsers: [GLNTRKNA_MomentEntry] = []
+    private var GLNTRKNAfeedItems: [GLNTRKNA_MomentEntry] = []
+    private var GLNTRKNA_ActiveCategoryIndex: Int = 0
+    
     private let GLNTRKNA_MasterScroller = UIScrollView()
     private let GLNTRKNA_RefreshPulse = UIRefreshControl()
     
@@ -19,21 +24,54 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
     private let GLNTRKNA_CategoryBridge = UIView()
     private let GLNTRKNA_FeedMatrix = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private var GLNTRKNA_ActiveCategoryIndex: Int = 0
+    
     private let GLNTRKNA_CategoryTags = ["Hot", "For you", "New", "Followed"]
     
-    private var GLNTRKNA_ArtisanPool: [String] = []
-    private var GLNTRKNA_VibeFeedPool: [String] = []
+//    private var GLNTRKNA_ArtisanPool: [String] = []
+//    private var GLNTRKNA_VibeFeedPool: [String] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_ConstructBaseCanvas()
         GLNTRKNA_AssembleModules()
-        GLNTRKNA_InitiateDataSync()
-      
+    
+        GLNTRKNA_HandleBlacklistUpdate()
         GLNTRKNA_MasterScroller.contentInsetAdjustmentBehavior = .never
-      
+        GLNTRKNA_SetupObservers()
+    }
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_HandleBlacklistUpdate),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
+    }
+    @objc private func GLNTRKNA_HandleBlacklistUpdate() {
+        // 当用户被拉黑时，执行静默刷新
+        // 1. 重新随机顶部用户（确保被拉黑的用户消失）
+        self.GLNTRKNAtopUsers = logicEngine.GLNTRKNA_FetchRandomArtisans()
+        
+        // 2. 重新过滤底部动态
+        self.GLNTRKNAfeedItems = logicEngine.GLNTRKNA_FilterFeed(by: GLNTRKNA_ActiveCategoryIndex)
+        
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loadin....", on: self.view)
+        DispatchQueue.main.async {
+            self.GLNTRKNA_RefreshPulse.endRefreshing()
+            self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
+            self.GLNTRKNA_FeedMatrix.reloadData()
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        }
+        
+    }
+        
+       
+    deinit {
+       
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func GLNTRKNA_ConstructBaseCanvas() {
@@ -45,7 +83,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         view.addSubview(GLNTRKNA_MasterScroller)
         
         GLNTRKNA_RefreshPulse.tintColor = .systemPink
-        GLNTRKNA_RefreshPulse.addTarget(self, action: #selector(GLNTRKNA_InitiateDataSync), for: .valueChanged)
+        GLNTRKNA_RefreshPulse.addTarget(self, action: #selector(GLNTRKNA_HandleBlacklistUpdate), for: .valueChanged)
         GLNTRKNA_MasterScroller.refreshControl = GLNTRKNA_RefreshPulse
     }
     
@@ -143,24 +181,11 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
             GLNTRKNA_CategoryBridge.addSubview(gln_btn)
         }
     }
-    
-    @objc private func GLNTRKNA_InitiateDataSync() {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
-            self.GLNTRKNA_ArtisanPool = ["Artisan_1", "Artisan_2", "Artisan_3", "Artisan_4", "Artisan_5"]
-            self.GLNTRKNA_VibeFeedPool = Array(repeating: "Design_Node", count: 10)
-            
-            DispatchQueue.main.async {
-                self.GLNTRKNA_RefreshPulse.endRefreshing()
-                self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
-                self.GLNTRKNA_FeedMatrix.reloadData()
-            }
-        }
-    }
-    
+  
     @objc private func GLNTRKNA_SwitchCategory(_ sender: UIButton) {
         GLNTRKNA_ActiveCategoryIndex = sender.tag
         GLNTRKNA_RenderCategoryNodes()
-        GLNTRKNA_InitiateDataSync()
+        GLNTRKNA_HandleBlacklistUpdate()
     }
     
     @objc private func GLNTRKNA_JumpToAiStudio() {
@@ -172,17 +197,26 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
 
 extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == GLNTRKNA_ArtisanHorizonStrip ? GLNTRKNA_ArtisanPool.count : GLNTRKNA_VibeFeedPool.count
+        return collectionView == GLNTRKNA_ArtisanHorizonStrip ? GLNTRKNAtopUsers.count : GLNTRKNAfeedItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == GLNTRKNA_ArtisanHorizonStrip {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Artisan", for: indexPath) as! GLNTRKNA_ArtisanCell
-            return cell
+            let ArtisanCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Artisan", for: indexPath) as! GLNTRKNA_ArtisanCell
+            let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
+            ArtisanCell.gln_avatar.image = UIImage(named: ArtisanCelldata.glnt_userId)
+            ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
+            
+            return ArtisanCell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Matrix", for: indexPath) as! GLNTRKNA_VibeMatrixCell
-            cell.gln_report.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
-            return cell
+            let VibeMatrixCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Matrix", for: indexPath) as! GLNTRKNA_VibeMatrixCell
+            let VibeMatrixCelldata = GLNTRKNAfeedItems[indexPath.row]
+            VibeMatrixCell.gln_cover.image = UIImage(named: VibeMatrixCelldata.momentPics.first ?? "")
+            VibeMatrixCell.gln_uname.text =  VibeMatrixCelldata.glnt_content
+            VibeMatrixCell.gln_meta.text = "\(VibeMatrixCelldata.glnt_comments.count) comments"
+            
+            VibeMatrixCell.gln_report.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+            return VibeMatrixCell
         }
     }
     //report
@@ -194,13 +228,16 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
         if collectionView == GLNTRKNA_ArtisanHorizonStrip {
             return
         }
-        self.navigationController?.pushViewController(GLNTRKNA_DymDetailController.init(gln_data: GLNTRKNA_DynamicModel(GLNTRKNA_UserIdentity: "", GLNTRKNA_AvatarResource: "gln_addplus", GLNTRKNA_HeroAssets: ["gln_addplus"], GLNTRKNA_ProseContent: "gln_addplus", GLNTRKNA_FeedbackVolume: "gln_addplus", GLNTRKNA_ReprintWorks: ["gln_addplus"])), animated: true)
+        let VibeMatrixCelldata = GLNTRKNAfeedItems[indexPath.row]
+        let momentController = GLNTRKNA_DymDetailController.init(gln_data: VibeMatrixCelldata)
+        
+        self.navigationController?.pushViewController(momentController, animated: true)
     }
 }
 //user cell
 class GLNTRKNA_ArtisanCell: UICollectionViewCell {
     let gln_avatar = UIImageView()
-    let gln_name = UILabel()
+    var gln_name = UILabel()
     let gln_action = UIButton()
     let gln_vidus = UIButton()
     override init(frame: CGRect) {
@@ -215,7 +252,7 @@ class GLNTRKNA_ArtisanCell: UICollectionViewCell {
         contentView.addSubview(gln_avatar)
         
         gln_name.frame = CGRect(x: 5, y: 65, width: 80, height: 20)
-        gln_name.text = "Artisan"
+       
         gln_name.textAlignment = .center
         gln_name.font = .systemFont(ofSize: 12)
         gln_name.textColor = .white
@@ -247,8 +284,13 @@ class GLNTRKNA_VibeMatrixCell: UICollectionViewCell {
         gln_cover.clipsToBounds = true
         contentView.addSubview(gln_cover)
         
+        gln_uname.textColor = .white
+        gln_uname.font = UIFont(name: "Alimama FangYuanTi VF-Bold", size: 16)
+        gln_uname.frame = CGRect(x: 10, y: frame.height - 30 - 30, width: 76, height: 20)
+        
+        contentView.addSubview(gln_uname)
         gln_meta.frame = CGRect(x: 10, y: frame.height - 30, width: frame.width - 60, height: 20)
-        gln_meta.text = "Rock Design"
+        
         gln_meta.textColor = .white
         gln_meta.font = .systemFont(ofSize: 14, weight: .medium)
         contentView.addSubview(gln_meta)
