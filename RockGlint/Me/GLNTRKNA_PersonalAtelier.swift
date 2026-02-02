@@ -6,7 +6,7 @@
 //
 import UIKit
 //个人中心
-class GLNTRKNA_PersonalOrbitController: UIViewController {
+class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
 
     private let GLNTRKNA_ScrW = UIScreen.main.bounds.width
     private let GLNTRKNA_ScrH = UIScreen.main.bounds.height
@@ -30,14 +30,23 @@ class GLNTRKNA_PersonalOrbitController: UIViewController {
         super.viewDidLoad()
         GLNTRKNA_ForgeInterface()
         GLNTRKNA_FetchIdentityPulse()
+        GLNTRKNA_SyncWealth()
+           
+        NotificationCenter.default.addObserver(self, selector: #selector(GLNTRKNA_SyncWealth), name: NSNotification.Name("GLNTRKNA_COIN_REFRESH"), object: nil)
+        GLNTRKNA_SyncWealth()
         
-        // 注册刷新通知
-                NotificationCenter.default.addObserver(self, selector: #selector(GLNTRKNA_SyncWealth), name: NSNotification.Name("GLNTRKNA_COIN_REFRESH"), object: nil)
-                GLNTRKNA_SyncWealth()
+       let info = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()
+        self.GLNTRKNA_AliasLabel.text = info?.glnt_alias
+        self.GLNTRKNA_BioProse.text = info?.glnt_bio
+        self.GLNTRKNA_PortraitNode.image = UIImage(named: "RocklogWithus")
+        
     }
     @objc private func GLNTRKNA_SyncWealth() {
-            let glnt_amount = UserDefaults.standard.integer(forKey: "GLNTRKNA_RESERVE_COINS")
-        gln_amount.text = "\(glnt_amount)"
+          
+        gln_amount.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0) >"
+        
+        
+      
        
     }
     private func GLNTRKNA_ForgeInterface() {
@@ -148,7 +157,7 @@ class GLNTRKNA_PersonalOrbitController: UIViewController {
         gln_coin_bar.addSubview(gln_coin_txt)
 
         self.gln_amount = UILabel(frame: CGRect(x: gln_coin_bar.frame.width - 100, y: 0, width: 80, height: 75 * GLNTRKNA_ScaleY))
-        gln_amount.text = "2222 >"
+        gln_amount.text = "0 >"
         gln_amount.textColor = .purple
         gln_amount.textAlignment = .right
         gln_amount.font = .boldSystemFont(ofSize: 18)
@@ -160,7 +169,14 @@ class GLNTRKNA_PersonalOrbitController: UIViewController {
     
     
     @objc func GLNTRKNAgln_edit()  {
-        self.navigationController?.pushViewController(GLNTRKNA_IdentityRefiner(), animated: true)
+        let editcontroller = GLNTRKNA_IdentityRefiner.init()
+        editcontroller.GLNTRKNA_SyncCallback = { (glnt_newName, glnt_newBio, glnt_newDate, glnt_newImg)  in
+                                                  
+            self.GLNTRKNA_AliasLabel.text = glnt_newName
+            self.GLNTRKNA_BioProse.text = glnt_newBio
+            self.GLNTRKNA_PortraitNode.image = glnt_newImg
+        }
+        self.navigationController?.pushViewController(editcontroller, animated: true)
      }
     
     
@@ -187,15 +203,19 @@ class GLNTRKNA_PersonalOrbitController: UIViewController {
         GLNTRKNA_MainWrapper.contentSize = CGSize(width: GLNTRKNA_ScrW, height: 850 * GLNTRKNA_ScaleY)
     }
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.GLNTRKNA_MetricPath.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_adored_list.count ?? 0)"
+    }
     @objc private func GLNTRKNA_FetchIdentityPulse() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            self.GLNTRKNA_AliasLabel.text = "Bronwyn"
-            self.GLNTRKNA_BioProse.text = "Nail artist, creating little masterpieces one finger at a time."
+            
             self.GLNTRKNA_MetricHeart.text = "0"
             self.GLNTRKNA_MetricTribe.text = "0"
-            self.GLNTRKNA_MetricPath.text = "0"
+           
             
             UIView.animate(withDuration: 0.5) {
                 self.GLNTRKNA_PortraitNode.alpha = 1.0

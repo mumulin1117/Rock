@@ -24,18 +24,18 @@ class GLNTRKNA_SettlementController: UIViewController {
         let glnt_nav_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_RatioY))
         view.addSubview(glnt_nav_bar)
         
-        let glnt_back = UIButton(frame: CGRect(x: 20 * GLNTRKNA_RatioX, y: 60 * GLNTRKNA_RatioY, width: 30, height: 30))
-        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        glnt_back.tintColor = .white
-        glnt_back.addTarget(self, action: #selector(GLNTRKNA_DepartOrbit), for: .touchUpInside)
-        glnt_nav_bar.addSubview(glnt_back)
-        
-        let glnt_title = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_RatioY, width: UIScreen.main.bounds.width, height: 30))
-        glnt_title.text = "Settings"
-        glnt_title.textColor = .white
-        glnt_title.textAlignment = .center
-        glnt_title.font = .boldSystemFont(ofSize: 18)
-        glnt_nav_bar.addSubview(glnt_title)
+//        let glnt_back = UIButton(frame: CGRect(x: 20 * GLNTRKNA_RatioX, y: 60 * GLNTRKNA_RatioY, width: 30, height: 30))
+//        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        glnt_back.tintColor = .white
+//        glnt_back.addTarget(self, action: #selector(GLNTRKNA_DepartOrbit), for: .touchUpInside)
+//        glnt_nav_bar.addSubview(glnt_back)
+        self.title =  "Settings"
+//        let glnt_title = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_RatioY, width: UIScreen.main.bounds.width, height: 30))
+//        glnt_title.text = "Settings"
+//        glnt_title.textColor = .white
+//        glnt_title.textAlignment = .center
+//        glnt_title.font = .boldSystemFont(ofSize: 18)
+//        glnt_nav_bar.addSubview(glnt_title)
 
         let glnt_options = ["User Agreement", "Privacy Agreement",  "About Us"]
         let glnt_icons = ["doc.text.fill", "shield.lefthalf.filled", "person.slash.fill", "info.circle.fill"]
@@ -115,17 +115,32 @@ class GLNTRKNA_SettlementController: UIViewController {
 
     @objc private func GLNTRKNA_ExposeLogoutDialog() {
         let glnt_alert = GLNTRKNA_DialogNexus(title: "Log out", message: "Are you sure you want to log out of this account? Logging out will require you to log in again.", actionTitle: "Log Out")
+        glnt_alert.GLNTRKNA_SyncCallback = {
+            if let gln_win = self.view.window {
+                GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_EvacuateAura()
+                gln_win.rootViewController = GLNTRKNA_AccessGateway()
+            }
+        
+        }
         glnt_alert.modalPresentationStyle = .overFullScreen
         self.present(glnt_alert, animated: false)
     }
 
     @objc private func GLNTRKNA_ExposeDeleteDialog() {
+        
         let glnt_alert = GLNTRKNA_DialogNexus(title: "Delete Account", message: "Deleting the account will clear the account data. Are you sure to delete?", actionTitle: "Delete")
+        glnt_alert.GLNTRKNA_SyncCallback = {
+            if let gln_win = self.view.window {
+                GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TerminateAccount()
+                gln_win.rootViewController = GLNTRKNA_AccessGateway()
+            }
+        
+        }
         glnt_alert.modalPresentationStyle = .overFullScreen
         self.present(glnt_alert, animated: false)
     }
 
-    @objc private func GLNTRKNA_DepartOrbit() {
-        self.navigationController?.popViewController(animated: true)
-    }
+//    @objc private func GLNTRKNA_DepartOrbit() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
 }

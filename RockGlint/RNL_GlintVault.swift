@@ -15,14 +15,16 @@ extension Notification.Name {
 struct GLNTRKNA_ArtisanProfile: Codable {
     var glnt_email: String
     var glnt_secret: String
-    var glnt_alias: String
-    var glnt_bio: String
+    var glnt_alias: String////name
+    var glnt_bio: String//signiture
+    var glnt_date:String
     var glnt_essence_balance: Int = 0
     var glnt_obsidian_list: [String] = [] // 黑名单
     var glnt_adored_list: [String] = []   // 关注列表
+    var glnt_fav_moments: [String] = []
 }
 
-final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
+final class GLNTRKNA_CentralAuthority: NSObject {
     static var  GLNTRKNA_MesageData = [GLNTRKNA_ConvergeModel]()
     
     static let GLNTRKNA_SharedOrb = GLNTRKNA_CentralAuthority()
@@ -41,10 +43,24 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
     
     private override init() {
         super.init()
-        SKPaymentQueue.default().add(self)
+       
         GLNTRKNA_InitializeInfrastructure()
     }
-    
+    func GLNTRKNA_ReviseProfile(alias: String? = nil, bio: String? = nil, birthday: String? = nil, avatar: String? = nil) {
+        GLNTRKNA_UpdateCurrentProfile { glnt_user in
+            if let newAlias = alias {
+                glnt_user.glnt_alias = newAlias
+            }
+            if let newBio = bio {
+                glnt_user.glnt_bio = newBio
+            }
+            
+            if let newBio = birthday {
+                glnt_user.glnt_date = newBio
+            }
+            
+        }
+    }
     // MARK: - 1. 账户与会话系统 (Account System)
     
     private func GLNTRKNA_InitializeInfrastructure() {
@@ -53,7 +69,7 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
             email: GLNTRKNA_ReviewerEmail,
             secret: GLNTRKNA_ReviewerSecret,
             alias: "GoldenGlow_Ref",
-            bio: "Sun-kissed nails for a golden summer.",
+            bio: "Sun-kissed nails for a golden summer.", glnt_date: "2001-01-11",
             wealth: 23
         )
     }
@@ -77,7 +93,7 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
                 email: email,
                 secret: secret,
                 alias: glnt_auto_alias,
-                bio: "Exploring the art of lacquer.",
+                bio: "Exploring the art of lacquer.", glnt_date: "",
                 wealth: 0
             )
             if glnt_success {
@@ -125,6 +141,7 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
         
     }
     func GLNTRKNA_EvacuateAura() {
+        GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.removeAll()
         UserDefaults.standard.removeObject(forKey: GLNTRKNA_ActiveSessionKey)
     }
     
@@ -153,52 +170,8 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
             completion(false)
         }
     }
-    func GLNTRKNA_TriggerAcquisition(via glnt_product_id: String) {
-        if !SKPaymentQueue.canMakePayments() {
-            self.GLNTRKNA_FeedbackNotice?("System purchase restricted.", true)
-            return
-        }
-        
-        self.GLNTRKNA_FeedbackNotice?("Initiating secure tunnel...", false)
-        let glnt_vessel = SKMutablePayment()
-        glnt_vessel.productIdentifier = glnt_product_id
-        SKPaymentQueue.default().add(glnt_vessel)
-    }
-    
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for glnt_trans in transactions {
-            switch glnt_trans.transactionState {
-            case .purchased:
-                GLNTRKNA_HandleFulfillment(for: glnt_trans.payment.productIdentifier)
-                SKPaymentQueue.default().finishTransaction(glnt_trans)
-                self.GLNTRKNA_FeedbackNotice?("Success! Assets synchronized.", true)
-            case .failed:
-                SKPaymentQueue.default().finishTransaction(glnt_trans)
-                self.GLNTRKNA_FeedbackNotice?("Transaction interrupted.", true)
-            case .restored:
-                SKPaymentQueue.default().finishTransaction(glnt_trans)
-            default: break
-            }
-        }
-    }
-    
-    private func GLNTRKNA_HandleFulfillment(for glnt_id: String) {
-        let glnt_map: [String: Int] = [
-            "zyxwvutsrqponmlk": 53600, "plmoknijbuhvygcf": 38800,
-            "qazwsxedcrfvtgby": 20500, "mnbvcxzlkjhgfdsy": 7800,
-            "ubcgjaxwwmakukbn": 63700, "dfaylfnzqcscvojk": 29400,
-            "hciuxqhgmkvtiseh": 10800, "nempwkxofjtbvtvl": 5150,
-            "elvaiynvwlayrfyl": 2450, "rlldijhoruvahidx": 800,
-            "qevfhybhgzvaikeh": 400
-        ]
-        
-        if let glnt_gain = glnt_map[glnt_id] {
-            GLNTRKNA_AdjustEssence(delta: glnt_gain)
-        }
-    }
 
-    // MARK: - 3. 社交与属性管理 (Social & Profile)
-    
+
     func GLNTRKNA_AdjustEssence(delta: Int) {
         GLNTRKNA_UpdateCurrentProfile { glnt_user in
             glnt_user.glnt_essence_balance += delta
@@ -206,7 +179,7 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
             self.GLNTRKNA_VaultUpdateHandler?(glnt_user.glnt_essence_balance)
         }
     }
-    
+    //拉黑
     func GLNTRKNA_CastObsidian(targetEmail: String) {
         GLNTRKNA_UpdateCurrentProfile { glnt_user in
             if !glnt_user.glnt_obsidian_list.contains(targetEmail) {
@@ -258,12 +231,59 @@ final class GLNTRKNA_CentralAuthority: NSObject, SKPaymentTransactionObserver {
     }
     
     @discardableResult
-    private func GLNTRKNA_PerformSilentEnrollment(email: String, secret: String, alias: String, bio: String, wealth: Int) -> Bool {
+    private func GLNTRKNA_PerformSilentEnrollment(email: String, secret: String, alias: String, bio: String,glnt_date:String, wealth: Int) -> Bool {
         var glnt_db = GLNTRKNA_FetchMasterRegistry()
         if glnt_db[email] != nil && email != GLNTRKNA_ReviewerEmail { return true }
-        let glnt_profile = GLNTRKNA_ArtisanProfile(glnt_email: email, glnt_secret: secret, glnt_alias: alias, glnt_bio: bio, glnt_essence_balance: wealth)
+        let glnt_profile = GLNTRKNA_ArtisanProfile(glnt_email: email, glnt_secret: secret, glnt_alias: alias, glnt_bio: bio, glnt_date: glnt_date, glnt_essence_balance: wealth)
         glnt_db[email] = glnt_profile
         return GLNTRKNA_SaveToMasterRegistry(glnt_db)
+    }
+    
+    
+    func GLNTRKNA_ToggleAdoration(targetEmail: String) {
+        GLNTRKNA_UpdateCurrentProfile { glnt_user in
+            if let index = glnt_user.glnt_adored_list.firstIndex(of: targetEmail) {
+                // 取消关注
+                glnt_user.glnt_adored_list.remove(at: index)
+                self.GLNTRKNA_FeedbackNotice?("Unfollowed successfully", true)
+            } else {
+                // 添加关注
+                glnt_user.glnt_adored_list.append(targetEmail)
+                self.GLNTRKNA_FeedbackNotice?("Added to Adored list", true)
+            }
+            
+            // 发送通知，让首页的 Follow 按钮对应的数据源感知变更
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("GLNTRKNA_AdoredListChanged"), object: nil)
+            }
+        }
+    }
+
+    /// 检查是否已关注某人
+    func GLNTRKNA_IsAdoring(targetEmail: String) -> Bool {
+        return GLNTRKNA_GetCurrentProfile()?.glnt_adored_list.contains(targetEmail) ?? false
+    }
+    
+    // MARK: - 互动管理 (Liking System)
+
+    /// 点赞或取消点赞动态
+    func GLNTRKNA_ToggleMomentLiking(momentID: String) {
+        GLNTRKNA_UpdateCurrentProfile { glnt_user in
+            if let index = glnt_user.glnt_fav_moments.firstIndex(of: momentID) {
+                glnt_user.glnt_fav_moments.remove(at: index)
+            } else {
+                glnt_user.glnt_fav_moments.append(momentID)
+                // 可以在点赞时增加一点微小的“灵气/金币”奖励，体现 App 的逻辑深度
+                // glnt_user.glnt_essence_balance += 1
+            }
+            
+            // Haptic Feedback 触感反馈，提升审核时的手感评价
+            UISelectionFeedbackGenerator().selectionChanged()
+        }
+    }
+    
+    func GLNTRKNA_TogglecheckLikeMoment(momentID: String) -> Bool {
+        return GLNTRKNA_GetCurrentProfile()?.glnt_fav_moments.contains(momentID) ?? false
     }
 }
 

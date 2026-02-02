@@ -8,6 +8,7 @@
 import UIKit
 
 class GLNTRKNA_DialogNexus: UIViewController {
+    var GLNTRKNA_SyncCallback: (() -> Void)?
     
     private let GLNTRKNA_RatioX = UIScreen.main.bounds.width / 393.0
     private let GLNTRKNA_RatioY = UIScreen.main.bounds.height / 852.0
@@ -82,7 +83,9 @@ class GLNTRKNA_DialogNexus: UIViewController {
     }
     
     @objc private func GLNTRKNA_Execute() {
-        // Mock logic
+        if GLNTRKNA_SyncCallback != nil {
+            GLNTRKNA_SyncCallback?()
+        }
         self.dismiss(animated: false)
     }
 }

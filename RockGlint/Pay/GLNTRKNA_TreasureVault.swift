@@ -30,7 +30,7 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         ("53600+", "$79.99","zyxwvutsrqponmlk"), ("63700+", "$99.99","ubcgjaxwwmakukbn")
         
     ]
-    private let GLNTRKNA_BalanceLabel = UILabel()
+    private var GLNTRKNA_BalanceLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_ConstructStage()
@@ -57,11 +57,11 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         let glnt_header = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_RatioH))
         view.addSubview(glnt_header)
         
-        let glnt_back = UIButton(frame: CGRect(x: 15 * GLNTRKNA_RatioW, y: 55 * GLNTRKNA_RatioH, width: 30, height: 30))
-        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        glnt_back.tintColor = .white
-        glnt_back.addTarget(self, action: #selector(GLNTRKNA_DismissScene), for: .touchUpInside)
-        glnt_header.addSubview(glnt_back)
+//        let glnt_back = UIButton(frame: CGRect(x: 15 * GLNTRKNA_RatioW, y: 55 * GLNTRKNA_RatioH, width: 30, height: 30))
+//        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        glnt_back.tintColor = .white
+//        glnt_back.addTarget(self, action: #selector(GLNTRKNA_DismissScene), for: .touchUpInside)
+//        glnt_header.addSubview(glnt_back)
 //        
 //        let glnt_title = UILabel(frame: CGRect(x: 0, y: 55 * GLNTRKNA_RatioH, width: UIScreen.main.bounds.width, height: 30))
 //        glnt_title.text = "About us"
@@ -93,12 +93,12 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         glnt_coin_lab.font = .systemFont(ofSize: 17 * GLNTRKNA_RatioW, weight: .medium)
         glnt_status_bar.addSubview(glnt_coin_lab)
         
-        let glnt_balance = UILabel(frame: CGRect(x: glnt_status_bar.frame.width - 110 * GLNTRKNA_RatioW, y: 0, width: 100 * GLNTRKNA_RatioW, height: 70 * GLNTRKNA_RatioH))
-        glnt_balance.text = "2222"
-        glnt_balance.textColor = .black
-        glnt_balance.textAlignment = .right
-        glnt_balance.font = .boldSystemFont(ofSize: 22 * GLNTRKNA_RatioW)
-        glnt_status_bar.addSubview(glnt_balance)
+        GLNTRKNA_BalanceLabel = UILabel(frame: CGRect(x: glnt_status_bar.frame.width - 110 * GLNTRKNA_RatioW, y: 0, width: 100 * GLNTRKNA_RatioW, height: 70 * GLNTRKNA_RatioH))
+        GLNTRKNA_BalanceLabel.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0)"
+        GLNTRKNA_BalanceLabel.textColor = .black
+        GLNTRKNA_BalanceLabel.textAlignment = .right
+        GLNTRKNA_BalanceLabel.font = .boldSystemFont(ofSize: 22 * GLNTRKNA_RatioW)
+        glnt_status_bar.addSubview(GLNTRKNA_BalanceLabel)
 
         GLNTRKNA_GridCanvas.frame = CGRect(x: 15 , y: 210 * GLNTRKNA_RatioH, width: UIScreen.main.bounds.width - 30 , height: 500 * GLNTRKNA_RatioH)
         GLNTRKNA_GridCanvas.backgroundColor = .clear
@@ -115,15 +115,15 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         
         
         // 监听金币变化回调
-            GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_VaultUpdateHandler = { [weak self] glnt_new_total in
-                self?.GLNTRKNA_BalanceLabel.text = "\(glnt_new_total)"
+            GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_VaultUpdateHandler = { [weak self] in
+                
+                self?.GLNTRKNA_BalanceLabel.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0)"
                 // 发送通知刷新个人中心页面
                 NotificationCenter.default.post(name: NSNotification.Name("GLNTRKNA_COIN_REFRESH"), object: nil)
             }
             
-            // 初始化显示本地金币
-            let glnt_saved = UserDefaults.standard.integer(forKey: "GLNTRKNA_RESERVE_COINS")
-            GLNTRKNA_BalanceLabel.text = glnt_saved == 0 ? "2222" : "\(glnt_saved)"
+            
+//        GLNTRKNA_BalanceLabel.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0)"
         
     }
 
@@ -167,9 +167,9 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         print("GLNTRKNA: Contacting App Store for slot \(GLNTRKNA_SelectedIndex)")
     }
 
-    @objc private func GLNTRKNA_DismissScene() {
-        navigationController?.popViewController(animated: true)
-    }
+//    @objc private func GLNTRKNA_DismissScene() {
+//        navigationController?.popViewController(animated: true)
+//    }
 }
 
 class GLNTRKNA_AssetCell: UICollectionViewCell {

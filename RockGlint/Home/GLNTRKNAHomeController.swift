@@ -59,13 +59,12 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         self.GLNTRKNAfeedItems = logicEngine.GLNTRKNA_FilterFeed(by: GLNTRKNA_ActiveCategoryIndex)
         
         GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loadin....", on: self.view)
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
             self.GLNTRKNA_RefreshPulse.endRefreshing()
             self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
             self.GLNTRKNA_FeedMatrix.reloadData()
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-        }
-        
+        }))
     }
         
        
@@ -206,7 +205,8 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
             let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
             ArtisanCell.gln_avatar.image = UIImage(named: ArtisanCelldata.glnt_userId)
             ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
-            
+            ArtisanCell.gln_vidus.tag = indexPath.row
+            ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink(Ubuaton:)), for: .touchUpInside)
             return ArtisanCell
         } else {
             let VibeMatrixCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Matrix", for: indexPath) as! GLNTRKNA_VibeMatrixCell
@@ -219,13 +219,21 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
             return VibeMatrixCell
         }
     }
-    //report
+    @objc private func GLNTRKNAEstablishVisualLink(Ubuaton:UIButton) {
+        let ArtisanCelldata = GLNTRKNAtopUsers[Ubuaton.tag]
+        let yac_face_vc = GLNTRKNA_FaceMirrorController.init(GLNTRKNACelestialData: ArtisanCelldata)
+       
+        yac_face_vc.modalPresentationStyle = .fullScreen
+        self.present(yac_face_vc, animated: true)
+    }
    @objc func gln_reportTraiiler()  {
        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
        self.present(safetyvc, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == GLNTRKNA_ArtisanHorizonStrip {
+            let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
+            self.navigationController?.pushViewController(GLNTRKNA_GuestOrbitController.init(GLNTRKNACelestialData: ArtisanCelldata), animated: true)
             return
         }
         let VibeMatrixCelldata = GLNTRKNAfeedItems[indexPath.row]
@@ -261,9 +269,10 @@ class GLNTRKNA_ArtisanCell: UICollectionViewCell {
         gln_action.frame = CGRect(x: 10, y: 90, width: 61, height: 24)
         gln_action.setImage(UIImage.init(named: "gln_actioning"), for: .normal)
         gln_action.setImage(UIImage.init(named: "gln_action_ed"), for: .selected)
-        
-        gln_vidus.frame = CGRect(x:77, y: 90, width: 12, height: 12)
+        gln_action.isUserInteractionEnabled = true
+        gln_vidus.frame = CGRect(x:77, y: 90, width: 24, height: 24)
         gln_vidus.setImage(UIImage.init(named: "gln_vidus"), for: .normal)
+        
         contentView.addSubview(gln_action)
         contentView.addSubview(gln_vidus)
     }

@@ -107,12 +107,12 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
                             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Waiting....", on: self.view)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                                 let glnt_msg = "✨ " + "Deduction successful!"
-                                        
+                                GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
                                 GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
                                 let gln_result = GLNTRKNA_CreativeOutputController()
                                 self.navigationController?.pushViewController(gln_result, animated: true)
                             }
-                          
+                            
                         } else {
                             
                             self.GLNTRKNA_HandleInsufficientFunds()

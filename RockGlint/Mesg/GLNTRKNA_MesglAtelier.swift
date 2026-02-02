@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
     private var GLNTRKNAtopUsers: [GLNTRKNA_MomentEntry] = []
     
@@ -20,14 +20,21 @@ class GLNTRKNA_ChatNexusController: UIViewController, UITableViewDelegate, UITab
         let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
         ArtisanCell.gln_avatar.image = UIImage(named: ArtisanCelldata.glnt_userId)
         ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
+        ArtisanCell.gln_vidus.tag = indexPath.row
+        ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink(Ubuaton:)), for: .touchUpInside)
         return ArtisanCell
         
     }
-  
+    @objc private func GLNTRKNAEstablishVisualLink(Ubuaton:UIButton) {
+        let ArtisanCelldata = GLNTRKNAtopUsers[Ubuaton.tag]
+        let yac_face_vc = GLNTRKNA_FaceMirrorController.init(GLNTRKNACelestialData: ArtisanCelldata)
+       
+        yac_face_vc.modalPresentationStyle = .fullScreen
+        self.present(yac_face_vc, animated: true)
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == GLNTRKNA_ArtisanHorizonStrip {
-            return
-        }
+        let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
+        self.navigationController?.pushViewController(GLNTRKNA_GuestOrbitController.init(GLNTRKNACelestialData: ArtisanCelldata), animated: true)
         
     }
 

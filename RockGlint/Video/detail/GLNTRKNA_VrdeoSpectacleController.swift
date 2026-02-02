@@ -23,15 +23,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     
     required init?(coder: NSCoder) { fatalError("GLNTRKNA_Init_Err") }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
-    }
+   
    
     // MARK: - GLNTRKNA: Playback Engine
         private var GLNTRKNA_PlayerTube: AVPlayer?
@@ -45,7 +37,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     private let GLNTRKNA_VesselScroll = UIScrollView()
     private let GLNTRKNA_VisualPlate = UIImageView()
     private let GLNTRKNA_PlayFreezeIcon = UIImageView()
-    private let GLNTRKNA_UserAvatar = UIImageView()
+    private let GLNTRKNA_UserAvatar = UIButton()
     private let GLNTRKNA_UserNameLabel = UILabel()
     private let GLNTRKNA_MetricsLabel = UILabel()
     private let GLNTRKNA_ProseBody = UILabel()
@@ -61,13 +53,36 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
 //    func GLNTRKNA_SynchronizeData(gln_data: GLNTRKNA_MomentEntry) {
 //        self.GLNTRKNA_Payload = gln_data
 //    }
-
+    lazy var gln_heart:UIButton = {
+        return UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 75, y: GLNTRKNA_MetricH(385), width: 55, height: 55))
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_PlayFreezeIcon.isHidden = true
         GLNTRKNA_AssembleScenery()
         GLNTRKNA_PopulateMockIntel()
         GLNTRKNA_InitializeSecureTheater()
+        
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
+            self.gln_heart.isSelected = true
+        }else{
+            self.gln_heart.isSelected = false
+        }
+        GLNTRKNA_SetupObservers()
+    }
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_DismissScene),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
+    }
+    @objc private func GLNTRKNA_HandleBlacklistUpdate() {
+        
+        
     }
     private func GLNTRKNA_InitializeSecureTheater() {
         GLNTRKNA_VideoContainer.frame = GLNTRKNA_VisualPlate.bounds
@@ -109,8 +124,15 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_VisualPlate.addSubview(GLNTRKNA_PlayFreezeIcon)
        
     }
-
+   @objc func GLNTRKNAToaogScenery() {
+       
+        self.navigationController?.pushViewController(GLNTRKNA_GuestOrbitController.init(GLNTRKNACelestialData: GLNTRKNA_DataManifest), animated: true)
+    }
     private func GLNTRKNA_AssembleScenery() {
+        
+        GLNTRKNA_UserAvatar.addTarget(self, action: #selector(GLNTRKNAToaogScenery), for: .touchUpInside)
+       
+        
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.15, alpha: 1.0)
         
         GLNTRKNA_VesselScroll.frame = CGRect(x: 0, y: 0, width: GLNTRKNA_CanvasWidth, height: GLNTRKNA_CanvasHeight - GLNTRKNA_MetricH(100))
@@ -132,25 +154,34 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_PlayFreezeIcon.image = UIImage(named: "GLNTRKNAplauid")
         GLNTRKNA_PlayFreezeIcon.tintColor = .white
         GLNTRKNA_PlayFreezeIcon.alpha = 0.8
-         
-        let gln_back = UIButton(frame: CGRect(x: 20, y: 50, width: 40, height: 40))
-        gln_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        gln_back.tintColor = .white
-        gln_back.addTarget(self, action: #selector(GLNTRKNA_DismissScene), for: .touchUpInside)
-        view.addSubview(gln_back)
+//         
+//        let gln_back = UIButton(frame: CGRect(x: 20, y: 50, width: 40, height: 40))
+//        gln_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        gln_back.tintColor = .white
+//        gln_back.addTarget(self, action: #selector(GLNTRKNA_DismissScene), for: .touchUpInside)
+//        view.addSubview(gln_back)
+//        
+//        let gln_more = UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 60, y: 50, width: 40, height: 40))
+//        gln_more.setImage(UIImage(named: "gln_report"), for: .normal)
+//        gln_more.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+        let gln_options_btn = UIButton()
+        gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
+        gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+        gln_options_btn.tintColor = .white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
+     
         
-        let gln_more = UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 60, y: 50, width: 40, height: 40))
-        gln_more.setImage(UIImage(named: "gln_report"), for: .normal)
-        gln_more.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
-        gln_more.tintColor = .white
-        view.addSubview(gln_more)
+       
+//        view.addSubview(gln_more)
         
         GLNTRKNA_UserAvatar.frame = CGRect(x: 20, y: GLNTRKNA_MetricH(380), width: 60, height: 60)
         GLNTRKNA_UserAvatar.layer.cornerRadius = 30
         GLNTRKNA_UserAvatar.layer.borderWidth = 2
         GLNTRKNA_UserAvatar.layer.borderColor = UIColor.systemPink.cgColor
         GLNTRKNA_UserAvatar.clipsToBounds = true
-        GLNTRKNA_UserAvatar.image = UIImage(named: GLNTRKNA_DataManifest.glnt_userId)
+        GLNTRKNA_UserAvatar.setImage(UIImage(named: GLNTRKNA_DataManifest.glnt_userId), for: .normal)
+        
+        
         
         GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_UserAvatar)
         GLNTRKNA_UserNameLabel.text =  GLNTRKNA_DataManifest.glnt_userName
@@ -164,7 +195,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_MetricsLabel.font = .systemFont(ofSize: 14)
         GLNTRKNA_VesselScroll.addSubview(GLNTRKNA_MetricsLabel)
         
-        let gln_heart = UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 75, y: GLNTRKNA_MetricH(385), width: 55, height: 55))
+        
      
         gln_heart.setImage(UIImage(named: "gln_heart"), for: .normal)
         gln_heart.setImage(UIImage(named: "gln_heart_fill"), for: .selected)
@@ -196,7 +227,16 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_SetupInputHarbor()
     }
     @objc private func GLNTRKNA_Triggeractionlike(heiaufi:UIButton) {
-        heiaufi.isSelected = !heiaufi.isSelected
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ToggleMomentLiking(momentID: self.GLNTRKNA_DataManifest.glnt_userId)
+        
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
+            self.gln_heart.isSelected = true
+        }else{
+            self.gln_heart.isSelected = false
+        }
+       
+        
+        self.GLNTRKNA_DataManifest.glntifFollowed = self.gln_heart.isSelected
     }
    @objc func gln_reportTraiiler()  {
        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)

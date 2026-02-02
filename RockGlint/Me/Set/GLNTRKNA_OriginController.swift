@@ -16,19 +16,19 @@ class GLNTRKNA_OriginController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
         
-        let glnt_back = UIButton(frame: CGRect(x: 20 * GLNTRKNA_RatioX, y: 60 * GLNTRKNA_RatioY, width: 30, height: 30))
-        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        glnt_back.tintColor = .white
-        glnt_back.addTarget(self, action: #selector(GLNTRKNA_Retreat), for: .touchUpInside)
-        view.addSubview(glnt_back)
-        
-        let glnt_title = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_RatioY, width: UIScreen.main.bounds.width, height: 30))
-        glnt_title.text = "About us"
-        glnt_title.textColor = .white
-        glnt_title.textAlignment = .center
-        glnt_title.font = .boldSystemFont(ofSize: 18)
-        view.addSubview(glnt_title)
-        
+//        let glnt_back = UIButton(frame: CGRect(x: 20 * GLNTRKNA_RatioX, y: 60 * GLNTRKNA_RatioY, width: 30, height: 30))
+//        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        glnt_back.tintColor = .white
+//        glnt_back.addTarget(self, action: #selector(GLNTRKNA_Retreat), for: .touchUpInside)
+//        view.addSubview(glnt_back)
+//        
+//        let glnt_title = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_RatioY, width: UIScreen.main.bounds.width, height: 30))
+//        glnt_title.text = "About us"
+//        glnt_title.textColor = .white
+//        glnt_title.textAlignment = .center
+//        glnt_title.font = .boldSystemFont(ofSize: 18)
+//        view.addSubview(glnt_title)
+        self.title =  "About us"
         let glnt_logo = UIImageView(frame: CGRect(x: (UIScreen.main.bounds.width - 120 * GLNTRKNA_RatioX) / 2, y: 220 * GLNTRKNA_RatioY, width: 120 * GLNTRKNA_RatioX, height: 120 * GLNTRKNA_RatioX))
         glnt_logo.backgroundColor = .systemPink
         glnt_logo.layer.cornerRadius = 24 * GLNTRKNA_RatioX
@@ -52,7 +52,7 @@ class GLNTRKNA_OriginController: UIViewController {
         view.addSubview(glnt_version)
     }
     
-    @objc private func GLNTRKNA_Retreat() {
-        self.navigationController?.popViewController(animated: true)
-    }
+//    @objc private func GLNTRKNA_Retreat() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
 }

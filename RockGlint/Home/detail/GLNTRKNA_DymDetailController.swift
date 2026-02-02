@@ -18,17 +18,8 @@ import UIKit
 //}
 
 class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
-    }
-   
+
+//   
     private let GLNTRKNA_RootContainer = UIScrollView()
     private let GLNTRKNA_AssetSlider = UIScrollView()
     private let GLNTRKNA_AssetIndicator = UILabel()
@@ -48,8 +39,25 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         GLNTRKNA_InitializeBase()
        
-        GLNTRKNA_AssembleVisuals()
+        GLNTRKNA_AssembleScenery()
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
+            self.gln_heart.isSelected = true
+        }else{
+            self.gln_heart.isSelected = false
+        }
+        GLNTRKNA_SetupObservers()
     }
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_ExitPortal),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
+    }
+    
     
     private func GLNTRKNA_InitializeBase() {
         GLNTRKNA_RootContainer.contentInsetAdjustmentBehavior = .never
@@ -77,7 +85,14 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
        self.present(safetyvc, animated: true)
     }
-    private func GLNTRKNA_AssembleVisuals() {
+    @objc func GLNTRKNAToaogScenery() {
+        
+         self.navigationController?.pushViewController(GLNTRKNA_GuestOrbitController.init(GLNTRKNACelestialData: GLNTRKNA_DataManifest), animated: true)
+     }
+     private func GLNTRKNA_AssembleScenery() {
+         
+       
+        
         let gln_sw = UIScreen.main.bounds.width
         let gln_hero_h = GLNTRKNA_ScaleH(480)
         
@@ -100,9 +115,6 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         // 2. Navigation Overlay
         title = "Dymamic Details"
        
-        let gln_text_attr: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = gln_text_attr
-        navigationController?.navigationBar.tintColor = .white
         
         
         gln_report.setImage(UIImage.init(named: "gln_report"), for: .normal)
@@ -113,12 +125,13 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         self.gln_heart.setImage(UIImage.init(named: "gln_heart"), for: .normal)
         
         let gln_info_y = gln_hero_h - GLNTRKNA_ScaleH(100)
-        let gln_avatar = UIImageView(frame: CGRect(x: GLNTRKNA_ScaleW(20), y: gln_info_y, width: 60, height: 60))
+         let gln_avatar = UIButton(frame: CGRect(x: GLNTRKNA_ScaleW(20), y: gln_info_y, width: 60, height: 60))
         gln_avatar.layer.cornerRadius = 30
         gln_avatar.layer.borderWidth = 2
         gln_avatar.layer.borderColor = UIColor.systemPink.cgColor
         gln_avatar.clipsToBounds = true
-        gln_avatar.image = UIImage(named: GLNTRKNA_DataManifest.glnt_userId)
+         gln_avatar.setImage(UIImage(named: GLNTRKNA_DataManifest.glnt_userId), for: .normal)
+         gln_avatar.addTarget(self, action: #selector(GLNTRKNAToaogScenery), for: .touchUpInside)
         GLNTRKNA_RootContainer.addSubview(gln_avatar)
         
        
@@ -226,7 +239,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
             
             // 虚假点赞数标签
             let gln_count = UILabel(frame: CGRect(x: 45, y: 10, width: 60, height: 32))
-            gln_count.text = "12.4k"
+            gln_count.text = "\(Int.random(in: 0...5))"
             gln_count.textColor = .white
             gln_count.font = .systemFont(ofSize: 14, weight: .semibold)
             gln_container.addSubview(gln_count)
@@ -343,7 +356,17 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     
     
     @objc private func GLNTRKNA_Triggeractionlike() {
-        self.gln_heart.isSelected = !gln_heart.isSelected
+        
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ToggleMomentLiking(momentID: self.GLNTRKNA_DataManifest.glnt_userId)
+        
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
+            self.gln_heart.isSelected = true
+        }else{
+            self.gln_heart.isSelected = false
+        }
+       
+        
+        self.GLNTRKNA_DataManifest.glntifFollowed = self.gln_heart.isSelected
     }
     
     

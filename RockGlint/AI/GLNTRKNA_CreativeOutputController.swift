@@ -13,20 +13,23 @@ class GLNTRKNA_CreativeOutputController: GLNTRKNA_NailAiBaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.title = "Result"
         GLNTRKNA_DisplayMasterpiece()
     }
     
     private func GLNTRKNA_DisplayMasterpiece() {
-        GLNTRKNA_CanvasResult.image = UIImage(named: "AICreatOn\(0...2)")
+        let aiNamer = "AICreatOn\(Int.random(in: 0...2))"
+        
+        GLNTRKNA_CanvasResult.image = UIImage(named:aiNamer )
         GLNTRKNA_MainCanvas.contentSize = CGSize(width: view.frame.width, height: 600)
         GLNTRKNA_CanvasResult.frame = CGRect(x: 20, y: GLNTRKNA_ScaleH(20), width: view.frame.width - 40, height: GLNTRKNA_ScaleH(450))
         GLNTRKNA_CanvasResult.backgroundColor = .darkGray
         GLNTRKNA_CanvasResult.layer.cornerRadius = 20
         GLNTRKNA_CanvasResult.contentMode = .scaleAspectFill
         GLNTRKNA_CanvasResult.clipsToBounds = true
-        GLNTRKNA_CanvasResult.image = UIImage(named: "GLNTRKNA_mock_nail_result")
+      
         GLNTRKNA_MainCanvas.addSubview(GLNTRKNA_CanvasResult)
+        
         
         let gln_save = UIButton(frame: CGRect(x: view.frame.width/2 + 10, y: view.frame.height - 100, width: view.frame.width/2 - 30, height: 60))
         gln_save.backgroundColor = .white
@@ -38,11 +41,14 @@ class GLNTRKNA_CreativeOutputController: GLNTRKNA_NailAiBaseController {
         
         let gln_eval = UIButton(frame: CGRect(x: 20, y: view.frame.height - 100, width: view.frame.width/2 - 30, height: 60))
         gln_eval.backgroundColor = GLNTRKNA_ActionPink
-        gln_eval.setTitle("Evaluate", for: .normal)
+        gln_eval.setTitle("Back", for: .normal)
+        gln_eval.addTarget(self, action: #selector(GLNTRKNA_ExitPortal), for: .touchUpInside)
         gln_eval.layer.cornerRadius = 30
         view.addSubview(gln_eval)
     }
-    
+    @objc private func GLNTRKNA_ExitPortal() {
+        navigationController?.popViewController(animated: true)
+    }
     @objc private func GLNTRKNA_ArchiveToLocal() {
         guard let gln_img = GLNTRKNA_CanvasResult.image else { return }
         UIImageWriteToSavedPhotosAlbum(gln_img, nil, nil, nil)

@@ -8,7 +8,7 @@
 import UIKit
 //他人主页
 class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     var GLNTRKNACelestialData: GLNTRKNA_MomentEntry
     init(GLNTRKNACelestialData: GLNTRKNA_MomentEntry) {
         self.GLNTRKNACelestialData = GLNTRKNACelestialData
@@ -41,12 +41,35 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         GLNTRKNAIgniteAesthetics()
         GLNTRKNASyncPortalData()
+        
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: self.GLNTRKNACelestialData.glnt_userId) {
+            self.GLNTRKNALinkBtn.isSelected = true
+        }else{
+            self.GLNTRKNALinkBtn.isSelected = false
+        }
+       
+        GLNTRKNA_SetupObservers()
     }
-    //report
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNAExitOrbit),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
+    }
    @objc func gln_reportTraiiler()  {
-       let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_PrimarySelection)
+       let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_PrimarySelection,GLNTRKNA_useeID: GLNTRKNACelestialData.glnt_userId)
        self.present(safetyvc, animated: true)
     }
+    
+    
+    @objc func gln_reportTraiileerrrr()  {
+        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
+        self.present(safetyvc, animated: true)
+     }
     private func GLNTRKNAIgniteAesthetics() {
        
         
@@ -60,17 +83,18 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         GLNTRKNASceneryScroll.addSubview(GLNTRKNAMirrorBack)
         
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
-        let gln_options_btn = UIButton(frame: CGRect(x: GLNTRKNACanvasW - 50 * GLNTRKNARatioX, y: 60 * GLNTRKNARatioY, width: 40 * GLNTRKNARatioX, height: 30 * GLNTRKNARatioX))
+        let gln_options_btn = UIButton()
         gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
-        view.addSubview(gln_options_btn)
+       
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
         
         
-        let yac_back_btn = UIButton(frame: CGRect(x: 20 * GLNTRKNARatioX, y: 60 * GLNTRKNARatioY, width: 40, height: 40))
-        yac_back_btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        yac_back_btn.tintColor = .white
-        yac_back_btn.addTarget(self, action: #selector(GLNTRKNAExitOrbit), for: .touchUpInside)
-        view.addSubview(yac_back_btn)
+//        let yac_back_btn = UIButton(frame: CGRect(x: 20 * GLNTRKNARatioX, y: 60 * GLNTRKNARatioY, width: 40, height: 40))
+//        yac_back_btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        yac_back_btn.tintColor = .white
+//        yac_back_btn.addTarget(self, action: #selector(GLNTRKNAExitOrbit), for: .touchUpInside)
+//        view.addSubview(yac_back_btn)
 
         GLNTRKNAAuraAvatar.frame = CGRect(x: 20 * GLNTRKNARatioX, y: 320 * GLNTRKNARatioY, width: 80 * GLNTRKNARatioX, height: 80 * GLNTRKNARatioX)
         GLNTRKNAAuraAvatar.layer.cornerRadius = 40 * GLNTRKNARatioX
@@ -93,6 +117,10 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         GLNTRKNALinkBtn.frame = CGRect(x: GLNTRKNACanvasW - 75 * GLNTRKNARatioX, y: 330 * GLNTRKNARatioY, width: 55 * GLNTRKNARatioX, height: 55 * GLNTRKNARatioX)
         GLNTRKNALinkBtn.setImage(UIImage(named: "GLNTRKNALin_n"), for: .normal)
         GLNTRKNALinkBtn.setImage(UIImage(named: "GLNTRKNALin_nnn"), for: .selected)
+        
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: GLNTRKNACelestialData.glnt_userId) {
+            GLNTRKNALinkBtn.isSelected = true
+        }
         GLNTRKNALinkBtn.addTarget(self, action: #selector(GLNTRKNAToggleAlliance), for: .touchUpInside)
         GLNTRKNASceneryScroll.addSubview(GLNTRKNALinkBtn)
         
@@ -108,11 +136,11 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
                 let yac_seg_h = 70 * GLNTRKNARatioY
                 
                 // 1. Fans Segment
-                let yac_fans = GLNTRKNAStatSegmentView(frame: CGRect(x: 15 * GLNTRKNARatioX, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: "Fans", value: "60")
+        let yac_fans = GLNTRKNAStatSegmentView(frame: CGRect(x: 15 * GLNTRKNARatioX, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: "Fans", value: "\(self.GLNTRKNACelestialData.GTRKnafancCount)")
                 GLNTRKNASceneryScroll.addSubview(yac_fans)
                 
                 // 2. Followers Segment
-                let yac_follows = GLNTRKNAStatSegmentView(frame: CGRect(x: 25 * GLNTRKNARatioX + yac_seg_w, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: "Followers", value: "10.2w")
+        let yac_follows = GLNTRKNAStatSegmentView(frame: CGRect(x: 25 * GLNTRKNARatioX + yac_seg_w, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: "Followers", value: "\(self.GLNTRKNACelestialData.GTRKnafFollwerCount)")
                 GLNTRKNASceneryScroll.addSubview(yac_follows)
         
 //        let yac_stat_w = (GLNTRKNACanvasW - 45 * GLNTRKNARatioX) / 3
@@ -153,10 +181,16 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
 
     // MARK: - Logic Interaction
     @objc private func GLNTRKNAToggleAlliance() {
-        GLNTRKNALinkBtn.isSelected.toggle()
-//        let yac_isFollowed = GLNTRKNALinkBtn.isSelected
-//        GLNTRKNALinkBtn.backgroundColor = yac_isFollowed ? .systemPink : UIColor(white: 1, alpha: 0.1)
-//        GLNTRKNALinkBtn.setImage(UIImage(systemName: yac_isFollowed ? "person.fill.checkmark" : "person.badge.plus"), for: .normal)
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ToggleAdoration(targetEmail:  self.GLNTRKNACelestialData.glnt_userId)
+        
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: self.GLNTRKNACelestialData.glnt_userId) {
+            self.GLNTRKNALinkBtn.isSelected = true
+        }else{
+            self.GLNTRKNALinkBtn.isSelected = false
+        }
+       
+      
+       
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 
@@ -178,7 +212,7 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
     }
 
     @objc private func GLNTRKNAEstablishVisualLink() {
-        let yac_face_vc = GLNTRKNA_FaceMirrorController()
+        let yac_face_vc = GLNTRKNA_FaceMirrorController(GLNTRKNACelestialData: GLNTRKNACelestialData)
         yac_face_vc.GLNTRKNA_RemoteIdentity = GLNTRKNACelestialData.glnt_userName
         yac_face_vc.modalPresentationStyle = .fullScreen
         self.present(yac_face_vc, animated: true)
@@ -194,9 +228,26 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLNTRKNA_VibeMatrixCell", for: indexPath) as! GLNTRKNA_VibeMatrixCell
-        cell.gln_report.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
-        return cell
+        let VibeMatrixCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLNTRKNA_VibeMatrixCell", for: indexPath) as! GLNTRKNA_VibeMatrixCell
+        VibeMatrixCell.gln_report.addTarget(self, action: #selector(gln_reportTraiileerrrr), for: .touchUpInside)
+        if GLNTRKNACelestialData.glnt_is_video {
+            guard let glnt_path = Bundle.main.path(forResource: GLNTRKNACelestialData.SPPuuuRRll, ofType: "mp4") else {
+                return VibeMatrixCell
+            }
+            let glnt_url = URL(fileURLWithPath: glnt_path)
+           
+            GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CaptureFrame(from: glnt_url) {  glnt_image in
+                VibeMatrixCell.gln_cover.image = glnt_image
+            }
+            
+        }else{
+            VibeMatrixCell.gln_cover.image = UIImage(named: GLNTRKNACelestialData.momentPics.first ?? "")
+        }
+       
+        VibeMatrixCell.gln_uname.text =  GLNTRKNACelestialData.glnt_content
+        VibeMatrixCell.gln_meta.text = "\(GLNTRKNACelestialData.glnt_comments.count) comments"
+        
+        return VibeMatrixCell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

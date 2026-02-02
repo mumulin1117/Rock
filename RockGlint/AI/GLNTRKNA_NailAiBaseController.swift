@@ -16,7 +16,7 @@ class GLNTRKNA_NailAiBaseController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Naily AI"
+        
         let gln_text_attr: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = gln_text_attr
         navigationController?.navigationBar.tintColor = .white
@@ -42,7 +42,9 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.title = "Naily AI"
+        
+        
         GLNTRKNA_RenderIntro()
     }
     
@@ -65,8 +67,16 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
         gln_start.setBackgroundImage(UIImage.init(named: "gln_start"), for: .normal)
         gln_start.addTarget(self, action: #selector(GLNTRKNA_LaunchEngine), for: .touchUpInside)
         view.addSubview(gln_start)
+        
+//        let glnt_back = UIButton(frame: CGRect(x: 15 , y: 55 , width: 30, height: 30))
+//        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        glnt_back.tintColor = .white
+//        glnt_back.addTarget(self, action: #selector(GLNTRKNA_ExitPortal), for: .touchUpInside)
+//        view.addSubview(glnt_back)
     }
-    
+//    @objc private func GLNTRKNA_ExitPortal() {
+//        navigationController?.popViewController(animated: true)
+//    }
     @objc private func GLNTRKNA_LaunchEngine() {
         let gln_selector = GLNTRKNA_ArtisanStyleSelector()
         navigationController?.pushViewController(gln_selector, animated: true)

@@ -5,7 +5,7 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
     
     static let GLNTRKNA_SharedEngine = GLNTRKNA_PaymentCore()
     
-    var GLNTRKNA_VaultUpdateHandler: ((Int) -> Void)?
+    var GLNTRKNA_VaultUpdateHandler: (() -> Void)?
     var GLNTRKNA_FeedbackNotice: ((String, Bool) -> Void)?
     
     override init() {
@@ -86,12 +86,10 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         glnt_add = glnt_map[glnt_id] ?? 0
         
         if glnt_add > 0 {
-            var glnt_count = UserDefaults.standard.integer(forKey: "GLNTRKNA_RESERVE_COINS")
-            glnt_count += glnt_add
-            UserDefaults.standard.set(glnt_count, forKey: "GLNTRKNA_RESERVE_COINS")
-            
+
+            GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_AdjustEssence(delta: glnt_add)
             DispatchQueue.main.async {
-                self.GLNTRKNA_VaultUpdateHandler?(glnt_count)
+                self.GLNTRKNA_VaultUpdateHandler?()
             }
         }
     }

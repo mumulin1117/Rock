@@ -21,9 +21,15 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
     private let GLNTRKNA_SolarDateLab = UILabel()
     private let GLNTRKNA_BioEditor = UITextView()
     private var GLNTRKNA_IsAuraChanged: Bool = false
+    
+    let info = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_InitializeScenery()
+        
+        
+         
+        
     }
 
     private func GLNTRKNA_InitializeScenery() {
@@ -31,21 +37,21 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         
         let glnt_top_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_ScaleH))
         view.addSubview(glnt_top_bar)
+        self.title = "Edit Profile"
+//        let glnt_retreat = UIButton(frame: CGRect(x: 20 * GLNTRKNA_ScaleW, y: 60 * GLNTRKNA_ScaleH, width: 30, height: 30))
+//        glnt_retreat.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        glnt_retreat.tintColor = .white
+//        glnt_retreat.addTarget(self, action: #selector(GLNTRKNA_AbortMission), for: .touchUpInside)
+//        glnt_top_bar.addSubview(glnt_retreat)
         
-        let glnt_retreat = UIButton(frame: CGRect(x: 20 * GLNTRKNA_ScaleW, y: 60 * GLNTRKNA_ScaleH, width: 30, height: 30))
-        glnt_retreat.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        glnt_retreat.tintColor = .white
-        glnt_retreat.addTarget(self, action: #selector(GLNTRKNA_AbortMission), for: .touchUpInside)
-        glnt_top_bar.addSubview(glnt_retreat)
-        
-        let glnt_header = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width, height: 30))
-        glnt_header.text = "Edit Profile"
-        glnt_header.textColor = .white
-        glnt_header.textAlignment = .center
-        glnt_header.font = .boldSystemFont(ofSize: 18)
-        glnt_top_bar.addSubview(glnt_header)
-        GLNTRKNA_AuraPreview.frame = CGRect(x: (UIScreen.main.bounds.width - 110 * GLNTRKNA_ScaleW)/2, y: 140 * GLNTRKNA_ScaleH, width: 110 * GLNTRKNA_ScaleW, height: 110 * GLNTRKNA_ScaleW)
-               
+//        let glnt_header = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width, height: 30))
+//        glnt_header.text = "Edit Profile"
+//        glnt_header.textColor = .white
+//        glnt_header.textAlignment = .center
+//        glnt_header.font = .boldSystemFont(ofSize: 18)
+//        glnt_top_bar.addSubview(glnt_header)
+//        GLNTRKNA_AuraPreview.frame = CGRect(x: (UIScreen.main.bounds.width - 110 * GLNTRKNA_ScaleW)/2, y: 140 * GLNTRKNA_ScaleH, width: 110 * GLNTRKNA_ScaleW, height: 110 * GLNTRKNA_ScaleW)
+//               
         GLNTRKNA_AuraPreview.layer.cornerRadius = 55 * GLNTRKNA_ScaleW
         GLNTRKNA_AuraPreview.backgroundColor = .darkGray
         GLNTRKNA_AuraPreview.clipsToBounds = true
@@ -84,8 +90,8 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
 //        let glnt_tap_aura = UITapGestureRecognizer(target: self, action: #selector(GLNTRKNA_TriggerOptics))
 //        GLNTRKNA_AuraPreview.addGestureRecognizer(glnt_tap_aura)
 
-        GLNTRKNA_ComposeEntry(y: 300, title: "Nickname", val: "Blake Cobb", isField: true)
-        GLNTRKNA_ComposeEntry(y: 400, title: "Birthday", val: "December 22, 2010", isField: false)
+        GLNTRKNA_ComposeEntry(y: 300, title: "Nickname", val: info?.glnt_alias ?? "No name", isField: true)
+        GLNTRKNA_ComposeEntry(y: 400, title: "Birthday", val: info?.glnt_date ?? "Enter Birthday", isField: false)
         
         let glnt_bio_box = UIView(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: 500 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 280 * GLNTRKNA_ScaleH))
         glnt_bio_box.backgroundColor = UIColor(white: 1, alpha: 0.08)
@@ -102,7 +108,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         GLNTRKNA_BioEditor.backgroundColor = .clear
         GLNTRKNA_BioEditor.textColor = .lightGray
         GLNTRKNA_BioEditor.font = .systemFont(ofSize: 15)
-        GLNTRKNA_BioEditor.text = "Write something to let people know you..."
+        GLNTRKNA_BioEditor.text = info?.glnt_bio ?? "Write something to let people know you..."
         glnt_bio_box.addSubview(GLNTRKNA_BioEditor)
 
         let glnt_submit = UIButton(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: UIScreen.main.bounds.height - 100 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 65 * GLNTRKNA_ScaleH))
@@ -211,11 +217,12 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         // 调用回调，将新头像一并传回
         GLNTRKNA_SyncCallback?(glnt_newName, glnt_newBio, glnt_newDate, glnt_newImg)
         
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ReviseProfile(alias: glnt_newName,bio: glnt_newBio,birthday: glnt_newDate)
         self.navigationController?.popViewController(animated: true)
         
     }
 
-    @objc private func GLNTRKNA_AbortMission() {
-        self.navigationController?.popViewController(animated: true)
-    }
+//    @objc private func GLNTRKNA_AbortMission() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
 }

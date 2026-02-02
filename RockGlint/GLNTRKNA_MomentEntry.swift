@@ -27,6 +27,8 @@ struct GLNTRKNA_MomentEntry: Codable {
     let glnt_content: String
     var glnt_comments: [String] = []
    
+    var glntifFollowed:Bool = false
+    var glntisHearted:Bool = false
     
     // 初始化方法，手动解析从 Plist 读入的原始字典
     init(fromDictionary dict: [String: Any]) {

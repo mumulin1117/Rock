@@ -122,9 +122,12 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         GLNTRKNA_AttachFooterButtons(gln_y: gln_last_y + 30)
     }
     
+    private var ifPickedReason:Bool = false
     
    @objc func GLNTRKNA_ciccler(GLNTRKNA:UIButton)  {
        GLNTRKNA.isSelected = !GLNTRKNA.isSelected
+       ifPickedReason = true
+       
     }
 
     // 2. 修改详细说明方法，确保高度足够放下输入框和键盘弹出空间
@@ -192,16 +195,47 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     }
     
     @objc private func GLNTRKNA_CommitProtocol() {
-        GLNTRKNA_FeedbackGen.notificationOccurred(.success)
-        GLNTRKNA_ExitPortal()
+        if GLNTRKNA_InputField.superview != nil {
+            guard let contetntrerpot = GLNTRKNA_InputField.text,contetntrerpot.isEmpty == false else {
+                let glnt_msg = "⚠️ " + "Please Enter the reason you report!"
+                        
+                GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
+              
+                return
+            }
+            
+        }
+        guard ifPickedReason == true else {
+            let glnt_msg = "⚠️ " + "Please pick the reason you report!"
+                    
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
+          
+            return
+        }
+        
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Submitting....", on: self.view)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+            let glnt_msg = "✨ " + "We will verify and process it as soon as possible!"
+                    
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
+            
+            self.GLNTRKNA_FeedbackGen.notificationOccurred(.success)
+            self.GLNTRKNA_ExitPortal()
+        }))
+        
     }
     
     @objc private func GLNTRKNA_ExecuteBlockade() {
+        if let id = GLNTRKNA_useeID {
+            GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CastObsidian(targetEmail: id)
+        }
         GLNTRKNA_FeedbackGen.notificationOccurred(.warning)
         GLNTRKNA_ExitPortal()
     }
     
     @objc private func GLNTRKNA_ExitPortal() {
+      
+        
         UIView.animate(withDuration: 0.25, animations: {
             self.GLNTRKNA_BlurEffect.alpha = 0
             self.GLNTRKNA_SheetAnchor.frame.origin.y = UIScreen.main.bounds.height

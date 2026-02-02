@@ -36,7 +36,19 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         super.viewDidLoad()
         GLNTRKNA_ConstructCanvas()
         GLNTRKNA_HydrateDialogue()
+        GLNTRKNA_SetupObservers()
     }
+    private func GLNTRKNA_SetupObservers() {
+            // 注册黑名单变更监听
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_PopView),
+                name: .GLNTRKNA_ObsidianListChanged,
+                object: nil
+            )
+       
+    }
+  
     
     private func GLNTRKNA_ConstructCanvas() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
@@ -45,24 +57,30 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         let gln_top_nav = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 110 * GLNTRKNA_RatioH))
         view.addSubview(gln_top_nav)
         
-        let gln_exit = UIButton(frame: CGRect(x: 15, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
-        gln_exit.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        gln_exit.tintColor = .white
-        gln_exit.addTarget(self, action: #selector(GLNTRKNA_PopView), for: .touchUpInside)
-        gln_top_nav.addSubview(gln_exit)
+//        let gln_exit = UIButton(frame: CGRect(x: 15, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
+//        gln_exit.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+//        gln_exit.tintColor = .white
+//        gln_exit.addTarget(self, action: #selector(GLNTRKNA_PopView), for: .touchUpInside)
+//        gln_top_nav.addSubview(gln_exit)
         
-        let gln_partner_lbl = UILabel(frame: CGRect(x: 80, y: 60 * GLNTRKNA_RatioH, width: view.bounds.width - 160, height: 40))
-        gln_partner_lbl.text = GLNTRKNA_ContextCarrier.userModel.glnt_userName
-        gln_partner_lbl.textColor = .white
-        gln_partner_lbl.textAlignment = .center
-        gln_partner_lbl.font = .boldSystemFont(ofSize: 18)
-        gln_top_nav.addSubview(gln_partner_lbl)
-        
-        let gln_options = UIButton(frame: CGRect(x: view.bounds.width - 55, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
-        gln_options.isUserInteractionEnabled = true
-        gln_options.setImage(UIImage(named: "gln_report"), for: .normal)
-        gln_options.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
-        gln_top_nav.addSubview(gln_options)
+        self.title = GLNTRKNA_ContextCarrier.userModel.glnt_userName
+//        let gln_partner_lbl = UILabel(frame: CGRect(x: 80, y: 60 * GLNTRKNA_RatioH, width: view.bounds.width - 160, height: 40))
+//        gln_partner_lbl.text =
+//        gln_partner_lbl.textColor = .white
+//        gln_partner_lbl.textAlignment = .center
+//        gln_partner_lbl.font = .boldSystemFont(ofSize: 18)
+//        gln_top_nav.addSubview(gln_partner_lbl)
+//        
+//        let gln_options = UIButton(frame: CGRect(x: view.bounds.width - 55, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
+//        gln_options.isUserInteractionEnabled = true
+//        gln_options.setImage(UIImage(named: "gln_report"), for: .normal)
+//        gln_options.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+        let gln_options_btn = UIButton()
+        gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
+        gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+       
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
+     
         
         // GLNTRKNA: Message List
         GLNTRKNA_ChatVault.frame = CGRect(x: 0, y: 110 * GLNTRKNA_RatioH, width: view.bounds.width, height: view.bounds.height - (210 * GLNTRKNA_RatioH))
@@ -108,14 +126,14 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
     
     
     @objc func gln_avioTraiiler()  {
-        let safetyvc =  GLNTRKNA_FaceMirrorController.init()
+        let safetyvc =  GLNTRKNA_FaceMirrorController.init(GLNTRKNACelestialData: GLNTRKNA_ContextCarrier.userModel)
         safetyvc.modalPresentationStyle = .fullScreen
         self.present(safetyvc, animated: true)
      }
     
     //report
    @objc func gln_reportTraiiler()  {
-       let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_PrimarySelection)
+       let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_PrimarySelection,GLNTRKNA_useeID: GLNTRKNA_ContextCarrier.userModel.glnt_userId)
        self.present(safetyvc, animated: true)
     }
     private func GLNTRKNA_HydrateDialogue() {

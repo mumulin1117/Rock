@@ -196,7 +196,7 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_CoverArt.contentMode = .scaleAspectFill
         GLNTRKNA_CoverArt.backgroundColor = .darkGray
         contentView.addSubview(GLNTRKNA_CoverArt)
-        
+        GLNTRKNA_CommentBox.isUserInteractionEnabled = false
         let gln_grad = CAGradientLayer()
         gln_grad.frame = GLNTRKNA_CoverArt.bounds
         gln_grad.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.6).cgColor]
@@ -225,7 +225,7 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_LikeBox.frame = CGRect(x: 15, y: gln_btn_y, width: 100, height: 45)
         GLNTRKNA_CommentBox.frame = CGRect(x: 125, y: gln_btn_y, width: 100, height: 45)
         GLNTRKNA_ReportBox.frame = CGRect(x: contentView.bounds.width - 64 - 12, y: gln_btn_y, width: 64, height: 40)
-        
+        GLNTRKNA_LikeBox.isUserInteractionEnabled = false
         [GLNTRKNA_LikeBox, GLNTRKNA_CommentBox, GLNTRKNA_ReportBox].forEach {
             $0.backgroundColor = UIColor(red: 0.03, green: 0.04, blue: 0.16, alpha: 1)
             $0.layer.cornerRadius = 12
@@ -243,6 +243,9 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_LikeBox.setTitle(" 0", for: .normal)
         GLNTRKNA_CommentBox.setTitle(" \(gln_data.glnt_comments.count)", for: .normal)
         GLNTRKNA_ConfigureVideoCell(with: gln_data.SPPuuuRRll)
+        
+        GLNTRKNA_Avatar.image = UIImage(named: gln_data.glnt_userId)
+        
     }
     
     // 在你的 Cell 子类中
