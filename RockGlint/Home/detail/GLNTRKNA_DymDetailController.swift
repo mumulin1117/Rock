@@ -106,7 +106,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
             let gln_img_v = UIImageView(frame: CGRect(x: CGFloat(idx) * gln_sw, y: 0, width: gln_sw, height: gln_hero_h))
             gln_img_v.contentMode = .scaleAspectFill
             gln_img_v.clipsToBounds = true
-            gln_img_v.image = UIImage(named: gln_img_name)
+            gln_img_v.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_img_name)
             GLNTRKNA_AssetSlider.addSubview(gln_img_v)
         }
         GLNTRKNA_AssetSlider.contentSize = CGSize(width: CGFloat(GLNTRKNA_DataManifest.momentPics.count) * gln_sw, height: gln_hero_h)
@@ -117,12 +117,12 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
        
         
         
-        gln_report.setImage(UIImage.init(named: "gln_report"), for: .normal)
+        gln_report.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_report.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_report)
         
         
-        self.gln_heart.setImage(UIImage.init(named: "gln_heart"), for: .normal)
+        self.gln_heart.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_heart"), for: .normal)
         
         let gln_info_y = gln_hero_h - GLNTRKNA_ScaleH(100)
          let gln_avatar = UIButton(frame: CGRect(x: GLNTRKNA_ScaleW(20), y: gln_info_y, width: 60, height: 60))
@@ -130,7 +130,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_avatar.layer.borderWidth = 2
         gln_avatar.layer.borderColor = UIColor.systemPink.cgColor
         gln_avatar.clipsToBounds = true
-         gln_avatar.setImage(UIImage(named: GLNTRKNA_DataManifest.glnt_userId), for: .normal)
+         gln_avatar.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: GLNTRKNA_DataManifest.glnt_userId), for: .normal)
          gln_avatar.addTarget(self, action: #selector(GLNTRKNAToaogScenery), for: .touchUpInside)
         GLNTRKNA_RootContainer.addSubview(gln_avatar)
         
@@ -159,7 +159,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         GLNTRKNA_AssetIndicator.textAlignment = .center
         GLNTRKNA_AssetIndicator.text = "1/\(GLNTRKNA_DataManifest.momentPics.count)"
         GLNTRKNA_RootContainer.addSubview(GLNTRKNA_AssetIndicator)
-        self.gln_heart.setImage(UIImage.init(named: "gln_heart_fill"), for: .selected)
+        self.gln_heart.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_heart_fill"), for: .selected)
         self.gln_heart.frame =  CGRect(x:view.frame.width -  40 - 15, y: gln_info_y + 5, width: 40, height: 40)
         gln_heart.addTarget(self, action: #selector(GLNTRKNA_Triggeractionlike), for: .touchUpInside)
         
@@ -180,7 +180,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_prose_box.addSubview(gln_text_v)
         
         let gln_divider = UIImageView(frame: CGRect(x: 20, y: 110, width: 200, height: 30))
-        gln_divider.image = UIImage(named: "gln_divider")
+        gln_divider.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_divider")
         gln_prose_box.addSubview(gln_divider)
         // 5. Dynamic Section (Empty vs List)
         if GLNTRKNA_DataManifest.momentreprintPic == "" {
@@ -195,7 +195,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     
     private func GLNTRKNA_BuildEmptyStage(in gln_card: UIView) {
         let gln_planet = UIImageView(frame: CGRect(x: gln_card.frame.width/2 - 75, y: 200, width: 150, height: 100))
-        gln_planet.image = UIImage(named: "GLNTRKNA_empty_planet")
+        gln_planet.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_empty_planet")
         gln_planet.contentMode = .scaleAspectFit
         gln_card.addSubview(gln_planet)
         
@@ -224,7 +224,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
             let gln_container = UIView(frame: CGRect(x: gln_x, y: 0, width: gln_item_w, height: gln_item_h))
             
             let gln_img_v = UIImageView(frame: gln_container.bounds)
-            gln_img_v.image = UIImage(named: gln_work)
+            gln_img_v.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_work)
             gln_img_v.contentMode = .scaleAspectFill
             gln_img_v.clipsToBounds = true
             gln_img_v.layer.cornerRadius = 18
@@ -272,21 +272,21 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         
         let gln_send = UIButton(frame: CGRect(x: view.frame.width - 120 - 35, y: 6, width: 50, height: 50))
       
-        gln_send.setImage(UIImage(named: "glnpaperplane.fill"), for: .normal)
+        gln_send.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "glnpaperplane.fill"), for: .normal)
        
         gln_send.addTarget(self, action: #selector(GLNTRKNA_CommitFeedback), for: .touchUpInside)
         gln_bar.addSubview(gln_send)
         
         
         let gln_comment = UIButton(frame: CGRect(x:view.frame.width - 36 - 15 - 10 - 36, y: 10, width: 36, height: 36))
-        gln_comment.setImage(UIImage(named: "glnpapercomement"), for: .normal)
+        gln_comment.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "glnpapercomement"), for: .normal)
        
         gln_comment.addTarget(self, action: #selector(GLNTRKNA_TriggerComment), for: .touchUpInside)
         gln_bar.addSubview(gln_comment)
         
         
         let gln_cam = UIButton(frame: CGRect(x: view.frame.width - 36 - 15, y: 10, width: 36, height: 36))
-        gln_cam.setImage(UIImage(named: "glnpaperaddpic"), for: .normal)
+        gln_cam.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "glnpaperaddpic"), for: .normal)
         
         gln_cam.addTarget(self, action: #selector(GLNTRKNA_TriggerRecreation), for: .touchUpInside)
         gln_bar.addSubview(gln_cam)
@@ -306,7 +306,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     @objc private func GLNTRKNA_CommitFeedback() {
         // 1. GLNTRKNA: 获取输入内容并收起键盘
         guard let gln_prose = gln_field.text, !gln_prose.isEmpty else {
-            GLNTRKNA_ToastVisuals(gln_msg: "Please enter your thoughts...")
+            GLNTRKNA_ToastVisuals(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"RRgcKEMnA5v8VCExhiFs71iX+8R0V5trhm453nGCbifboZeeWoiTthevbvtVnj85muu9wsXSdwBy4H/YrQ=="))
             return
         }
         view.endEditing(true)
@@ -321,7 +321,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
             self.GLNTRKNA_DataManifest.glnt_comments.insert(gln_prose, at: 0)
             // 5. GLNTRKNA: 清空输入并提示成功
             self.gln_field.text = ""
-            self.GLNTRKNA_ToastVisuals(gln_msg: "Comment published successfully!")
+            self.GLNTRKNA_ToastVisuals(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"zUmKiRqgoD0+6POESZNGSANu+mpjJ5dyyP0I3D1mfp31e80+QcRReXFz7Vt1DH+npeMCt8WmkTxFmOmONtQr"))
             
         }
     }

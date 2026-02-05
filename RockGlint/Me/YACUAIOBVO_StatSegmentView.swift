@@ -12,8 +12,7 @@ class GLNTRKNAStatSegmentView: UIView {
     private let GLNTRKNAValueLab = UILabel()
     private let GLNTRKNAKeyLab = UILabel()
     private let GLNTRKNATopIcon = UIImageView()
-    
-    // 初始化方法
+  
     init(frame: CGRect, key: String, value: String, isCall: Bool = false) {
         super.init(frame: frame)
         GLNTRKNAArchitect(key: key, value: value, isCall: isCall)
@@ -24,10 +23,10 @@ class GLNTRKNAStatSegmentView: UIView {
     private func GLNTRKNAArchitect(key: String, value: String, isCall: Bool) {
         self.backgroundColor = .clear
         
-        // 1. 绘制梯形背景
+     
         let yac_shape = CAShapeLayer()
         let yac_path = UIBezierPath()
-        // 这里的倾斜逻辑：左边往右斜，右边也往右斜
+       
         yac_path.move(to: CGPoint(x: 15, y: 0))
         yac_path.addLine(to: CGPoint(x: self.bounds.width, y: 0))
         yac_path.addLine(to: CGPoint(x: self.bounds.width - 15, y: self.bounds.height))
@@ -41,7 +40,6 @@ class GLNTRKNAStatSegmentView: UIView {
         }
         self.layer.addSublayer(yac_shape)
         
-        // 2. 配置文字
         GLNTRKNAValueLab.frame = CGRect(x: 0, y: isCall ? 35 : 30, width: self.bounds.width, height: 25)
         GLNTRKNAValueLab.text = value
         GLNTRKNAValueLab.textAlignment = .center
@@ -56,14 +54,14 @@ class GLNTRKNAStatSegmentView: UIView {
         GLNTRKNAKeyLab.font = .systemFont(ofSize: 12)
         self.addSubview(GLNTRKNAKeyLab)
         
-        // 3. 特殊处理：Call 按钮上方的气泡
+      
         if isCall {
             GLNTRKNATopIcon.frame = CGRect(x: (self.bounds.width - 40)/2, y: -25, width: 45, height: 40)
-            GLNTRKNATopIcon.image = UIImage(named: "GLNTRKNACallBubble") // 这里对应设计图粉色气泡
+            GLNTRKNATopIcon.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNACallBubble") // 这里对应设计图粉色气泡
             GLNTRKNATopIcon.contentMode = .scaleAspectFit
             self.addSubview(GLNTRKNATopIcon)
             
-            // 添加闪烁动画，防止4.3
+          
             GLNTRKNAIgnitePulseEffect()
         }
     }

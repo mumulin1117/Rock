@@ -41,11 +41,11 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         
         switch GLNTRKNA_WorkMode {
         case .gln_artisan_image:
-            title = "Upload Image"
+            title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"ymTTamMsP9sAGbmZRi6v2iRxGdfA2lLVrt6FRRqE9t+0UusAQe3YmExCXlo=")
         case .gln_artisan_video:
-            title = "Video Release"
+            title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"TDl8EHuitIZrf36eyFNVVLfnO5Rs67p5j5QihLROpf0ZvIL9ba4hhydA5R4x")
         case .gln_nail_recreate:
-            title = "Add Nail Comment"
+            title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"RSNzXNcPV+WAhVPQh2Xjtmtu7l5ZhgUWurVHnNPbVaF1NYbEjquEIC86STuAeMEk")
         
         }
         let gln_text_attr: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
@@ -74,7 +74,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
             GLNTRKNA_MediaGallery.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
             GLNTRKNA_MediaGallery.layer.cornerRadius = 15
             
-            let gln_plus = UIImageView(image: UIImage(named: "gln_addplus"))
+            let gln_plus = UIImageView(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_addplus"))
             gln_plus.tintColor = UIColor(white: 1.0, alpha: 0.3)
             gln_plus.frame = CGRect(x: (GLNTRKNA_MediaGallery.frame.width - 60)/2, y: (gln_video_h - 60)/2, width: 60, height: 60)
             GLNTRKNA_MediaGallery.addSubview(gln_plus)
@@ -87,7 +87,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
             GLNTRKNA_MediaGallery.frame = CGRect(x: gln_side_pad, y: GLNTRKNA_ScaleH(30), width: gln_sw - (15 * 2), height: gln_video_h)
             
             let ganartbutton = UIButton.init(frame: GLNTRKNA_MediaGallery.bounds)
-            ganartbutton.setBackgroundImage(UIImage.init(named: "normailADSsimg"), for: .normal)
+            ganartbutton.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "normailADSsimg"), for: .normal)
             ganartbutton.tag = 1999
             ganartbutton.addTarget(self, action: #selector(GLNTRKNA_TriggerComment), for: .touchUpInside)
             GLNTRKNA_MediaGallery.addSubview(ganartbutton)
@@ -96,7 +96,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         GLNTRKNA_StageScroll.addSubview(GLNTRKNA_MediaGallery)
         
         let gln_form_y = GLNTRKNA_MediaGallery.frame.maxY + GLNTRKNA_ScaleH(40)
-        let GLNTRKNA_imag = UIImageView(image: UIImage.init(named: "GLNTRKNA_imag"))
+        let GLNTRKNA_imag = UIImageView(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_imag"))
         GLNTRKNA_imag.frame = CGRect(x: gln_side_pad, y: gln_form_y, width: 111, height:(GLNTRKNA_WorkMode == .gln_nail_recreate) ? 0 : 24)
         GLNTRKNA_imag.isHidden = (GLNTRKNA_WorkMode == .gln_nail_recreate)
        
@@ -111,7 +111,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         GLNTRKNA_ManifestInput.layer.cornerRadius = 15
         GLNTRKNA_ManifestInput.textColor = .white
         GLNTRKNA_ManifestInput.font = .systemFont(ofSize: 16)
-        GLNTRKNA_ManifestInput.text = "Share your nail moments with us! Show off your latest designs!"
+        GLNTRKNA_ManifestInput.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"hp75aMynXCK2iovDFa05xs9GC3S7qqapTEUeTjonZfuIRCVOJ1cH+dD0ESJRbVARvc6rgGikAUNBO9to8GaDmPKrL2ByvBZnUhHbwYQfOYJby2x4kySJabazIp5y4Q==")
         GLNTRKNA_ManifestInput.delegate = self
         GLNTRKNA_StageScroll.addSubview(GLNTRKNA_ManifestInput)
         
@@ -120,11 +120,11 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         
         switch GLNTRKNA_WorkMode {
         case .gln_artisan_image:
-            GLNTRKNA_CommitTrigger.setTitle("Post" , for: .normal)
+            GLNTRKNA_CommitTrigger.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"PHQV8knjcKQgwqzEDehl0z0NoKq0Mnzdj/0sUANjALLzNrxh") , for: .normal)
         case .gln_artisan_video:
-            GLNTRKNA_CommitTrigger.setTitle("Release", for: .normal)
+            GLNTRKNA_CommitTrigger.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"z1WSWXUsiN72xzkZqw+9UCifiDV026MNrxip7kALGEbDgNUWFPuF"), for: .normal)
         case .gln_nail_recreate:
-            GLNTRKNA_CommitTrigger.setTitle("Publish", for: .normal)
+            GLNTRKNA_CommitTrigger.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"lKPsABZD6WooKSE3t2k6RWcLA4duUJjU9uv6GVepWrwRxd/nmUvX"), for: .normal)
         
         }
         
@@ -137,7 +137,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         let gln_btn = UIButton(frame: CGRect(x: pad + CGFloat(index) * (size + pad), y: 0, width: size, height: size))
         gln_btn.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         gln_btn.layer.cornerRadius = 12
-        gln_btn.setImage(UIImage(named: "gln_addplus"), for: .normal)
+        gln_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_addplus"), for: .normal)
         gln_btn.tintColor = .gray
         gln_btn.tag = 100 + index
         gln_btn.addTarget(self, action: #selector(GLNTRKNA_TriggerPicker(index:)), for: .touchUpInside)
@@ -212,7 +212,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
     @objc private func GLNTRKNA_ExecuteUpload() {
         if GLNTRKNA_WorkMode == .gln_nail_recreate {
             if GLNTRKNA_SelectedAssets == nil {
-                let gln_error = "Please add at one nail photo."
+                let gln_error = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"PutBzkd6HJ5LcYPR3rCKcFkZrtnKWVmXYtgjFlIMHfIiG6C2y/yM2NWY1J96GE41xvbaQUbcpEMXG5t7ew==")
                 GLNTRKNA_PostAlert(gln_msg: gln_error)
                 return
             }
@@ -222,8 +222,8 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
                 self.GLNTRKNA_CommitTrigger.alpha = 1.0
                 
                 // Notify user of success before popping
-                let gln_success = UIAlertController(title: "Rock Studio", message: "Your comment nail content published successfully!,it will present after review!", preferredStyle: .alert)
-                gln_success.addAction(UIAlertAction(title: "Great", style: .default, handler: { _ in
+                let gln_success = UIAlertController(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"mNnggS3CtYoUQ8zjoJB7x3gm671OsHaha3uwvLrtpf0zCn12P2uyC2Q2ng=="), message: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"rG6jrZiLaC2V3XrKxfze1UUVxActfsS1SJA3RiKDjmZuYd3bsDqHpw6RrDVTOtW5J9W9rHJSzPGJznVnB5dn9Oym40msjl7E1IGxILW67cmOUtQiU2LzB6Bp2fRdHIKNPZ6bgFjefpB0vam8FUcp"), preferredStyle: .alert)
+                gln_success.addAction(UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"nRP1+RoezDGmVkuaIe9Eba1xp+x6UPM+XLCN8+GihXz6VJRHSA=="), style: .default, handler: { _ in
                     self.navigationController?.popViewController(animated: true)
                 }))
                 self.present(gln_success, animated: true)
@@ -232,10 +232,10 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
             return
         }
         let gln_text = GLNTRKNA_ManifestInput.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        let gln_is_placeholder = gln_text.contains("Share your nail moments") || gln_text.isEmpty
+        let gln_is_placeholder = gln_text.contains(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"t4nzHl8ZMeROOcs8sXJv7F35ZdBYaNCaJkj579LlriEGAGixT0pyTZSVo6FS9sFo7jKcCnY/sg==")) || gln_text.isEmpty
         
         if gln_is_placeholder && GLNTRKNA_WorkMode != .gln_nail_recreate {
-            GLNTRKNA_PostAlert(gln_msg: "Please describe your masterpiece first.")
+            GLNTRKNA_PostAlert(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"yIn+VwIV5w+HizWcpJshqFg9yNFEz3n6RCIcnEesPN8jNjCnGVyHgIWN8nJpg4ooyUotPCS2ZBiQfRS+Ts610go/i5HBIW0="))
             return
         }
 
@@ -263,7 +263,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         }
 
         if !gln_media_ready {
-            let gln_error = (GLNTRKNA_WorkMode == .gln_artisan_video) ? "Please select a video clip." : "Please add at least one nail photo."
+            let gln_error = (GLNTRKNA_WorkMode == .gln_artisan_video) ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"FNzbOXJeyKv8MfzBfcqLKGgPcopV9qlZ1XgSEKww9H/xUxsLhorLi4r4N1scd8fAJlJevdwlB+dhyq4=") : GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"hUsvWS5i0bysJRuzDhCStigfKoB8Acm2FTzwdQL6418a+gCh8qptUJ3OIq/jMgfBFv218NOiiAm19g5frAcIlnYbDw==")
             GLNTRKNA_PostAlert(gln_msg: gln_error)
             return
         }
@@ -273,7 +273,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         GLNTRKNA_CommitTrigger.alpha = 0.5
         
         // UI Feedback: Show a "Syncing" state
-        GLNTRKNA_CommitTrigger.setTitle("Syncing to Rock...", for: .normal)
+        GLNTRKNA_CommitTrigger.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"I8oGaL9j7jhUZpwZwppRwHMD72ZheJAwo+YNNrEWIO0A2Cop7/xG64+8uv04bTsze4Y="), for: .normal)
         
         
 
@@ -282,8 +282,8 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
             self.GLNTRKNA_CommitTrigger.alpha = 1.0
             
             // Notify user of success before popping
-            let gln_success = UIAlertController(title: "Rock Studio", message: "Artisan content published successfully!", preferredStyle: .alert)
-            gln_success.addAction(UIAlertAction(title: "Great", style: .default, handler: { _ in
+            let gln_success = UIAlertController(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"wSvdZQmpiNEEr15R5hvr9uzBUStVdbEIVZrOX+BmqbUYk6bB9r1hNgs3Pg=="), message: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"szsSgbRAC8fISdT3Og73Q9Ykzdb0mSPfH6/vH2CgXr714U7mAgVCA4YOixjN95KuKr1g17RFzRDq0U3v+R9GIL56U49ajiU="), preferredStyle: .alert)
+            gln_success.addAction(UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"+qTJliXx0JFK2PEQ7hOvt4ekaKm1ywxckut1IhVH7pR0upGsKA=="), style: .default, handler: { _ in
                 self.navigationController?.popViewController(animated: true)
             }))
             self.present(gln_success, animated: true)
@@ -291,15 +291,15 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
     }
     
     private func GLNTRKNA_PostAlert(gln_msg: String) {
-        let gln_alert = UIAlertController(title: "Rock Studio", message: gln_msg, preferredStyle: .alert)
-        gln_alert.addAction(UIAlertAction(title: "Confirmed", style: .default))
+        let gln_alert = UIAlertController(title:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"cfBoFUI4tIcepNSKwANxWjDRn1Gk8mVdJrhbzcxEeo84ZmEK12QMWZ9nwQ=="), message: gln_msg, preferredStyle: .alert)
+        gln_alert.addAction(UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"HUsE7TH05zcuaJfHZ61/RAkPM/kXy1XanSnJrMJciOV+2TqDuO46yOI="), style: .default))
         present(gln_alert, animated: true)
     }
     
     @objc private func GLNTRKNA_CollapseInput() { view.endEditing(true) }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text.contains("Share your nail moments") { textView.text = "" }
+        if textView.text.contains(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"BwgRMGnH6VKNTRyyfl7anvebucp/A15YDebuA/pIbbIf81f/hsaf4PBG+r8dwOa1GWNz9Fbe7g==")) { textView.text = "" }
     }
     
     private func GLNTRKNA_ApplyAesthetic(_ gln_img: UIImage?, to gln_btn: UIButton) {

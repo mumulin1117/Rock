@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    // GLNTRKNA: 全局窗口实例，虽然现在主要用 SceneDelegate，但保留此引用是标准做法
+   
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -23,6 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        return UISceneConfiguration(name: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"+PN+ltEzAXzkrJby5fljIp0pi6PLUEbh6DP426hS9Aqg0jt3F4ETNZ443vXVKysXlZLkifo="), sessionRole: connectingSceneSession.role)
     }
 }

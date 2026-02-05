@@ -7,18 +7,16 @@
 
 import UIKit
 
-import UIKit
-
 class GLNTRKNA_AmbienceManager {
     
     static let GLNTRKNA_SharedOrb = GLNTRKNA_AmbienceManager()
     
     private var GLNTRKNA_VeilLayer: UIView?
     
-    // MARK: - Core Visual Feedback
+
     
     func GLNTRKNA_ProjectLoading(with glnt_msg: String, on glnt_target: UIView) {
-        // 确保不会重复创建
+    
         if GLNTRKNA_VeilLayer != nil { return }
         
         DispatchQueue.main.async {
@@ -50,7 +48,7 @@ class GLNTRKNA_AmbienceManager {
             glnt_target.addSubview(glnt_veil)
             self.GLNTRKNA_VeilLayer = glnt_veil
             
-            // 4.3 策略：为 Loading 增加一个简单的呼吸动画，增加代码独特性
+           
             glnt_vessel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             UIView.animate(withDuration: 0.25) {
                 glnt_vessel.transform = .identity
@@ -79,14 +77,12 @@ class GLNTRKNA_AmbienceManager {
             glnt_banner.font = .boldSystemFont(ofSize: 14)
             glnt_banner.layer.cornerRadius = 20
             glnt_banner.clipsToBounds = true
-            
-            // 动态计算宽度
+       
             let glnt_width = glnt_text.size(withAttributes: [.font: glnt_banner.font!]).width + 40
             glnt_banner.frame = CGRect(x: (glnt_base.frame.width - glnt_width)/2, y: glnt_base.frame.height - 180, width: glnt_width, height: 44)
             
             glnt_base.addSubview(glnt_banner)
-            
-            // 进场动画
+           
             glnt_banner.alpha = 0
             glnt_banner.transform = CGAffineTransform(translationX: 0, y: 20)
             
@@ -95,7 +91,6 @@ class GLNTRKNA_AmbienceManager {
                 glnt_banner.transform = .identity
             }
             
-            // 离场动画
             UIView.animate(withDuration: 0.3, delay: 2.3, options: .curveEaseIn) {
                 glnt_banner.alpha = 0
                 glnt_banner.transform = CGAffineTransform(translationX: 0, y: -20)

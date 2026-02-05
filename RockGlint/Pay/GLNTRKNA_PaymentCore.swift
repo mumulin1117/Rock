@@ -18,12 +18,12 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
     func GLNTRKNA_TriggerAcquisition(via glnt_product_id: String) {
         
         if !SKPaymentQueue.canMakePayments() {
-            self.GLNTRKNA_FeedbackNotice?("System purchase restricted.", true)
+            self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"zOmqq08QQGf8wyijFAwjrYLpwT2L8og/sO8oweBhSm4QoULrnEzP0nxMha/rCPy3+AMWCo+v/orM76g="), true)
             return
         }
         
         // 开启 Loading 反馈
-        self.GLNTRKNA_FeedbackNotice?("Initiating secure tunnel...", false)
+        self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"p38IRURl02g99ZFTuDAVQrGB5yrBtUjBbIkU5uQQsBqF8CywLM4q6aKN4AOrc15AqT/oPJGjE41zHXs="), false)
         
         // 使用 SKMutablePayment 直接根据 ProductID 发起请求
         // 注意：这种方式在某些环境下如果未预热可能弹出稍慢，但在逻辑上是自恰的
@@ -42,12 +42,12 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
                 // 支付成功
                 GLNTRKNA_HandleFulfillment(for: glnt_trans.payment.productIdentifier)
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
-                self.GLNTRKNA_FeedbackNotice?("Success! Assets synchronized.", true)
+                self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"nDK7xZCPIqKEsyIz5v9vHTHzyaBK307ZHGNfZ9HYxwg5Yns3Hj5SwPP2pA5GeQiqfxbXy6YjAE0lQxEoBA=="), true)
                 
             case .failed:
                 // 支付失败或用户取消
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
-                self.GLNTRKNA_FeedbackNotice?("Transaction interrupted.", true)
+                self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Jjk4B6rDednHg28AtxqBU1AyPyFXDr5sb4rix+B+r1VQUFIKCCwkam03eQtAZNSZKJaZd7VA+1E="), true)
                 
             case .restored:
                 SKPaymentQueue.default().finishTransaction(glnt_trans)

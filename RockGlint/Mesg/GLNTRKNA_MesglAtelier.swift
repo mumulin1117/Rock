@@ -18,7 +18,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let ArtisanCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Artisan", for: indexPath) as! GLNTRKNA_ArtisanCell
         let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
-        ArtisanCell.gln_avatar.image = UIImage(named: ArtisanCelldata.glnt_userId)
+        ArtisanCell.gln_avatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: ArtisanCelldata.glnt_userId)
         ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
         ArtisanCell.gln_vidus.tag = indexPath.row
         ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink(Ubuaton:)), for: .touchUpInside)
@@ -42,7 +42,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
         let gln_planet = UIImageView(frame: CGRect(x: 0, y: GLNTRKNA_RatioH(370), width: 168, height: 134))
                
         gln_planet.isHidden = true
-        gln_planet.image = UIImage(named: "rokyholder")
+        gln_planet.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "rokyholder")
         gln_planet.contentMode = .scaleAspectFit
         return gln_planet
     }()
@@ -71,14 +71,13 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
        
     }
     @objc private func GLNTRKNA_HandleBlacklistUpdate() {
-        // 当用户被拉黑时，执行静默刷新
-        // 1. 重新随机顶部用户（确保被拉黑的用户消失）
+
        let logicEngine = GLNTRKNA_HomeLogicEngine()
         self.GLNTRKNAtopUsers = logicEngine.GLNTRKNA_FetchRandomArtisans()
       
 
         
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loading....", on: self.view)
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AfW5tPPvtjGpML+N1/Mv7D+XsHinrlBpK4J2fylL/yBXFGmSOuYGeayZZg==") , on: self.view)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
             self.GLNTRKNA_BaseTable.reloadData()
             self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
@@ -98,7 +97,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
         
         let gln_header = UILabel(frame: CGRect(x: 20, y: GLNTRKNA_RatioH(40), width: 200, height: 40))
-        gln_header.text = "Message"
+        gln_header.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"aV3gBiyFNzhBk8XFl/2FBCHiw84sC92V9f/g0fwY6cX83fj4MBtZ")
         gln_header.textColor = .white
         gln_header.font = .systemFont(ofSize: 32, weight: .bold)
         view.addSubview(gln_header)
@@ -119,7 +118,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
 //        GLNTRKNA_RenderFollowerRow()
         
         let gln_label = UILabel(frame: CGRect(x: 20, y: GLNTRKNA_RatioH(280), width: 100, height: 30))
-        gln_label.text = "Recent"
+        gln_label.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"RsHEsaiCJJ61vB8RDpYpKonvZMwJ7YZUq/k1qAeLvn25xoxf5wM=")
         gln_label.textColor = .white
         gln_label.font = .boldSystemFont(ofSize: 20)
         view.addSubview(gln_label)
@@ -197,7 +196,7 @@ class GLNTRKNA_NexusCell: UITableViewCell {
     
     func GLNTRKNA_Apply(gln_m: GLNTRKNA_ConvergeModel) {
         gln_name.text = gln_m.userModel.glnt_userName
-        gln_ava.image = UIImage(named: gln_m.userModel.glnt_userId)
+        gln_ava.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_m.userModel.glnt_userId)
         gln_sub.text = gln_m.convert.last?.gln_txt
         gln_time.text = gln_m.convert.last?.gln_time
     }

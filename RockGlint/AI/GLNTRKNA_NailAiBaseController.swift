@@ -23,7 +23,7 @@ class GLNTRKNA_NailAiBaseController: UIViewController {
         
         let gln_header = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         gln_header.contentMode = .scaleToFill
-        gln_header.image = UIImage(named: "gln_headerbg")
+        gln_header.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_headerbg")
         
         view.addSubview(gln_header)
       
@@ -42,7 +42,7 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Naily AI"
+        self.title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"70iOTNm/TAkGuoxGQFZcYANwhNnQ9e2IA0mzwb69aplXmKGEikza8A==")
         
         
         GLNTRKNA_RenderIntro()
@@ -64,7 +64,7 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
         gln_card.addSubview(gln_desc)
         
         let gln_start = UIButton(frame: CGRect(x: GLNTRKNA_ScaleW(40), y: view.frame.height - GLNTRKNA_ScaleH(120), width: view.frame.width - GLNTRKNA_ScaleW(80), height: GLNTRKNA_ScaleH(60)))
-        gln_start.setBackgroundImage(UIImage.init(named: "gln_start"), for: .normal)
+        gln_start.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_start"), for: .normal)
         gln_start.addTarget(self, action: #selector(GLNTRKNA_LaunchEngine), for: .touchUpInside)
         view.addSubview(gln_start)
         

@@ -25,7 +25,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
     private let GLNTRKNA_FeedMatrix = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     
-    private let GLNTRKNA_CategoryTags = ["Hot", "For you", "New", "Followed"]
+    private let GLNTRKNA_CategoryTags = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"f8VktUgK/kbytnBvlyOXpRswV7XexLtR4lJwBxIW8Jzxg/w="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"4bjPHpA7KzWNon/f4kJATCMS/KNkCTUUCYT0V06dvJ/00CnP6UHf"), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"RL+MLmj/VG7xSTn9zTDypvE39rIlGKflsAGth+uxcmrKu8s="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"9cZqKqUkR25O6tUbPAJDhgRAO9XQuZ6yybQp0hKnLrktUSVMO5jFkw==")]
     
 //    private var GLNTRKNA_ArtisanPool: [String] = []
 //    private var GLNTRKNA_VibeFeedPool: [String] = []
@@ -97,12 +97,12 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         GLNTRKNA_MasterScroller.addSubview(gln_title)
         
         let gln_plus = UIButton(frame: CGRect(x: gln_sw - GLNTRKNA_ScaleW(60), y: GLNTRKNA_ScaleH(50), width: GLNTRKNA_ScaleW(40), height: GLNTRKNA_ScaleW(40)))
-        gln_plus.setImage(UIImage.init(named: "gln_plus"), for: .normal)
+        gln_plus.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_plus"), for: .normal)
         gln_plus.addTarget(self, action: #selector(GLNTRKNA_RenderPostNodes), for: .touchUpInside)
         GLNTRKNA_MasterScroller.addSubview(gln_plus)
         
         GLNTRKNA_AiCanvasTrigger.frame = CGRect(x: gln_gap, y: GLNTRKNA_ScaleH(110), width: gln_sw - (gln_gap * 2), height: GLNTRKNA_ScaleH(130))
-        GLNTRKNA_AiCanvasTrigger.setBackgroundImage(UIImage(named: "GLNTRKNA_AI_Entry_Banner"), for: .normal)
+        GLNTRKNA_AiCanvasTrigger.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_AI_Entry_Banner"), for: .normal)
         GLNTRKNA_AiCanvasTrigger.imageView?.contentMode = .scaleAspectFill
         GLNTRKNA_AiCanvasTrigger.layer.cornerRadius = 16
         GLNTRKNA_AiCanvasTrigger.clipsToBounds = true
@@ -150,7 +150,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         
         GLNTRKNA_MasterScroller.contentSize = CGSize(width: gln_sw, height: GLNTRKNA_ScaleH(1100))
     }
-    private let backGroundImagPickin:UIImageView = UIImageView.init(image: UIImage.init(named: "gln_ringball"))
+    private let backGroundImagPickin:UIImageView = UIImageView.init(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_ringball"))
     
     @objc private func GLNTRKNA_RenderPostNodes() {
         self.navigationController?.pushViewController(GLNTRKNA_CreativeStudioController.init(gln_mode: .gln_nail_recreate), animated: true)
@@ -203,7 +203,7 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
         if collectionView == GLNTRKNA_ArtisanHorizonStrip {
             let ArtisanCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Artisan", for: indexPath) as! GLNTRKNA_ArtisanCell
             let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
-            ArtisanCell.gln_avatar.image = UIImage(named: ArtisanCelldata.glnt_userId)
+            ArtisanCell.gln_avatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: ArtisanCelldata.glnt_userId)
             ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
             ArtisanCell.gln_vidus.tag = indexPath.row
             ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink(Ubuaton:)), for: .touchUpInside)
@@ -211,7 +211,7 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
         } else {
             let VibeMatrixCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Matrix", for: indexPath) as! GLNTRKNA_VibeMatrixCell
             let VibeMatrixCelldata = GLNTRKNAfeedItems[indexPath.row]
-            VibeMatrixCell.gln_cover.image = UIImage(named: VibeMatrixCelldata.momentPics.first ?? "")
+            VibeMatrixCell.gln_cover.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: VibeMatrixCelldata.momentPics.first ?? "")
             VibeMatrixCell.gln_uname.text =  VibeMatrixCelldata.glnt_content
             VibeMatrixCell.gln_meta.text = "\(VibeMatrixCelldata.glnt_comments.count) comments"
             
@@ -267,11 +267,11 @@ class GLNTRKNA_ArtisanCell: UICollectionViewCell {
         contentView.addSubview(gln_name)
         
         gln_action.frame = CGRect(x: 10, y: 90, width: 61, height: 24)
-        gln_action.setImage(UIImage.init(named: "gln_actioning"), for: .normal)
-        gln_action.setImage(UIImage.init(named: "gln_action_ed"), for: .selected)
+        gln_action.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_actioning"), for: .normal)
+        gln_action.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_action_ed"), for: .selected)
         gln_action.isUserInteractionEnabled = true
         gln_vidus.frame = CGRect(x:77, y: 90, width: 24, height: 24)
-        gln_vidus.setImage(UIImage.init(named: "gln_vidus"), for: .normal)
+        gln_vidus.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_vidus"), for: .normal)
         
         contentView.addSubview(gln_action)
         contentView.addSubview(gln_vidus)
@@ -284,7 +284,7 @@ class GLNTRKNA_VibeMatrixCell: UICollectionViewCell {
     let gln_uname = UILabel()
     let gln_meta = UILabel()
     let gln_report = UIButton()
-    let gln_heart = UIImageView.init(image: UIImage.init(named: "gln_heart"))
+    let gln_heart = UIImageView.init(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_heart"))
     override init(frame: CGRect) {
         super.init(frame: frame)
         gln_cover.frame = self.bounds
@@ -307,7 +307,7 @@ class GLNTRKNA_VibeMatrixCell: UICollectionViewCell {
         
         
         gln_report.frame = CGRect(x: frame.width - 15 - 24, y: 12, width: 24, height: 15)
-        gln_report.setImage(UIImage.init(named: "gln_report"), for: .normal)
+        gln_report.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         contentView.addSubview(gln_report)
         
         gln_heart.frame = CGRect(x: frame.width - 10 - 40, y: frame.height - 30 - 40, width: 40, height: 40)

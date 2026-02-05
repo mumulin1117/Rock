@@ -151,7 +151,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_VisualPlate.addGestureRecognizer(gln_tap)
         
         GLNTRKNA_PlayFreezeIcon.frame = CGRect(x: (GLNTRKNA_CanvasWidth - 70)/2, y: (GLNTRKNA_MetricH(460) - 70)/2, width: 70, height: 70)
-        GLNTRKNA_PlayFreezeIcon.image = UIImage(named: "GLNTRKNAplauid")
+        GLNTRKNA_PlayFreezeIcon.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNAplauid")
         GLNTRKNA_PlayFreezeIcon.tintColor = .white
         GLNTRKNA_PlayFreezeIcon.alpha = 0.8
 //         
@@ -162,10 +162,10 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
 //        view.addSubview(gln_back)
 //        
 //        let gln_more = UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 60, y: 50, width: 40, height: 40))
-//        gln_more.setImage(UIImage(named: "gln_report"), for: .normal)
+//        gln_more.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
 //        gln_more.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
         let gln_options_btn = UIButton()
-        gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
+        gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
         gln_options_btn.tintColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
@@ -179,7 +179,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_UserAvatar.layer.borderWidth = 2
         GLNTRKNA_UserAvatar.layer.borderColor = UIColor.systemPink.cgColor
         GLNTRKNA_UserAvatar.clipsToBounds = true
-        GLNTRKNA_UserAvatar.setImage(UIImage(named: GLNTRKNA_DataManifest.glnt_userId), for: .normal)
+        GLNTRKNA_UserAvatar.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: GLNTRKNA_DataManifest.glnt_userId), for: .normal)
         
         
         
@@ -197,8 +197,8 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         
         
      
-        gln_heart.setImage(UIImage(named: "gln_heart"), for: .normal)
-        gln_heart.setImage(UIImage(named: "gln_heart_fill"), for: .selected)
+        gln_heart.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_heart"), for: .normal)
+        gln_heart.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_heart_fill"), for: .selected)
         gln_heart.addTarget(self, action: #selector(GLNTRKNA_Triggeractionlike(heiaufi: )), for: .touchUpInside)
       
         GLNTRKNA_VesselScroll.addSubview(gln_heart)
@@ -216,7 +216,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_VesselScroll.addSubview(gln_line)
         
         let gln_title = UIImageView(frame: CGRect(x: 20, y: gln_content_y + 90, width: 160, height: 25))
-        gln_title.image = UIImage(named: "commententsection")
+        gln_title.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "commententsection")
         GLNTRKNA_VesselScroll.addSubview(gln_title)
         
         GLNTRKNA_CommentStack.axis = .vertical
@@ -250,7 +250,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_CommentField.frame = CGRect(x: 20, y: 15, width: GLNTRKNA_CanvasWidth - 90, height: 45)
         GLNTRKNA_CommentField.backgroundColor = UIColor(white: 1, alpha: 0.08)
         GLNTRKNA_CommentField.layer.cornerRadius = 22.5
-        GLNTRKNA_CommentField.placeholder = "Add Comment..."
+        GLNTRKNA_CommentField.placeholder = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"zupmnLsuw+lU6IIK58TypkVxjkzHhYJ69kcytW4/iYBMMIx8fmoaqPIOX8/v1w==")
         GLNTRKNA_CommentField.textColor = .white
         GLNTRKNA_CommentField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 1))
         GLNTRKNA_CommentField.leftViewMode = .always
@@ -295,7 +295,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     
     @objc private func GLNTRKNA_InjectComment() {
         guard let gln_txt = GLNTRKNA_CommentField.text, !gln_txt.isEmpty else {
-            GLNTRKNA_ToastVisuals(gln_msg: "Please enter your thoughts...")
+            GLNTRKNA_ToastVisuals(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"8dAi6LKt+o8Vm46wAQIjMO6A5aa6X0+CGtG5b0yeH5D6VB8akRLXVCc4qpWpjdHP9bVjTffJwz0ARLDkIg=="))
             return
             
         }
@@ -317,7 +317,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
             
             // 5. GLNTRKNA: 清空输入并提示成功
             self.GLNTRKNA_CommentField.text = ""
-            self.GLNTRKNA_ToastVisuals(gln_msg: "Comment published successfully!")
+            self.GLNTRKNA_ToastVisuals(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"m9MalJ5WEA6UROTg/edTSksfXkr3EQ9u4H5GOvV+ydXm0VAflqxLu6yMFbbgmWWMmBdJyGLStaCsrhJSxr7X"))
             
         }
             
@@ -331,7 +331,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         gln_ava.backgroundColor = .gray
         gln_ava.layer.cornerRadius = 22.5
         gln_ava.clipsToBounds = true
-        gln_ava.image = UIImage(named: gln_img)
+        gln_ava.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_img)
         let gln_user = UILabel(frame: CGRect(x: 55, y: 0, width: 200, height: 20))
         gln_user.text = gln_name
         gln_user.textColor = .systemPurple

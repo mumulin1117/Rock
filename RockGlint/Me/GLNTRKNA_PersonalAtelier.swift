@@ -38,7 +38,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
        let info = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()
         self.GLNTRKNA_AliasLabel.text = info?.glnt_alias
         self.GLNTRKNA_BioProse.text = info?.glnt_bio
-        self.GLNTRKNA_PortraitNode.image = UIImage(named: "RocklogWithus")
+        self.GLNTRKNA_PortraitNode.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "RocklogWithus")
         
     }
     @objc private func GLNTRKNA_SyncWealth() {
@@ -59,7 +59,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
         view.addSubview(GLNTRKNA_MainWrapper)
 
         let gln_title = UILabel(frame: CGRect(x: 20 * GLNTRKNA_ScaleX, y: 30 * GLNTRKNA_ScaleY, width: 200, height: 40))
-        gln_title.text = "Personal"
+        gln_title.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"rsq2q6958QuTpTDrBuS97DVaHpB16BNMNykupSzibVSpZRQA5jnr2A==")
         gln_title.textColor = .white
         gln_title.font = .systemFont(ofSize: 32, weight: .bold)
         GLNTRKNA_MainWrapper.addSubview(gln_title)
@@ -74,7 +74,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
 
         let gln_edit_btn = UIButton(frame: CGRect(x: 143 * GLNTRKNA_ScaleX, y: 185 * GLNTRKNA_ScaleY, width: 86 * GLNTRKNA_ScaleX, height: 30 * GLNTRKNA_ScaleY))
      
-        gln_edit_btn.setBackgroundImage(UIImage(named: "gln_edit_btn"), for: .normal)
+        gln_edit_btn.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_edit_btn"), for: .normal)
         
         GLNTRKNA_MainWrapper.addSubview(gln_edit_btn)
         gln_edit_btn.addTarget(self, action:#selector(GLNTRKNAgln_edit) , for: .touchUpInside)
@@ -83,7 +83,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
         gln_gear.backgroundColor = UIColor(white: 1, alpha: 0.1)
         gln_gear.addTarget(self, action: #selector(GLNTRKNAgln_gear), for: .touchUpInside)
         
-        gln_gear.setImage(UIImage(named: "gln_gear"), for: .normal)
+        gln_gear.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_gear"), for: .normal)
       
         GLNTRKNA_MainWrapper.addSubview(gln_gear)
 
@@ -119,7 +119,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
         GLNTRKNA_MetricPath.font = .boldSystemFont(ofSize: 20)
         GLNTRKNA_MainWrapper.addSubview(GLNTRKNA_MetricPath)
         
-        let gln_titles = ["Likes", "Followers", "Following"]
+        let gln_titles = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"o6VuohQonV3bC2Pjlv6in6/DWo+MJQu7t8PPnM5Ef0ne8ESzoQ=="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"t/jBG9Sq7DgGyaB5nFWP/CYMr0hCce8ostSnaYQQkvYNGws5Ql6tDAc="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"bEQ9Gno2p+7DhQ4bhkVlNMb7b1s6nVAyiDZp4MOWhi+I0iMH8CKz0Qo=")]
         for i in 0..<3 {
             let gln_l = UILabel(frame: CGRect(x: CGFloat(i) * gln_stat_w, y: gln_stat_y + 30, width: gln_stat_w, height: 20))
             gln_l.text = gln_titles[i]
@@ -147,7 +147,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
         
         
         let gln_coin_icon = UIImageView(frame: CGRect(x: 20, y: 20 * GLNTRKNA_ScaleY, width: 35 * GLNTRKNA_ScaleY, height: 35 * GLNTRKNA_ScaleY))
-        gln_coin_icon.image = UIImage(named: "gln_coin_icon")
+        gln_coin_icon.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_coin_icon")
         gln_coin_bar.addSubview(gln_coin_icon)
 
         let gln_coin_txt = UILabel(frame: CGRect(x: 65, y: 0, width: 150, height: 75 * GLNTRKNA_ScaleY))
@@ -188,7 +188,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
         GLNTRKNA_MainWrapper.addSubview(GLNTRKNA_VoidStation)
 
         let gln_planet = UIImageView(frame: CGRect(x: (GLNTRKNA_ScrW - 160)/2, y: 40 * GLNTRKNA_ScaleY, width: 160, height: 120))
-        gln_planet.image = UIImage(named: "GLNTRKNA_EmptyNebula")
+        gln_planet.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_EmptyNebula")
         gln_planet.contentMode = .scaleAspectFit
         GLNTRKNA_VoidStation.addSubview(gln_planet)
 

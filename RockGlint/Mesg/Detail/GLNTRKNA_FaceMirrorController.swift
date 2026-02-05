@@ -58,7 +58,7 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
     private func GLNTRKNA_IgniteScenery() {
         view.backgroundColor = .black
         
-        GLNTRKNA_RemoteStage.image = UIImage(named: GLNTRKNACelestialData.glnt_userId)
+        GLNTRKNA_RemoteStage.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: GLNTRKNACelestialData.glnt_userId)
         GLNTRKNA_RemoteStage.frame = view.bounds
         GLNTRKNA_RemoteStage.contentMode = .scaleAspectFill
         
@@ -76,7 +76,7 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
 //        view.addSubview(gln_exit_btn)
         
         let gln_options_btn = UIButton()
-        gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
+        gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
@@ -89,7 +89,7 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
         GLNTRKNA_IdentityLabel.font = .boldSystemFont(ofSize: 18)
         
         
-        GLNTRKNA_SessionTimer.text = "Calling...."
+        GLNTRKNA_SessionTimer.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"ahwsy9XvNeW8SropwJkFkPcftw1qjlYZIPrCmKfW7mMX7iKJ06EMzkFEZg==")
         GLNTRKNA_SessionTimer.textColor = .white
         GLNTRKNA_SessionTimer.textAlignment = .center
         GLNTRKNA_SessionTimer.font = .boldSystemFont(ofSize: 18)
@@ -102,7 +102,7 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
         GLNTRKNA_SelfPortal.frame = CGRect(x: GLNTRKNA_HorizonW - 130 * GLNTRKNA_ScaleX, y: 120 * GLNTRKNA_ScaleY, width: 110 * GLNTRKNA_ScaleX, height: 160 * GLNTRKNA_ScaleY)
         GLNTRKNA_SelfPortal.backgroundColor = .black
         GLNTRKNA_SelfPortal.layer.cornerRadius = 12
-        GLNTRKNA_SelfPortal.image = UIImage(named: "RocklogWithus")
+        GLNTRKNA_SelfPortal.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "RocklogWithus")
         GLNTRKNA_SelfPortal.clipsToBounds = true
         GLNTRKNA_SelfPortal.layer.borderWidth = 1
         GLNTRKNA_SelfPortal.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
@@ -118,14 +118,14 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
         let gln_hang_btn = UIButton(frame: CGRect(x: (GLNTRKNA_HorizonW - 80 * GLNTRKNA_ScaleX) / 2, y: 20 * GLNTRKNA_ScaleY, width: 80 * GLNTRKNA_ScaleX, height: 80 * GLNTRKNA_ScaleX))
         gln_hang_btn.backgroundColor = .systemRed
         gln_hang_btn.layer.cornerRadius = 40 * GLNTRKNA_ScaleX
-        gln_hang_btn.setImage(UIImage(systemName: "phone.down.fill"), for: .normal)
+        gln_hang_btn.setImage(UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"MM8UMPfICBzbWxg2IdAGHdZomBFavfrtidr9ZBYl37zJYvuPUKu0q3UPskM4rhM=")), for: .normal)
         gln_hang_btn.tintColor = .white
         gln_hang_btn.addTarget(self, action: #selector(GLNTRKNA_TerminateStream), for: .touchUpInside)
         GLNTRKNA_CommandHub.addSubview(gln_hang_btn)
         
         let gln_ctrl_y = 130 * GLNTRKNA_ScaleY
         let gln_ctrl_spacing = GLNTRKNA_HorizonW / 5
-        let gln_symbols = ["video.fill", "mic.fill", "drop.fill", "camera.rotate.fill"]
+        let gln_symbols = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"cgtDvLLEtnqiuaYAsa8MQlA5EZNmJdNNejq730kMpwqZdDTONDdD0YeS"),GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"yW43DDHGqnxRkzGD+irdk2ZF3+lDuRRy/e57N5DwwSZuDJPxx/wq/Q==") , GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"s12D/1QhCgYmgvgLgevAMcTlSWXqWuqGORD3T6WM7oWXYtpxDhuFGLA="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"nvizGGozi7fUUdvCIunKVBxAuK/BLY2nDSF/kwPicnFLtNJYCTkkmJ54hDOhiT6GmBQ=")]
         
         for (index, symbol) in gln_symbols.enumerated() {
             let gln_btn = UIButton(frame: CGRect(x: CGFloat(index + 1) * gln_ctrl_spacing - 25 * GLNTRKNA_ScaleX, y: gln_ctrl_y, width: 50 * GLNTRKNA_ScaleX, height: 50 * GLNTRKNA_ScaleX))

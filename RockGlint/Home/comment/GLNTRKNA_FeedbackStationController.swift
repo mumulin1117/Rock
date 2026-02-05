@@ -151,7 +151,7 @@ class GLNTRKNA_VoxCell: UITableViewCell {
     required init?(coder: NSCoder) { fatalError() }
 
     func GLNTRKNA_Hydrate(_ gln_model: GLNTRKNA_FeedbackEntity) {
-        GLNTRKNA_Portrait.image = UIImage(named: gln_model.GLNTRKNA_VoxAvatar)
+        GLNTRKNA_Portrait.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_model.GLNTRKNA_VoxAvatar)
         GLNTRKNA_Identity.text = gln_model.GLNTRKNA_VoxName
         GLNTRKNA_Prose.text = gln_model.GLNTRKNA_VoxProse
     }

@@ -24,21 +24,21 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
         GLNTRKNA_MainCanvas.contentSize = CGSize(width: view.frame.width, height: 1200)
         var gln_offset_y = GLNTRKNA_ScaleH(20)
         
-        gln_offset_y = GLNTRKNA_PopulateTags(title: "Choose Your Style", pool: GLNTRKNA_ThemePool, startY: gln_offset_y, isTheme: true)
+        gln_offset_y = GLNTRKNA_PopulateTags(title:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"/ir4+zBsQKCscAzko9ktR29xPRFEH42gc+lozDmRoBrkh9Z1icpYytwiS31wuCvgTg=="), pool: GLNTRKNA_ThemePool, startY: gln_offset_y, isTheme: true)
         gln_offset_y += 20
-        gln_offset_y = GLNTRKNA_PopulateTags(title: "Choose Your Shape", pool: GLNTRKNA_ShapePool, startY: gln_offset_y, isTheme: false)
+        gln_offset_y = GLNTRKNA_PopulateTags(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"WhVa0h2VM4/6Tfs7xDd2qx3skSGefKaQ6VxuSA3iYS/uLiasVVDsbOZRkOpNnJXufA=="), pool: GLNTRKNA_ShapePool, startY: gln_offset_y, isTheme: false)
         
         let gln_input = UITextView(frame: CGRect(x: 20, y: gln_offset_y + 20, width: view.frame.width - 40, height: 120))
         gln_input.backgroundColor = UIColor(white: 1.0, alpha: 0.15)
         gln_input.layer.cornerRadius = 12
         gln_input.textColor = .lightGray
-        gln_input.text = "Add a detailed description to guide Naily AI..."
+        gln_input.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"al5lAGgTObXkUHK5l5VilYdu0vko/oq/UfZStMWRC8yJju9axPVedA+eUo3wFof39spuICIhln255tfJJvzmUagK7pS1VGyrSxQvTjQJmA==")
         GLNTRKNA_MainCanvas.addSubview(gln_input)
         
         let gln_forge = UIButton(frame: CGRect(x: 40, y: view.frame.height - 100, width: view.frame.width - 80, height: 60))
         gln_forge.backgroundColor = GLNTRKNA_ActionPink
         gln_forge.layer.cornerRadius = 30
-        gln_forge.setImage(UIImage.init(named: "gln_coin_icon"), for: .normal)
+        gln_forge.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_coin_icon"), for: .normal)
         gln_forge.setTitle("200", for: .normal)
         gln_forge.addTarget(self, action: #selector(GLNTRKNA_TriggerGeneration), for: .touchUpInside)
         view.addSubview(gln_forge)
@@ -86,16 +86,16 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
 
     @objc private func GLNTRKNA_TriggerGeneration() {
         guard GLNTRKNA_CurrentTheme != nil &&  GLNTRKNA_CurrentShape != nil else{
-            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage("Please pick your style and shape at first!", on: self.view)
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"3TUzKUT30BWj1N8+mClIyRXvuXbmuyvYZnOJsubtf9dVHMaKEiZZSxOwcRUYAktELPG1bi93S9siFt6M7aRllNSsEXgW28a77Dg="), on: self.view)
             return
         }
         
         
         let glnt_cost = 200
         self.GLNTRKNA_PresentDecision(
-                title: "AI Generation",
+                title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"q+is/LUi6jAc/6SFRGSPo/scyJAeLAyUIDPNOKVoomVUWOGtC32CZz4uGAuA"),
                 detail: "This creative process will consume \(glnt_cost) coins. Do you wish to proceed?",
-                confirmTitle: "Confirm"
+                confirmTitle:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"eAFralFZji/UpMsp6VQUKwrVY1rPcAH3avnAL3K0t29INk5K77Yf")
             ) { [weak self] in
                 guard let self = self else { return }
                 
@@ -106,7 +106,7 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
                             // 2. 检查并处理扣费
                             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Waiting....", on: self.view)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                                let glnt_msg = "✨ " + "Deduction successful!"
+                                let glnt_msg = "✨ " + GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"kKLQT9OGbMUhIMHd081fPveqNDFHGtrNtgt+2LykuV5XIuVbPJQVcXFeoZ+5HYVM7W9NurU=")
                                 GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
                                 GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
                                 let gln_result = GLNTRKNA_CreativeOutputController()
@@ -127,22 +127,22 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
     
     private func GLNTRKNA_HandleInsufficientFunds() {
         self.GLNTRKNA_PresentDecision(
-            title: "Inadequate Balance",
-            detail: "You need more coins to unlock this AI feature. Go to recharge?",
-            confirmTitle: "Recharge"
+            title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"JeCvWZ3a3KYcsIVuyeQPHkoiPgqPf/xvS5llphI/CabfXcarVcpoZupQPpT000Hh7ps="),
+            detail: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"QXIKAJNYRaghbmsFtQDlFGtbFFTqtZbw/CVX6ijw7Cl11nnJGoHjvNUIOyRABJtuvqec/e0xA/xO43p6+mNJjIPHyXhaZux3Xs1RP41IfqZqTYEFACm0ip4Kcsv4ig=="),
+            confirmTitle: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"GZYwAF4ZgeWvoIWKgvCJLIQNrH8iKTq6ROJNL5vjWK1ielaifmnRyA==")
         ) {
             let rechargeVC = GLNTRKNA_TreasureVault() // 您的充值页面
             self.navigationController?.pushViewController(rechargeVC, animated: true)
         }
     }
     
-    func GLNTRKNA_PresentDecision(title: String, detail: String, confirmTitle: String = "Confirm", handler: @escaping () -> Void) {
+    func GLNTRKNA_PresentDecision(title: String, detail: String, confirmTitle: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"J5pGNqESG0jAjNNV/mjElYJhfTUuaeJoHlbWNJmnVQJwZyjmrESI"), handler: @escaping () -> Void) {
             let glnt_alert = UIAlertController(title: title, message: detail, preferredStyle: .alert)
             
             let glnt_confirm = UIAlertAction(title: confirmTitle, style: .default) { _ in
                 handler()
             }
-            let glnt_cancel = UIAlertAction(title: "Dismiss", style: .cancel)
+            let glnt_cancel = UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"3JOfTpD99GHQ0kb43aw95KivRkgRUE1W10HyLIOIPmhHByANCXZE"), style: .cancel)
             
             glnt_alert.addAction(glnt_confirm)
             glnt_alert.addAction(glnt_cancel)

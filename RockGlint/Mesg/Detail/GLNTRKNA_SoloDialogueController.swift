@@ -73,10 +73,10 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
 //        
 //        let gln_options = UIButton(frame: CGRect(x: view.bounds.width - 55, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
 //        gln_options.isUserInteractionEnabled = true
-//        gln_options.setImage(UIImage(named: "gln_report"), for: .normal)
+//        gln_options.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
 //        gln_options.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
         let gln_options_btn = UIButton()
-        gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
+        gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
@@ -99,7 +99,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         let gln_cam = UIButton(frame: CGRect(x: 15, y: 15 * GLNTRKNA_RatioH, width: 45, height: 45))
         gln_cam.backgroundColor = UIColor(white: 1, alpha: 0.1)
         gln_cam.layer.cornerRadius = 22.5
-        gln_cam.setImage(UIImage(systemName: "video.fill"), for: .normal)
+        gln_cam.setImage(UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"1lYHiSsYfJapKUz16uqFIaBN/v/tRrjaS+QG81WGxHDanVuIgmJt+q8s")), for: .normal)
         gln_cam.tintColor = .cyan
         gln_cam.addTarget(self, action: #selector(gln_avioTraiiler), for: .touchUpInside)
         
@@ -110,7 +110,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         GLNTRKNA_WriteField.layer.cornerRadius = 22.5
         GLNTRKNA_WriteField.textColor = .white
         GLNTRKNA_WriteField.font = .systemFont(ofSize: 15)
-        GLNTRKNA_WriteField.placeholder = "Say something..."
+        GLNTRKNA_WriteField.placeholder = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"pKmVbXApjInU7Lvco6XAYTAKqAX7tPQT5ZiRrGiWIhE6s7AWL6vHd0nYQQ+LfQ/d")
         GLNTRKNA_WriteField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 1))
         GLNTRKNA_WriteField.leftViewMode = .always
         GLNTRKNA_EntryPlate.addSubview(GLNTRKNA_WriteField)
@@ -118,7 +118,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         GLNTRKNA_RelayBtn.frame = CGRect(x: view.bounds.width - 60, y: 15 * GLNTRKNA_RatioH, width: 45, height: 45)
         GLNTRKNA_RelayBtn.backgroundColor = .systemPink
         GLNTRKNA_RelayBtn.layer.cornerRadius = 22.5
-        GLNTRKNA_RelayBtn.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        GLNTRKNA_RelayBtn.setImage(UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"paperplane.fill")), for: .normal)
         GLNTRKNA_RelayBtn.tintColor = .white
         GLNTRKNA_RelayBtn.addTarget(self, action: #selector(GLNTRKNA_Transmit), for: .touchUpInside)
         GLNTRKNA_EntryPlate.addSubview(GLNTRKNA_RelayBtn)
@@ -143,7 +143,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
     
     @objc private func GLNTRKNA_Transmit() {
         guard let gln_text = GLNTRKNA_WriteField.text, !gln_text.isEmpty else {
-            GLNTRKNA_ToastVisuals(gln_msg: "Please enter your message...")
+            GLNTRKNA_ToastVisuals(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"jTgvcxqotFA/CWD4BYl++zP1DWBXCA4rMdf0zAeiTmS6hgFpVail7GOoXTeYiPvCbThcNA5Hil9rbtVn"))
             return
         }
         

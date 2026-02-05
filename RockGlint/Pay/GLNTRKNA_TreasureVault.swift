@@ -108,7 +108,7 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         view.addSubview(GLNTRKNA_GridCanvas)
 
         let glnt_trigger = UIButton(frame: CGRect(x: 15 * GLNTRKNA_RatioW, y: UIScreen.main.bounds.height - 110 * GLNTRKNA_RatioH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_RatioW, height: 65 * GLNTRKNA_RatioH))
-        glnt_trigger.setBackgroundImage(UIImage.init(named: "glnt_triggerbg"), for: .normal)
+        glnt_trigger.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "glnt_triggerbg"), for: .normal)
         glnt_trigger.addTarget(self, action: #selector(GLNTRKNA_InitiatePurchase), for: .touchUpInside)
         view.addSubview(glnt_trigger)
         
@@ -152,14 +152,14 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         let glnt_target = GLNTRKNA_CoinLedger[GLNTRKNA_SelectedIndex]
         
         // 虚假弹窗效果增加迷惑性
-        let glnt_alert = UIAlertController(title: "Security Verification", message: "Proceed with the transaction for \(glnt_target.0)?", preferredStyle: .alert)
+        let glnt_alert = UIAlertController(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"xjxGyQEO89c+3ICD/DX43DpGxxbcsNnDu1LPjtNHdiNvN5Xot6g3ymjY4OK8SmN6CuoOP44="), message: "Proceed with the transaction for \(glnt_target.0)?", preferredStyle: .alert)
         
-        glnt_alert.addAction(UIAlertAction(title: "Secure Pay", style: .default, handler: { _ in
+        glnt_alert.addAction(UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"tTf0iURoOtZp6eRNj+ivq+/tX+FVje4Uyvfbv5hKTmrQtx2yLUFowNH1"), style: .default, handler: { _ in
             // 调用支付核心
             GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_TriggerAcquisition(via: self.GLNTRKNA_CoinLedger[self.GLNTRKNA_SelectedIndex].2)
         }))
         
-        glnt_alert.addAction(UIAlertAction(title: "Later", style: .cancel))
+        glnt_alert.addAction(UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"2+6F4ZzAO8/4A9bA0wjQw2yIP3vbO44jqDRfM66NAQqppdQf2Q=="), style: .cancel))
         present(glnt_alert, animated: true)
     }
     private func GLNTRKNA_ProcessInAppPayload() {
@@ -188,7 +188,7 @@ class GLNTRKNA_AssetCell: UICollectionViewCell {
         contentView.addSubview(glnt_bg)
         
         glnt_icon.frame = CGRect(x: 30, y: 15, width: 34, height: 34)
-        glnt_icon.image = UIImage(named: "gln_coin_icon")
+        glnt_icon.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_coin_icon")
        
         contentView.addSubview(glnt_icon)
         glnt_val.textAlignment = .center

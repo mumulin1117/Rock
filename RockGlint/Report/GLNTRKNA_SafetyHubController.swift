@@ -72,9 +72,9 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     private func GLNTRKNA_RenderPrimaryMenu() {
         GLNTRKNA_ClearAnchor()
         
-        let gln_report_btn = GLNTRKNA_CraftButton(gln_title: "Report", gln_color: .clear, gln_border: true)
-        let gln_block_btn = GLNTRKNA_CraftButton(gln_title: "Block", gln_color: .clear, gln_border: true)
-        let gln_cancel_btn = GLNTRKNA_CraftButton(gln_title: "Cancel", gln_color: UIColor.systemPink.withAlphaComponent(0.8), gln_border: false)
+        let gln_report_btn = GLNTRKNA_CraftButton(gln_title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"9RRn/1/eEap02IsA5bQQMaH32pmZMb7SxfTBzYEfQtSrX9fn+7g="), gln_color: .clear, gln_border: true)
+        let gln_block_btn = GLNTRKNA_CraftButton(gln_title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"fZTF6ktcVN7Zh6jss+02JtQGc610LvJsrXztK+S7Ovxwa9nfiA=="), gln_color: .clear, gln_border: true)
+        let gln_cancel_btn = GLNTRKNA_CraftButton(gln_title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"pkrmYBKGbHsVSsp5btpolkqh/hL6LkFUq1MJ6xLYBupADfRwYno="), gln_color: UIColor.systemPink.withAlphaComponent(0.8), gln_border: false)
         
         gln_report_btn.addTarget(self, action: #selector(GLNTRKNA_GoToReasons), for: .touchUpInside)
         gln_block_btn.addTarget(self, action: #selector(GLNTRKNA_ExecuteBlockade), for: .touchUpInside)
@@ -96,13 +96,13 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         GLNTRKNA_AdjustSheetHeight(gln_target_h: gln_new_h)
         
         let gln_header = UILabel(frame: CGRect(x: 0, y: 30, width: GLNTRKNA_SheetAnchor.frame.width, height: 30))
-        gln_header.text = "Reporting"
+        gln_header.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"JznsAAZKG8IQoEnjjUR/6HxnlJur1J6wZMhWGK367qGMj5L57B/rb8M=")
         gln_header.textColor = .white
         gln_header.font = .boldSystemFont(ofSize: 22)
         gln_header.textAlignment = .center
         GLNTRKNA_SheetAnchor.addSubview(gln_header)
         
-        let gln_options = ["Fake photo", "Scam or commercial", "Not interested", "Other"]
+        let gln_options = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"O+hLqONz7YeQzDyNOJPaPc7HQlEgrfEpbS5UBORsjRmgpVjQejOJgJVR"),GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"e6udO0chHr/OLYmMJAUDmNWk+ubCi7kvvh+5QYCTDaQIAznIUv/fplpE3rRjk1FolMA=") , GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"uT7Wd3FZ1izAIzyo8n2t5+EceAdRECQGDKSo5H25mK0MqRQvnFDlMSUd2JcW8g=="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"/I/OrHDjiHQqoKcX9rLucXKrN20gbMt6o0ASjFLGC41dQ9MRDw==")]
         var gln_last_y: CGFloat = 80
         
         for (index, text) in gln_options.enumerated() {
@@ -139,14 +139,14 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         GLNTRKNA_AdjustSheetHeight(gln_target_h: gln_detail_h)
         
         let gln_title = UILabel(frame: CGRect(x: 20, y: 25, width: GLNTRKNA_SheetAnchor.frame.width - 40, height: 30))
-        gln_title.text = "Content Reporting"
+        gln_title.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"xNOtYSRI5Y8VgCBc64CqmTiDj2qKnbkyVyH5KHb9o5Pc1fxSY6HxcRVNO5l6VJ0AEQ==")
         gln_title.textColor = .white
         gln_title.font = .boldSystemFont(ofSize: 20)
         gln_title.textAlignment = .center
         GLNTRKNA_SheetAnchor.addSubview(gln_title)
         
         let gln_sub = UILabel(frame: CGRect(x: 30, y: 65, width: GLNTRKNA_SheetAnchor.frame.width - 60, height: 40))
-        gln_sub.text = "Are you sure you want to report this content? Please provide a reason."
+        gln_sub.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"3sRifjt1wxQYnsfAyR9nJRD1/HmSDW26y6QKNnScHPHV2f6QJBPC9yUIBUZn+UQCd2OIuR1pD1527SoIeNnZgF9r0fUedVKXhLO00zssYaZdi0ediZ8NFCVINp+fuf/YLQ2FI0KU")
         gln_sub.numberOfLines = 2
         gln_sub.textColor = .lightGray
         gln_sub.font = .systemFont(ofSize: 13)
@@ -162,7 +162,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         GLNTRKNA_InputField.text = "" // 清空默认文本
         GLNTRKNA_SheetAnchor.addSubview(GLNTRKNA_InputField)
         
-        GLNTRKNA_AttachFooterButtons(gln_y: 310, gln_submit_title: "Submit Report")
+        GLNTRKNA_AttachFooterButtons(gln_y: 310, gln_submit_title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"g9co9Xc7z9YuGj08b69ajoZS77jr46duGhAkjA0teSkmKqcZy3ft2yTUKo4x"))
     }
 
     // 3. 新增核心辅助方法：平滑调整高度
@@ -177,9 +177,9 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     
 
     
-    private func GLNTRKNA_AttachFooterButtons(gln_y: CGFloat, gln_submit_title: String = "Submit") {
+    private func GLNTRKNA_AttachFooterButtons(gln_y: CGFloat, gln_submit_title: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"8osZCfXNNEVp6+tG89FJdLNRjUAMB3ml6zgsKFnsRWiVjbNdq+Y=")) {
         let gln_cancel = UIButton(frame: CGRect(x: 24, y: gln_y, width: GLNTRKNA_ScaleW(160), height: 54))
-        gln_cancel.setTitle("Cancel", for: .normal)
+        gln_cancel.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"eXTbSLfVHzrg2ZitF+PXPm4r+uwQnM0aJsXhq6Oi6eX+zca+VIU="), for: .normal)
         gln_cancel.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         gln_cancel.layer.cornerRadius = 27
         gln_cancel.addTarget(self, action: #selector(GLNTRKNA_ExitPortal), for: .touchUpInside)
@@ -197,7 +197,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     @objc private func GLNTRKNA_CommitProtocol() {
         if GLNTRKNA_InputField.superview != nil {
             guard let contetntrerpot = GLNTRKNA_InputField.text,contetntrerpot.isEmpty == false else {
-                let glnt_msg = "⚠️ " + "Please Enter the reason you report!"
+                let glnt_msg = "⚠️ " + GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"ZEf86SX2ETaGVRXfScVU8lk4wHGNvEiCZYYzNihOY0q7ciRVeCis538aKxyulSwp9N4jAvrWUOFpR0utEgMNdeWFiw==")
                         
                 GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
               
@@ -206,16 +206,16 @@ class GLNTRKNA_SafetyHubController: UIViewController {
             
         }
         guard ifPickedReason == true else {
-            let glnt_msg = "⚠️ " + "Please pick the reason you report!"
+            let glnt_msg = "⚠️ " + GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"cbn5cYyIKW3bF1EwBP9Vow0cXySq2tJhbxApWJGpCmt0F7ZMSeUdY/DWUFvbQ6DHw01PwnL3Kpvk8CAoMDUq4+4c")
                     
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
           
             return
         }
         
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Submitting....", on: self.view)
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"rdgcqMu1mgLRDQMEVWnv6ZzUzGeakKEr4J2Ras6f9Yuft+d+l/U3agHmg8+aSQ=="), on: self.view)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
-            let glnt_msg = "✨ " + "We will verify and process it as soon as possible!"
+            let glnt_msg = "✨ " + GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"bd0h68w3xSrNQ35L1xh2DgDJmcGQ8R0ZCAhoNuR93HpvWcdKTruE8hsSQP3xlW3bj+CRYQTrO2o9SUsN4ZkUKXeFcR1+M7ACI/69maBLOfhZKA==")
                     
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
             

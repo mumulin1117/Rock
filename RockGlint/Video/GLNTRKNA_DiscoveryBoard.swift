@@ -13,9 +13,9 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
     private let GLNTRKNA_BaseHeight: CGFloat = 852.0
     
    
-    private let GLNTRKNA_HeaderTags = ["Hot", "For you", "New", "Followed"]
+    private let GLNTRKNA_HeaderTags = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"uMGmNV5vqSezQpIPIgWbBvT+Z2gVhlpT/rbkdoGAX+SoHlE="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Mu9/ggbLh1ysz667yRxs3lriQaTPX62ASrPNYp5g+NJf9wpvPdsX"), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"JadLqWBdo66FZtD8v/scqfUDsDHQP+/mbbUkh+y1i0cExqc="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"r4lwVjj5qRq4wY4Ulzj3gC+6UvsYpz5DlQGwiLCGnEQFbtAp+/cJSA==")]
     private var GLNTRKNA_SelectedIndex = 400
-    private let backGroundImagPickin:UIImageView = UIImageView.init(image: UIImage.init(named: "gln_ringball"))
+    private let backGroundImagPickin:UIImageView = UIImageView.init(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_ringball"))
    
     private lazy var GLNTRKNA_MainGallery: UICollectionView = {
         let gln_layout = UICollectionViewFlowLayout()
@@ -81,7 +81,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
         view.addSubview(gln_title)
         
         let gln_add = UIButton(frame: CGRect(x: GLNTRKNA_RatioW(333), y: GLNTRKNA_RatioH(60), width: GLNTRKNA_RatioW(40), height: GLNTRKNA_RatioW(40)))
-        gln_add.setImage(UIImage(named: "gln_plus"), for: .normal)
+        gln_add.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_plus"), for: .normal)
         gln_add.addTarget(self, action: #selector(GLNTRKNA_RenderPostNodes), for: .touchUpInside)
         view.addSubview(gln_add)
         
@@ -203,7 +203,7 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_CoverArt.layer.addSublayer(gln_grad)
         
         GLNTRKNA_PlayIndicator.frame = CGRect(x: contentView.bounds.width - 60, y: 20, width: 40, height: 40)
-        GLNTRKNA_PlayIndicator.image = UIImage(systemName: "play.circle.fill")
+        GLNTRKNA_PlayIndicator.image = UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"JQivoB/78r8yN0VWlqGzawd/ePgzlcBNmzs+6oikLvnmbGzehjjU3vbxLVtJPEcH"))
         GLNTRKNA_PlayIndicator.tintColor = .white.withAlphaComponent(0.8)
         contentView.addSubview(GLNTRKNA_PlayIndicator)
         
@@ -233,9 +233,9 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
             contentView.addSubview($0)
         }
         
-        GLNTRKNA_LikeBox.setImage(UIImage(systemName: "heart"), for: .normal)
-        GLNTRKNA_CommentBox.setImage(UIImage(systemName: "message"), for: .normal)
-        GLNTRKNA_ReportBox.setImage(UIImage(named: "reporeintgg"), for: .normal)
+        GLNTRKNA_LikeBox.setImage(UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"E/2jaMbJ3m63h5TlzGuRHwuLQv8BdxhJmhX9x1xNEfIWdoVlrA==")), for: .normal)
+        GLNTRKNA_CommentBox.setImage(UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"9hsWTt8vLEs74mxJX7ZxsCnmciRXL6IL+REnMfenkP5pBiSD7h2R")), for: .normal)
+        GLNTRKNA_ReportBox.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "reporeintgg"), for: .normal)
     }
     
     func GLNTRKNA_ConfigureProtocol(gln_data: GLNTRKNA_MomentEntry) {
@@ -244,20 +244,16 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_CommentBox.setTitle(" \(gln_data.glnt_comments.count)", for: .normal)
         GLNTRKNA_ConfigureVideoCell(with: gln_data.SPPuuuRRll)
         
-        GLNTRKNA_Avatar.image = UIImage(named: gln_data.glnt_userId)
+        GLNTRKNA_Avatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_data.glnt_userId)
         
     }
     
-    // 在你的 Cell 子类中
     func GLNTRKNA_ConfigureVideoCell(with glnt_videoName: String) {
-        // 1. 构造本地路径
+      
         guard let glnt_path = Bundle.main.path(forResource: glnt_videoName, ofType: "mp4") else { return }
         let glnt_url = URL(fileURLWithPath: glnt_path)
         
-        // 2. 检查是否有内存缓存（可选逻辑）
-        // if let cached = MyCache.get(glnt_videoName) { self.imgView.image = cached; return }
-
-        // 3. 提取截图
+      
         GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CaptureFrame(from: glnt_url) { [weak self] glnt_image in
             self?.GLNTRKNA_CoverArt.image = glnt_image
         }

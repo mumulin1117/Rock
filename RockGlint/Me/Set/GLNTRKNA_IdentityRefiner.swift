@@ -37,7 +37,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         
         let glnt_top_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_ScaleH))
         view.addSubview(glnt_top_bar)
-        self.title = "Edit Profile"
+        self.title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"kAxUI7Akt8G1RgHIQyUbmQNNMiXypN0lqBrCmRKrYc0IOH5IW+2L0vMsElk=")
 //        let glnt_retreat = UIButton(frame: CGRect(x: 20 * GLNTRKNA_ScaleW, y: 60 * GLNTRKNA_ScaleH, width: 30, height: 30))
 //        glnt_retreat.setImage(UIImage(systemName: "arrow.left"), for: .normal)
 //        glnt_retreat.tintColor = .white
@@ -57,7 +57,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         GLNTRKNA_AuraPreview.clipsToBounds = true
         GLNTRKNA_AuraPreview.isUserInteractionEnabled = true
         GLNTRKNA_AuraPreview.contentMode = .scaleAspectFill
-        GLNTRKNA_AuraPreview.image = UIImage(named: "GLNTRKNA_DefaultAvatar")
+        GLNTRKNA_AuraPreview.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_DefaultAvatar")
         view.addSubview(GLNTRKNA_AuraPreview)
         
         let glnt_aura_mask = UIView(frame: GLNTRKNA_AuraPreview.bounds)
@@ -79,7 +79,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         GLNTRKNA_AuraPreview.clipsToBounds = true
         GLNTRKNA_AuraPreview.isUserInteractionEnabled = true
         GLNTRKNA_AuraPreview.contentMode = .scaleAspectFill
-        GLNTRKNA_AuraPreview.image = UIImage(named: "GLNTRKNA_DefaultAvatar")
+        GLNTRKNA_AuraPreview.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_DefaultAvatar")
         view.addSubview(GLNTRKNA_AuraPreview)
 //        
 //        let glnt_cam_icon = UIButton(frame: CGRect(x: 35 * GLNTRKNA_ScaleW, y: 35 * GLNTRKNA_ScaleW, width: 40 * GLNTRKNA_ScaleW, height: 40 * GLNTRKNA_ScaleW))
@@ -90,8 +90,8 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
 //        let glnt_tap_aura = UITapGestureRecognizer(target: self, action: #selector(GLNTRKNA_TriggerOptics))
 //        GLNTRKNA_AuraPreview.addGestureRecognizer(glnt_tap_aura)
 
-        GLNTRKNA_ComposeEntry(y: 300, title: "Nickname", val: info?.glnt_alias ?? "No name", isField: true)
-        GLNTRKNA_ComposeEntry(y: 400, title: "Birthday", val: info?.glnt_date ?? "Enter Birthday", isField: false)
+        GLNTRKNA_ComposeEntry(y: 300, title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Y9J2SvcghDUt8+ReWXAiLeG7MbXzBaZXzr5vqyoO0gf1y1PnJ3k1BQ=="), val: info?.glnt_alias ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"c3YJobG+2r3RghzPHKCaQXcXtZaPqQz/6YXNizeWrsT8+Pzf5XIA"), isField: true)
+        GLNTRKNA_ComposeEntry(y: 400, title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"BsFpEqclPf+lGbsW7pnCdNOsT5+qRzNUlCBo5I0eLfmqZs+mF9pmhg=="), val: info?.glnt_date ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"6Edi3hz1ymdEZHOkEQAtAf9FAJqbz2O+paBh18kGnXOVQFCUqRfWl9P2El4Z3g=="), isField: false)
         
         let glnt_bio_box = UIView(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: 500 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 280 * GLNTRKNA_ScaleH))
         glnt_bio_box.backgroundColor = UIColor(white: 1, alpha: 0.08)
@@ -99,7 +99,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         view.addSubview(glnt_bio_box)
         
         let glnt_bio_title = UILabel(frame: CGRect(x: 15, y: 20, width: 100, height: 20))
-        glnt_bio_title.text = "About me"
+        glnt_bio_title.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"qhd1yCz9sm9lZIdTR2Ftq3869GjJqq4Bic3e+Fff8ASLg1cK0U2T8w==")
         glnt_bio_title.textColor = .white
         glnt_bio_title.font = .boldSystemFont(ofSize: 18)
         glnt_bio_box.addSubview(glnt_bio_title)
@@ -108,13 +108,13 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         GLNTRKNA_BioEditor.backgroundColor = .clear
         GLNTRKNA_BioEditor.textColor = .lightGray
         GLNTRKNA_BioEditor.font = .systemFont(ofSize: 15)
-        GLNTRKNA_BioEditor.text = info?.glnt_bio ?? "Write something to let people know you..."
+        GLNTRKNA_BioEditor.text = info?.glnt_bio ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"EEbtvWopvv1eZORFYu+2USarJ2x4lYbpmbKQjsZjzXOQXvUa1cJuIBJHMt4mXH6kJPZs+vd9BLYc6gis7tCQw7vcJtw9BaPkfg==")
         glnt_bio_box.addSubview(GLNTRKNA_BioEditor)
 
         let glnt_submit = UIButton(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: UIScreen.main.bounds.height - 100 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 65 * GLNTRKNA_ScaleH))
         glnt_submit.layer.masksToBounds = true
         glnt_submit.layer.cornerRadius = 32.5 * GLNTRKNA_ScaleH
-        glnt_submit.setTitle("Confirm", for: .normal)
+        glnt_submit.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"HjBG9vk/UiXBtY6PauBGitPl1WmkF+a3gcVXt1JdO57B4/7toraj"), for: .normal)
         glnt_submit.setTitleColor(.white, for: .normal)
         glnt_submit.titleLabel?.font = .boldSystemFont(ofSize: 18)
         glnt_submit.addTarget(self, action: #selector(GLNTRKNA_CommitIdentity), for: .touchUpInside)
@@ -132,11 +132,11 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
     @objc private func GLNTRKNA_TriggerOptics() {
             let glnt_sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
-            let glnt_album = UIAlertAction(title: "Choose from Library", style: .default) { _ in
+            let glnt_album = UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"2dFc9DoazOmFDDbyuSYtzbRNe1gGm8XLdeHaW5Qc8Vm0Kd1PNdYJF8Ndvoruv0JkAadG"), style: .default) { _ in
                 self.GLNTRKNA_InvokeSystemGallery()
             }
             
-            let glnt_cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let glnt_cancel = UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"3+x9ke4fmzRG3lWGUfwkE58ZMLh5+4PJGcFkxt2LGdwilzKfvx4="), style: .cancel, handler: nil)
             
             glnt_sheet.addAction(glnt_album)
             glnt_sheet.addAction(glnt_cancel)

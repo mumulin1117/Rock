@@ -30,7 +30,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
     private let GLNTRKNA_VibeBanner: UIImageView = {
         let gln_img = UIImageView()
         gln_img.contentMode = .scaleAspectFill
-        gln_img.image = UIImage(named: "gln_rkna_login_hero")
+        gln_img.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_rkna_login_hero")
         gln_img.clipsToBounds = true
         return gln_img
     }()
@@ -45,7 +45,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         gln_tf.textColor = .white
         gln_tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
         gln_tf.leftViewMode = .always
-        gln_tf.attributedPlaceholder = NSAttributedString(string: "Enter your email", attributes: [.foregroundColor: UIColor.lightGray])
+        gln_tf.attributedPlaceholder = NSAttributedString(string: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"IwnNc5hB1wDekP7OkESmgEnec6i5fE59rBUYLj9FlJT80BEQSeIm0vTRz5ZbmBr0"), attributes: [.foregroundColor: UIColor.lightGray])
         gln_tf.keyboardType = .emailAddress
         return gln_tf
     }()
@@ -58,13 +58,13 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         gln_tf.isSecureTextEntry = true
         gln_tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
         gln_tf.leftViewMode = .always
-        gln_tf.attributedPlaceholder = NSAttributedString(string: "Enter your password", attributes: [.foregroundColor: UIColor.lightGray])
+        gln_tf.attributedPlaceholder = NSAttributedString(string: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"PbXR50au4D/o99fM5BpWlcA1IWvuO3d3Hj8+HrwBoD8WeOUFjG0xU1JUtS/ELqJDq8/F"), attributes: [.foregroundColor: UIColor.lightGray])
         return gln_tf
     }()
     
     private let GLNTRKNA_CommitTrigger: UIButton = {
         let gln_btn = UIButton()
-        gln_btn.setBackgroundImage(UIImage(named: "GLNTRKNA_CommitTrigger"), for: .normal)
+        gln_btn.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_CommitTrigger"), for: .normal)
         gln_btn.contentMode = .scaleAspectFit
         return gln_btn
     }()
@@ -155,14 +155,14 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         GLNTRKNA_PolicyTerminal.isEditable = false
         GLNTRKNA_PolicyTerminal.isScrollEnabled = false
         
-        let gln_base_text = "By continuing you agree to our <Terms of Service> and <Privacy Policy>."
+        let gln_base_text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"wL4Ko3aQ98Byb5I01lhXGdZ5U8tQJ4uuG1hB+dnAAvhFXK+qpIp7jW3ts68mACvZGC06ljaga29EUA1PlghjInIZgKSdHONP7Rjj3ir4vrkTl03vg2/wIoN9h2dpwDXwDLPzocj1IA==")
         let gln_attributed = NSMutableAttributedString(string: gln_base_text, attributes: [.foregroundColor: UIColor.gray, .font: UIFont.systemFont(ofSize: GLNTRKNA_ScaleW(13))])
         
-        let gln_range1 = (gln_base_text as NSString).range(of: "<Terms of Service>")
-        let gln_range2 = (gln_base_text as NSString).range(of: "<Privacy Policy>")
+        let gln_range1 = (gln_base_text as NSString).range(of: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"+0WLrwovt/VRflJ1z1xzNU5i0TNval9E6zhkoqJ+jyDWt7+Nq2WDi/GYad0gT6HctqI="))
+        let gln_range2 = (gln_base_text as NSString).range(of: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"reBBrdRJsZw3S2PDM6P1Ix6WfcIvsiDHuQXwZsUYGij1NNf3Lb80EUTMKXRq99QK"))
         
-        gln_attributed.addAttribute(.link, value: "rnl://terms", range: gln_range1)
-        gln_attributed.addAttribute(.link, value: "rnl://privacy", range: gln_range2)
+        gln_attributed.addAttribute(.link, value:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"U0Wme6/8vndRcLGYaPHNEJEv1c0Q/sMSrgFjN7lrBPaG8Idf16Mc3EfdxQ=="), range: gln_range1)
+        gln_attributed.addAttribute(.link, value: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"QopQBMAKaZIzYCDcqQl+MuCGvrIUMNVnCo2FdjJnPwclEBo7poSjzNzvaZcr"), range: gln_range2)
         gln_attributed.addAttribute(.foregroundColor, value: UIColor(red: 1, green: 0.16, blue: 0.51,alpha:1), range: gln_range1)
         gln_attributed.addAttribute(.foregroundColor, value: UIColor(red: 1, green: 0.16, blue: 0.51,alpha:1), range: gln_range2)
         
@@ -184,7 +184,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
     
     @objc private func GLNTRKNA_ExecuteAccess() {
         guard GLNTRKNA_ConsentTick.isSelected else {
-            GLNTRKNA_PostAlert(msg: "Please accept the Terms and Privacy Policy first.")
+            GLNTRKNA_PostAlert(msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"xXnbrfHwvK1OEGDC0BhbfHQ/3QOQ0zR/Ahh6jDaaNk3dVzxPtJ7PGl8j1z5/76SwkPU1msIMOze4lxJW31/OSoILyIFOoHdaqpeu/ARrzhuu"))
             return
         }
         
@@ -194,12 +194,12 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         if gln_mail.contains("@") && gln_pass.count >= 6 {
             GLNTRKNA_CommitTrigger.isEnabled = false
             GLNTRKNA_CommitTrigger.alpha = 0.5
-            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Login....", on: self.view)
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"j9ytPnOL2iscXARpcVLWmqknq3sabry4A7BPuIlXa4NtPyfN1ZEtwMA="), on: self.view)
             let result =  GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_VerifyIdentity(email: gln_mail, secret: gln_pass)
             if result  {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                     if let gln_win = self.view.window {
-                        let glnt_msg = "✨ " + "Login successful! "
+                        let glnt_msg = "✨ " + GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"tJEir5WdEWrq4cBWg9jJt9l7jLBWTC+tVFeGJjq3WcxBFZKRK+Zt608Wu6BtPnIWWaE=")
                                 
                         GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
                         gln_win.rootViewController = GLNTRKNA_StudioTabController()
@@ -209,18 +209,18 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
                 return
             }else{
                 
-                let glnt_msg = "⚠️ " + "Login failed,please tra again later! "
+                let glnt_msg = "⚠️ " + GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"sC4hWCs/JqRernxjhzq1teOz1POHDjtE4cI3Ys0U9ui187d3x6cEGume3icP7ZwVjZKdnOAZwoZCq+r7YQBnQpO3jAVc")
                         
                 GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
             }
             
         } else {
-            GLNTRKNA_PostAlert(msg: "Invalid Email or Password credentials.")
+            GLNTRKNA_PostAlert(msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"h/TUI6tjvktCd4axcLQkthmTeZPZzjOvtupGcDlg4cMnMuHTOMNBSWFehaGB08u+CLHMvyd/pxB/fZgRifhXdpCFGbtjOw=="))
         }
     }
     
     private func GLNTRKNA_PostAlert(msg: String) {
-        let gln_alert = UIAlertController(title: "Rock Studio", message: msg, preferredStyle: .alert)
+        let gln_alert = UIAlertController(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"efAz7iyo6J2h1Ks/BRtPNna+Zgw3xMuF5bOHxuEBrdJvlSgdiBu9ZKCACQ=="), message: msg, preferredStyle: .alert)
         gln_alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(gln_alert, animated: true)
     }
@@ -247,7 +247,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
 
 extension GLNTRKNA_AccessGateway: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        let gln_dest = URL.absoluteString == "rnl://terms" ? "Terms of Service" : "Privacy Policy"
+        let gln_dest = URL.absoluteString == "rnl://terms" ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"A7x7DLSgMn614lfkrbyv/srIwe8+DIsup00FMIBW0XIKnPlnsMXCjoa3earv/BZY") : GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"0SBpjU6AJ1FwEnaH/01YnoZ3WsS8zFxyNXj+6iWccbAipfa/7CneXcTXLKRstw==")
         
        
         let go = GLNTRKNA_LegalViewer.init(docType: URL.absoluteString)

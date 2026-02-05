@@ -53,7 +53,7 @@ class GLNTRKNA_DialogNexus: UIViewController {
         let glnt_cancel = UIButton(frame: CGRect(x: 25 * GLNTRKNA_RatioX, y: 180 * GLNTRKNA_RatioY, width: glnt_panel.frame.width - 50 * GLNTRKNA_RatioX, height: 50 * GLNTRKNA_RatioY))
         glnt_cancel.backgroundColor = UIColor(white: 1, alpha: 0.05)
         glnt_cancel.layer.cornerRadius = 25 * GLNTRKNA_RatioY
-        glnt_cancel.setTitle("Cancel", for: .normal)
+        glnt_cancel.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"a7FYA2HmN8grPT7NdrJu5OuvhvicjplSRqcwgtyBXikufVdSX+E="), for: .normal)
         glnt_cancel.setTitleColor(UIColor(red: 0.96, green: 0.64, blue: 0.82, alpha: 1.0), for: .normal)
         glnt_cancel.titleLabel?.font = .boldSystemFont(ofSize: 16)
         glnt_cancel.addTarget(self, action: #selector(GLNTRKNA_Silence), for: .touchUpInside)

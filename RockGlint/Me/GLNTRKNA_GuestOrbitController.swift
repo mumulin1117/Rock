@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//他人主页
+
 class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var GLNTRKNACelestialData: GLNTRKNA_MomentEntry
@@ -84,7 +84,7 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
         let gln_options_btn = UIButton()
-        gln_options_btn.setImage(UIImage(named: "gln_report"), for: .normal)
+        gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
@@ -115,8 +115,8 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         GLNTRKNASceneryScroll.addSubview(GLNTRKNAMantraLabel)
         
         GLNTRKNALinkBtn.frame = CGRect(x: GLNTRKNACanvasW - 75 * GLNTRKNARatioX, y: 330 * GLNTRKNARatioY, width: 55 * GLNTRKNARatioX, height: 55 * GLNTRKNARatioX)
-        GLNTRKNALinkBtn.setImage(UIImage(named: "GLNTRKNALin_n"), for: .normal)
-        GLNTRKNALinkBtn.setImage(UIImage(named: "GLNTRKNALin_nnn"), for: .selected)
+        GLNTRKNALinkBtn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNALin_n"), for: .normal)
+        GLNTRKNALinkBtn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNALin_nnn"), for: .selected)
         
         if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: GLNTRKNACelestialData.glnt_userId) {
             GLNTRKNALinkBtn.isSelected = true
@@ -126,7 +126,7 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         
         GLNTRKNAPulseBtn.frame = CGRect(x: GLNTRKNACanvasW - 145 * GLNTRKNARatioX, y: 330 * GLNTRKNARatioY, width: 55 * GLNTRKNARatioX, height: 55 * GLNTRKNARatioX)
        
-        GLNTRKNAPulseBtn.setImage(UIImage(named: "GLNTRKNAPulseBtn"), for: .normal)
+        GLNTRKNAPulseBtn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNAPulseBtn"), for: .normal)
        
         GLNTRKNAPulseBtn.addTarget(self, action: #selector(GLNTRKNAEnterDeepChat), for: .touchUpInside)
         GLNTRKNASceneryScroll.addSubview(GLNTRKNAPulseBtn)
@@ -136,23 +136,23 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
                 let yac_seg_h = 70 * GLNTRKNARatioY
                 
                 // 1. Fans Segment
-        let yac_fans = GLNTRKNAStatSegmentView(frame: CGRect(x: 15 * GLNTRKNARatioX, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: "Fans", value: "\(self.GLNTRKNACelestialData.GTRKnafancCount)")
+        let yac_fans = GLNTRKNAStatSegmentView(frame: CGRect(x: 15 * GLNTRKNARatioX, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"qlT73bAUAOlhmH+zW4j+o+xJzw2HNiKEooHrn76IpKwup863"), value: "\(self.GLNTRKNACelestialData.GTRKnafancCount)")
                 GLNTRKNASceneryScroll.addSubview(yac_fans)
                 
                 // 2. Followers Segment
-        let yac_follows = GLNTRKNAStatSegmentView(frame: CGRect(x: 25 * GLNTRKNARatioX + yac_seg_w, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: "Followers", value: "\(self.GLNTRKNACelestialData.GTRKnafFollwerCount)")
+        let yac_follows = GLNTRKNAStatSegmentView(frame: CGRect(x: 25 * GLNTRKNARatioX + yac_seg_w, y: yac_bar_y, width: yac_seg_w, height: yac_seg_h), key: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"nBDlERnFWlisvVBvlZLjMZUBr5kXQbGmLu3nN96Y9xN8b6LZbvzehT0="), value: "\(self.GLNTRKNACelestialData.GTRKnafFollwerCount)")
                 GLNTRKNASceneryScroll.addSubview(yac_follows)
         
 //        let yac_stat_w = (GLNTRKNACanvasW - 45 * GLNTRKNARatioX) / 3
 //        let yac_stat_y = 430 * GLNTRKNARatioY
-        GLNTRKNACallDeck.setBackgroundImage( UIImage(named: "yac_cahil_icon"), for: .normal)
+        GLNTRKNACallDeck.setBackgroundImage( GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "yac_cahil_icon"), for: .normal)
         GLNTRKNACallDeck.frame = CGRect(x: 35 * GLNTRKNARatioX + yac_seg_w * 2, y: yac_bar_y - 41, width: yac_seg_w , height: 101)
        
         GLNTRKNACallDeck.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink), for: .touchUpInside)
         GLNTRKNASceneryScroll.addSubview(GLNTRKNACallDeck)
         
         let yac_call_icon = UIImageView(frame: CGRect(x: 15, y: GLNTRKNACallDeck.frame.maxY + 12, width: 80, height: 24))
-        yac_call_icon.image = UIImage(named: "monmentTItle")
+        yac_call_icon.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "monmentTItle")
       
         GLNTRKNASceneryScroll.addSubview(yac_call_icon)
        
@@ -175,8 +175,8 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         GLNTRKNANomadLabel.text = GLNTRKNACelestialData.glnt_userName
         GLNTRKNAMantraLabel.text = GLNTRKNACelestialData.glnt_signature
         // Fake Network Placeholder
-        GLNTRKNAMirrorBack.image = UIImage(named:GLNTRKNACelestialData.glnt_userId )//"gln_bg_placeholder"
-        GLNTRKNAAuraAvatar.image = UIImage(named: GLNTRKNACelestialData.glnt_userId)
+        GLNTRKNAMirrorBack.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:GLNTRKNACelestialData.glnt_userId )//"gln_bg_placeholder"
+        GLNTRKNAAuraAvatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: GLNTRKNACelestialData.glnt_userId)
     }
 
     // MARK: - Logic Interaction
@@ -241,7 +241,7 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
             }
             
         }else{
-            VibeMatrixCell.gln_cover.image = UIImage(named: GLNTRKNACelestialData.momentPics.first ?? "")
+            VibeMatrixCell.gln_cover.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: GLNTRKNACelestialData.momentPics.first ?? "")
         }
        
         VibeMatrixCell.gln_uname.text =  GLNTRKNACelestialData.glnt_content

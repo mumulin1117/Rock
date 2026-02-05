@@ -37,7 +37,7 @@ class GLNTRKNA_LegalViewer: UIViewController {
         view.addSubview(GLNTRKNA_DocTerminal)
         
         // Custom Back Button to match Rock style
-        let gln_back = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(GLNTRKNA_DismissVault))
+        let gln_back = UIBarButtonItem(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"cDZTFyTLYjWHItk/BRqxeeftIbGEKio3rc80ZHRQ2oLBeCjU5w=="), style: .plain, target: self, action: #selector(GLNTRKNA_DismissVault))
         gln_back.tintColor = .systemPink
         navigationItem.leftBarButtonItem = gln_back
     }
