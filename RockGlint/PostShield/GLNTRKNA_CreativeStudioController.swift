@@ -249,6 +249,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
             }
         } else {
           
+            
             if let gln_main_btn = GLNTRKNA_MediaGallery as? UIButton {
                 gln_media_ready = gln_main_btn.backgroundImage(for: .normal) != nil
             } else {
