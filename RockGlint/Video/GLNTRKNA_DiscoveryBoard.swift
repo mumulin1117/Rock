@@ -42,7 +42,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+            
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_HandleBlacklistUpdate),
@@ -56,7 +56,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
         let logicEngine = GLNTRKNA_HomeLogicEngine()
         self.GLNTRKNAfeedItems = logicEngine.GLNTRKNA_FilterVadio(by: GLNTRKNA_SelectedIndex - 400)
         
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loading....", on: self.view)
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Jf4b9HBbEp3ZI9+mpghaCgmeJM0Diiyin5YuLjml27m6jcOsVcq+r2VxGg=="), on: self.view)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
             self.GLNTRKNA_MainGallery.reloadData()
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
@@ -75,7 +75,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
         view.backgroundColor = UIColor(red: 0.04, green: 0.04, blue: 0.16, alpha: 1.0)
         
         let gln_title = UILabel(frame: CGRect(x: GLNTRKNA_RatioW(20), y: GLNTRKNA_RatioH(60), width: GLNTRKNA_RatioW(200), height: GLNTRKNA_RatioH(40)))
-        gln_title.text = "Video"
+        gln_title.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"zcEcBfv/tS4ROivWDMiJVqEy2fswYZBs44wShen8xyJ9t84h2Q==")
         gln_title.textColor = .white
         gln_title.font = .systemFont(ofSize: 32, weight: .bold)
         view.addSubview(gln_title)
@@ -130,7 +130,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
     @objc private func GLNTRKNA_SwitchCategory(_ sender: UIButton) {
         if GLNTRKNA_SelectedIndex == sender.tag { return }
         GLNTRKNA_SelectedIndex = sender.tag
-//        GLNTRKNA_ConstructSegmentedInterface()
+
         GLNTRKNA_HandleBlacklistUpdate()
         backGroundImagPickin.center = sender.center
         let gln_impact = UISelectionFeedbackGenerator()

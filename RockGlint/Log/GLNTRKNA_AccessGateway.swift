@@ -38,8 +38,8 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
     private let GLNTRKNA_EmailSymbol = UILabel()
     private let GLNTRKNA_SecretSymbol = UILabel()
     
-    private let GLNTRKNA_ArtisanEmail: UITextField = {
-        let gln_tf = UITextField()
+    private let GLNTRKNA_ArtisanEmail: GLNBaseTextField = {
+        let gln_tf = GLNBaseTextField()
         gln_tf.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         gln_tf.layer.cornerRadius = 12
         gln_tf.textColor = .white
@@ -50,8 +50,8 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         return gln_tf
     }()
     
-    private let GLNTRKNA_ArtisanSecret: UITextField = {
-        let gln_tf = UITextField()
+    private let GLNTRKNA_ArtisanSecret: GLNBaseTextField = {
+        let gln_tf = GLNBaseTextField()
         gln_tf.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         gln_tf.layer.cornerRadius = 12
         gln_tf.textColor = .white
@@ -77,7 +77,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         return gln_btn
     }()
     
-    private let GLNTRKNA_PolicyTerminal = UITextView()
+    private let GLNTRKNA_PolicyTerminal = MUNDFlRLTextView()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -88,7 +88,7 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         glnt_status_bar.addSubview(glnt_coin_icon)
         
         let glnt_coin_lab = UILabel(frame: CGRect(x: 55 * GLNTRKNA_RatioW, y: 0, width: 150, height: 70 * GLNTRKNA_RatioH))
-        glnt_coin_lab.text = "Available coins"
+        glnt_coin_lab.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AqQVVAWcxN63vvL3MDCmbQfD+NdIlR4UDanI4zBg2VzkSYpzoXSj81hwR37rre4=")
         glnt_coin_lab.textColor = .black
         glnt_coin_lab.font = .systemFont(ofSize: 17 * GLNTRKNA_RatioW, weight: .medium)
         glnt_status_bar.addSubview(glnt_coin_lab)

@@ -26,7 +26,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
 
     private let GLNTRKNA_ChatVault = UITableView()
     private let GLNTRKNA_EntryPlate = UIView()
-    private let GLNTRKNA_WriteField = UITextField()
+    private let GLNTRKNA_WriteField = GLNBaseTextField()
     private let GLNTRKNA_RelayBtn = UIButton()
     
     private let GLNTRKNA_RatioW = UIScreen.main.bounds.width / 393.0
@@ -56,33 +56,15 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         // GLNTRKNA: Custom Top Bar
         let gln_top_nav = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 110 * GLNTRKNA_RatioH))
         view.addSubview(gln_top_nav)
-        
-//        let gln_exit = UIButton(frame: CGRect(x: 15, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
-//        gln_exit.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        gln_exit.tintColor = .white
-//        gln_exit.addTarget(self, action: #selector(GLNTRKNA_PopView), for: .touchUpInside)
-//        gln_top_nav.addSubview(gln_exit)
-        
+ 
         self.title = GLNTRKNA_ContextCarrier.userModel.glnt_userName
-//        let gln_partner_lbl = UILabel(frame: CGRect(x: 80, y: 60 * GLNTRKNA_RatioH, width: view.bounds.width - 160, height: 40))
-//        gln_partner_lbl.text =
-//        gln_partner_lbl.textColor = .white
-//        gln_partner_lbl.textAlignment = .center
-//        gln_partner_lbl.font = .boldSystemFont(ofSize: 18)
-//        gln_top_nav.addSubview(gln_partner_lbl)
-//        
-//        let gln_options = UIButton(frame: CGRect(x: view.bounds.width - 55, y: 60 * GLNTRKNA_RatioH, width: 40, height: 40))
-//        gln_options.isUserInteractionEnabled = true
-//        gln_options.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
-//        gln_options.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+
         let gln_options_btn = UIButton()
         gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
      
-        
-        // GLNTRKNA: Message List
         GLNTRKNA_ChatVault.frame = CGRect(x: 0, y: 110 * GLNTRKNA_RatioH, width: view.bounds.width, height: view.bounds.height - (210 * GLNTRKNA_RatioH))
         GLNTRKNA_ChatVault.backgroundColor = .clear
         GLNTRKNA_ChatVault.separatorStyle = .none
@@ -118,7 +100,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         GLNTRKNA_RelayBtn.frame = CGRect(x: view.bounds.width - 60, y: 15 * GLNTRKNA_RatioH, width: 45, height: 45)
         GLNTRKNA_RelayBtn.backgroundColor = .systemPink
         GLNTRKNA_RelayBtn.layer.cornerRadius = 22.5
-        GLNTRKNA_RelayBtn.setImage(UIImage(systemName: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"paperplane.fill")), for: .normal)
+        GLNTRKNA_RelayBtn.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
         GLNTRKNA_RelayBtn.tintColor = .white
         GLNTRKNA_RelayBtn.addTarget(self, action: #selector(GLNTRKNA_Transmit), for: .touchUpInside)
         GLNTRKNA_EntryPlate.addSubview(GLNTRKNA_RelayBtn)
@@ -154,9 +136,11 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
             $0.userModel.glnt_userId == self.GLNTRKNA_ContextCarrier.userModel.glnt_userId
             
         }) {
-            // 更新全局数组中对应位置的消息包数组
+         
             GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[gln_index].convert = self.GLNTRKNA_ContextCarrier.convert
             
+        }else{
+            GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.append(self.GLNTRKNA_ContextCarrier)
         }
         
         GLNTRKNA_WriteField.text = ""
@@ -200,14 +184,13 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         self.navigationController?.popViewController(animated: true)
     }
 
-    // MARK: - TableView Protocols
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GLNTRKNA_ContextCarrier.convert.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gln_cell = tableView.dequeueReusableCell(withIdentifier: "GLNTRKNA_Bubble", for: indexPath) as! GLNTRKNA_DialogueBubbleCell
-        gln_cell.GLNTRKNA_Configure(gln_packet: GLNTRKNA_ContextCarrier.convert[indexPath.row])
+        gln_cell.GLNTRKNA_Configure(gln_packet: GLNTRKNA_ContextCarrier.convert[indexPath.row],withImg: GLNTRKNA_ContextCarrier.userModel.glnt_userId)
         return gln_cell
     }
     
@@ -219,7 +202,6 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
     }
 }
 
-// MARK: - GLNTRKNA Custom Cell
 class GLNTRKNA_DialogueBubbleCell: UITableViewCell {
     private let GLNTRKNA_Cloud = UIView()
     private let GLNTRKNA_Prose = UILabel()
@@ -245,7 +227,7 @@ class GLNTRKNA_DialogueBubbleCell: UITableViewCell {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    func GLNTRKNA_Configure(gln_packet: GLNTRKNA_MsgPacket) {
+    func GLNTRKNA_Configure(gln_packet: GLNTRKNA_MsgPacket,withImg:String = "") {
         GLNTRKNA_Prose.text = gln_packet.gln_txt
         let gln_max_w = UIScreen.main.bounds.width * 0.65
         let gln_size = gln_packet.gln_txt.boundingRect(with: CGSize(width: gln_max_w, height: 1000), options: .usesLineFragmentOrigin, attributes: [.font: GLNTRKNA_Prose.font!], context: nil)
@@ -258,11 +240,13 @@ class GLNTRKNA_DialogueBubbleCell: UITableViewCell {
             GLNTRKNA_Cloud.frame = CGRect(x: UIScreen.main.bounds.width - gln_cloud_w - 65, y: 10, width: gln_cloud_w, height: gln_cloud_h)
             GLNTRKNA_Cloud.backgroundColor = UIColor(red: 0.96, green: 0.64, blue: 0.82, alpha: 1.0)
             GLNTRKNA_Prose.textColor = .white
+            GLNTRKNA_Ava.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "RocklogWithus")
         } else {
             GLNTRKNA_Ava.frame = CGRect(x: 15, y: 10, width: 40, height: 40)
             GLNTRKNA_Cloud.frame = CGRect(x: 65, y: 10, width: gln_cloud_w, height: gln_cloud_h)
             GLNTRKNA_Cloud.backgroundColor = .white
             GLNTRKNA_Prose.textColor = .black
+            GLNTRKNA_Ava.image =  GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: withImg)
         }
         
         GLNTRKNA_Prose.frame = CGRect(x: 15, y: 12.5, width: gln_size.width, height: gln_size.height)

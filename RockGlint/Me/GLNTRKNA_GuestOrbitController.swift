@@ -41,7 +41,11 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         GLNTRKNAIgniteAesthetics()
         GLNTRKNASyncPortalData()
-        
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AfW5tPPvtjGpML+N1/Mv7D+XsHinrlBpK4J2fylL/yBXFGmSOuYGeayZZg==") , on: self.view)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+         
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        }))
         if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: self.GLNTRKNACelestialData.glnt_userId) {
             self.GLNTRKNALinkBtn.isSelected = true
         }else{
@@ -51,7 +55,7 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+           
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNAExitOrbit),
@@ -125,8 +129,8 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         GLNTRKNASceneryScroll.addSubview(GLNTRKNALinkBtn)
         
         GLNTRKNAPulseBtn.frame = CGRect(x: GLNTRKNACanvasW - 145 * GLNTRKNARatioX, y: 330 * GLNTRKNARatioY, width: 55 * GLNTRKNARatioX, height: 55 * GLNTRKNARatioX)
-       
-        GLNTRKNAPulseBtn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNAPulseBtn"), for: .normal)
+       //GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNAPulseBtn")
+        GLNTRKNAPulseBtn.setImage(UIImage(named: "GLNTRKNAPulseBtn"), for: .normal)
        
         GLNTRKNAPulseBtn.addTarget(self, action: #selector(GLNTRKNAEnterDeepChat), for: .touchUpInside)
         GLNTRKNASceneryScroll.addSubview(GLNTRKNAPulseBtn)

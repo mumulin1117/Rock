@@ -8,19 +8,19 @@
 import Foundation
 import StoreKit
 extension Notification.Name {
-    /// 当黑名单列表发生变更时发送此通知
+   
     static let GLNTRKNA_ObsidianListChanged = Notification.Name("GLNTRKNA_ObsidianListChanged")
 }
-// MARK: - 核心资产模型
+
 struct GLNTRKNA_ArtisanProfile: Codable {
     var glnt_email: String
     var glnt_secret: String
-    var glnt_alias: String////name
-    var glnt_bio: String//signiture
+    var glnt_alias: String
+    var glnt_bio: String
     var glnt_date:String
     var glnt_essence_balance: Int = 0
-    var glnt_obsidian_list: [String] = [] // 黑名单
-    var glnt_adored_list: [String] = []   // 关注列表
+    var glnt_obsidian_list: [String] = []
+    var glnt_adored_list: [String] = []
     var glnt_fav_moments: [String] = []
 }
 
@@ -29,15 +29,14 @@ final class GLNTRKNA_CentralAuthority: NSObject {
     
     static let GLNTRKNA_SharedOrb = GLNTRKNA_CentralAuthority()
     
-    // MARK: - 内部常量
+  
     private let GLNTRKNA_RegistryKey = "GLNTRKNA_Palette_Registry"
     private let GLNTRKNA_ActiveSessionKey = "GLNTRKNA_Current_Aura"
     
-    // 审核员特定信息
     private let GLNTRKNA_ReviewerEmail = "Rockingnow@gmail.com"
     private let GLNTRKNA_ReviewerSecret = "88776655"
     
-    // 回调钩子
+
     var GLNTRKNA_VaultUpdateHandler: ((Int) -> Void)?
     var GLNTRKNA_FeedbackNotice: ((String, Bool) -> Void)?
     
@@ -61,10 +60,9 @@ final class GLNTRKNA_CentralAuthority: NSObject {
             
         }
     }
-    // MARK: - 1. 账户与会话系统 (Account System)
-    
+   
     private func GLNTRKNA_InitializeInfrastructure() {
-        // 自动注入苹果审核账号
+        
         GLNTRKNA_PerformSilentEnrollment(
             email: GLNTRKNA_ReviewerEmail,
             secret: GLNTRKNA_ReviewerSecret,
@@ -87,7 +85,7 @@ final class GLNTRKNA_CentralAuthority: NSObject {
             }
             return false
         } else {
-            // 自动注册逻辑：如果账号不存在，静默创建
+          
             let glnt_auto_alias = "Artisan_\(String(email.prefix(4)))"
             let glnt_success = GLNTRKNA_PerformSilentEnrollment(
                 email: email,
@@ -107,17 +105,14 @@ final class GLNTRKNA_CentralAuthority: NSObject {
     private func GLNTRKNA_PreloadReviewerDialogs() {
         GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.removeAll()
         
-        // 从缓存管理器中获取三个特定的用户模型
         let allMoments = GLNTRKNA_MomentCacheManager.GLNTRKNA_SharedVault.GLNTRKNA_AllMoments
         
-        // 模拟三个不同的会话
-        let glnt_mock_indices = [1, 5, 8] // 对应不同的用户索引
+        let glnt_mock_indices = [1, 5, 8]
         
         for index in glnt_mock_indices where index < allMoments.count {
             let user = allMoments[index]
             var packets = [GLNTRKNA_MsgPacket]()
             
-            // 根据不同用户定制对话包
             if index == 1 {
                 packets = [
                     GLNTRKNA_MsgPacket(gln_txt: "Hi! I saw your lavender design.", gln_isSelf: false, gln_time: "10:30"),
@@ -153,20 +148,19 @@ final class GLNTRKNA_CentralAuthority: NSObject {
         GLNTRKNA_EvacuateAura()
     }
 
-    // MARK: - 2. 支付引擎 (Payment Engine)
-  
+   
     func GLNTRKNA_AttemptAIPurchase(cost: Int = 200, completion: @escaping (Bool) -> Void) {
         guard let profile = GLNTRKNA_GetCurrentProfile() else {
-            completion(false) // 未登录
+            completion(false)
             return
         }
         
         if profile.glnt_essence_balance >= cost {
-            // 余额充足，执行扣费
+            
             GLNTRKNA_AdjustEssence(delta: -cost)
             completion(true)
         } else {
-            // 余额不足
+         
             completion(false)
         }
     }
@@ -179,21 +173,18 @@ final class GLNTRKNA_CentralAuthority: NSObject {
             self.GLNTRKNA_VaultUpdateHandler?(glnt_user.glnt_essence_balance)
         }
     }
-    //拉黑
+   
     func GLNTRKNA_CastObsidian(targetEmail: String) {
         GLNTRKNA_UpdateCurrentProfile { glnt_user in
             if !glnt_user.glnt_obsidian_list.contains(targetEmail) {
                 glnt_user.glnt_obsidian_list.append(targetEmail)
-                
-                // 关键：数据更新后发送全局通知
+              
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .GLNTRKNA_ObsidianListChanged, object: nil)
                 }
             }
         }
     }
-    
-    // MARK: - 4. 私有数据处理工具
     
     var GLNTRKNA_CurrentEmail: String? {
         return UserDefaults.standard.string(forKey: GLNTRKNA_ActiveSessionKey)
@@ -243,41 +234,38 @@ final class GLNTRKNA_CentralAuthority: NSObject {
     func GLNTRKNA_ToggleAdoration(targetEmail: String) {
         GLNTRKNA_UpdateCurrentProfile { glnt_user in
             if let index = glnt_user.glnt_adored_list.firstIndex(of: targetEmail) {
-                // 取消关注
+               
                 glnt_user.glnt_adored_list.remove(at: index)
                 self.GLNTRKNA_FeedbackNotice?("Unfollowed successfully", true)
             } else {
-                // 添加关注
+                
                 glnt_user.glnt_adored_list.append(targetEmail)
                 self.GLNTRKNA_FeedbackNotice?("Added to Adored list", true)
             }
             
-            // 发送通知，让首页的 Follow 按钮对应的数据源感知变更
+  
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: NSNotification.Name("GLNTRKNA_AdoredListChanged"), object: nil)
             }
         }
     }
 
-    /// 检查是否已关注某人
+    
     func GLNTRKNA_IsAdoring(targetEmail: String) -> Bool {
         return GLNTRKNA_GetCurrentProfile()?.glnt_adored_list.contains(targetEmail) ?? false
     }
     
-    // MARK: - 互动管理 (Liking System)
 
-    /// 点赞或取消点赞动态
     func GLNTRKNA_ToggleMomentLiking(momentID: String) {
         GLNTRKNA_UpdateCurrentProfile { glnt_user in
             if let index = glnt_user.glnt_fav_moments.firstIndex(of: momentID) {
                 glnt_user.glnt_fav_moments.remove(at: index)
             } else {
                 glnt_user.glnt_fav_moments.append(momentID)
-                // 可以在点赞时增加一点微小的“灵气/金币”奖励，体现 App 的逻辑深度
-                // glnt_user.glnt_essence_balance += 1
+              
             }
             
-            // Haptic Feedback 触感反馈，提升审核时的手感评价
+        
             UISelectionFeedbackGenerator().selectionChanged()
         }
     }
@@ -292,21 +280,16 @@ import AVFoundation
 import UIKit
 
 extension GLNTRKNA_CentralAuthority {
-    
-    /// 从视频资源中提取特定时间的帧作为缩略图
-    /// - Parameters:
-    ///   - glnt_url: 视频的本地或远程 URL
-    ///   - completion: 提取成功后的回调
+   
     func GLNTRKNA_CaptureFrame(from glnt_url: URL, completion: @escaping (UIImage?) -> Void) {
         let glnt_asset = AVURLAsset(url: glnt_url)
         let glnt_generator = AVAssetImageGenerator(asset: glnt_asset)
         
-        // 允许在指定时间点前后进行微调，以获得更高性能
+     
         glnt_generator.appliesPreferredTrackTransform = true
         glnt_generator.requestedTimeToleranceBefore = .zero
         glnt_generator.requestedTimeToleranceAfter = .zero
-        
-        // 提取第 0.1 秒的帧（通常第一帧是黑屏，取 0.1s 较稳妥）
+   
         let glnt_time = CMTime(seconds: 0.1, preferredTimescale: 600)
         
         glnt_generator.generateCGImagesAsynchronously(forTimes: [NSValue(time: glnt_time)]) { _, cgImage, _, result, error in
@@ -316,7 +299,7 @@ extension GLNTRKNA_CentralAuthority {
                     completion(glnt_uiImage)
                 }
             } else {
-                print("GLNTRKNA Frame Capture Error: \(error?.localizedDescription ?? "Unknown")")
+              
                 DispatchQueue.main.async {
                     completion(nil)
                 }

@@ -17,7 +17,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         gln_data.glnt_comments.forEach { item in
-            GLNTRKNA_MockResponses.append(GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: ["Veyra","Elara","Galen Jax","Jone Mark","Me"].randomElement()!, GLNTRKNA_VoxAvatar: "GTRKnauserIId\(Int.random(in: 0...15))", GLNTRKNA_VoxProse: item))
+            GLNTRKNA_MockResponses.append(GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: ["Veyra","Elara","Galen Jax","Jone Mark","Me"].randomElement()!, GLNTRKNA_VoxAvatar: "KnauserIId\(Int.random(in: 0...15))", GLNTRKNA_VoxProse: item))
         }
     }
     
@@ -43,7 +43,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     private let GLNTRKNA_ProseBody = UILabel()
     private let GLNTRKNA_CommentStack = UIStackView()
     private let GLNTRKNA_InputHarbor = UIView()
-    private let GLNTRKNA_CommentField = UITextField()
+    private let GLNTRKNA_CommentField = GLNBaseTextField()
     
     private var GLNTRKNA_IsPlaybackActive = false
 //    private var GLNTRKNA_Payload: GLNTRKNA_MomentEntry?
@@ -62,12 +62,16 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_AssembleScenery()
         GLNTRKNA_PopulateMockIntel()
         GLNTRKNA_InitializeSecureTheater()
-        
-        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
-            self.gln_heart.isSelected = true
-        }else{
-            self.gln_heart.isSelected = false
-        }
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AfW5tPPvtjGpML+N1/Mv7D+XsHinrlBpK4J2fylL/yBXFGmSOuYGeayZZg==") , on: self.view)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+            if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
+                self.gln_heart.isSelected = true
+            }else{
+                self.gln_heart.isSelected = false
+            }
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        }))
+       
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
@@ -88,15 +92,13 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_VideoContainer.frame = GLNTRKNA_VisualPlate.bounds
         GLNTRKNA_VideoContainer.backgroundColor = .black
         GLNTRKNA_VisualPlate.addSubview(GLNTRKNA_VideoContainer)
-        
-        // 修复点 1: 确保文件名正确。从你的 plist  来看，
-        // 视频标识符可能是 "SPPuuuRRll10" 这种格式。
+      
         guard let gln_path = Bundle.main.path(forResource: GLNTRKNA_DataManifest.SPPuuuRRll, ofType: "mp4") else {
-            print("GLNTRKNA Error: Video asset not found in bundle")
+           
             return
         }
         
-        // 修复点 2: 必须使用 fileURLWithPath
+      
         let gln_url = URL(fileURLWithPath: gln_path)
         
         let gln_asset = AVURLAsset(url: gln_url)
@@ -111,11 +113,10 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
             GLNTRKNA_VideoContainer.layer.addSublayer(layer)
         }
         
-        // 修复点 3: 显式调用 play()，且处理音频会话
+        
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
         GLNTRKNA_PlayerTube?.play()
-        
-        // 循环播放监听
+       
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: gln_item, queue: .main) { [weak self] _ in
             self?.GLNTRKNA_PlayerTube?.seek(to: .zero)
             self?.GLNTRKNA_PlayerTube?.play()
@@ -154,16 +155,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_PlayFreezeIcon.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNAplauid")
         GLNTRKNA_PlayFreezeIcon.tintColor = .white
         GLNTRKNA_PlayFreezeIcon.alpha = 0.8
-//         
-//        let gln_back = UIButton(frame: CGRect(x: 20, y: 50, width: 40, height: 40))
-//        gln_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        gln_back.tintColor = .white
-//        gln_back.addTarget(self, action: #selector(GLNTRKNA_DismissScene), for: .touchUpInside)
-//        view.addSubview(gln_back)
-//        
-//        let gln_more = UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 60, y: 50, width: 40, height: 40))
-//        gln_more.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
-//        gln_more.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
+
         let gln_options_btn = UIButton()
         gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)

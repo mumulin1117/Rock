@@ -17,9 +17,9 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
     
     private let GLNTRKNA_BaseCanvas = UIView()
     private let GLNTRKNA_AuraPreview = UIImageView()
-    private let GLNTRKNA_AliasField = UITextField()
+    private let GLNTRKNA_AliasField = GLNBaseTextField()
     private let GLNTRKNA_SolarDateLab = UILabel()
-    private let GLNTRKNA_BioEditor = UITextView()
+    private let GLNTRKNA_BioEditor = MUNDFlRLTextView()
     private var GLNTRKNA_IsAuraChanged: Bool = false
     
     let info = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()
@@ -38,20 +38,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         let glnt_top_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_ScaleH))
         view.addSubview(glnt_top_bar)
         self.title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"kAxUI7Akt8G1RgHIQyUbmQNNMiXypN0lqBrCmRKrYc0IOH5IW+2L0vMsElk=")
-//        let glnt_retreat = UIButton(frame: CGRect(x: 20 * GLNTRKNA_ScaleW, y: 60 * GLNTRKNA_ScaleH, width: 30, height: 30))
-//        glnt_retreat.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        glnt_retreat.tintColor = .white
-//        glnt_retreat.addTarget(self, action: #selector(GLNTRKNA_AbortMission), for: .touchUpInside)
-//        glnt_top_bar.addSubview(glnt_retreat)
-        
-//        let glnt_header = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width, height: 30))
-//        glnt_header.text = "Edit Profile"
-//        glnt_header.textColor = .white
-//        glnt_header.textAlignment = .center
-//        glnt_header.font = .boldSystemFont(ofSize: 18)
-//        glnt_top_bar.addSubview(glnt_header)
-//        GLNTRKNA_AuraPreview.frame = CGRect(x: (UIScreen.main.bounds.width - 110 * GLNTRKNA_ScaleW)/2, y: 140 * GLNTRKNA_ScaleH, width: 110 * GLNTRKNA_ScaleW, height: 110 * GLNTRKNA_ScaleW)
-//               
+
         GLNTRKNA_AuraPreview.layer.cornerRadius = 55 * GLNTRKNA_ScaleW
         GLNTRKNA_AuraPreview.backgroundColor = .darkGray
         GLNTRKNA_AuraPreview.clipsToBounds = true
@@ -81,14 +68,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         GLNTRKNA_AuraPreview.contentMode = .scaleAspectFill
         GLNTRKNA_AuraPreview.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_DefaultAvatar")
         view.addSubview(GLNTRKNA_AuraPreview)
-//        
-//        let glnt_cam_icon = UIButton(frame: CGRect(x: 35 * GLNTRKNA_ScaleW, y: 35 * GLNTRKNA_ScaleW, width: 40 * GLNTRKNA_ScaleW, height: 40 * GLNTRKNA_ScaleW))
-//        glnt_cam_icon.setImage(UIImage(systemName: "camera.fill"), for: .normal)
-//        glnt_cam_icon.tintColor = .white
-//        GLNTRKNA_AuraPreview.addSubview(glnt_cam_icon)
-//        
-//        let glnt_tap_aura = UITapGestureRecognizer(target: self, action: #selector(GLNTRKNA_TriggerOptics))
-//        GLNTRKNA_AuraPreview.addGestureRecognizer(glnt_tap_aura)
+
 
         GLNTRKNA_ComposeEntry(y: 300, title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Y9J2SvcghDUt8+ReWXAiLeG7MbXzBaZXzr5vqyoO0gf1y1PnJ3k1BQ=="), val: info?.glnt_alias ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"c3YJobG+2r3RghzPHKCaQXcXtZaPqQz/6YXNizeWrsT8+Pzf5XIA"), isField: true)
         GLNTRKNA_ComposeEntry(y: 400, title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"BsFpEqclPf+lGbsW7pnCdNOsT5+qRzNUlCBo5I0eLfmqZs+mF9pmhg=="), val: info?.glnt_date ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"6Edi3hz1ymdEZHOkEQAtAf9FAJqbz2O+paBh18kGnXOVQFCUqRfWl9P2El4Z3g=="), isField: false)
@@ -214,7 +194,6 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         let glnt_newDate = GLNTRKNA_SolarDateLab.text ?? ""
         let glnt_newImg = GLNTRKNA_IsAuraChanged ? GLNTRKNA_AuraPreview.image : nil
         
-        // 调用回调，将新头像一并传回
         GLNTRKNA_SyncCallback?(glnt_newName, glnt_newBio, glnt_newDate, glnt_newImg)
         
         GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ReviseProfile(alias: glnt_newName,bio: glnt_newBio,birthday: glnt_newDate)
@@ -222,7 +201,5 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         
     }
 
-//    @objc private func GLNTRKNA_AbortMission() {
-//        self.navigationController?.popViewController(animated: true)
-//    }
+
 }

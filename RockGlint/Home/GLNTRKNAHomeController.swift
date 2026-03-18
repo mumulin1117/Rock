@@ -153,7 +153,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
     private let backGroundImagPickin:UIImageView = UIImageView.init(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_ringball"))
     
     @objc private func GLNTRKNA_RenderPostNodes() {
-        self.navigationController?.pushViewController(GLNTRKNA_CreativeStudioController.init(gln_mode: .gln_nail_recreate), animated: true)
+        self.navigationController?.pushViewController(GLNTRKNA_CreativeStudioController.init(gln_mode: .gln_artisan_image), animated: true)
     }
     private func GLNTRKNA_RenderCategoryNodes() {
         GLNTRKNA_CategoryBridge.subviews.forEach {

@@ -24,18 +24,8 @@ class GLNTRKNA_SettlementController: UIViewController {
         let glnt_nav_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_RatioY))
         view.addSubview(glnt_nav_bar)
         
-//        let glnt_back = UIButton(frame: CGRect(x: 20 * GLNTRKNA_RatioX, y: 60 * GLNTRKNA_RatioY, width: 30, height: 30))
-//        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        glnt_back.tintColor = .white
-//        glnt_back.addTarget(self, action: #selector(GLNTRKNA_DepartOrbit), for: .touchUpInside)
-//        glnt_nav_bar.addSubview(glnt_back)
+
         self.title =  GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"HZQ66HYno3KVogTb1pSp6NZofEUnvG5wE94plf6lVvDFOemJrtD1GQ==")
-//        let glnt_title = UILabel(frame: CGRect(x: 0, y: 60 * GLNTRKNA_RatioY, width: UIScreen.main.bounds.width, height: 30))
-//        glnt_title.text = "Settings"
-//        glnt_title.textColor = .white
-//        glnt_title.textAlignment = .center
-//        glnt_title.font = .boldSystemFont(ofSize: 18)
-//        glnt_nav_bar.addSubview(glnt_title)
 
         let glnt_options = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"JxaO+II5mmTpE8EXzU88XAQ5EiBISVbdJsy/qnuSbiwHnmoaLqjIMpmuuaHIag=="),GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"d5KDG4NtB8fPUGTvUf6c/LzZNNeWbqNdFi8DYEAgifybli6T80sRe6EguIcEEF6PvA=="),  GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Sp/7uPzUyyMRx6fXvgMY46sY/NHD9ZFfn8FzmIgg9XccHZEJ0ty8yQ==")]
         let glnt_icons = ["doc.text.fill", "shield.lefthalf.filled", "person.slash.fill", "info.circle.fill"]
@@ -140,7 +130,4 @@ class GLNTRKNA_SettlementController: UIViewController {
         self.present(glnt_alert, animated: false)
     }
 
-//    @objc private func GLNTRKNA_DepartOrbit() {
-//        self.navigationController?.popViewController(animated: true)
-//    }
 }

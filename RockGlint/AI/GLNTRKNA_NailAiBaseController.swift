@@ -55,7 +55,7 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
         gln_card.layer.cornerRadius = 20
         GLNTRKNA_MainCanvas.addSubview(gln_card)
         
-        let gln_desc = UITextView(frame: gln_card.bounds.insetBy(dx: 15, dy: 15))
+        let gln_desc = MUNDFlRLTextView(frame: gln_card.bounds.insetBy(dx: 15, dy: 15))
         gln_desc.backgroundColor = .clear
         gln_desc.isEditable = false
         gln_desc.textColor = .white

@@ -8,7 +8,7 @@ import UIKit
 class GLNTRKNA_LegalViewer: UIViewController {
 
     private var GLNTRKNA_ActiveDocType: String = ""
-    private let GLNTRKNA_DocTerminal = UITextView()
+    private let GLNTRKNA_DocTerminal = MUNDFlRLTextView()
     
     init(docType: String) {
         self.GLNTRKNA_ActiveDocType = docType

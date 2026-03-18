@@ -14,7 +14,7 @@ class GLNTRKNA_FeedbackStationController: UIViewController, UITableViewDelegate,
         super.init(nibName:nil, bundle: nil)
         
         GLNTRKNAAllcomment.forEach { item in
-            GLNTRKNA_EchoRegistry.append(GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: ["Joren Veyra","Cerys Elara","Galen Jax","Jone Mark"].randomElement()!, GLNTRKNA_VoxAvatar: "GTRKnauserIId\(Int.random(in: 0...15))", GLNTRKNA_VoxProse: item))
+            GLNTRKNA_EchoRegistry.append(GLNTRKNA_FeedbackEntity(GLNTRKNA_VoxName: ["Joren Veyra","Cerys Elara","Galen Jax","Jone Mark"].randomElement()!, GLNTRKNA_VoxAvatar: "KnauserIId\(Int.random(in: 0...15))", GLNTRKNA_VoxProse: item))
         }
       
     }

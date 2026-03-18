@@ -8,15 +8,6 @@
 import UIKit
 
 
-//struct GLNTRKNA_DynamicModel {
-//    let GLNTRKNA_UserIdentity: String
-//    let GLNTRKNA_AvatarResource: String
-//    let GLNTRKNA_HeroAssets: [String]
-//    let GLNTRKNA_ProseContent: String
-//    let GLNTRKNA_FeedbackVolume: String
-//    let GLNTRKNA_ReprintWorks: [String] // Empty implies the default planet view
-//}
-
 class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
 
 //   
@@ -38,17 +29,21 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_InitializeBase()
-       
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AfW5tPPvtjGpML+N1/Mv7D+XsHinrlBpK4J2fylL/yBXFGmSOuYGeayZZg==") , on: self.view)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+            if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
+                self.gln_heart.isSelected = true
+            }else{
+                self.gln_heart.isSelected = false
+            }
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        }))
         GLNTRKNA_AssembleScenery()
-        if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TogglecheckLikeMoment(momentID: self.GLNTRKNA_DataManifest.glnt_userId) {
-            self.gln_heart.isSelected = true
-        }else{
-            self.gln_heart.isSelected = false
-        }
+       
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+            
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_ExitPortal),
@@ -67,14 +62,14 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         GLNTRKNA_RootContainer.frame = view.bounds
         GLNTRKNA_RootContainer.contentInsetAdjustmentBehavior = .never
         GLNTRKNA_RootContainer.showsVerticalScrollIndicator = false
-        // GLNTRKNA: 增加 contentSize 以支持底部卡片展开
+      
                
         GLNTRKNA_RootContainer.contentSize = CGSize(width: view.frame.width, height: GLNTRKNA_ScaleH(1100))
         view.addSubview(GLNTRKNA_RootContainer)
     }
     @objc private func GLNTRKNA_ToggleFavorite(sender: UIButton) {
         sender.isSelected.toggle()
-        // GLNTRKNA: 虚假触感反馈
+        
         let gln_impact = UIImpactFeedbackGenerator(style: .medium)
         gln_impact.impactOccurred()
         
@@ -111,9 +106,8 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         }
         GLNTRKNA_AssetSlider.contentSize = CGSize(width: CGFloat(GLNTRKNA_DataManifest.momentPics.count) * gln_sw, height: gln_hero_h)
         GLNTRKNA_RootContainer.addSubview(GLNTRKNA_AssetSlider)
-        
-        // 2. Navigation Overlay
-        title = "Dymamic Details"
+       
+        title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"OK2ZVL4hSJfciU7gWoLW3UmpNgwg5b9iy2FG4sX05OQ9YQCmAaHha73Sc/wRjjY=")
        
         
         
@@ -164,14 +158,14 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_heart.addTarget(self, action: #selector(GLNTRKNA_Triggeractionlike), for: .touchUpInside)
         
         GLNTRKNA_RootContainer.addSubview(gln_heart)
-        // 4. Content Card
+        
         let gln_card_y = gln_hero_h - 20
         let gln_prose_box = UIView(frame: CGRect(x: 0, y: gln_card_y, width: gln_sw, height: 1000))
         gln_prose_box.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.15, alpha: 1.0)
         gln_prose_box.layer.cornerRadius = 25
         GLNTRKNA_RootContainer.addSubview(gln_prose_box)
         
-        let gln_text_v = UITextView(frame: CGRect(x: 20, y: 30, width: gln_sw - 40, height: 80))
+        let gln_text_v = MUNDFlRLTextView(frame: CGRect(x: 20, y: 30, width: gln_sw - 40, height: 80))
         gln_text_v.backgroundColor = .clear
         gln_text_v.textColor = .white
         gln_text_v.font = .systemFont(ofSize: 16)
@@ -182,14 +176,13 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         let gln_divider = UIImageView(frame: CGRect(x: 20, y: 110, width: 200, height: 30))
         gln_divider.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_divider")
         gln_prose_box.addSubview(gln_divider)
-        // 5. Dynamic Section (Empty vs List)
+        
         if GLNTRKNA_DataManifest.momentreprintPic == "" {
             GLNTRKNA_BuildEmptyStage(in: gln_prose_box)
         } else {
             GLNTRKNA_BuildReprintScroll(in: gln_prose_box)
         }
         
-        // 6. Interaction Bar
         GLNTRKNA_AttachBar()
     }
     
@@ -200,7 +193,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_card.addSubview(gln_planet)
         
         let gln_hint = UILabel(frame: CGRect(x: 0, y: 310, width: gln_card.frame.width, height: 50))
-        gln_hint.text = "Haven't reproduced the nail art yet,\nnow go publish!"
+        gln_hint.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"IFV7Shtcng810VnB7z6AIp+QW5I/XTIpWddh+xK443CYdeerTJP5CZc5WbLayrGhkaVs20nfzGO0exJb9u8ZocNse/HD5hASIVdVQHhLelYu+PQ=")
         gln_hint.textColor = .lightGray
         gln_hint.numberOfLines = 2
         gln_hint.textAlignment = .center
@@ -253,7 +246,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    private  var gln_field = UITextField()
+    private  var gln_field = GLNBaseTextField()
     private func GLNTRKNA_AttachBar() {
         let gln_bar = UIView(frame: CGRect(x: 0, y: view.frame.height - 100, width: view.frame.width, height: 100))
         gln_bar.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.12, alpha: 1.0)
@@ -264,8 +257,8 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_input_bg.layer.cornerRadius = 25
         gln_bar.addSubview(gln_input_bg)
         
-        let gln_field = UITextField(frame: gln_input_bg.bounds.insetBy(dx: 20, dy: 0))
-        gln_field.placeholder = "Add Comment..."
+        let gln_field = GLNBaseTextField(frame: gln_input_bg.bounds.insetBy(dx: 20, dy: 0))
+        gln_field.placeholder = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AwckxmpnKGa/9Fu3LgvxCA+BBoODJFMj+tOfrOczhr+fcFnPXJzUa/34nr4dDw==")
         gln_field.textColor = .white
         self.gln_field = gln_field
         gln_input_bg.addSubview(gln_field)
@@ -304,7 +297,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc private func GLNTRKNA_CommitFeedback() {
-        // 1. GLNTRKNA: 获取输入内容并收起键盘
+   
         guard let gln_prose = gln_field.text, !gln_prose.isEmpty else {
             GLNTRKNA_ToastVisuals(gln_msg: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"RRgcKEMnA5v8VCExhiFs71iX+8R0V5trhm453nGCbifboZeeWoiTthevbvtVnj85muu9wsXSdwBy4H/YrQ=="))
             return
@@ -326,7 +319,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    // MARK: - GLNTRKNA 虚假提示 UI 组件
+
     private func GLNTRKNA_ToastVisuals(gln_msg: String) {
         let gln_toast = UILabel()
         gln_toast.text = gln_msg

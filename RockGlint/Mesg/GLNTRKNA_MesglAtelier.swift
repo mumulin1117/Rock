@@ -8,7 +8,16 @@
 import UIKit
 
 class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
-    
+    private lazy var MUNDFlRL_VoidChronicleLabel: UILabel = {
+        let MUNDFlRL_Label = UILabel()
+        MUNDFlRL_Label.textAlignment = .center
+        MUNDFlRL_Label.textColor = .white
+        MUNDFlRL_Label.font = .systemFont(ofSize: 16)
+        
+        MUNDFlRL_Label.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"2JucRcAFmlgPc0B0moq0A+nrzGNvBsnOvAkxzYPjPySpgevwAl97Zw7yoWQKww==")
+        MUNDFlRL_Label.isHidden = true
+        return MUNDFlRL_Label
+    }()
     private var GLNTRKNAtopUsers: [GLNTRKNA_MomentEntry] = []
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,18 +59,22 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
     private let GLNTRKNA_ScrH = UIScreen.main.bounds.height
     
     private let GLNTRKNA_BaseTable = UITableView()
-//    private let GLNTRKNA_SpotlightScroll = UIScrollView()
-  
+
     private let GLNTRKNA_Refresher = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_SetupAesthetics()
-        GLNTRKNA_HandleBlacklistUpdate()
+
         GLNTRKNA_SetupObservers()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GLNTRKNA_HandleBlacklistUpdate()
+    }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+         
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_HandleBlacklistUpdate),
@@ -78,11 +91,18 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
 
         
         GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AfW5tPPvtjGpML+N1/Mv7D+XsHinrlBpK4J2fylL/yBXFGmSOuYGeayZZg==") , on: self.view)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
-            self.GLNTRKNA_BaseTable.reloadData()
-            self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-        }))
+                let MUNDFlRL_PulseCount = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.count
+                
+                self.MUNDFlRL_VoidChronicleLabel.isHidden = (MUNDFlRL_PulseCount > 0)
+                self.GLNTRKNA_BaseTable.backgroundView = MUNDFlRL_PulseCount == 0 ? self.MUNDFlRL_VoidChronicleLabel : nil
+                
+                self.GLNTRKNA_BaseTable.reloadData()
+                self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
+                self.GLNTRKNA_Refresher.endRefreshing() 
+               
+            }
         
         
     }
@@ -95,7 +115,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
  
     private func GLNTRKNA_SetupAesthetics() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
-        
+        MUNDFlRL_VoidChronicleLabel.frame = CGRect(x: 0, y: 0, width: GLNTRKNA_BaseTable.bounds.width, height: 100)
         let gln_header = UILabel(frame: CGRect(x: 20, y: GLNTRKNA_RatioH(40), width: 200, height: 40))
         gln_header.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"aV3gBiyFNzhBk8XFl/2FBCHiw84sC92V9f/g0fwY6cX83fj4MBtZ")
         gln_header.textColor = .white
@@ -153,8 +173,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let gln_chat = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[indexPath.row])
-        
-//        gln_chat.GLNTRKNA_PartnerName = GLNTRKNA_NexusData[indexPath.row].gln_name
+
         self.navigationController?.pushViewController(gln_chat, animated: true)
     }
     

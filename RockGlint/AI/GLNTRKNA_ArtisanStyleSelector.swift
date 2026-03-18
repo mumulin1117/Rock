@@ -28,7 +28,7 @@ class GLNTRKNA_ArtisanStyleSelector: GLNTRKNA_NailAiBaseController {
         gln_offset_y += 20
         gln_offset_y = GLNTRKNA_PopulateTags(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"WhVa0h2VM4/6Tfs7xDd2qx3skSGefKaQ6VxuSA3iYS/uLiasVVDsbOZRkOpNnJXufA=="), pool: GLNTRKNA_ShapePool, startY: gln_offset_y, isTheme: false)
         
-        let gln_input = UITextView(frame: CGRect(x: 20, y: gln_offset_y + 20, width: view.frame.width - 40, height: 120))
+        let gln_input = MUNDFlRLTextView(frame: CGRect(x: 20, y: gln_offset_y + 20, width: view.frame.width - 40, height: 120))
         gln_input.backgroundColor = UIColor(white: 1.0, alpha: 0.15)
         gln_input.layer.cornerRadius = 12
         gln_input.textColor = .lightGray

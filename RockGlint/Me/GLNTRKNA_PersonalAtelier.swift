@@ -26,12 +26,12 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
     private let GLNTRKNA_Refresher = UIRefreshControl()
 
     private var gln_amount = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GLNTRKNA_ForgeInterface()
         GLNTRKNA_FetchIdentityPulse()
         GLNTRKNA_SyncWealth()
-           
         NotificationCenter.default.addObserver(self, selector: #selector(GLNTRKNA_SyncWealth), name: NSNotification.Name("GLNTRKNA_COIN_REFRESH"), object: nil)
         GLNTRKNA_SyncWealth()
         
@@ -44,10 +44,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
     @objc private func GLNTRKNA_SyncWealth() {
           
         gln_amount.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0) >"
-        
-        
-      
-       
+
     }
     private func GLNTRKNA_ForgeInterface() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
@@ -193,7 +190,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
         GLNTRKNA_VoidStation.addSubview(gln_planet)
 
         let gln_hint = UILabel(frame: CGRect(x: 40, y: 170 * GLNTRKNA_ScaleY, width: GLNTRKNA_ScrW - 80, height: 50))
-        gln_hint.text = "Haven't reproduced the nail art yet,\nnow go publish!"
+        gln_hint.text = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"NSog1wNumIVqCJLln/qiWABGqb2grCWZntS4Go1nbfJ9nJQLweYMTyTWJIxa3cxQxGokefY0BZfBMvVP08l1d7Wiqz3jBo3ddpAOq+hfH7qwVcU=")
         gln_hint.textColor = .lightGray
         gln_hint.numberOfLines = 2
         gln_hint.textAlignment = .center

@@ -12,7 +12,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     private let GLNTRKNA_BlurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let GLNTRKNA_SheetAnchor = UIView()
     private let GLNTRKNA_MainStack = UIStackView()
-    private let GLNTRKNA_InputField = UITextView()
+    private let GLNTRKNA_InputField = MUNDFlRLTextView()
     private let GLNTRKNA_FeedbackGen = UINotificationFeedbackGenerator()
     
     private let GLNTRKNA_CornerRadius: CGFloat = 32
@@ -29,8 +29,8 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     enum GLNTRKNA_SafetyMode {
-        case GLNTRKNA_PrimarySelection//拉黑
-        case GLNTRKNA_ReasonCategorization//内容举报
+        case GLNTRKNA_PrimarySelection
+        case GLNTRKNA_ReasonCategorization
        
     }
 

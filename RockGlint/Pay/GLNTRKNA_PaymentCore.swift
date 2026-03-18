@@ -1,20 +1,31 @@
 import Foundation
 import StoreKit
-
+extension GLNTRKNA_PaymentCore: SKProductsRequestDelegate {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        for product in response.products {
+            MUNDFlRL_PreheatedProducts[product.productIdentifier] = product
+        }
+    }
+}
 class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
+    private var MUNDFlRL_AuraRequest: SKProductsRequest?
+    private var MUNDFlRL_PreheatedProducts: [String: SKProduct] = [:]
     
     static let GLNTRKNA_SharedEngine = GLNTRKNA_PaymentCore()
     
     var GLNTRKNA_VaultUpdateHandler: (() -> Void)?
     var GLNTRKNA_FeedbackNotice: ((String, Bool) -> Void)?
-    
+    func GLNTRKNA_PreheatVault(with ids: Set<String>) {
+        MUNDFlRL_AuraRequest = SKProductsRequest(productIdentifiers: ids)
+        MUNDFlRL_AuraRequest?.delegate = self
+        MUNDFlRL_AuraRequest?.start()
+    }
     override init() {
         super.init()
-        // 核心：依然需要注册监听器来捕获支付结果
+    
         SKPaymentQueue.default().add(self)
     }
-    
-    /// 纯 ID 触发模式：不再依赖 SKProduct 列表
+
     func GLNTRKNA_TriggerAcquisition(via glnt_product_id: String) {
         
         if !SKPaymentQueue.canMakePayments() {
@@ -22,16 +33,22 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
             return
         }
         
-        // 开启 Loading 反馈
         self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"p38IRURl02g99ZFTuDAVQrGB5yrBtUjBbIkU5uQQsBqF8CywLM4q6aKN4AOrc15AqT/oPJGjE41zHXs="), false)
         
-        // 使用 SKMutablePayment 直接根据 ProductID 发起请求
-        // 注意：这种方式在某些环境下如果未预热可能弹出稍慢，但在逻辑上是自恰的
+     
         let glnt_vessel = SKMutablePayment()
         glnt_vessel.productIdentifier = glnt_product_id
         
-        // 提交到支付队列 - 这将直接呼起苹果系统指纹/面容界面
-        SKPaymentQueue.default().add(glnt_vessel)
+        let glnt_payment: SKPayment
+            if let glnt_safe_product = MUNDFlRL_PreheatedProducts[glnt_product_id] {
+                glnt_payment = SKPayment(product: glnt_safe_product)
+            } else {
+                let glnt_vessel = SKMutablePayment()
+                glnt_vessel.productIdentifier = glnt_product_id
+                glnt_payment = glnt_vessel
+            }
+        
+        SKPaymentQueue.default().add(glnt_payment)
     }
     
     // MARK: - 支付队列监听

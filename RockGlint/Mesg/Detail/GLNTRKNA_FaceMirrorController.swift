@@ -41,7 +41,7 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+           
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_TerminateStream),
@@ -134,10 +134,16 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
             gln_btn.setImage(UIImage(systemName: symbol), for: .normal)
             gln_btn.tintColor = .white
             if index == 2 { gln_btn.tintColor = .white } // Representing the 'beauty' or 'filter' drop icon
+            gln_btn.addTarget(self, action: #selector(GLNTRKNA_oprationStream), for: .touchUpInside)
             GLNTRKNA_CommandHub.addSubview(gln_btn)
         }
     }
-
+    @objc private func GLNTRKNA_oprationStream() {
+        let glnt_msg = " " + "⚠️Please try this function after the phone is connected"
+                
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
+        
+    }
     private func GLNTRKNA_StartMetricPulse() {
         GLNTRKNA_PulseTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let gln_s = self else { return }

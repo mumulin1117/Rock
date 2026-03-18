@@ -19,7 +19,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
     private var GLNTRKNA_VideoURL: URL?
     
 //    private let GLNTRKNA_DraftLabel = UILabel()
-    private let GLNTRKNA_ManifestInput = UITextView()
+    private let GLNTRKNA_ManifestInput = MUNDFlRLTextView()
     private let GLNTRKNA_CommitTrigger = UIButton()
     
     init(gln_mode: GLNTRKNA_PublishMode) {
@@ -100,10 +100,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
         GLNTRKNA_imag.frame = CGRect(x: gln_side_pad, y: gln_form_y, width: 111, height:(GLNTRKNA_WorkMode == .gln_nail_recreate) ? 0 : 24)
         GLNTRKNA_imag.isHidden = (GLNTRKNA_WorkMode == .gln_nail_recreate)
        
-//        GLNTRKNA_DraftLabel.text = "Copywriting"
-//        GLNTRKNA_DraftLabel.textColor = .white
-//        GLNTRKNA_DraftLabel.font = UIFont(name: "AvenirNext-BoldItalic", size: 22)
-//        GLNTRKNA_DraftLabel.frame = CGRect(x: gln_side_pad, y: gln_form_y, width: 200, height: 30)
+
         GLNTRKNA_StageScroll.addSubview(GLNTRKNA_imag)
         GLNTRKNA_ManifestInput.isHidden = (GLNTRKNA_WorkMode == .gln_nail_recreate)
         GLNTRKNA_ManifestInput.frame = CGRect(x: gln_side_pad, y: gln_form_y + 40, width: gln_sw - (gln_side_pad * 2), height: GLNTRKNA_ScaleH((GLNTRKNA_WorkMode == .gln_nail_recreate) ?  0  : 280))
@@ -239,11 +236,11 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
             return
         }
 
-        // 2. Validate Media Presence
+       
         var gln_media_ready = false
         
         if GLNTRKNA_WorkMode == .gln_artisan_image {
-            // Check if any of the buttons in the gallery have a background image set
+           
             for i in 0..<3 {
                 if let gln_btn = GLNTRKNA_MediaGallery.viewWithTag(i + 100) as? UIButton,
                    gln_btn.backgroundImage(for: .normal) != nil {
@@ -333,8 +330,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
     
     
     @objc private func GLNTRKNA_TriggerVideoPicker() {
-        // In video mode, we don't need a specific button tag,
-        // but we set addPickImgIndex to a unique value if needed.
+       
         self.addPickImgIndex = 999
         var gln_config = PHPickerConfiguration()
         gln_config.filter = .videos

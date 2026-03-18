@@ -41,13 +41,7 @@ class GLNTRKNA_StudioTabController: UITabBarController {
        let RNLappeac = UITabBarAppearance.init()
         RNLappeac.backgroundColor = UIColor(red: 0.11, green: 0.08, blue: 0.24, alpha: 1)
         self.tabBar.standardAppearance = RNLappeac
-//        let appearance = UINavigationBarAppearance()
-//        appearance.configureWithOpaqueBackground()
-//       
-//        appearance.backgroundColor = UIColor(red: 0.11, green: 0.08, blue: 0.24, alpha: 1)
-//        appearance.titleTextAttributes = [.foregroundColor: UIColor(red: 0.11, green: 0.08, blue: 0.24, alpha: 1)]
-//        
-//        UINavigationBar.appearance().standardAppearance = appearance
+
         self.tabBar.scrollEdgeAppearance = RNLappeac
         
         

@@ -149,7 +149,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RockGlint/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ROCK;
+				INFOPLIST_KEY_CFBundleDisplayName = Rock;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Capture your nail masterpieces to share your unique style with the community or use Naily AI to overlay digital inspirations onto your fingertips.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Enables sound capture for sharing the stories behind your nail art and engaging in interactive creative sessions with fellow artists.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Select your favorite manicures from your gallery to curate your personal style board or save new Naily AI inspirations for your next salon visit.";
@@ -163,7 +163,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rnl.rock-nail-art";
+				PRODUCT_BUNDLE_IDENTIFIER = com.plsbvuy.rock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -185,7 +185,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RockGlint/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ROCK;
+				INFOPLIST_KEY_CFBundleDisplayName = Rock;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Capture your nail masterpieces to share your unique style with the community or use Naily AI to overlay digital inspirations onto your fingertips.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Enables sound capture for sharing the stories behind your nail art and engaging in interactive creative sessions with fellow artists.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Select your favorite manicures from your gallery to curate your personal style board or save new Naily AI inspirations for your next salon visit.";
@@ -199,7 +199,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rnl.rock-nail-art";
+				PRODUCT_BUNDLE_IDENTIFIER = com.plsbvuy.rock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
