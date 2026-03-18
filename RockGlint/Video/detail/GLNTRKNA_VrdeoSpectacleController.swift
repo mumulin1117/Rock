@@ -46,13 +46,10 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     private let GLNTRKNA_CommentField = GLNBaseTextField()
     
     private var GLNTRKNA_IsPlaybackActive = false
-//    private var GLNTRKNA_Payload: GLNTRKNA_MomentEntry?
-    
+
     private var GLNTRKNA_MockResponses:[GLNTRKNA_FeedbackEntity] = []
 
-//    func GLNTRKNA_SynchronizeData(gln_data: GLNTRKNA_MomentEntry) {
-//        self.GLNTRKNA_Payload = gln_data
-//    }
+
     lazy var gln_heart:UIButton = {
         return UIButton(frame: CGRect(x: GLNTRKNA_CanvasWidth - 75, y: GLNTRKNA_MetricH(385), width: 55, height: 55))
     }()
@@ -75,7 +72,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+            
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_DismissScene),
@@ -161,11 +158,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
         gln_options_btn.tintColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
-     
-        
-       
-//        view.addSubview(gln_more)
-        
+ 
         GLNTRKNA_UserAvatar.frame = CGRect(x: 20, y: GLNTRKNA_MetricH(380), width: 60, height: 60)
         GLNTRKNA_UserAvatar.layer.cornerRadius = 30
         GLNTRKNA_UserAvatar.layer.borderWidth = 2
@@ -351,7 +344,6 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     }
 
 
-    // MARK: - GLNTRKNA 虚假提示 UI 组件
     private func GLNTRKNA_ToastVisuals(gln_msg: String) {
         let gln_toast = UILabel()
         gln_toast.text = gln_msg

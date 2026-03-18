@@ -87,11 +87,9 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         GLNTRKNA_SheetAnchor.addSubview(gln_stack)
     }
     
-    // 1. 修改跳转到理由选择的方法，增加高度调整
     @objc private func GLNTRKNA_GoToReasons() {
         GLNTRKNA_ClearAnchor()
         
-        // 动态增加容器高度以适应更多选项
         let gln_new_h = GLNTRKNA_ScaleH(560)
         GLNTRKNA_AdjustSheetHeight(gln_target_h: gln_new_h)
         
@@ -110,7 +108,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
             gln_row.setTitle("  " + text, for: .normal)
             gln_row.contentHorizontalAlignment = .left
             gln_row.titleLabel?.font = .systemFont(ofSize: 17)
-            // 增加点击状态切换，增强交互
+          
             gln_row.setImage(UIImage(systemName: "circle"), for: .normal)
             gln_row.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
             gln_row.tintColor = .systemPink
@@ -130,11 +128,10 @@ class GLNTRKNA_SafetyHubController: UIViewController {
        
     }
 
-    // 2. 修改详细说明方法，确保高度足够放下输入框和键盘弹出空间
+
     @objc private func GLNTRKNA_PrepareTestimony() {
         GLNTRKNA_ClearAnchor()
         
-        // 举报详情页需要更高空间
         let gln_detail_h = GLNTRKNA_ScaleH(620)
         GLNTRKNA_AdjustSheetHeight(gln_target_h: gln_detail_h)
         
@@ -153,19 +150,17 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         gln_sub.textAlignment = .center
         GLNTRKNA_SheetAnchor.addSubview(gln_sub)
         
-        // 调整输入框位置，防止底部按钮重叠
         GLNTRKNA_InputField.frame = CGRect(x: 24, y: 120, width: GLNTRKNA_SheetAnchor.frame.width - 48, height: 160)
         GLNTRKNA_InputField.backgroundColor = UIColor(white: 1.0, alpha: 0.08)
         GLNTRKNA_InputField.layer.cornerRadius = 15
         GLNTRKNA_InputField.textColor = .white
         GLNTRKNA_InputField.font = .systemFont(ofSize: 15)
-        GLNTRKNA_InputField.text = "" // 清空默认文本
+        GLNTRKNA_InputField.text = ""
         GLNTRKNA_SheetAnchor.addSubview(GLNTRKNA_InputField)
         
         GLNTRKNA_AttachFooterButtons(gln_y: 310, gln_submit_title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"g9co9Xc7z9YuGj08b69ajoZS77jr46duGhAkjA0teSkmKqcZy3ft2yTUKo4x"))
     }
 
-    // 3. 新增核心辅助方法：平滑调整高度
     private func GLNTRKNA_AdjustSheetHeight(gln_target_h: CGFloat) {
         let gln_sw = UIScreen.main.bounds.width
         let gln_sh = UIScreen.main.bounds.height

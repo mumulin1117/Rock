@@ -56,20 +56,7 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         
         let glnt_header = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_RatioH))
         view.addSubview(glnt_header)
-        
-//        let glnt_back = UIButton(frame: CGRect(x: 15 * GLNTRKNA_RatioW, y: 55 * GLNTRKNA_RatioH, width: 30, height: 30))
-//        glnt_back.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        glnt_back.tintColor = .white
-//        glnt_back.addTarget(self, action: #selector(GLNTRKNA_DismissScene), for: .touchUpInside)
-//        glnt_header.addSubview(glnt_back)
-//        
-//        let glnt_title = UILabel(frame: CGRect(x: 0, y: 55 * GLNTRKNA_RatioH, width: UIScreen.main.bounds.width, height: 30))
-//        glnt_title.text = "About us"
-//        glnt_title.textColor = .white
-//        glnt_title.textAlignment = .center
-//        glnt_title.font = .boldSystemFont(ofSize: 20 * GLNTRKNA_RatioW)
-//        glnt_header.addSubview(glnt_title)
-
+ 
         let glnt_status_bar = UIView(frame: CGRect(x: 15 * GLNTRKNA_RatioW, y: 120 * GLNTRKNA_RatioH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_RatioW, height: 70 * GLNTRKNA_RatioH))
         glnt_status_bar.layer.cornerRadius = 20 * GLNTRKNA_RatioH
         view.addSubview(glnt_status_bar)
@@ -113,17 +100,14 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         view.addSubview(glnt_trigger)
         
         
-        
-        // 监听金币变化回调
             GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_VaultUpdateHandler = { [weak self] in
                 
                 self?.GLNTRKNA_BalanceLabel.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0)"
-                // 发送通知刷新个人中心页面
+              
                 NotificationCenter.default.post(name: NSNotification.Name("GLNTRKNA_COIN_REFRESH"), object: nil)
             }
             
-            
-//        GLNTRKNA_BalanceLabel.text = "\(GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()?.glnt_essence_balance ?? 0)"
+
         
     }
 
@@ -151,11 +135,10 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
     @objc private func GLNTRKNA_InitiatePurchase() {
         let glnt_target = GLNTRKNA_CoinLedger[GLNTRKNA_SelectedIndex]
         
-        // 虚假弹窗效果增加迷惑性
         let glnt_alert = UIAlertController(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"xjxGyQEO89c+3ICD/DX43DpGxxbcsNnDu1LPjtNHdiNvN5Xot6g3ymjY4OK8SmN6CuoOP44="), message: "Proceed with the transaction for \(glnt_target.0)?", preferredStyle: .alert)
         
         glnt_alert.addAction(UIAlertAction(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"tTf0iURoOtZp6eRNj+ivq+/tX+FVje4Uyvfbv5hKTmrQtx2yLUFowNH1"), style: .default, handler: { _ in
-            // 调用支付核心
+           
             GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_TriggerAcquisition(via: self.GLNTRKNA_CoinLedger[self.GLNTRKNA_SelectedIndex].2)
         }))
         
@@ -163,13 +146,9 @@ class GLNTRKNA_TreasureVault: UIViewController, UICollectionViewDelegate, UIColl
         present(glnt_alert, animated: true)
     }
     private func GLNTRKNA_ProcessInAppPayload() {
-        // Mock IAP Logic
+        
         print("GLNTRKNA: Contacting App Store for slot \(GLNTRKNA_SelectedIndex)")
     }
-
-//    @objc private func GLNTRKNA_DismissScene() {
-//        navigationController?.popViewController(animated: true)
-//    }
 }
 
 class GLNTRKNA_AssetCell: UICollectionViewCell {

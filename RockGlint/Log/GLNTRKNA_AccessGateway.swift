@@ -136,7 +136,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
         GLNTRKNA_CommitTrigger.frame = CGRect(x: gln_padding, y: gln_pass_y + GLNTRKNA_ScaleH(120), width: gln_input_w, height: gln_btn_h)
         GLNTRKNA_ArtisanContainer.addSubview(GLNTRKNA_CommitTrigger)
         
-        // Privacy / Consent
+     
         let gln_consent_y = gln_pass_y + GLNTRKNA_ScaleH(210)
         GLNTRKNA_ConsentTick.frame = CGRect(x: gln_padding, y: gln_consent_y, width: GLNTRKNA_ScaleW(24), height: GLNTRKNA_ScaleW(24))
         GLNTRKNA_ArtisanContainer.addSubview(GLNTRKNA_ConsentTick)
@@ -220,7 +220,7 @@ class GLNTRKNA_AccessGateway: UIViewController, UITextFieldDelegate {
     }
     
     private func GLNTRKNA_PostAlert(msg: String) {
-        let gln_alert = UIAlertController(title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"efAz7iyo6J2h1Ks/BRtPNna+Zgw3xMuF5bOHxuEBrdJvlSgdiBu9ZKCACQ=="), message: msg, preferredStyle: .alert)
+        let gln_alert = UIAlertController(title: "Prompt", message: msg, preferredStyle: .alert)
         gln_alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(gln_alert, animated: true)
     }

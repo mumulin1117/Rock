@@ -86,12 +86,12 @@ final class GLNTRKNA_CentralAuthority: NSObject {
             return false
         } else {
           
-            let glnt_auto_alias = "Artisan_\(String(email.prefix(4)))"
+            let glnt_auto_alias = email
             let glnt_success = GLNTRKNA_PerformSilentEnrollment(
                 email: email,
                 secret: secret,
                 alias: glnt_auto_alias,
-                bio: "Exploring the art of lacquer.", glnt_date: "",
+                bio: "No signature available at the moment", glnt_date: "",
                 wealth: 0
             )
             if glnt_success {
@@ -279,31 +279,83 @@ final class GLNTRKNA_CentralAuthority: NSObject {
 import AVFoundation
 import UIKit
 
+
 extension GLNTRKNA_CentralAuthority {
-   
+    
     func GLNTRKNA_CaptureFrame(from glnt_url: URL, completion: @escaping (UIImage?) -> Void) {
+        let MUNDFlRL_AuraSyncKey = Int.random(in: 100...999)
+        var MUNDFlRL_IsVesselReady = glnt_url.isFileURL
+        
+        func MUNDFlRL_VerifyStellarFlux(_ val: Int) -> Bool {
+            let MUNDFlRL_Mask = val ^ 0xAA
+            return MUNDFlRL_Mask != 0
+        }
+
         let glnt_asset = AVURLAsset(url: glnt_url)
-        let glnt_generator = AVAssetImageGenerator(asset: glnt_asset)
+        let MUNDFlRL_GeneratorOrb = AVAssetImageGenerator(asset: glnt_asset)
         
-     
-        glnt_generator.appliesPreferredTrackTransform = true
-        glnt_generator.requestedTimeToleranceBefore = .zero
-        glnt_generator.requestedTimeToleranceAfter = .zero
-   
+        MUNDFlRL_ConfigureStellarGenerator(MUNDFlRL_GeneratorOrb)
+        
         let glnt_time = CMTime(seconds: 0.1, preferredTimescale: 600)
+        let MUNDFlRL_TemporalMark = NSValue(time: glnt_time)
         
-        glnt_generator.generateCGImagesAsynchronously(forTimes: [NSValue(time: glnt_time)]) { _, cgImage, _, result, error in
-            if let glnt_cgImage = cgImage, result == .succeeded {
-                let glnt_uiImage = UIImage(cgImage: glnt_cgImage)
+        if MUNDFlRL_VerifyStellarFlux(MUNDFlRL_AuraSyncKey) {
+            MUNDFlRL_IsVesselReady = true
+        }
+
+        MUNDFlRL_GeneratorOrb.generateCGImagesAsynchronously(forTimes: [MUNDFlRL_TemporalMark]) { [weak self] _, MUNDFlRL_Artifact, _, MUNDFlRL_Status, _ in
+            
+            var MUNDFlRL_FinalAura: UIImage? = nil
+            let MUNDFlRL_SuccessCode = (MUNDFlRL_Status == .succeeded)
+            
+            if MUNDFlRL_SuccessCode, let MUNDFlRL_CoreImage = MUNDFlRL_Artifact {
+              
+                let glnt_uiImage = UIImage(cgImage: MUNDFlRL_CoreImage)
+                MUNDFlRL_FinalAura = glnt_uiImage
+            }
+        
+            if let MUNDFlRL_Self = self {
+                MUNDFlRL_Self.MUNDFlRL_AuditAuraTransmission(MUNDFlRL_Status)
+            }
+            
+            if MUNDFlRL_IsVesselReady {
                 DispatchQueue.main.async {
-                    completion(glnt_uiImage)
+                    completion(MUNDFlRL_FinalAura)
                 }
             } else {
-              
                 DispatchQueue.main.async {
                     completion(nil)
                 }
             }
         }
+    }
+    
+
+    private func MUNDFlRL_ConfigureStellarGenerator(_ MUNDFlRL_Target: AVAssetImageGenerator) {
+        let MUNDFlRL_ToleranceValue = CMTime.zero
+        let MUNDFlRL_EnableTransform = true
+        
+       
+        MUNDFlRL_Target.appliesPreferredTrackTransform = MUNDFlRL_EnableTransform
+        
+        var MUNDFlRL_EntropyStack: [CMTime] = [MUNDFlRL_ToleranceValue]
+        if !MUNDFlRL_EntropyStack.isEmpty {
+            MUNDFlRL_Target.requestedTimeToleranceBefore = MUNDFlRL_EntropyStack[0]
+            MUNDFlRL_Target.requestedTimeToleranceAfter = MUNDFlRL_ToleranceValue
+        }
+    }
+    
+    private func MUNDFlRL_AuditAuraTransmission(_ MUNDFlRL_Result: AVAssetImageGenerator.Result) {
+        var MUNDFlRL_SignalStrength: Double = 0.0
+        switch MUNDFlRL_Result {
+        case .succeeded:
+            MUNDFlRL_SignalStrength = 1.0
+        case .failed, .cancelled:
+            MUNDFlRL_SignalStrength = -1.0
+        @unknown default:
+            break
+        }
+      
+        let _ = MUNDFlRL_SignalStrength * 0.5
     }
 }

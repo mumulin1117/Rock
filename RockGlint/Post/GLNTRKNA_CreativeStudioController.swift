@@ -17,8 +17,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
     private var addPickImgIndex:Int = 100
     
     private var GLNTRKNA_VideoURL: URL?
-    
-//    private let GLNTRKNA_DraftLabel = UILabel()
+
     private let GLNTRKNA_ManifestInput = MUNDFlRLTextView()
     private let GLNTRKNA_CommitTrigger = UIButton()
     
@@ -249,8 +248,7 @@ class GLNTRKNA_CreativeStudioController: UIViewController, PHPickerViewControlle
                 }
             }
         } else {
-            // For Video or Recreation, check the single large preview container
-            // Assuming we check the background image of the primary trigger button
+          
             if let gln_main_btn = GLNTRKNA_MediaGallery as? UIButton {
                 gln_media_ready = gln_main_btn.backgroundImage(for: .normal) != nil
             } else {

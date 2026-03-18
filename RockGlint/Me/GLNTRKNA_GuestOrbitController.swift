@@ -94,11 +94,6 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: gln_options_btn)
         
         
-//        let yac_back_btn = UIButton(frame: CGRect(x: 20 * GLNTRKNARatioX, y: 60 * GLNTRKNARatioY, width: 40, height: 40))
-//        yac_back_btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        yac_back_btn.tintColor = .white
-//        yac_back_btn.addTarget(self, action: #selector(GLNTRKNAExitOrbit), for: .touchUpInside)
-//        view.addSubview(yac_back_btn)
 
         GLNTRKNAAuraAvatar.frame = CGRect(x: 20 * GLNTRKNARatioX, y: 320 * GLNTRKNARatioY, width: 80 * GLNTRKNARatioX, height: 80 * GLNTRKNARatioX)
         GLNTRKNAAuraAvatar.layer.cornerRadius = 40 * GLNTRKNARatioX

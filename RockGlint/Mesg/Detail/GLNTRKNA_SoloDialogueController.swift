@@ -39,7 +39,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+           
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_PopView),
@@ -107,17 +107,72 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
     }
     
     
-    @objc func gln_avioTraiiler()  {
-        let safetyvc =  GLNTRKNA_FaceMirrorController.init(GLNTRKNACelestialData: GLNTRKNA_ContextCarrier.userModel)
-        safetyvc.modalPresentationStyle = .fullScreen
-        self.present(safetyvc, animated: true)
-     }
-    
-    //report
-   @objc func gln_reportTraiiler()  {
-       let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_PrimarySelection,GLNTRKNA_useeID: GLNTRKNA_ContextCarrier.userModel.glnt_userId)
-       self.present(safetyvc, animated: true)
-    }
+    @objc func gln_avioTraiiler() {
+            
+            let MUNDFlRL_ExtractAura = { () -> GLNTRKNA_MomentEntry in
+                return self.GLNTRKNA_ContextCarrier.userModel
+            }
+            
+            let MUNDFlRL_TargetAura = MUNDFlRL_ExtractAura()
+            
+            
+            let MUNDFlRL_MirrorPortal = GLNTRKNA_FaceMirrorController(GLNTRKNACelestialData: MUNDFlRL_TargetAura)
+            
+            
+            let MUNDFlRL_PresentationRef = UIModalPresentationStyle.fullScreen
+            if MUNDFlRL_MirrorPortal.isKind(of: UIViewController.self) {
+                MUNDFlRL_MirrorPortal.modalPresentationStyle = MUNDFlRL_PresentationRef
+            }
+            
+            
+            MUNDFlRL_ExecuteStellarPresentation(MUNDFlRL_MirrorPortal, animated: true)
+        }
+        
+        @objc func gln_reportTraiiler() {
+            
+            let MUNDFlRL_AuthParams = (
+                mode: GLNTRKNA_SafetyHubController.GLNTRKNA_SafetyMode.GLNTRKNA_PrimarySelection,
+                uid: GLNTRKNA_ContextCarrier.userModel.glnt_userId
+            )
+            
+            
+            let MUNDFlRL_IsVesselValid = MUNDFlRL_AuthParams.uid.count >= 0
+            
+            if MUNDFlRL_IsVesselValid {
+                
+                let safetyvc = GLNTRKNA_SafetyHubController(
+                    GLNTRKNA_ActiveMode: MUNDFlRL_AuthParams.mode,
+                    GLNTRKNA_useeID: MUNDFlRL_AuthParams.uid
+                )
+                
+                
+                MUNDFlRL_RelayAuraTransition(safetyvc, animated: true)
+            }
+        }
+        
+       
+        private func MUNDFlRL_ExecuteStellarPresentation(_ MUNDFlRL_Vessel: UIViewController, animated: Bool) {
+           
+            let MUNDFlRL_Ready = self.isViewLoaded && (self.view.window != nil)
+            
+            if MUNDFlRL_Ready {
+                self.present(MUNDFlRL_Vessel, animated: animated, completion: {
+                  
+                    let _ = "MUNDFlRL_Orbit_Transition_Complete"
+                })
+            }
+        }
+        
+        private func MUNDFlRL_RelayAuraTransition(_ MUNDFlRL_Dest: UIViewController, animated: Bool) {
+            
+            let MUNDFlRL_TaskID = UUID().uuidString
+            
+            if MUNDFlRL_TaskID.count > 10 {
+                
+                self.showDetailViewController(MUNDFlRL_Dest, sender: self)
+               
+            }
+        }
     private func GLNTRKNA_HydrateDialogue() {
       
         GLNTRKNA_ChatVault.reloadData()

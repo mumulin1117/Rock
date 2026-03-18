@@ -56,8 +56,7 @@ struct GLNTRKNA_MomentEntry: Codable {
     }
 }
 
-
-final class GLNTRKNA_MomentCacheManager {
+ class GLNTRKNA_MomentCacheManager {
     
     static let GLNTRKNA_SharedVault = GLNTRKNA_MomentCacheManager()
     

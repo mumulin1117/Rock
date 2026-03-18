@@ -68,13 +68,7 @@ class GLNTRKNA_FaceMirrorController: UIViewController {
         let gln_top_shadow = UIView(frame: CGRect(x: 0, y: 0, width: GLNTRKNA_HorizonW, height: 150 * GLNTRKNA_ScaleY))
         gln_top_shadow.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         view.addSubview(gln_top_shadow)
-//
-//        let gln_exit_btn = UIButton(frame: CGRect(x: 20 * GLNTRKNA_ScaleX, y: 60 * GLNTRKNA_ScaleY, width: 30 * GLNTRKNA_ScaleX, height: 30 * GLNTRKNA_ScaleX))
-//        gln_exit_btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-//        gln_exit_btn.tintColor = .white
-//        gln_exit_btn.addTarget(self, action: #selector(GLNTRKNA_TerminateStream), for: .touchUpInside)
-//        view.addSubview(gln_exit_btn)
-        
+
         let gln_options_btn = UIButton()
         gln_options_btn.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_report"), for: .normal)
         gln_options_btn.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)

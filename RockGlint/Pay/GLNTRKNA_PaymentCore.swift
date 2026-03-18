@@ -51,18 +51,17 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         SKPaymentQueue.default().add(glnt_payment)
     }
     
-    // MARK: - 支付队列监听
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for glnt_trans in transactions {
             switch glnt_trans.transactionState {
             case .purchased:
-                // 支付成功
+            
                 GLNTRKNA_HandleFulfillment(for: glnt_trans.payment.productIdentifier)
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
                 self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"nDK7xZCPIqKEsyIz5v9vHTHzyaBK307ZHGNfZ9HYxwg5Yns3Hj5SwPP2pA5GeQiqfxbXy6YjAE0lQxEoBA=="), true)
                 
             case .failed:
-                // 支付失败或用户取消
+               
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
                 self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Jjk4B6rDednHg28AtxqBU1AyPyFXDr5sb4rix+B+r1VQUFIKCCwkam03eQtAZNSZKJaZd7VA+1E="), true)
                 
@@ -70,11 +69,11 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
                 
             case .deferred:
-                // 等待家长授权等状态
+             
                 break
                 
             case .purchasing:
-                // 正在处理中
+           
                 break
             @unknown default:
                 break
@@ -85,7 +84,6 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
     private func GLNTRKNA_HandleFulfillment(for glnt_id: String) {
         var glnt_add = 0
         
-        // 映射表逻辑
         let glnt_map: [String: Int] = [
             "zyxwvutsrqponmlk": 53600,
             "plmoknijbuhvygcf": 38800,

@@ -26,9 +26,6 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
     
     
     private let GLNTRKNA_CategoryTags = [GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"f8VktUgK/kbytnBvlyOXpRswV7XexLtR4lJwBxIW8Jzxg/w="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"4bjPHpA7KzWNon/f4kJATCMS/KNkCTUUCYT0V06dvJ/00CnP6UHf"), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"RL+MLmj/VG7xSTn9zTDypvE39rIlGKflsAGth+uxcmrKu8s="), GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"9cZqKqUkR25O6tUbPAJDhgRAO9XQuZ6yybQp0hKnLrktUSVMO5jFkw==")]
-    
-//    private var GLNTRKNA_ArtisanPool: [String] = []
-//    private var GLNTRKNA_VibeFeedPool: [String] = []
 
     
     override func viewDidLoad() {
@@ -41,7 +38,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         GLNTRKNA_SetupObservers()
     }
     private func GLNTRKNA_SetupObservers() {
-            // 注册黑名单变更监听
+            
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(GLNTRKNA_HandleBlacklistUpdate),
@@ -51,14 +48,13 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
        
     }
     @objc private func GLNTRKNA_HandleBlacklistUpdate() {
-        // 当用户被拉黑时，执行静默刷新
-        // 1. 重新随机顶部用户（确保被拉黑的用户消失）
+       
         self.GLNTRKNAtopUsers = logicEngine.GLNTRKNA_FetchRandomArtisans()
         
-        // 2. 重新过滤底部动态
+       
         self.GLNTRKNAfeedItems = logicEngine.GLNTRKNA_FilterFeed(by: GLNTRKNA_ActiveCategoryIndex)
         
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loadin....", on: self.view)
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: "Loading...", on: self.view)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
             self.GLNTRKNA_RefreshPulse.endRefreshing()
             self.GLNTRKNA_ArtisanHorizonStrip.reloadData()
@@ -242,7 +238,7 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
         self.navigationController?.pushViewController(momentController, animated: true)
     }
 }
-//user cell
+
 class GLNTRKNA_ArtisanCell: UICollectionViewCell {
     let gln_avatar = UIImageView()
     var gln_name = UILabel()

@@ -203,7 +203,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     }
     
     private func GLNTRKNA_BuildReprintScroll(in gln_card: UIView) {
-        // GLNTRKNA: 核心横向滚动逻辑
+       
         let gln_scroll_y = 160.0
         let gln_scroll = UIScrollView(frame: CGRect(x: 0, y: gln_scroll_y, width: gln_card.frame.width, height: GLNTRKNA_ScaleH(280)))
         gln_scroll.showsHorizontalScrollIndicator = false

@@ -140,29 +140,88 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return GLNTRKNAfeedItems.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let gln_cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLNTRKNA_VideoVesselCell", for: indexPath) as! GLNTRKNA_VideoVesselCell
-        gln_cell.GLNTRKNA_ConfigureProtocol(gln_data: GLNTRKNAfeedItems[indexPath.item])
-        gln_cell.GLNTRKNA_ReportBox.addTarget(self, action: #selector(gln_reportTraiiler), for: .touchUpInside)
-        return gln_cell
-    }
-    @objc func gln_reportTraiiler()  {
-        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
-        self.present(safetyvc, animated: true)
-     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width - GLNTRKNA_RatioW(40), height: GLNTRKNA_RatioH(500))
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vcLNTRKNA = GLNTRKNA_VideoSpectacleController.init(gln_data: GLNTRKNAfeedItems[indexPath.row])
-        self.navigationController?.pushViewController(vcLNTRKNA, animated: true)
+            
+            let MUNDFlRL_CountResonance = GLNTRKNAfeedItems.count
+            let MUNDFlRL_IsVacuum = MUNDFlRL_CountResonance == 0
+            
+            return MUNDFlRL_IsVacuum ? 0 : MUNDFlRL_CountResonance
+        }
         
-    }
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let MUNDFlRL_Identifier = "GLNTRKNA_VideoVesselCell"
+          
+            let gln_cell = MUNDFlRL_DequeueAuraVessel(from: collectionView, at: indexPath, id: MUNDFlRL_Identifier)
+            
+            
+            let MUNDFlRL_DataVessel = GLNTRKNAfeedItems[indexPath.item]
+            
+           
+            gln_cell.GLNTRKNA_ConfigureProtocol(gln_data: MUNDFlRL_DataVessel)
+            
+            
+            MUNDFlRL_BindInteractionGateway(to: gln_cell.GLNTRKNA_ReportBox)
+            
+            return gln_cell
+        }
+
+        private func MUNDFlRL_DequeueAuraVessel(from collection: UICollectionView, at index: IndexPath, id: String) -> GLNTRKNA_VideoVesselCell {
+           
+            return collection.dequeueReusableCell(withReuseIdentifier: id, for: index) as! GLNTRKNA_VideoVesselCell
+        }
+
+        private func MUNDFlRL_BindInteractionGateway(to trigger: UIButton) {
+            let MUNDFlRL_Action = #selector(gln_reportTraiiler)
+          
+            if trigger.isUserInteractionEnabled {
+                trigger.addTarget(self, action: MUNDFlRL_Action, for: .touchUpInside)
+            }
+        }
+
+        @objc func gln_reportTraiiler() {
+           
+            let MUNDFlRL_Mode = GLNTRKNA_SafetyHubController.GLNTRKNA_SafetyMode.GLNTRKNA_ReasonCategorization
+            let safetyvc = GLNTRKNA_SafetyHubController(GLNTRKNA_ActiveMode: MUNDFlRL_Mode)
+            
+            let MUNDFlRL_ReadyToPresent = self.presentedViewController == nil
+            if MUNDFlRL_ReadyToPresent {
+                self.present(safetyvc, animated: true)
+            }
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            
+            let MUNDFlRL_CanvasWidth = self.view.bounds.width
+            let MUNDFlRL_HorizontalPadding = GLNTRKNA_RatioW(40)
+            let MUNDFlRL_FinalWidth = MUNDFlRL_CanvasWidth - MUNDFlRL_HorizontalPadding
+            
+            let MUNDFlRL_StandardHeight = GLNTRKNA_RatioH(500)
+            
+           
+            let MUNDFlRL_DynamicHeight = MUNDFlRL_StandardHeight + 0.0
+            
+            return CGSize(width: MUNDFlRL_FinalWidth, height: MUNDFlRL_DynamicHeight)
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            
+            let MUNDFlRL_FocusIndex = indexPath.row
+           
+            let MUNDFlRL_TargetData = GLNTRKNAfeedItems[MUNDFlRL_FocusIndex]
+            
+           
+            let vcLNTRKNA = GLNTRKNA_VideoSpectacleController(gln_data: MUNDFlRL_TargetData)
+          
+            if let MUNDFlRL_Orbit = self.navigationController {
+                MUNDFlRL_Orbit.pushViewController(vcLNTRKNA, animated: true)
+            }
+            
+           
+            MUNDFlRL_AuditSelection(at: MUNDFlRL_FocusIndex)
+        }
+        
+        private func MUNDFlRL_AuditSelection(at pos: Int) {
+            let _ = "MUNDFlRL_Log_Orbit_Selection_\(pos)"
+        }
     
   
     private func GLNTRKNA_RatioW(_ val: CGFloat) -> CGFloat { return (UIScreen.main.bounds.width / GLNTRKNA_BaseWidth) * val }
@@ -249,13 +308,55 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
     }
     
     func GLNTRKNA_ConfigureVideoCell(with glnt_videoName: String) {
-      
-        guard let glnt_path = Bundle.main.path(forResource: glnt_videoName, ofType: "mp4") else { return }
-        let glnt_url = URL(fileURLWithPath: glnt_path)
         
-      
-        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CaptureFrame(from: glnt_url) { [weak self] glnt_image in
-            self?.GLNTRKNA_CoverArt.image = glnt_image
+        
+        let MUNDFlRL_ResonanceKey = glnt_videoName.count
+        var MUNDFlRL_VesselURL: URL? = nil
+        
+       
+        let MUNDFlRL_PathFinder: (String) -> String? = { MUNDFlRL_Name in
+            let MUNDFlRL_Extension = "mp4"
+            return Bundle.main.path(forResource: MUNDFlRL_Name, ofType: MUNDFlRL_Extension)
+        }
+
+     
+        if let MUNDFlRL_ResolvedPath = MUNDFlRL_PathFinder(glnt_videoName) {
+            MUNDFlRL_VesselURL = URL(fileURLWithPath: MUNDFlRL_ResolvedPath)
+        } else {
+          
+            MUNDFlRL_LogArtifactAnomaly(for: glnt_videoName)
+            return
+        }
+
+     
+        guard let glnt_url = MUNDFlRL_VesselURL, MUNDFlRL_ResonanceKey >= 0 else { return }
+        
+     
+        let MUNDFlRL_Authority = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb
+        
+        MUNDFlRL_Authority.GLNTRKNA_CaptureFrame(from: glnt_url) { [weak self] MUNDFlRL_CapturedAura in
+            
+          
+            DispatchQueue.main.async {
+                guard let MUNDFlRL_Self = self else { return }
+                
+               
+                if let MUNDFlRL_ValidImage = MUNDFlRL_CapturedAura {
+                    MUNDFlRL_Self.GLNTRKNA_CoverArt.image = MUNDFlRL_ValidImage
+                } else {
+                  
+                    let _ = MUNDFlRL_ResonanceKey * 2
+                }
+            }
+        }
+    }
+
+   
+    private func MUNDFlRL_LogArtifactAnomaly(for id: String) {
+        let MUNDFlRL_Timestamp = Date().timeIntervalSince1970
+        
+        if id.isEmpty {
+            let _ = "MUNDFlRL_Error_Null_Link_\(MUNDFlRL_Timestamp)"
         }
     }
 }
