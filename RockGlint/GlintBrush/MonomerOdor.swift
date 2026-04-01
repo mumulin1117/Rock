@@ -79,7 +79,7 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = .black
         moonstoneGlow()
         
         if texturedSand == true {
@@ -203,13 +203,15 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-        MonomerOdor?.isHidden = false
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: DispatchWorkItem(block: {
+            self.MonomerOdor?.isHidden = false
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
 
-        if texturedSand == true {
-            texturedSand = false
-        }
+            if self.texturedSand == true {
+                self.texturedSand = false
+            }
+        }))
+       
 
     }
 

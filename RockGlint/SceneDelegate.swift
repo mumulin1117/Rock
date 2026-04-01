@@ -40,10 +40,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         if let primedNail = self.window {
-            APPPREFIX_SDK.vCutSmile.frenchSmile(wrapAround: primedNail)
+            GLntlampsCure.vCutSmile.frenchSmile(wrapAround: primedNail)
         }
 
-        window?.rootViewController = APPPREFIX_SDK.vCutSmile.encapsulatedChain()
+        window?.rootViewController = GLntlampsCure.vCutSmile.encapsulatedChain()
         
         
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 import Network
-//log
+//launch
 class CuticleOilGLNT: NSObject {
 
 }

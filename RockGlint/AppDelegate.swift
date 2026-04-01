@@ -24,6 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // 将 Push Token 转发给 SDK 进行存储
-        APPPREFIX_SDK.vCutSmile.floatingDesignGLNT(beadLink: deviceToken)
+        GLntlampsCure.vCutSmile.floatingDesignGLNT(beadLink: deviceToken)
     }
 }

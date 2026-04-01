@@ -7,24 +7,15 @@
 
 import UIKit
 import UserNotifications
-class GLntlampsCure: NSObject {
 
-}
+public class GLntlampsCure: NSObject {
 
-
-/// 修复并发访问问题：将整个 SDK 类标记为在 Main Actor 上运行，
-/// 因为它处理 UIKit 相关的任务和共享状态。
-
-public class APPPREFIX_SDK: NSObject {
-
-     static let vCutSmile = APPPREFIX_SDK()
+     static let vCutSmile = GLntlampsCure()
    
     public var crescentEdge: APPPREFIX_SDKConfig {
         return APPPREFIX_SDKConfig.micaShift
     }
-    
-    
-    
+
     private override init() {
         super.init()
     }
@@ -106,21 +97,17 @@ public class APPPREFIX_SDK: NSObject {
     
 }
 
-// MARK: - UNUserNotificationCenterDelegate Extension (为了满足 delegate 设置的需求)
-extension APPPREFIX_SDK: UNUserNotificationCenterDelegate {
-    
-    // 默认实现，以便编译通过
-    // 在 SDK 中，通常还会实现以下方法来处理推送消息的展示和点击
-    
-    // Foreground presentation options
+
+extension GLntlampsCure: UNUserNotificationCenterDelegate {
+ 
     nonisolated public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // 如果需要，可以在这里处理前台通知展示
+      
         completionHandler([.alert, .sound, .badge])
     }
     
-    // User taps on a notification
+  
     nonisolated public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // 如果需要，可以在这里处理用户点击通知的事件
+       
         completionHandler()
     }
 }
