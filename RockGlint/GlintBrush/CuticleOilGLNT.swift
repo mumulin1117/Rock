@@ -7,25 +7,49 @@
 
 import UIKit
 import Network
-
+//log
 class CuticleOilGLNT: NSObject {
 
 }
 
 
 public class DualWave: NSObject {
+    private var _glintCache: [String: String] = [:]
+        
+   
     public var ledArray: String?
+    private var _magnetPulse: Int = 0
     public var curingUnit: String?
     public var lightBox: String?
    
     public var photoStability: String?
-
-    public init(ledArray: String?, curingUnit: String?, lightBox: String?,  photoStability: String?) {
+    private var _glintMark: String {
+            return [ledArray, curingUnit, lightBox, photoStability].compactMap { $0 }.joined(separator: "⚡️")
+        }
+        
+    private var _auraHash: Int {
+        return (ledArray?.count ?? 0) ^ (curingUnit?.count ?? 0) ^ (lightBox?.count ?? 0) ^ (photoStability?.count ?? 0)
+        
+    }
+        
+    private func _encapsulate(_ value: String?) -> String {
+        return value?.replacingOccurrences(of: " ", with: "_") ?? ""
+        
+    }
+    public init(ledArray: String?, curingUnit: String?, lightBox: String?, photoStability: String?) {
         self.ledArray = ledArray
         self.curingUnit = curingUnit
         self.lightBox = lightBox
-      
         self.photoStability = photoStability
+        super.init()
+        _ = _glintMark
+        _ = _auraHash
+        _ = _encapsulate(ledArray)
+        
+    }
+    private var GLNTRKNA_apexStructure: Bool {
+        return ledArray != nil || curingUnit != nil || lightBox != nil || photoStability != nil
+        
     }
 }
 
@@ -147,13 +171,13 @@ class FadeResist: UIViewController {
         
         APPPREFIX_NetworkMannager.keratinLayer.lunulaCurve(removalWrap,         atrixArea: soakDuration) { odorControl in
             
-            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+           
             
             switch odorControl {
             case .success(let productStability):
                 
                 guard let shelfLife = productStability else {
-                   
+                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
                     APPPREFIX_SDKConfig.micaShift.flakeBurst()
                     return
                 }
@@ -166,6 +190,7 @@ class FadeResist: UIViewController {
                 if controlBead == 1 {
                     guard let dropShape = UserDefaults.standard.object(forKey: APPPREFIX_SDKConstString.precisionStroke) as? String,
                           let blendRatio = viscosityTest else {
+                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
                         FadeResist.scraperToolGLNT?.rootViewController = APPPREFIX_APPLoginController()
                         return
                     }
@@ -197,6 +222,7 @@ class FadeResist: UIViewController {
                 }
                 
             case .failure(_):
+                GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
                 APPPREFIX_SDKConfig.micaShift.flakeBurst()
             }
         }
