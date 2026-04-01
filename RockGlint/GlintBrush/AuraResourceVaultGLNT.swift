@@ -8,8 +8,6 @@
 import UIKit
 import CryptoKit
 
-import UIKit
-import CryptoKit
 
 class GLNTRKnaAuraResourceVault {
     

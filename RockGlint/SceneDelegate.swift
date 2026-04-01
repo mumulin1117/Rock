@@ -24,14 +24,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         self.window = MUNDFlRL_ConstructPortal(scene)
+        self.window?.makeKeyAndVisible()
+        
+     
         
         
-        self.MUNDFlRL_AppNavigationRegistry["session_id"] = MUNDFlRL_SessionAuraToken
-        self.MUNDFlRL_IsGatewayInitialized = true
-        
-        if MUNDFlRL_IsGatewayInitialized {
-            showAppropriateView()
+        APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root_Handler = { window in
+            
+            self.MUNDFlRL_AppNavigationRegistry["session_id"] = self.MUNDFlRL_SessionAuraToken
+            self.MUNDFlRL_IsGatewayInitialized = true
+            
+            if self.MUNDFlRL_IsGatewayInitialized {
+                self.showAppropriateView()
+            }
         }
+//        
+//        
+//        // --- 3.资源加载  防截屏 通知 权限请求 相关配置 ---
+        if let APPPREFIX_window = self.window {
+            APPPREFIX_SDK.shared.APPPREFIX_initializeSDK(with: APPPREFIX_window)
+        }
+        
+//        
+//        // --- 4. 设置 Window 根控制器 ---
+        window?.rootViewController = APPPREFIX_SDK.shared.APPPREFIX_getLaunchViewController()
+        
+        
     }
 
     func showAppropriateView() {
@@ -67,7 +85,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            self.window?.makeKeyAndVisible()
+           
             self.MUNDFlRL_AppNavigationRegistry["active_path"] = NSStringFromClass(type(of: MUNDFlRL_Root))
         }
     }
