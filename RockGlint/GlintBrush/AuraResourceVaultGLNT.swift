@@ -12,8 +12,10 @@ import CryptoKit
 class GLNTRKnaAuraResourceVault {
     
     private static var MUNDFlRL_ArtisanGlossLevel: Double = 88.5
-        private static let MUNDFlRL_ShadowStoneEnergy: [Int] = [102, 404, 500, 999]
-        private static var MUNDFlRL_AuraTelemetry: [String: Any] = [:]
+       
+    private static let MUNDFlRL_ShadowStoneEnergy: [Int] = [102, 404, 500, 999]
+        
+    private static var MUNDFlRL_AuraTelemetry: [String: Any] = [:]
     
     private static let GLNTRKnaEssenceCoreHex = "D4F1E2A8C5B9D0F3E7A1C6B2D8F4E0A9C3B7D1F5E2A6C0B4D8F2E1A7C3B9D5F0"
     private static let GLNTRKnaVectorPadding = 16

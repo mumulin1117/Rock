@@ -2,7 +2,7 @@
 //  CuticleOilGLNT.swift
 //  RockGlint
 //
-//  Created by mumu on 2026/4/1.
+//  Created by RockGlint on 2026/4/1.
 //
 
 import UIKit
@@ -13,94 +13,90 @@ class CuticleOilGLNT: NSObject {
 }
 
 
-public class APPPREFIX_LaunchParamaKey: NSObject {
-    public var APPPREFIX_timeZone: String?
-    public var APPPREFIX_textInput: String?
-    public var APPPREFIX_localeLaunguge: String?
+public class DualWave: NSObject {
+    public var ledArray: String?
+    public var curingUnit: String?
+    public var lightBox: String?
    
-    public var APPPREFIX_ifDebug: String?
+    public var photoStability: String?
 
-    public init(APPPREFIX_timeZone: String?, APPPREFIX_textInput: String?, APPPREFIX_localeLaunguge: String?,  APPPREFIX_ifDebug: String?) {
-        self.APPPREFIX_timeZone = APPPREFIX_timeZone
-        self.APPPREFIX_textInput = APPPREFIX_textInput
-        self.APPPREFIX_localeLaunguge = APPPREFIX_localeLaunguge
+    public init(ledArray: String?, curingUnit: String?, lightBox: String?,  photoStability: String?) {
+        self.ledArray = ledArray
+        self.curingUnit = curingUnit
+        self.lightBox = lightBox
       
-        self.APPPREFIX_ifDebug = APPPREFIX_ifDebug
+        self.photoStability = photoStability
     }
 }
 
-//app 启动页面    app启动时时候 设置windoe的根控制器 为这个控制器
-
-class APPPREFIX_AppLaunchController: UIViewController {
+class FadeResist: UIViewController {
   
-    private func APPPREFIX_addBackgroundImageView()  {
-        let APPPREFIX_laungchstr = APPPREFIX_SDKConfig.shared.APPPREFIX_LaunchBackgroundImage
+    private func colorFast()  {
+        let glossMeter = APPPREFIX_SDKConfig.micaShift.carbideCutter
         
-        let APPPREFIX_backgroundImage = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:  APPPREFIX_laungchstr)
-        let APPPREFIX_BbckgroundImageView = UIImageView(image:APPPREFIX_backgroundImage )
-        APPPREFIX_BbckgroundImageView.contentMode = .scaleAspectFill
-        APPPREFIX_BbckgroundImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        view.addSubview(APPPREFIX_BbckgroundImageView)
+        let durabilityRank = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:  glossMeter)
+        let finishInspect = UIImageView(image:durabilityRank )
+        finishInspect.contentMode = .scaleAspectFill
+        finishInspect.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        view.addSubview(finishInspect)
        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APPPREFIX_addBackgroundImageView()
-        
-        //时间不满足的时候，直接进入A
-        if (Date().timeIntervalSince1970 <= APPPREFIX_SDKConfig.shared.APPPREFIX_launchRequestTimeInterval ) == true {
-            APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root()
+        colorFast()
+      
+        if (Date().timeIntervalSince1970 <= APPPREFIX_SDKConfig.micaShift.ceramicBit ) == true {
+            APPPREFIX_SDKConfig.micaShift.flakeBurst()
             return
             
 
         }
 
-        //时间满足的时候，且已经请求过网络
         if  UserDefaults.standard.bool(forKey: "WyiAnalogousTone") == true {
             DispatchQueue.main.async {
-                self.APPPREFIX_performAppLaunchRequest()
+                self.foilPacketGLNT()
             }
            
             return
         }
-        //时间满足的时候，没请求过网络，网络监听，然后请求接口
-        APPPREFIX_digitalArtwork()
+       
+        cureTestGLNT()
 
     }
-    private var glowElementallment = false
+    private var glnttackCheck = false
         
    
         
-    private func APPPREFIX_digitalArtwork() {
+    private func cureTestGLNT() {
         DispatchQueue.global(qos: .background).async { [weak self] in
                     guard let self = self else { return }
             
-        let APPPREFIX_Pulse = NWPathMonitor()
-        APPPREFIX_Pulse.pathUpdateHandler = { [weak self] path in
+        let nipperPrecision = NWPathMonitor()
+        nipperPrecision.pathUpdateHandler = { [weak self] cuticleScissor in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                if path.status == .satisfied && !self.glowElementallment{
+                if cuticleScissor.status == .satisfied && !self.glnttackCheck{
                     
-                    self.glowElementallment = true
+                    self.glnttackCheck = true
                     GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-                    self.APPPREFIX_performAppLaunchRequest()
-                    APPPREFIX_Pulse.cancel()
-                }else if path.status != .satisfied && !self.glowElementallment {
-                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.APPPREFIX_11, on: self.view)
+                    self.foilPacketGLNT()
+                    nipperPrecision.cancel()
+                }else if cuticleScissor.status != .satisfied && !self.glnttackCheck {
+                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.crispLine, on: self.view)
                 }
                 
             }
             
         }
-        let APPPREFIX_edition = DispatchQueue(label: APPPREFIX_SDKConstString.APPPREFIX_75)
-        APPPREFIX_Pulse.start(queue: APPPREFIX_edition)
+        let orangeWood = DispatchQueue(label: APPPREFIX_SDKConstString.skillShare)
+        nipperPrecision.start(queue: orangeWood)
         
         }
     }
     
-    static  var APPPREFIX_mainWindow:UIWindow?{
+    static  var scraperToolGLNT:UIWindow?{
         if #available(iOS 15.0, *) {
                 return UIApplication.shared.connectedScenes
                     .compactMap { $0 as? UIWindowScene }
@@ -112,13 +108,12 @@ class APPPREFIX_AppLaunchController: UIViewController {
     }
 
     
-    private func APPPREFIX_performAppLaunchRequest() {
+    private func foilPacketGLNT() {
       
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.APPPREFIX_11, on: self.view)
-        let APPPREFIX_requestPath = APPPREFIX_SDKConfig.shared.APPPREFIX_launchDetailPath
-        var APPPREFIX_parameters: [String: Any] = [:]
-        
-        // MARK: - 收集语言
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.crispLine, on: self.view)
+        let removalWrap = APPPREFIX_SDKConfig.micaShift.crystalEdge
+        var soakDuration: [String: Any] = [:]
+      
         let APPPREFIX_uniqueLanguages = Locale.preferredLanguages
             .map { Locale(identifier: $0).languageCode ?? $0 }
             .reduce(into: [String]()) { result, code in
@@ -127,91 +122,82 @@ class APPPREFIX_AppLaunchController: UIViewController {
                 }
             }
         
-        if let APPPREFIX_languageKey = APPPREFIX_SDKConfig.shared.APPPREFIX_launchParamaKey.APPPREFIX_localeLaunguge ,APPPREFIX_languageKey != ""{
-            APPPREFIX_parameters[APPPREFIX_languageKey] = APPPREFIX_uniqueLanguages
+        if let resinAlternative = APPPREFIX_SDKConfig.micaShift.reverseFrench.lightBox ,resinAlternative != ""{
+            soakDuration[resinAlternative] = APPPREFIX_uniqueLanguages
         }
         
-        // MARK: - 时区
-        let APPPREFIX_timezone = TimeZone.current.identifier
-        if let timezoneKey = APPPREFIX_SDKConfig.shared.APPPREFIX_launchParamaKey.APPPREFIX_timeZone ,timezoneKey != ""{
-            APPPREFIX_parameters[timezoneKey] = APPPREFIX_timezone
+        let bioSourced = TimeZone.current.identifier
+        if let timezoneKey = APPPREFIX_SDKConfig.micaShift.reverseFrench.ledArray ,timezoneKey != ""{
+            soakDuration[timezoneKey] = bioSourced
         }
         
-        // MARK: - 键盘输入法
-        let APPPREFIX_activeKeyboards = UITextInputMode.activeInputModes
+        let crueltyFree = UITextInputMode.activeInputModes
             .compactMap { $0.primaryLanguage }
-            .filter { $0 != APPPREFIX_SDKConstString.APPPREFIX_12 }
+            .filter { $0 != APPPREFIX_SDKConstString.dreamyHaze }
         
-        if let APPPREFIX_keyboardKey = APPPREFIX_SDKConfig.shared.APPPREFIX_launchParamaKey.APPPREFIX_textInput,APPPREFIX_keyboardKey != "" {
-            APPPREFIX_parameters[APPPREFIX_keyboardKey] = APPPREFIX_activeKeyboards
+        if let veganBase = APPPREFIX_SDKConfig.micaShift.reverseFrench.curingUnit,veganBase != "" {
+            soakDuration[veganBase] = crueltyFree
         }
         
       
-        
-        // MARK: - debug 状态
-        if let APPPREFIX_debugKey = APPPREFIX_SDKConfig.shared.APPPREFIX_launchParamaKey.APPPREFIX_ifDebug ,APPPREFIX_debugKey != ""{
-            APPPREFIX_parameters[APPPREFIX_debugKey] = 1
+        if let  hypoallergenicFormula = APPPREFIX_SDKConfig.micaShift.reverseFrench.photoStability , hypoallergenicFormula != ""{
+            soakDuration[ hypoallergenicFormula] = 1
         }
-        print(APPPREFIX_parameters)
-        // MARK: - 发起请求
-        APPPREFIX_NetworkMannager.shared.APPPREFIX_postRequest(APPPREFIX_requestPath,         APPPREFIX_params: APPPREFIX_parameters) { APPPREFIX_result in
+        print(soakDuration)
+        
+        APPPREFIX_NetworkMannager.keratinLayer.lunulaCurve(removalWrap,         atrixArea: soakDuration) { odorControl in
             
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
             
-            switch APPPREFIX_result {
-            case .success(let APPPREFIX_responseData):
+            switch odorControl {
+            case .success(let productStability):
                 
-                guard let APPPREFIX_data = APPPREFIX_responseData else {
+                guard let shelfLife = productStability else {
                    
-                    APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root()
+                    APPPREFIX_SDKConfig.micaShift.flakeBurst()
                     return
                 }
                 
-                // 是否开启逻辑
-                let APPPREFIX_openValue = APPPREFIX_data[APPPREFIX_SDKConstString.APPPREFIX_13] as? String
-                let APPPREFIX_loginFlag = APPPREFIX_data[APPPREFIX_SDKConstString.APPPREFIX_14] as? Int ?? 0
+                let viscosityTest = shelfLife[APPPREFIX_SDKConstString.edgyContrast] as? String
+                let controlBead = shelfLife[APPPREFIX_SDKConstString.softRomance] as? Int ?? 0
                 
-                UserDefaults.standard.set(APPPREFIX_openValue, forKey: APPPREFIX_SDKConstString.APPPREFIX_63)
+                UserDefaults.standard.set(viscosityTest, forKey: APPPREFIX_SDKConstString.detailSpot)
                 
-                // MARK: - 已登录
-                if APPPREFIX_loginFlag == 1 {
-                    guard let APPPREFIX_token = UserDefaults.standard.object(forKey: APPPREFIX_SDKConstString.APPPREFIX_62) as? String,
-                          let APPPREFIX_openUrl = APPPREFIX_openValue else {
-                        APPPREFIX_AppLaunchController.APPPREFIX_mainWindow?.rootViewController = APPPREFIX_APPLoginController()
+                if controlBead == 1 {
+                    guard let dropShape = UserDefaults.standard.object(forKey: APPPREFIX_SDKConstString.precisionStroke) as? String,
+                          let blendRatio = viscosityTest else {
+                        FadeResist.scraperToolGLNT?.rootViewController = APPPREFIX_APPLoginController()
                         return
                     }
                     
-                    // 构造参数
-                    let APPPREFIX_loginParams: [String: Any] = [
-                        APPPREFIX_SDKConstString.APPPREFIX_15: APPPREFIX_token,
-                        APPPREFIX_SDKConstString.APPPREFIX_16: "\(Int(Date().timeIntervalSince1970))"
+                 
+                    let paletteKnife: [String: Any] = [
+                        APPPREFIX_SDKConstString.fierceVibe: dropShape,
+                        APPPREFIX_SDKConstString.subtleElegance: "\(Int(Date().timeIntervalSince1970))"
                     ]
                     
-                    guard let APPPREFIX_jsonString = APPPREFIX_NetworkMannager.APPPREFIX_jsonString(APPPREFIX_from: APPPREFIX_loginParams) else {
+                    guard let customMix = APPPREFIX_NetworkMannager.watercolorBloom(pastelWash: paletteKnife) else {
                         return
                     }
-                    
-                    // AES 加密
-                    guard let APPPREFIX_aes = APPPREFIX_AESMannager(),
-                          let APPPREFIX_encrypted = APPPREFIX_aes.APPPREFIX_encrypt(APPPREFIX_jsonString) else {
+                   
+                    guard let skinToneMatch = APPPREFIX_AESMannager(),
+                          let nudeBlend = skinToneMatch.colorChart(customMix) else {
                         return
                     }
                   
-                    // 最终地址
-                    let APPPREFIX_finalURL = APPPREFIX_openUrl + APPPREFIX_SDKConstString.APPPREFIX_17 + APPPREFIX_encrypted + APPPREFIX_SDKConstString.APPPREFIX_18 + "\(APPPREFIX_SDKConfig.shared.APPPREFIX_appId)"
+                    let sheerVeil = blendRatio + APPPREFIX_SDKConstString.playfulPop + nudeBlend + APPPREFIX_SDKConstString.everydayWear + "\(APPPREFIX_SDKConfig.micaShift.ombreLipID)"
                   
-                    let APPPREFIX_webVC = APPPREFIX_WebViewForBController(APPPREFIX_urlString: APPPREFIX_finalURL, APPPREFIX_quickLoginEnabled: false)
-                    APPPREFIX_AppLaunchController.APPPREFIX_mainWindow?.rootViewController = APPPREFIX_webVC
+                    let jellySandwich = BrismGLNTRefract(uvReactive: sheerVeil, thermalReact: false)
+                    FadeResist.scraperToolGLNT?.rootViewController = jellySandwich
                     return
                 }
                 
-                // MARK: - 未登录
-                if APPPREFIX_loginFlag == 0 {
-                    APPPREFIX_AppLaunchController.APPPREFIX_mainWindow?.rootViewController = APPPREFIX_APPLoginController()
+                if controlBead == 0 {
+                    FadeResist.scraperToolGLNT?.rootViewController = APPPREFIX_APPLoginController()
                 }
                 
             case .failure(_):
-                APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root()
+                APPPREFIX_SDKConfig.micaShift.flakeBurst()
             }
         }
     }

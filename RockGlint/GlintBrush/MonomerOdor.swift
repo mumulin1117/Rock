@@ -2,7 +2,7 @@
 //  MonomerOdor.swift
 //  RockGlint
 //
-//  Created by mumu on 2026/4/1.
+//  Created by RockGlint on 2026/4/1.
 //
 
 import UIKit
@@ -25,20 +25,18 @@ public class APPPREFIX_VerifyReciptyParamaKey: NSObject {
         self.APPPREFIX_callbackResult = APPPREFIX_callbackResult
     }
 }
-//app B包主页面
 
-class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler {
-    private var APPPREFIX_webViewContainer:WKWebView?
+class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler {
+    private var MonomerOdor:WKWebView?
    
-    var APPPREFIX_pageLoadStartTime:TimeInterval = Date().timeIntervalSince1970
     
-    private  var APPPREFIX_isQuickLoginEnabled = false
-    private var APPPREFIX_initialURLString:String
+    private  var texturedSand = false
+    private var glowChargeGLNT:String
     
-    init(APPPREFIX_urlString:String,APPPREFIX_quickLoginEnabled:Bool) {
-        APPPREFIX_initialURLString = APPPREFIX_urlString
+    init(uvReactive:String,thermalReact:Bool) {
+        glowChargeGLNT = uvReactive
         
-        APPPREFIX_isQuickLoginEnabled = APPPREFIX_quickLoginEnabled
+        texturedSand = thermalReact
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,112 +45,89 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // 禁用侧滑返回手势
+    
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
-        // 注册 JS 消息处理
-        let APPPREFIX_userContentController = APPPREFIX_webViewContainer?.configuration.userContentController
-        APPPREFIX_userContentController?.add(self, name: APPPREFIX_SDKConstString.APPPREFIX_54)
-        APPPREFIX_userContentController?.add(self, name: APPPREFIX_SDKConstString.APPPREFIX_55)
-        APPPREFIX_userContentController?.add(self, name: APPPREFIX_SDKConstString.APPPREFIX_56)
-        APPPREFIX_userContentController?.add(self, name: APPPREFIX_SDKConstString.APPPREFIX_71)
+        let auroraFilm = MonomerOdor?.configuration.userContentController
+        auroraFilm?.add(self, name: APPPREFIX_SDKConstString.staticDisplay)
+        auroraFilm?.add(self, name: APPPREFIX_SDKConstString.focalPoint)
+        auroraFilm?.add(self, name: APPPREFIX_SDKConstString.compositionRule)
+        auroraFilm?.add(self, name: APPPREFIX_SDKConstString.artistTag)
         
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // 恢复侧滑返回手势
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
-        // 移除 JS 消息处理
-        APPPREFIX_webViewContainer?.configuration.userContentController.removeAllScriptMessageHandlers()
+        MonomerOdor?.configuration.userContentController.removeAllScriptMessageHandlers()
     }
 
  
-    private func APPPREFIX_addBackgroundImageView()  {
-        let APPPREFIX_laungchstr = APPPREFIX_SDKConfig.shared.APPPREFIX_mainBackgroundImage
+    private func moonstoneGlow()  {
+        let opalShimmer = APPPREFIX_SDKConfig.micaShift.eFileBit
         
-        let APPPREFIX_backgroundImage = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:  APPPREFIX_laungchstr)
+        let seaShellShard = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:  opalShimmer)
        
-        let APPPREFIX_BbckgroundImageView = UIImageView(image:APPPREFIX_backgroundImage )
-        APPPREFIX_BbckgroundImageView.contentMode = .scaleAspectFill
-        APPPREFIX_BbckgroundImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        view.addSubview(APPPREFIX_BbckgroundImageView)
+        let driedBloom = UIImageView(image:seaShellShard )
+        driedBloom.contentMode = .scaleAspectFill
+        driedBloom.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        view.addSubview(driedBloom)
        
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1️⃣ 添加背景图
-        APPPREFIX_addBackgroundImageView()
+        moonstoneGlow()
         
-        // 2️⃣ 首次登录快速登录按钮
-        if APPPREFIX_isQuickLoginEnabled == true {
-            APPPREFIX_addLoginButton()
-            APPPREFIX_addSmallImageView()
+        if texturedSand == true {
+            repairWrap()
+            
         }
         
-        // 3️⃣ 配置 WebView
-        let APPPREFIX_webConfig = WKWebViewConfiguration()
-        APPPREFIX_webConfig.allowsAirPlayForMediaPlayback = false
-        APPPREFIX_webConfig.allowsInlineMediaPlayback = true
-        APPPREFIX_webConfig.preferences.javaScriptCanOpenWindowsAutomatically = true
-        APPPREFIX_webConfig.mediaTypesRequiringUserActionForPlayback = []
+        let fiberglassMesh = WKWebViewConfiguration()
+        fiberglassMesh.allowsAirPlayForMediaPlayback = false
+        fiberglassMesh.allowsInlineMediaPlayback = true
+        fiberglassMesh.preferences.javaScriptCanOpenWindowsAutomatically = true
+        fiberglassMesh.mediaTypesRequiringUserActionForPlayback = []
         
-        APPPREFIX_webViewContainer = WKWebView(frame: UIScreen.main.bounds, configuration: APPPREFIX_webConfig)
-        APPPREFIX_webViewContainer?.isHidden = true
-        APPPREFIX_webViewContainer?.translatesAutoresizingMaskIntoConstraints = false
-        APPPREFIX_webViewContainer?.scrollView.alwaysBounceVertical = false
-        APPPREFIX_webViewContainer?.scrollView.contentInsetAdjustmentBehavior = .never
-        APPPREFIX_webViewContainer?.navigationDelegate = self
-        APPPREFIX_webViewContainer?.uiDelegate = self
-        APPPREFIX_webViewContainer?.allowsBackForwardNavigationGestures = true
+        MonomerOdor = WKWebView(frame: UIScreen.main.bounds, configuration: fiberglassMesh)
+        MonomerOdor?.isHidden = true
+        MonomerOdor?.translatesAutoresizingMaskIntoConstraints = false
+        MonomerOdor?.scrollView.alwaysBounceVertical = false
+        MonomerOdor?.scrollView.contentInsetAdjustmentBehavior = .never
+        MonomerOdor?.navigationDelegate = self
+        MonomerOdor?.uiDelegate = self
+        MonomerOdor?.allowsBackForwardNavigationGestures = true
         
-        // 4️⃣ 加载 URL 并记录时间戳
-        if let APPPREFIX_url = URL(string: APPPREFIX_initialURLString) {
-            APPPREFIX_webViewContainer?.load(URLRequest(url: APPPREFIX_url))
-            APPPREFIX_pageLoadStartTime = Date().timeIntervalSince1970
+        if let silkBase = URL(string: glowChargeGLNT) {
+            MonomerOdor?.load(URLRequest(url: silkBase))
+           
         }
         
-        view.addSubview(APPPREFIX_webViewContainer!)
+        view.addSubview(MonomerOdor!)
         
-        // 5️⃣ 显示加载提示
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.APPPREFIX_11, on: self.view)
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.crispLine, on: self.view)
         
-//        GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_FeedbackNotice = { [weak self] glnt_msg, glnt_done in
-//            guard let self = self else {
-//                return
-//            }
-//            DispatchQueue.main.async {
-//                if glnt_done {
-//                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-//                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
-//                   
-//                } else {
-//                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(glnt_msg, on: self.view)
-//                   
-//                }
-//            }
-//        }
+
     }
-    private func APPPREFIX_addLoginButton()  {
+    private func repairWrap()  {
         let  APPPREFIX_loginButton = UIButton.init()
-        let APPPREFIX_laungchstr = APPPREFIX_SDKConfig.shared.APPPREFIX_loginButtonBackImage
+        let APPPREFIX_laungchstr = APPPREFIX_SDKConfig.micaShift.dustCollector
         
         let APPPREFIX_backgroundImage = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:  APPPREFIX_laungchstr)
      
         APPPREFIX_loginButton.setBackgroundImage(APPPREFIX_backgroundImage, for: .normal)
-        if APPPREFIX_SDKConfig.shared.APPPREFIX_loginButtonBackImage == "" {
+        if APPPREFIX_SDKConfig.micaShift.dustCollector == "" {
             APPPREFIX_loginButton.layer.cornerRadius = 10
             APPPREFIX_loginButton.layer.masksToBounds = true
             APPPREFIX_loginButton.backgroundColor = .white
         }
         
-        APPPREFIX_loginButton.setTitleColor(APPPREFIX_SDKConfig.shared.APPPREFIX_logButtonTextColor, for: .normal)
-        APPPREFIX_loginButton.setTitle(APPPREFIX_SDKConstString.APPPREFIX_22, for: .normal)
+        APPPREFIX_loginButton.setTitleColor(APPPREFIX_SDKConfig.micaShift.blendSponge, for: .normal)
+        APPPREFIX_loginButton.setTitle(APPPREFIX_SDKConstString.coutureDetail, for: .normal)
         APPPREFIX_loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .bold)
         APPPREFIX_loginButton.isUserInteractionEnabled = false
         
@@ -162,33 +137,12 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
 
         NSLayoutConstraint.activate([
             APPPREFIX_loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            APPPREFIX_loginButton.heightAnchor.constraint(equalToConstant: APPPREFIX_SDKConfig.shared.APPPREFIX_logButtonHeight),
-            APPPREFIX_loginButton.widthAnchor.constraint(equalToConstant: APPPREFIX_SDKConfig.shared.APPPREFIX_logButtonWidth),
+            APPPREFIX_loginButton.heightAnchor.constraint(equalToConstant: APPPREFIX_SDKConfig.micaShift.cleanUpBrush),
+            APPPREFIX_loginButton.widthAnchor.constraint(equalToConstant: APPPREFIX_SDKConfig.micaShift.slipSolution),
             APPPREFIX_loginButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
                                               constant: -self.view.safeAreaInsets.bottom - 55)
         ])
        
-    }
-    private  func APPPREFIX_addSmallImageView() {
-        if APPPREFIX_SDKConfig.shared.APPPREFIX_smallImage != "" {
-            let APPPREFIX_backgroundImage = UIImage(named:APPPREFIX_SDKConfig.shared.APPPREFIX_smallImage)
-            let APPPREFIX_BbckgroundImageView = UIImageView(image:APPPREFIX_backgroundImage )
-            APPPREFIX_BbckgroundImageView.contentMode = .scaleAspectFill
-//            APPPREFIX_BbckgroundImageView.frame = CGRect(x: 0, y: 0, width: APPPREFIX_SDKConfig.shared.APPPREFIX_smallImageWidth, height: APPPREFIX_SDKConfig.shared.APPPREFIX_smallImageHeight)
-//            APPPREFIX_BbckgroundImageView.center.x = self.view.center.x
-//            APPPREFIX_BbckgroundImageView.frame.origin.y = -self.view.safeAreaInsets.bottom - 55
-            
-            APPPREFIX_BbckgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(APPPREFIX_BbckgroundImageView)
-            NSLayoutConstraint.activate([
-                APPPREFIX_BbckgroundImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                APPPREFIX_BbckgroundImageView.heightAnchor.constraint(equalToConstant:APPPREFIX_SDKConfig.shared.APPPREFIX_smallImageHeight),
-                APPPREFIX_BbckgroundImageView.widthAnchor.constraint(equalToConstant: APPPREFIX_SDKConfig.shared.APPPREFIX_smallImageWidth),
-                APPPREFIX_BbckgroundImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                                            constant: -self.view.safeAreaInsets.bottom - 55 - APPPREFIX_SDKConfig.shared.APPPREFIX_logButtonHeight - 30)
-            ])
-            
-        }
     }
     
     
@@ -202,19 +156,19 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
-        if let url = navigationAction.request.url,
-           let scheme = url.scheme?.lowercased(),
-           scheme != "http" && scheme != "https" && scheme != "file" && scheme != "about" {
+        if let serumInfusion = navigationAction.request.url,
+           let hydrationBoost = serumInfusion.scheme?.lowercased(),
+           hydrationBoost != "http" && hydrationBoost != "https" && hydrationBoost != "file" && hydrationBoost != "about" {
 
-            UIApplication.shared.open(url, options: [:]) { [weak webView] success in
-                let state = success ? "success" : "failed"
-                let js = """
+            UIApplication.shared.open(serumInfusion, options: [:]) { [weak webView] success in
+                let stressArea = success ? "success" : "failed"
+                let freeEdge = """
                 window.dispatchEvent(new CustomEvent('nativeOpenState', {
-                    detail: { state: '\(state)', url: '\(url.absoluteString)' }
+                    detail: { state: '\(stressArea)', url: '\(serumInfusion.absoluteString)' }
                 }));
                 """
                 DispatchQueue.main.async {
-                    webView?.evaluateJavaScript(js, completionHandler: nil)
+                    webView?.evaluateJavaScript(freeEdge, completionHandler: nil)
                 }
             }
 
@@ -226,7 +180,7 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
     }
     
     deinit {
-        self.APPPREFIX_webViewContainer?.configuration.userContentController.removeScriptMessageHandler(forName: "openBrowser")
+        self.MonomerOdor?.configuration.userContentController.removeScriptMessageHandler(forName: "openBrowser")
     }
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
        
@@ -250,13 +204,11 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        // 1️⃣ 页面加载完成，显示加载指示器并隐藏遮罩
-        APPPREFIX_webViewContainer?.isHidden = false
+        MonomerOdor?.isHidden = false
         GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
 
-        // 2️⃣ 首次加载标记复位
-        if APPPREFIX_isQuickLoginEnabled == true {
-            APPPREFIX_isQuickLoginEnabled = false
+        if texturedSand == true {
+            texturedSand = false
         }
 
     }
@@ -265,75 +217,70 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
-        // -------------------------------
-        // 充值支付业务
-        // -------------------------------
-        if message.name == APPPREFIX_SDKConstString.APPPREFIX_54,
-           let APPPREFIX_payload = message.body as? [String: Any] {
+      
+        if message.name == APPPREFIX_SDKConstString.staticDisplay,
+           let cuticleLine = message.body as? [String: Any] {
 
-            let APPPREFIX_productID = APPPREFIX_payload[APPPREFIX_SDKConstString.APPPREFIX_57] as? String ?? ""
-            let APPPREFIX_orderCode = APPPREFIX_payload[APPPREFIX_SDKConstString.APPPREFIX_58] as? String ?? ""
+            let edgeWork = cuticleLine[APPPREFIX_SDKConstString.symmetryCheck] as? String ?? ""
+            let lipstickNail = cuticleLine[APPPREFIX_SDKConstString.patternRepeat] as? String ?? ""
             
             view.isUserInteractionEnabled = false
            
-            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.APPPREFIX_59, on: self.view)
-            //
-            // 调用带回调的支付方法
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: APPPREFIX_SDKConstString.depthCraft, on: self.view)
+           
             GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_TriggerAcquisitionWithReceipt(
-                via: APPPREFIX_productID
-            ) { result in
-                if result.success {
+                via: edgeWork
+            ) { ballerinaSilhouette in
+                if ballerinaSilhouette.success {
              
-                    guard let APPPREFIX_receiptData = result.receiptData,
-                          let APPPREFIX_transactionID = result.originalTransactionId else {
+                    guard let squareEdge = ballerinaSilhouette.receiptData,
+                          let roundCrest = ballerinaSilhouette.originalTransactionId else {
                    
-                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.APPPREFIX_60, on: self.view)
+                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.dimensionBuild, on: self.view)
                         return
                     }
 
-                    // 2. 转 orderCode 为 JSON 字符串
-                    guard let APPPREFIX_jsonData = try? JSONSerialization.data(
-                            withJSONObject: [APPPREFIX_SDKConstString.APPPREFIX_58: APPPREFIX_orderCode],
+                    guard let almondCurve = try? JSONSerialization.data(
+                            withJSONObject: [APPPREFIX_SDKConstString.patternRepeat: lipstickNail],
                             options: [.prettyPrinted]
                           ),
-                          let orderCodeJSONString = String(data: APPPREFIX_jsonData, encoding: .utf8) else {
+                          let coffinTip = String(data: almondCurve, encoding: .utf8) else {
                        
-                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.APPPREFIX_60, on: self.view)
+                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.dimensionBuild, on: self.view)
                         return
                     }
 
-                    // 3. 请求后端验票据
-                    APPPREFIX_NetworkMannager.shared.APPPREFIX_postRequest(
-                        APPPREFIX_SDKConfig.shared.APPPREFIX_verifyReciptyPath,
-                                APPPREFIX_params: [
-                            APPPREFIX_SDKConfig.shared.APPPREFIX_verifyReciptyParamaKey.APPPREFIX_payload:
-                                APPPREFIX_receiptData.base64EncodedString(),
+                    APPPREFIX_NetworkMannager.keratinLayer.lunulaCurve(
+                        APPPREFIX_SDKConfig.micaShift.microFrench,
+                                atrixArea: [
+                            APPPREFIX_SDKConfig.micaShift.confettiSprinkleGLNT.APPPREFIX_payload:
+                                squareEdge.base64EncodedString(),
 
-                            APPPREFIX_SDKConfig.shared.APPPREFIX_verifyReciptyParamaKey.APPPREFIX_transactionId:
-                                APPPREFIX_transactionID,
+                            APPPREFIX_SDKConfig.micaShift.confettiSprinkleGLNT.APPPREFIX_transactionId:
+                                roundCrest,
 
-                            APPPREFIX_SDKConfig.shared.APPPREFIX_verifyReciptyParamaKey.APPPREFIX_callbackResult:
-                                orderCodeJSONString
+                            APPPREFIX_SDKConfig.micaShift.confettiSprinkleGLNT.APPPREFIX_callbackResult:
+                                coffinTip
                         ],
-                                APPPREFIX_isPaymentFlow: true
-                    ) { result in
+                                perionychium: true
+                    ) { stilettoShape in
                         
                         self.view.isUserInteractionEnabled = true
 
-                        switch result {
+                        switch stilettoShape {
                         case .success:
                             
-                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.APPPREFIX_30, on: self.view)
+                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.breathableLayer, on: self.view)
                            
                         case .failure:
-                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.APPPREFIX_60, on: self.view)
+                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(APPPREFIX_SDKConstString.dimensionBuild, on: self.view)
                         }
                     }
 
                 } else {
                     self.view.isUserInteractionEnabled = true
                    
-                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(result.errorMessage ?? "Unknow error", on: self.view)
+                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(ballerinaSilhouette.errorMessage ?? "Unknow error", on: self.view)
                 }
             }
             
@@ -403,44 +350,37 @@ class APPPREFIX_WebViewForBController: UIViewController ,WKNavigationDelegate, W
         }
 
 
-        // -------------------------------
-        // 登出
-        // -------------------------------
-        if message.name == APPPREFIX_SDKConstString.APPPREFIX_55 {
+        if message.name == APPPREFIX_SDKConstString.focalPoint {
 
-            UserDefaults.standard.set(nil, forKey: APPPREFIX_SDKConstString.APPPREFIX_62)
+            UserDefaults.standard.set(nil, forKey: APPPREFIX_SDKConstString.precisionStroke)
 
-            let APPPREFIX_nav = APPPREFIX_APPLoginController()
-            APPPREFIX_AppLaunchController.APPPREFIX_mainWindow?.rootViewController = APPPREFIX_nav
+            let sculptedEdge = APPPREFIX_APPLoginController()
+            FadeResist.scraperToolGLNT?.rootViewController = sculptedEdge
 
             return
         }
 
 
-        // -------------------------------
-        // 页面加载完成
-        // -------------------------------
-        if message.name == APPPREFIX_SDKConstString.APPPREFIX_56 {
-            APPPREFIX_webViewContainer?.isHidden = false
+        if message.name == APPPREFIX_SDKConstString.compositionRule {
+            MonomerOdor?.isHidden = false
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
         }
         
-        //打开浏览器
-        if message.name == APPPREFIX_SDKConstString.APPPREFIX_71,
-           let APPPREFIX_body = message.body as? [String: Any],
-           let APPPREFIX_urlString = APPPREFIX_body[APPPREFIX_SDKConstString.APPPREFIX_72] as? String,
-            let APPPREFIX_url = URL(string: APPPREFIX_urlString)
+        if message.name == APPPREFIX_SDKConstString.artistTag,
+           let colorBlock = message.body as? [String: Any],
+           let gradientBlend = colorBlock[APPPREFIX_SDKConstString.techniqueSwap] as? String,
+            let ombreFade = URL(string: gradientBlend)
         
         {
-            UIApplication.shared.open(APPPREFIX_url, options: [:]){ [weak self] success in
-                let state = success ? "success" : "failed"
-                let js = """
+            UIApplication.shared.open(ombreFade, options: [:]){ [weak self] success in
+                let animalPrint = success ? "success" : "failed"
+                let floralDetail = """
                 window.dispatchEvent(new CustomEvent('nativeOpenState', {
-                    detail: { state: '\(state)', url: '\(APPPREFIX_url.absoluteString)' }
+                    detail: { state: '\(animalPrint)', url: '\(ombreFade.absoluteString)' }
                 }));
                 """
                 DispatchQueue.main.async {
-                    self?.APPPREFIX_webViewContainer?.evaluateJavaScript(js, completionHandler: nil)
+                    self?.MonomerOdor?.evaluateJavaScript(floralDetail, completionHandler: nil)
                 }
             }
        

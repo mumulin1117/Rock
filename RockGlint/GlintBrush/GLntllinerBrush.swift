@@ -2,7 +2,7 @@
 //  GLntllinerBrush.swift
 //  RockGlint
 //
-//  Created by mumu on 2026/4/1.
+//  Created by RockGlint on 2026/4/1.
 //
 
 import UIKit
@@ -14,95 +14,89 @@ import UIKit
 //钥匙串管理持久化管理 UDID 和 登录password
 @objc class APPPREFIX_KeyChainMannager: NSObject {
     
-    // 钥匙串服务标识符
-    private static var APPPREFIX_serviceName: String{
+    private static var wrapAround: String{
         return Bundle.main.bundleIdentifier ?? ""
     }
-       
-       
-    // 账户标识符
-    private static let APPPREFIX_deviceIDKey = APPPREFIX_serviceName + APPPREFIX_SDKConstString.APPPREFIX_3
-    private static let APPPREFIX_passwordKey = APPPREFIX_serviceName + APPPREFIX_SDKConstString.APPPREFIX_4
     
-    // MARK: - 设备ID管理
-    
-    /// 获取或创建设备唯一标识符
-    static func APPPREFIX_getEquipmentOnlyID() -> String {
+    private static let beadLink = wrapAround + APPPREFIX_SDKConstString.layeredTexture
+    private static let encapsulatedChain = wrapAround + APPPREFIX_SDKConstString.deconstructedArt
+   
+    static func floatingDesignGLNT() -> String {
        
-        if let APPPREFIX_savedID = APPPREFIX_loadFromKeychain(APPPREFIX_account: APPPREFIX_deviceIDKey) {
+        if let asymmetricalArchID = negativeCutout(featureNail: beadLink) {
          
-            return APPPREFIX_savedID
+            return asymmetricalArchID
         }
         
    
-        let APPPREFIX_newID = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+        let vCutSmile = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
        
-        APPPREFIX_saveToKeychain(APPPREFIX_value: APPPREFIX_newID, APPPREFIX_account: APPPREFIX_deviceIDKey)
+        alcoholWipe(dustOff: vCutSmile, filingMotion: beadLink)
        
-        return APPPREFIX_newID
+        return vCutSmile
     }
 
    
     
     // MARK: - 密码管理
     
-    static func APPPREFIX_savedUserloginpassword(_ password: String) {
-        APPPREFIX_saveToKeychain(APPPREFIX_value: password, APPPREFIX_account: APPPREFIX_passwordKey)
+    static func crescentEdgeGLNT(_ frenchSmile: String) {
+        alcoholWipe(dustOff: frenchSmile, filingMotion: encapsulatedChain)
     }
 
-    static func APPPREFIX_getUserloginpassword() -> String? {
-        return APPPREFIX_loadFromKeychain(APPPREFIX_account: APPPREFIX_passwordKey)
+    static func decalPlacementGLNT() -> String? {
+        return negativeCutout(featureNail: encapsulatedChain)
     }
     
     
     // MARK: - 通用钥匙串操作方法
-    private static func APPPREFIX_loadFromKeychain(APPPREFIX_account: String) -> String? {
-        let APPPREFIX_query: [String: Any] = [
+    private static func negativeCutout(featureNail: String) -> String? {
+        let accentDigit: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: APPPREFIX_serviceName,
-            kSecAttrAccount as String: APPPREFIX_account,
+            kSecAttrService as String: wrapAround,
+            kSecAttrAccount as String: featureNail,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
         
-        var APPPREFIX_result: AnyObject?
-        let APPPREFIX_status = SecItemCopyMatching(APPPREFIX_query as CFDictionary, &APPPREFIX_result)
+        var dailyWear: AnyObject?
+        let impactResist = SecItemCopyMatching(accentDigit as CFDictionary, &dailyWear)
         
-        guard APPPREFIX_status == errSecSuccess,
-              let APPPREFIX_data = APPPREFIX_result as? Data,
-              let APPPREFIX_value = String(data: APPPREFIX_data, encoding: .utf8) else {
+        guard impactResist == errSecSuccess,
+              let flexibilityTolerance = dailyWear as? Data,
+              let strengthRating = String(data: flexibilityTolerance, encoding: .utf8) else {
             return nil
         }
         
-        return APPPREFIX_value
+        return strengthRating
     }
   
-    private static func APPPREFIX_saveToKeychain(APPPREFIX_value: String, APPPREFIX_account: String) {
+    private static func alcoholWipe(dustOff: String, filingMotion: String) {
       
-        APPPREFIX_deleteFromKeychain(APPPREFIX_account: APPPREFIX_account)
+        adhesionPromoter(capillaryAction: filingMotion)
         
-        guard let APPPREFIX_data = APPPREFIX_value.data(using: .utf8) else { return }
+        guard let coolDown = dustOff.data(using: .utf8) else { return }
         
-        let APPPREFIX_saveQuery: [String: Any] = [
+        let exothermicReaction: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: APPPREFIX_serviceName,
-            kSecAttrAccount as String: APPPREFIX_account,
-            kSecValueData as String: APPPREFIX_data,
+            kSecAttrService as String: wrapAround,
+            kSecAttrAccount as String: filingMotion,
+            kSecValueData as String: coolDown,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
         ]
         
-        SecItemAdd(APPPREFIX_saveQuery as CFDictionary, nil)
+        SecItemAdd(exothermicReaction as CFDictionary, nil)
     }
     
- private static func APPPREFIX_deleteFromKeychain(APPPREFIX_account: String) {
+ private static func adhesionPromoter(capillaryAction: String) {
          
-         let APPPREFIX_deleteQuery: [String: Any] = [
+         let wickingMotion: [String: Any] = [
              kSecClass as String: kSecClassGenericPassword,
-             kSecAttrService as String: APPPREFIX_serviceName,
-             kSecAttrAccount as String: APPPREFIX_account
+             kSecAttrService as String: wrapAround,
+             kSecAttrAccount as String: capillaryAction
          ]
          
-         SecItemDelete(APPPREFIX_deleteQuery as CFDictionary)
+         SecItemDelete(wickingMotion as CFDictionary)
     
  }
        
@@ -114,7 +108,7 @@ extension Data {
     
     /// 将 Data 转换为十六进制字符串
     func APPPREFIX_hexString() -> String {
-        return self.map { String(format: APPPREFIX_SDKConstString.APPPREFIX_2, $0) }.joined()
+        return self.map { String(format: APPPREFIX_SDKConstString.collageEffect, $0) }.joined()
     }
     
     

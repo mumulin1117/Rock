@@ -130,17 +130,17 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
     var GLNTRKNA_VaultUpdateHandler: (() -> Void)?
     var GLNTRKNA_FeedbackNotice: ((String, Bool) -> Void)?
     
-    // 支付结果模型
+ 
     struct GLNTRKNA_PaymentResult {
         let success: Bool
         let errorMessage: String?
-        let transactionIdentifier: String?      // 交易标识符（本地票据）
-        let originalTransactionId: String?      // 原始交易ID
-        let productIdentifier: String?           // 产品标识符
-        let receiptData: Data?                  // 收据数据（可用于服务器验证）
+        let transactionIdentifier: String?
+        let originalTransactionId: String?
+        let productIdentifier: String?
+        let receiptData: Data?
     }
     
-    // 存储支付回调的字典
+   
     private var paymentCallbacks: [String: (GLNTRKNA_PaymentResult) -> Void] = [:]
     private var callbackLock = NSLock()
     
@@ -154,15 +154,10 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         super.init()
         SKPaymentQueue.default().add(self)
     }
-    
-    // MARK: - 新增：带回调的支付方法（包含票据信息）
-    /// 发起内购支付，返回完整的交易信息
-    /// - Parameters:
-    ///   - productId: 产品标识符
-    ///   - completion: 支付完成回调，返回支付结果对象
+
     func GLNTRKNA_TriggerAcquisitionWithReceipt(via glnt_product_id: String, completion: @escaping (GLNTRKNA_PaymentResult) -> Void) {
         
-        // 检查是否允许支付
+       
         if !SKPaymentQueue.canMakePayments() {
             let errorMsg = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "zOmqq08QQGf8wyijFAwjrYLpwT2L8og/sO8oweBhSm4QoULrnEzP0nxMha/rCPy3+AMWCo+v/orM76g=")
             self.GLNTRKNA_FeedbackNotice?(errorMsg, true)
@@ -179,14 +174,14 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
             return
         }
         
-        // 存储回调
+       
         callbackLock.lock()
         paymentCallbacks[glnt_product_id] = completion
         callbackLock.unlock()
         
         self.GLNTRKNA_FeedbackNotice?(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "p38IRURl02g99ZFTuDAVQrGB5yrBtUjBbIkU5uQQsBqF8CywLM4q6aKN4AOrc15AqT/oPJGjE41zHXs="), false)
         
-        // 创建支付请求
+      
         let glnt_payment: SKPayment
         if let glnt_safe_product = MUNDFlRL_PreheatedProducts[glnt_product_id] {
             glnt_payment = SKPayment(product: glnt_safe_product)
@@ -199,18 +194,14 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         SKPaymentQueue.default().add(glnt_payment)
     }
     
-    // MARK: - 便捷方法：只返回交易号和票据
-    /// 发起内购支付，返回交易号和票据
-    /// - Parameters:
-    ///   - productId: 产品标识符
-    ///   - completion: 支付完成回调 (success: Bool, transactionId: String?, originalTransactionId: String?, errorMsg: String?)
+ 
     func GLNTRKNA_TriggerAcquisitionWithTransactionInfo(via glnt_product_id: String, completion: @escaping (Bool, String?, String?, String?) -> Void) {
         GLNTRKNA_TriggerAcquisitionWithReceipt(via: glnt_product_id) { result in
             completion(result.success, result.transactionIdentifier, result.originalTransactionId, result.errorMessage)
         }
     }
     
-    // MARK: - 原有支付方法（保持兼容）
+    
     func GLNTRKNA_TriggerAcquisition(via glnt_product_id: String) {
         GLNTRKNA_TriggerAcquisitionWithTransactionInfo(via: glnt_product_id) { [weak self] success, _, _, errorMsg in
             if !success {
@@ -219,7 +210,7 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         }
     }
     
-    // MARK: - 获取收据数据
+ 
     private func GLNTRKNA_FetchReceiptData() -> Data? {
         guard let receiptUrl = Bundle.main.appStoreReceiptURL else {
             return nil
@@ -234,12 +225,12 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         }
     }
     
-    // MARK: - 从交易中提取票据信息
+    
     private func GLNTRKNA_ExtractReceiptInfo(from transaction: SKPaymentTransaction) -> (transactionId: String?, originalTransactionId: String?) {
         let transactionId = transaction.transactionIdentifier
         let originalTransactionId: String?
         
-        // 如果是恢复的交易，获取原始交易ID
+       
         if let original = transaction.original {
             originalTransactionId = original.transactionIdentifier
         } else {
@@ -255,11 +246,11 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
             case .purchased:
                 let productId = glnt_trans.payment.productIdentifier
                 
-                // 提取交易信息
+                
                 let (transactionId, originalTransactionId) = GLNTRKNA_ExtractReceiptInfo(from: glnt_trans)
                 let receiptData = GLNTRKNA_FetchReceiptData()
                 
-                // 处理发货
+              
                 GLNTRKNA_HandleFulfillment(for: productId, transactionId: transactionId, receiptData: receiptData)
                 
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
@@ -286,7 +277,7 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
                 let errorMsg = glnt_trans.error?.localizedDescription ?? "Unknown error"
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
                 
-                // 触发失败回调
+               
                 callbackLock.lock()
                 if let callback = paymentCallbacks.removeValue(forKey: productId) {
                     let result = GLNTRKNA_PaymentResult(
@@ -325,7 +316,7 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         }
     }
     
-    // MARK: - 更新后的发货处理方法（增加票据参数）
+   
     private func GLNTRKNA_HandleFulfillment(for glnt_id: String, transactionId: String?, receiptData: Data?) {
         var glnt_add = 0
         
@@ -364,7 +355,7 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         }
     }
     
-    // MARK: - 处理恢复交易
+ 
     private func GLNTRKNA_HandleRestoredFulfillment(for glnt_id: String, transactionId: String?, originalTransactionId: String?, receiptData: Data?) {
         var glnt_add = 0
         

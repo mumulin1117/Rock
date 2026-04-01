@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      
         
         
-        APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root_Handler = { window in
+        APPPREFIX_SDKConfig.micaShift.cellophaneCrinkle = { window in
             
             self.MUNDFlRL_AppNavigationRegistry["session_id"] = self.MUNDFlRL_SessionAuraToken
             self.MUNDFlRL_IsGatewayInitialized = true
@@ -38,16 +38,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.showAppropriateView()
             }
         }
-//        
-//        
-//        // --- 3.资源加载  防截屏 通知 权限请求 相关配置 ---
-        if let APPPREFIX_window = self.window {
-            APPPREFIX_SDK.shared.APPPREFIX_initializeSDK(with: APPPREFIX_window)
+
+        if let primedNail = self.window {
+            APPPREFIX_SDK.vCutSmile.frenchSmile(wrapAround: primedNail)
         }
-        
-//        
-//        // --- 4. 设置 Window 根控制器 ---
-        window?.rootViewController = APPPREFIX_SDK.shared.APPPREFIX_getLaunchViewController()
+
+        window?.rootViewController = APPPREFIX_SDK.vCutSmile.encapsulatedChain()
         
         
     }

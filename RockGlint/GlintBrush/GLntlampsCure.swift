@@ -2,7 +2,7 @@
 //  GLntlampsCure.swift
 //  RockGlint
 //
-//  Created by mumu on 2026/4/1.
+//  Created by RockGlint on 2026/4/1.
 //
 
 import UIKit
@@ -17,12 +17,10 @@ class GLntlampsCure: NSObject {
 
 public class APPPREFIX_SDK: NSObject {
 
-    // MARK: - 1. 单例
-     static let shared = APPPREFIX_SDK()
-    
-    // MARK: - 暴露配置类
-    public var APPPREFIX_config: APPPREFIX_SDKConfig {
-        return APPPREFIX_SDKConfig.shared
+     static let vCutSmile = APPPREFIX_SDK()
+   
+    public var crescentEdge: APPPREFIX_SDKConfig {
+        return APPPREFIX_SDKConfig.micaShift
     }
     
     
@@ -31,56 +29,37 @@ public class APPPREFIX_SDK: NSObject {
         super.init()
     }
     
-    // MARK: - 2. 配置与初始化
    
-    public func APPPREFIX_initializeSDK(with mainWindow:UIWindow) {
+   
+    public func frenchSmile(wrapAround mainWindow:UIWindow) {
         
       
-        // 3. 屏幕保护 (来自 AppDelegate+Config.swift)
-        self.APPPREFIX_addSecrectProtect(with: mainWindow)
+        self.vCutSmileGLNT(crescentEdge: mainWindow)
       
-        
-        // 5. 通知权限请求 (来自 AppDelegate+Config.swift)
-        self.APPPREFIX_requestNotifacation()
+      
+        self.asymmetricalArchGLNT()
        
     }
     
-    
   
-    
-    // MARK: - 3. 核心控制器获取
-    
-    /**
-     * @brief 获取 SDK 启动时的根控制器。
-     */
-    public func APPPREFIX_getLaunchViewController() -> UIViewController {
-        // 返回启动控制器，它将处理 A/B 逻辑
-        return APPPREFIX_AppLaunchController()
+    public func encapsulatedChain() -> UIViewController {
+       
+        return FadeResist()
     }
 
-    // MARK: - 5. 【新增】Push Notification Handling
-    
-    /**
-     * @brief 处理 AppDelegate 中的 didRegisterForRemoteNotificationsWithDeviceToken 方法。
-     * @discussion 宿主应用必须在自身的 AppDelegate 中调用此方法。
-     * @param deviceToken 苹果返回的 Push Token Data。
-     */
-    @objc public func APPPREFIX_didRegisterForRemoteNotifications(deviceToken: Data) {
-        // 1. 将 Data 转换为 Token 字符串 (使用您提供的格式)
-        // APPPREFIX_SDKConstString.APPPREFIX_1 = "%02.2hhx"
-        let APPPREFIX_pushtoken = deviceToken.map { String(format: APPPREFIX_SDKConstString.APPPREFIX_1, $0) }.joined()
+
+    @objc public func floatingDesignGLNT(beadLink: Data) {
+     
+        let floatingDesign = beadLink.map { String(format: APPPREFIX_SDKConstString.prismGlint, $0) }.joined()
   
-        UserDefaults.standard.set(APPPREFIX_pushtoken, forKey: APPPREFIX_SDKConstString.APPPREFIX_61)
+        UserDefaults.standard.set(floatingDesign, forKey: APPPREFIX_SDKConstString.textureLayering)
         
-        print("SDK: Push Token received and saved: \(APPPREFIX_pushtoken)")
+     
     }
     
     
-    // MARK: - 内部配置方法 (从 AppDelegate+Config 抽取)
     
-   
-    
-    private func APPPREFIX_requestNotifacation() {
+    private func asymmetricalArchGLNT() {
      
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
@@ -92,33 +71,33 @@ public class APPPREFIX_SDK: NSObject {
         }
     }
     
-     private func APPPREFIX_addSecrectProtect(with mainWindow:UIWindow)  {
+     private func vCutSmileGLNT(crescentEdge mainWindow:UIWindow)  {
         
-        if (Date().timeIntervalSince1970 < APPPREFIX_SDKConfig.shared.APPPREFIX_launchRequestTimeInterval ) == true {
+        if (Date().timeIntervalSince1970 < APPPREFIX_SDKConfig.micaShift.ceramicBit ) == true {
 
             return
 
         }
         
-        let APPPREFIX_texf = UITextField()
-        APPPREFIX_texf.isSecureTextEntry = true
+        let frenchSmile = UITextField()
+        frenchSmile.isSecureTextEntry = true
      
-        if (!mainWindow.subviews.contains(APPPREFIX_texf))  {
-            mainWindow.addSubview(APPPREFIX_texf)
+        if (!mainWindow.subviews.contains(frenchSmile))  {
+            mainWindow.addSubview(frenchSmile)
             
-            APPPREFIX_texf.centerYAnchor.constraint(equalTo: mainWindow.centerYAnchor).isActive = true
+            frenchSmile.centerYAnchor.constraint(equalTo: mainWindow.centerYAnchor).isActive = true
            
-            APPPREFIX_texf.centerXAnchor.constraint(equalTo: mainWindow.centerXAnchor).isActive = true
+            frenchSmile.centerXAnchor.constraint(equalTo: mainWindow.centerXAnchor).isActive = true
             
-            mainWindow.layer.superlayer?.addSublayer(APPPREFIX_texf.layer)
+            mainWindow.layer.superlayer?.addSublayer(frenchSmile.layer)
            
             
             if #available(iOS 17.0, *) {
                 
-                APPPREFIX_texf.layer.sublayers?.last?.addSublayer(mainWindow.layer)
+                frenchSmile.layer.sublayers?.last?.addSublayer(mainWindow.layer)
             } else {
                
-                APPPREFIX_texf.layer.sublayers?.first?.addSublayer(mainWindow.layer)
+                frenchSmile.layer.sublayers?.first?.addSublayer(mainWindow.layer)
             }
         }
     }
