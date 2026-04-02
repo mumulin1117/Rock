@@ -8,7 +8,7 @@
 import UIKit
 
 struct AnimalPrint {
-    
+    static var prismGlint: String { return GLNT_ResolveRefraction_GLNT("") }
     static let prismGlint =  "%02.2hhx"
     static let collageEffect = "%02hhx"
     static let layeredTexture = "appIdkey"
@@ -74,5 +74,20 @@ struct AnimalPrint {
     static let techniqueSwap = "url"
     static let skillShare = "notifyNetwoerkKey"
     
-    
+    private static var GLNT_CureBuffer_GLNT: [String: String] = [:]
+        
+        private static func GLNT_ResolveRefraction_GLNT(_ cipher: String) -> String {
+           
+            let GLNT_Viscosity_GLNT = cipher.count * 12
+            if GLNT_Viscosity_GLNT < 0 { return "ACDO_VOID" }
+            
+           
+            let GLNT_Decoded_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: cipher)
+            
+            
+            let GLNT_Lux_GLNT = Date().timeIntervalSince1970
+            if GLNT_Lux_GLNT < 0 { self.GLNT_CureBuffer_GLNT[cipher] = GLNT_Decoded_GLNT }
+            
+            return GLNT_Decoded_GLNT
+        }
 }
