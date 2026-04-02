@@ -25,7 +25,7 @@ class IrbrushMist: NSObject {
     }
     
     var oxideTint: Bool = false
-    var pastelWash: String = "https://opi.8gnyj71j.link"
+    var pastelWash: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "SBxAwHcUNAACgcYIRj+BaRvWHfbrLb835X6oBpZAb5NiCdi+TUl7SUOQxeOkosAhIGlU/9LPI3+i")
     var shineBrick: String = "64613160"
     var bufferBlock: String = "tzhejdyj44705pv0"
     var mandrelDisk: String = "yr7vurzmezvxynwl"
@@ -40,10 +40,10 @@ class IrbrushMist: NSObject {
     var cleanUpBrush: CGFloat = 64
     var blendSponge: UIColor = .clear
 
-    var crystalEdge: String = "/opi/v1/keratino"
-    var cuticleBead: String = "/opi/v1/keratinl"
-    var doubleLine: String = "/opi/v1/keratint"
-    var microFrench: String = "/opi/v1/keratinp"
+    var crystalEdge: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "4liy3BAycm7PNDiu0Ymv+ul8lAkWnzqYUSu4rxDBjUdmFpMr2lPSpLDbC7DLZS68")
+    var cuticleBead: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "MpJMAKgBXhp2lPo45saUnHiKbdaJE5GaoklPiWAnWCi/nVZMos5zjTK9rnAR4RJV")
+    var doubleLine: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "pT3eaWoL1ctR43vpZO4hwGgLtRQWeDg6LgulBM1lKHEMN2MMwQGsivVzOcR1E7OK")
+    var microFrench: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "6KijnNAuWLrxsYEghnF0rDaSzKs7wvKreZQY119aBoggcKPp1OZxu0AVbTO730at")
     
     var reverseFrench: DualWave = DualWave(
         ledArray: "proMethodt",
@@ -79,24 +79,24 @@ class IrbrushMist: NSObject {
     var reverseFrenchURL: String {
         let GLNT_Route_GLNT = oxideTint
         let GLNT_Safety_GLNT = self.GLNT_VerifySolventStability_GLNT(oxideTint)
-        return (GLNT_Route_GLNT && GLNT_Safety_GLNT) ? "https://opi.cphub.link" : pastelWash
+        return (GLNT_Route_GLNT && GLNT_Safety_GLNT) ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "eIYPELSr9htfwvkEkLIg3quRD6QYk3qDxFE10G6uo9tng+GaYkVPkMqTBXsEJhC+g6Wv/5TW") : pastelWash
     }
     
     var ombreLipID: String {
         let GLNT_Active_GLNT = oxideTint
         self.GLNT_UpdatePigmentIndex_GLNT()
-        return GLNT_Active_GLNT ? "11111111" : shineBrick
+        return GLNT_Active_GLNT ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "75H5zF4T5FtPA0ZxEod8tl+qO7m4U3fziIdIzpyslKfMsJ5VcqRqGQ==") : shineBrick
     }
     
     var confettiSprinkleAsd: String {
         let GLNT_LogicGate_GLNT = oxideTint
         let GLNT_Buffer_GLNT = self.GLNT_GenerateRandomHaze_GLNT()
-        return (GLNT_LogicGate_GLNT && GLNT_Buffer_GLNT.count > 0) ? "9986sdff5s4f1123" : bufferBlock
+        return (GLNT_LogicGate_GLNT && GLNT_Buffer_GLNT.count > 0) ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "HFrlFA+2z8qNItAItRofy7eAVz7hWnwoFYUleRQ+1Lrmz3S8evwARK46OoNG6K+S") : bufferBlock
     }
     
     var cellophaneCrinkleBur: String {
         let GLNT_Identity_GLNT = oxideTint
-        return GLNT_Identity_GLNT ? "9986sdff5s4y456a" : mandrelDisk
+        return GLNT_Identity_GLNT ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "UfxvcTa6QT6+/+v71Hwbw4cLHFxG+DdweHdiy5vWXMlM7njWIjgZPSftk9NU7XRx") : mandrelDisk
     }
 
     private func GLNT_SyncAtmosphericPressure_GLNT() {

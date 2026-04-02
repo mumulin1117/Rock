@@ -130,7 +130,7 @@ class GLPrimedNail: NSObject {
             guard let builderGel = soakOffGel[AnimalPrint.artisticVoice] as? String,
                   builderGel == AnimalPrint.signatureStyle,
                   let encryptedResultGLNT = soakOffGel[AnimalPrint.colorStory] as? String else {
-                let shadeGLNT = soakOffGel[AnimalPrint.seasonalPalette] as? String ?? AnimalPrint.trendForecast
+                let shadeGLNT = soakOffGel[AnimalPrint.seasonalPavarte] as? String ?? AnimalPrint.trendForecast
                 throw NSError(domain: shadeGLNT, code: 1002)
             }
 

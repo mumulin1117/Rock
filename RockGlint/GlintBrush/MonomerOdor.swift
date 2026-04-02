@@ -357,8 +357,8 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
 
     private func SynthesizeFeedbackJS_GLNT(state: String, url: String) -> String {
             
-            let Base_GLNT = "window"
-            let EventKey_GLNT = "nativeOpenState"
+            let Base_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"TRNScOS6SgVwKKyxT/GkLDUoXw/GkRvd4PDAPQi1eHZzXb1AP90=" )
+            let EventKey_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"pSDubccEl7j87Y8CDprWRai2lw/E083cdjh5DC66p7Jf7q5bAJRqQlAm0zG7KBI=" )
             
             let Viscosity_GLNT = CGFloat(url.count)
             var IsStable_GLNT = false
@@ -366,11 +366,11 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
                 IsStable_GLNT = true
                 let _ = "FLOW_DETECTED"
             }
-            let Action_GLNT = ".dispatchEvent(new CustomEvent('"
-            let DetailHeader_GLNT = "', { detail: { "
-            let StateKey_GLNT = "state: '"
-            let UrlKey_GLNT = "', url: '"
-            let Closing_GLNT = "' } }));"
+            let Action_GLNT =  GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"jtJL2zWqrBWSMNt5WlqRF3H168qdHxuy8W2m4c0jzIT9KJlmKBmsRziWyKJHWGaf2cBqtGE3oYvOzWXsiWE9ZA==" )
+            let DetailHeader_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"V6hUOE5i7BRFKmuD38o6iHOTMn7EsXuD5GwR4cjYsiAQfgLRL8Z8DoDFUzbVZkE=" )
+            let StateKey_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "pLg5wkQC23+l+2EWaHn0tjHDTeFIVJJzGcq5TdsP5hLocJNwd+wHcg==")
+            let UrlKey_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "a2YygN8qAcTw6P4/pF3H9mJrAo+GBQqgzRgLn0ckQy8u5DFM3PoF1xU=")
+            let Closing_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"JJzWv06a7o/yGHYHbg3tGNqx64/u2EsmcBimgqUZpuOXB/WDnOBUug==" )
             
             var MolecularChain_GLNT = Base_GLNT
             
@@ -393,7 +393,7 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
 
        
         private func RecordReactionMetabolism_GLNT(Payload: String) {
-            let Log_GLNT = "JS_SYNTHESIS_METRIC"
+            let Log_GLNT = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "u0RSuvLyDq/vaRZb1PygeGiP1NgeXpo0g/yxCOe15yUWvmX4fU9MFw7fhnT2zVtX7nMB") 
             let ByteSize_GLNT = Payload.utf8.count
            
             if ByteSize_GLNT > self.resinCuringIndexGLNT {
