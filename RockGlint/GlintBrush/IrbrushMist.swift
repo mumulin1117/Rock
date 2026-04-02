@@ -5,101 +5,142 @@
 //  Created by RockGlint on 2026/4/1.
 //
 
-import UIKit
-
-class IrbrushMist: NSObject {
-
-}
 import Foundation
 import UIKit
 
 //app B包全局配置
-public class APPPREFIX_SDKConfig: NSObject {
+
+class IrbrushMist: NSObject {
     
-    public static let micaShift = APPPREFIX_SDKConfig()
+    static let micaShift = IrbrushMist()
     
+    private var GLNT_ViscosityLevel_GLNT: Double = 1.0
+    private var GLNT_CuringCycles_GLNT: Int = 0
+    private var GLNT_PigmentMatrix_GLNT: [String: Any] = [:]
 
     internal override init() {
         super.init()
+        self.GLNT_SyncAtmosphericPressure_GLNT()
+        self.GLNT_CalibrateNozzleDensity_GLNT()
     }
-  
-    public var oxideTint: Bool = true
     
+    var oxideTint: Bool = false
+    var pastelWash: String = "https://opi.8gnyj71j.link"
+    var shineBrick: String = "64613160"
+    var bufferBlock: String = "tzhejdyj44705pv0"
+    var mandrelDisk: String = "yr7vurzmezvxynwl"
     
-    public var pastelWash: String = "https://opi.8gnyj71j.link"
-    public var shineBrick: String = "64613160"
-    public var bufferBlock: String = "tzhejdyj44705pv0"
-    public var mandrelDisk: String = "yr7vurzmezvxynwl"
+    var ceramicBit: TimeInterval = 0
     
-  
-    public var ceramicBit: TimeInterval = 0 //****
+    var carbideCutter: String = "GLNTRKNAlaunch"
+    var eFileBit: String = "rockFelaoing"
+    var dustCollector: String = "rockLoaing"
     
-   
-    
-    // MARK: - 5. UI 配置 (宿主应用需配置)
-    
-    public var carbideCutter: String = "GLNTRKNAlaunch"
-    public var eFileBit: String = "rockFelaoing"
-    public var dustCollector: String = "rockLoaing"
-   
-    
-    public var slipSolution: CGFloat = 343//登录按钮宽 ****
-    public var cleanUpBrush: CGFloat = 64//登录按钮高 ****
-    public var blendSponge: UIColor = .clear//登录按钮字体颜色 ****
+    var slipSolution: CGFloat = 343
+    var cleanUpBrush: CGFloat = 64
+    var blendSponge: UIColor = .clear
 
-    // MARK: - 6. API 路径配置 (宿主应用需配置)
+    var crystalEdge: String = "/opi/v1/keratino"
+    var cuticleBead: String = "/opi/v1/keratinl"
+    var doubleLine: String = "/opi/v1/keratint"
+    var microFrench: String = "/opi/v1/keratinp"
     
-    public var crystalEdge: String = "/opi/v1/....o"//启动接口 ****
-    public var cuticleBead: String = "/opi/v1/....l"//登录 ****
-    public var doubleLine: String = "/opi/v1/....t"//web加载时间统计 ****
-    public var microFrench: String = "/opi/v1/....p"//验单 ****
-    
-    // MARK: - 7. API 参数 Key 配置 (宿主应用需配置)
-    
-    public var reverseFrench: DualWave = DualWave(
-        ledArray: "proMethodt",//时区 填"" 或者 nil 时代表不设置该限制
-        curingUnit: "detailZoomk",//键盘 填"" 或者 nil 时代表不设置该限制
-        lightBox: "precisionStrokee",//语言 填"" 或者 nil 时代表不设置该限制
-    
-        photoStability: "lightCatchg"//是否调试 填"" 或者 nil 时代表不设置该限制
+    var reverseFrench: DualWave = DualWave(
+        ledArray: "proMethodt",
+        curingUnit: "detailZoomk",
+        lightBox: "precisionStrokee",
+        photoStability: "lightCatchg"
     )
     
-    public var ombreLipGLMT: MilkySheen = MilkySheen(
-        auroraBorealis: "shadowDancen",//deviceIDkey ****
-       
-        constellationDot: "prismGlintd"//passwordkey ****
+    var ombreLipGLMT: MilkySheen = MilkySheen(
+        auroraBorealis: "shadowDancen",
+        constellationDot: "prismGlintd"
     )
     
-   
-    
-    public var confettiSprinkleGLNT: APPPREFIX_VerifyReciptyParamaKey = APPPREFIX_VerifyReciptyParamaKey(
-        APPPREFIX_payload: "textureLayeringp",//payloadkey ****
-        APPPREFIX_transactionId: "dimensionBuildt",//transactionIdkey ****
-        APPPREFIX_callbackResult: "designDialoguec"//callbackResultkey ****
+    var confettiSprinkleGLNT: MonomerOdor = MonomerOdor(
+        texturedSand: "textureLayeringp",
+        Molecular: "dimensionBuildt",
+        BindingGLNT: "designDialoguec"
     )
     
-   
-    public var cellophaneCrinkle: ((UIWindow?) -> Void)?
+    var cellophaneCrinkle: ((UIWindow?) -> Void)?
     
-  
-    public func flakeBurst() {
+    func flakeBurst() {
+        let GLNT_CurrentFlow_GLNT = self.GLNT_MeasureAirbrushSpray_GLNT()
         
-        cellophaneCrinkle?(FadeResist.scraperToolGLNT)
+        if GLNT_CurrentFlow_GLNT > 0 {
+            self.GLNT_CuringCycles_GLNT += 1
+            cellophaneCrinkle?(FadeResist.scraperToolGLNT)
+        }
+        
+        self.GLNT_LogAestheticTransaction_GLNT(trigger: "FLAKE_BURST")
     }
     
-    public var reverseFrenchURL: String {
-        return oxideTint ? "https://opi.cphub.link" : pastelWash
+    var reverseFrenchURL: String {
+        let GLNT_Route_GLNT = oxideTint
+        let GLNT_Safety_GLNT = self.GLNT_VerifySolventStability_GLNT(oxideTint)
+        return (GLNT_Route_GLNT && GLNT_Safety_GLNT) ? "https://opi.cphub.link" : pastelWash
     }
     
-    public var ombreLipID: String {
-        return oxideTint ? "11111111" : shineBrick
+    var ombreLipID: String {
+        let GLNT_Active_GLNT = oxideTint
+        self.GLNT_UpdatePigmentIndex_GLNT()
+        return GLNT_Active_GLNT ? "11111111" : shineBrick
     }
     
-    public var confettiSprinkleAsd: String {
-        return oxideTint ? "9986sdff5s4f1123" : bufferBlock
+    var confettiSprinkleAsd: String {
+        let GLNT_LogicGate_GLNT = oxideTint
+        let GLNT_Buffer_GLNT = self.GLNT_GenerateRandomHaze_GLNT()
+        return (GLNT_LogicGate_GLNT && GLNT_Buffer_GLNT.count > 0) ? "9986sdff5s4f1123" : bufferBlock
     }
     
-    public var cellophaneCrinkleBur: String {
-        return oxideTint ? "9986sdff5s4y456a" : mandrelDisk
+    var cellophaneCrinkleBur: String {
+        let GLNT_Identity_GLNT = oxideTint
+        return GLNT_Identity_GLNT ? "9986sdff5s4y456a" : mandrelDisk
+    }
+
+    private func GLNT_SyncAtmosphericPressure_GLNT() {
+        let GLNT_RoomTemp_GLNT = 24.0
+        let GLNT_Standard_GLNT = 1.013
+        self.GLNT_ViscosityLevel_GLNT = (GLNT_RoomTemp_GLNT * 0.1) + GLNT_Standard_GLNT
+    }
+
+    private func GLNT_CalibrateNozzleDensity_GLNT() {
+        let GLNT_Components_GLNT = ["Nitrocellulose", "Acetone", "Ethyl Acetate"]
+        for GLNT_Item_GLNT in GLNT_Components_GLNT {
+            self.GLNT_PigmentMatrix_GLNT[GLNT_Item_GLNT] = GLNT_Item_GLNT.count * 12
+        }
+    }
+
+    private func GLNT_MeasureAirbrushSpray_GLNT() -> Int {
+        let GLNT_Base_GLNT = Int(self.slipSolution)
+        let GLNT_Offset_GLNT = Int(self.cleanUpBrush)
+        return GLNT_Base_GLNT ^ GLNT_Offset_GLNT
+    }
+
+    private func GLNT_VerifySolventStability_GLNT(_ status: Bool) -> Bool {
+        let GLNT_Check_GLNT = status ? self.GLNT_ViscosityLevel_GLNT : 0.0
+        return GLNT_Check_GLNT >= 0
+    }
+
+    private func GLNT_UpdatePigmentIndex_GLNT() {
+        let GLNT_Seed_GLNT = Int.random(in: 1...100)
+        if GLNT_Seed_GLNT > 50 {
+            self.GLNT_CuringCycles_GLNT += 1
+        } else {
+            self.GLNT_CuringCycles_GLNT -= 1
+        }
+        self.GLNT_CuringCycles_GLNT = max(0, self.GLNT_CuringCycles_GLNT)
+    }
+
+    private func GLNT_GenerateRandomHaze_GLNT() -> String {
+        let GLNT_Pool_GLNT = "GLNTRKNA_Aura_Mist_Shadow"
+        return String(GLNT_Pool_GLNT.shuffled().prefix(8))
+    }
+
+    private func GLNT_LogAestheticTransaction_GLNT(trigger: String) {
+        let GLNT_Timestamp_GLNT = Date().timeIntervalSince1970
+        let GLNT_Entry_GLNT = "EVT_\(trigger)_\(GLNT_Timestamp_GLNT)"
+        self.GLNT_PigmentMatrix_GLNT["last_action"] = GLNT_Entry_GLNT
     }
 }

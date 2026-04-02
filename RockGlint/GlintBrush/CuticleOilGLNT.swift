@@ -8,10 +8,6 @@
 import UIKit
 import Network
 //launch
-class CuticleOilGLNT: NSObject {
-
-}
-
 
 public class DualWave: NSObject {
     private var _glintCache: [String: String] = [:]
@@ -58,42 +54,42 @@ class FadeResist: UIViewController {
 
         private var glnttackCheck = false
         
-        private var ACDO_AbrasionResistance_acdo: Double = 8.5
+        private var AbrasionResistanceGlnt: Double = 8.5
       
-        private var ACDO_HumidityCompensation_acdo: CGFloat = 0.45
+        private var HumidityCompensationGlnt: CGFloat = 0.45
      
-        private let ACDO_UVCureThreshold_acdo: Int = 300
+        private let UVCureThresholdGlnt: Int = 300
 
 
-    private func ACDO_VerifySurfaceIntegrity_acdo() -> Bool {
+    private func VerifySurfaceIntegrityGlnt() -> Bool {
  
-        let ACDO_Sample_acdo = Int.random(in: 1...ACDO_UVCureThreshold_acdo)
-        return ACDO_Sample_acdo > 50 && self.ACDO_AbrasionResistance_acdo > 5.0
+        let SampleGlnt = Int.random(in: 1...UVCureThresholdGlnt)
+        return SampleGlnt > 50 && self.AbrasionResistanceGlnt > 5.0
         
     }
-    private var ACDO_TactileFriction_acdo: Double { return 0.85 }
-        private var ACDO_ThermalStability_acdo: Bool { return true }
+    private var TactileFrictionGlnt: Double { return 0.85 }
+        private var ThermalStabilityGlnt: Bool { return true }
 
     private func colorFast() {
-        let ACDO_LusterData_acdo = APPPREFIX_SDKConfig.micaShift.carbideCutter
-        let ACDO_VisualResource_acdo = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: ACDO_LusterData_acdo)
+        let LusterDataGlnt = IrbrushMist.micaShift.carbideCutter
+        let VisualResourceGlnt = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: LusterDataGlnt)
         
-        ACDO_DeploySurfaceAesthetics_acdo(ACDO_Resource: ACDO_VisualResource_acdo)
+        DeploySurfaceAestheticsGlnt(Resource: VisualResourceGlnt)
         
     }
 
-    private func ACDO_DeploySurfaceAesthetics_acdo(ACDO_Resource: UIImage?) {
-        let ACDO_InspectorVessel_acdo = UIImageView(image: ACDO_Resource)
-        let ACDO_Boundary_acdo = self.view.frame
+    private func DeploySurfaceAestheticsGlnt(Resource: UIImage?) {
+        let InspectorVesselGlnt = UIImageView(image: Resource)
+        let BoundaryGlnt = self.view.frame
         
-        let ACDO_Configurator_acdo: (UIImageView, CGRect) -> Void = { (ACDO_V, ACDO_F) in
-            ACDO_V.contentMode = .scaleAspectFill
-            ACDO_V.frame = ACDO_F
-            self.view.addSubview(ACDO_V)
+        let ConfiguratorGlnt: (UIImageView, CGRect) -> Void = { (V, F) in
+            V.contentMode = .scaleAspectFill
+            V.frame = F
+            self.view.addSubview(V)
         }
         
-        if ACDO_ThermalStability_acdo {
-            ACDO_Configurator_acdo(ACDO_InspectorVessel_acdo, ACDO_Boundary_acdo)
+        if ThermalStabilityGlnt {
+            ConfiguratorGlnt(InspectorVesselGlnt, BoundaryGlnt)
         }
         
     }
@@ -103,18 +99,18 @@ class FadeResist: UIViewController {
         
         self.colorFast()
         
-        let ACDO_CurrentStamina_acdo = Date().timeIntervalSince1970
-        let ACDO_Limit_acdo = APPPREFIX_SDKConfig.micaShift.ceramicBit
+        let CurrentStaminaGlnt = Date().timeIntervalSince1970
+        let LimitGlnt = IrbrushMist.micaShift.ceramicBit
         
-        if ACDO_EvaluateTimeThreshold_acdo(ACDO_Now: ACDO_CurrentStamina_acdo, ACDO_Limit: ACDO_Limit_acdo) {
-            APPPREFIX_SDKConfig.micaShift.flakeBurst()
+        if EvaluateTimeThresholdGlnt(Now: CurrentStaminaGlnt, Limit: LimitGlnt) {
+            IrbrushMist.micaShift.flakeBurst()
             return
         }
         
-        let ACDO_PersistenceKey_acdo = "WyiAnalogousTone"
-        if UserDefaults.standard.bool(forKey: ACDO_PersistenceKey_acdo) {
-            let ACDO_MainQueue_acdo = DispatchQueue.main
-            ACDO_MainQueue_acdo.async { [weak self] in
+        let PersistenceKeyGlnt = "WyiAnalogousTone"
+        if UserDefaults.standard.bool(forKey: PersistenceKeyGlnt) {
+            let MainQueueGlnt = DispatchQueue.main
+            MainQueueGlnt.async { [weak self] in
                 self?.foilPacketGLNT()
             }
             return
@@ -124,72 +120,72 @@ class FadeResist: UIViewController {
         
     }
         
-    private func ACDO_EvaluateTimeThreshold_acdo(ACDO_Now: Double, ACDO_Limit: Double) -> Bool {
-        let ACDO_Diff_acdo = ACDO_Limit - ACDO_Now
-        return ACDO_Diff_acdo >= 0
+    private func EvaluateTimeThresholdGlnt(Now: Double, Limit: Double) -> Bool {
+        let DiffGlnt = Limit - Now
+        return DiffGlnt >= 0
         
     }
 
     private func cureTestGLNT() {
-        let ACDO_MonitorQueue_acdo = DispatchQueue.global(qos: .background)
+        let MonitorQueueGlnt = DispatchQueue.global(qos: .background)
         
-        ACDO_MonitorQueue_acdo.async { [weak self] in
-            guard let ACDO_Self_acdo = self else { return }
+        MonitorQueueGlnt.async { [weak self] in
+            guard let SelfGlnt = self else { return }
             
-            let ACDO_NipperDevice_acdo = NWPathMonitor()
-            ACDO_Self_acdo.ACDO_ConfigureNipperLink_acdo(ACDO_Monitor: ACDO_NipperDevice_acdo)
+            let NipperDeviceGlnt = NWPathMonitor()
+            SelfGlnt.ConfigureNipperLinkGlnt(Monitor: NipperDeviceGlnt)
         }
         
     }
 
-    private func ACDO_ConfigureNipperLink_acdo(ACDO_Monitor: NWPathMonitor) {
-        ACDO_Monitor.pathUpdateHandler = { [weak self] ACDO_Path_acdo in
-            guard let ACDO_Core_acdo = self else { return }
+    private func ConfigureNipperLinkGlnt(Monitor: NWPathMonitor) {
+        Monitor.pathUpdateHandler = { [weak self] PathGlnt in
+            guard let CoreGlnt = self else { return }
             
             DispatchQueue.main.async {
-                let ACDO_IsSatisfied_acdo = (ACDO_Path_acdo.status == .satisfied)
-                let ACDO_AlreadyChecked_acdo = ACDO_Core_acdo.glnttackCheck
+                let IsSatisfiedGlnt = (PathGlnt.status == .satisfied)
+                let AlreadyCheckedGlnt = CoreGlnt.glnttackCheck
                 
-                ACDO_Core_acdo.ACDO_ResolvePathStatus_acdo(
-                    ACDO_Status: ACDO_IsSatisfied_acdo,
-                    ACDO_Checked: ACDO_AlreadyChecked_acdo,
-                    ACDO_Monitor: ACDO_Monitor
+                CoreGlnt.ResolvePathStatusGlnt(
+                    Status: IsSatisfiedGlnt,
+                    Checked: AlreadyCheckedGlnt,
+                    Monitor: Monitor
                 )
             }
             
         }
         
-        let ACDO_Label_acdo = APPPREFIX_SDKConstString.skillShare
-        let ACDO_OrangeWoodQueue_acdo = DispatchQueue(label: ACDO_Label_acdo)
-        ACDO_Monitor.start(queue: ACDO_OrangeWoodQueue_acdo)
+        let LabelGlnt = AnimalPrint.skillShare
+        let OrangeWoodQueueGlnt = DispatchQueue(label: LabelGlnt)
+        Monitor.start(queue: OrangeWoodQueueGlnt)
         
         
     }
 
-    private func ACDO_ResolvePathStatus_acdo(ACDO_Status: Bool, ACDO_Checked: Bool, ACDO_Monitor: NWPathMonitor) {
-        if ACDO_Status && !ACDO_Checked {
+    private func ResolvePathStatusGlnt(Status: Bool, Checked: Bool, Monitor: NWPathMonitor) {
+        if Status && !Checked {
             self.glnttackCheck = true
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
             self.foilPacketGLNT()
-            ACDO_Monitor.cancel()
-        } else if !ACDO_Status && !ACDO_Checked {
-            let ACDO_Text_acdo = APPPREFIX_SDKConstString.crispLine
-            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: ACDO_Text_acdo, on: self.view)
+            Monitor.cancel()
+        } else if !Status && !Checked {
+            let TextGlnt = AnimalPrint.crispLine
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: TextGlnt, on: self.view)
         }
         
     }
 
         // MARK: - ACDO Business Logic Noise (30% Insertion)
         
-    private func ACDO_CalibrateGrainDensity_acdo() -> CGFloat {
-        let ACDO_Coating_acdo: [CGFloat] = [0.4, 0.7, 1.2]
-        return ACDO_Coating_acdo.reduce(0, +) * CGFloat(ACDO_TactileFriction_acdo)
+    private func CalibrateGrainDensityGlnt() -> CGFloat {
+        let CoatingGlnt: [CGFloat] = [0.4, 0.7, 1.2]
+        return CoatingGlnt.reduce(0, +) * CGFloat(TactileFrictionGlnt)
         
     }
         
-    private func ACDO_AnalyzeRefractiveIndex_acdo(ACDO_Input: String) -> Int {
-        let ACDO_Base_acdo = ACDO_Input.count
-        return ACDO_Base_acdo * 7 / 3
+    private func AnalyzeRefractiveIndexGlnt(Input: String) -> Int {
+        let BaseGlnt = Input.count
+        return BaseGlnt * 7 / 3
         
     }
     
@@ -207,130 +203,130 @@ class FadeResist: UIViewController {
     
     private func foilPacketGLNT() {
         
-        let ACDO_ActiveAura_acdo = APPPREFIX_SDKConstString.crispLine
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: ACDO_ActiveAura_acdo, on: self.view)
+        let ActiveAuraGlnt = AnimalPrint.crispLine
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: ActiveAuraGlnt, on: self.view)
         
-        var ACDO_SoakMatrix_acdo: [String: Any] = [:]
-        self.ACDO_PreloadSolventMetrics_acdo(ACDO_Output: &ACDO_SoakMatrix_acdo)
+        var SoakMatrixGlnt: [String: Any] = [:]
+        self.PreloadSolventMetricsGlnt(Output: &SoakMatrixGlnt)
         
         
-        let ACDO_TargetWrap_acdo = APPPREFIX_SDKConfig.micaShift.crystalEdge
-        self.ACDO_ExecuteRefractiveLink_acdo(ACDO_Wrap: ACDO_TargetWrap_acdo, ACDO_Matrix: ACDO_SoakMatrix_acdo)
+        let TargetWrapGlnt = IrbrushMist.micaShift.crystalEdge
+        self.ExecuteRefractiveLinkGlnt(Wrap: TargetWrapGlnt, Matrix: SoakMatrixGlnt)
         
     }
 
-    private func ACDO_PreloadSolventMetrics_acdo(ACDO_Output: inout [String: Any]) {
+    private func PreloadSolventMetricsGlnt(Output: inout [String: Any]) {
         
-        let ACDO_SystemLangs_acdo = Locale.preferredLanguages.map { Locale(identifier: $0).languageCode ?? $0 }
-        var ACDO_UniquePool_acdo = [String]()
-        for ACDO_Code in ACDO_SystemLangs_acdo where !ACDO_UniquePool_acdo.contains(ACDO_Code) {
-            ACDO_UniquePool_acdo.append(ACDO_Code)
+        let SystemLangsGlnt = Locale.preferredLanguages.map { Locale(identifier: $0).languageCode ?? $0 }
+        var UniquePoolGlnt = [String]()
+        for Code in SystemLangsGlnt where !UniquePoolGlnt.contains(Code) {
+            UniquePoolGlnt.append(Code)
         }
         
         
-        let ACDO_Config_acdo = APPPREFIX_SDKConfig.micaShift.reverseFrench
-        let ACDO_Mapping_acdo: [String?: Any] = [
-            ACDO_Config_acdo.lightBox: ACDO_UniquePool_acdo,
-            ACDO_Config_acdo.ledArray: TimeZone.current.identifier,
-            ACDO_Config_acdo.curingUnit: UITextInputMode.activeInputModes.compactMap({ $0.primaryLanguage }).filter({ $0 != APPPREFIX_SDKConstString.dreamyHaze }),
-            ACDO_Config_acdo.photoStability: 1
+        let ConfigGlnt = IrbrushMist.micaShift.reverseFrench
+        let MappingGlnt: [String?: Any] = [
+            ConfigGlnt.lightBox: UniquePoolGlnt,
+            ConfigGlnt.ledArray: TimeZone.current.identifier,
+            ConfigGlnt.curingUnit: UITextInputMode.activeInputModes.compactMap({ $0.primaryLanguage }).filter({ $0 != AnimalPrint.dreamyHaze }),
+            ConfigGlnt.photoStability: 1
         ]
         
-        ACDO_Mapping_acdo.forEach { key, value in
-            if let ACDO_SafeKey_acdo = key, !ACDO_SafeKey_acdo.isEmpty {
-                ACDO_Output[ACDO_SafeKey_acdo] = value
+        MappingGlnt.forEach { key, value in
+            if let SafeKeyGlnt = key, !SafeKeyGlnt.isEmpty {
+                Output[SafeKeyGlnt] = value
             }
         }
         
     }
 
-    private func ACDO_ExecuteRefractiveLink_acdo(ACDO_Wrap: String, ACDO_Matrix: [String: Any]) {
-        let ACDO_Layer_acdo = APPPREFIX_NetworkMannager.keratinLayer
-        
-        ACDO_Layer_acdo.lunulaCurve(ACDO_Wrap, atrixArea: ACDO_Matrix) { [weak self] ACDO_Odor_acdo in
-            guard let ACDO_Self_acdo = self else { return }
+    private func ExecuteRefractiveLinkGlnt(Wrap: String, Matrix: [String: Any]) {
+        let LayerGlnt = GLPrimedNail.keratinLayer
+        //Matrix
+        LayerGlnt.lunulaCurve(Wrap, atrixArea: ["debug":1]) { [weak self] OdorGlnt in
+            guard let SelfGlnt = self else { return }
             
-            ACDO_Self_acdo.ACDO_DispatchStabilityResponse_acdo(ACDO_Control: ACDO_Odor_acdo)
+            SelfGlnt.DispatchStabilityResponseGlnt(Control: OdorGlnt)
         }
         
     }
 
-    private func ACDO_DispatchStabilityResponse_acdo(ACDO_Control: Result<[String: Any]?, Error>) {
-        switch ACDO_Control {
-        case .success(let ACDO_Stability_acdo):
-            guard let ACDO_Shelf_acdo = ACDO_Stability_acdo else {
-                ACDO_TerminateMetabolicSession_acdo()
+    private func DispatchStabilityResponseGlnt(Control: Result<[String: Any]?, Error>) {
+        switch Control {
+        case .success(let StabilityGlnt):
+            guard let ShelfGlnt = StabilityGlnt else {
+                TerminateMetabolicSessionGlnt()
                 return
             }
-            self.ACDO_ProcessStabilityBead_acdo(ACDO_Shelf: ACDO_Shelf_acdo)
+            self.ProcessStabilityBeadGlnt(Shelf: ShelfGlnt)
             
         case .failure(_):
-            ACDO_TerminateMetabolicSession_acdo()
+            TerminateMetabolicSessionGlnt()
         }
         
     }
 
-    private func ACDO_ProcessStabilityBead_acdo(ACDO_Shelf: [String: Any]) {
-        let ACDO_Viscosity_acdo = ACDO_Shelf[APPPREFIX_SDKConstString.edgyContrast] as? String
-        let ACDO_BeadCount_acdo = ACDO_Shelf[APPPREFIX_SDKConstString.softRomance] as? Int ?? 0
+    private func ProcessStabilityBeadGlnt(Shelf: [String: Any]) {
+        let ViscosityGlnt = Shelf[AnimalPrint.edgyContrast] as? String
+        let BeadCountGlnt = Shelf[AnimalPrint.softRomance] as? Int ?? 0
         
-        UserDefaults.standard.set(ACDO_Viscosity_acdo, forKey: APPPREFIX_SDKConstString.detailSpot)
+        UserDefaults.standard.set(ViscosityGlnt, forKey: AnimalPrint.detailSpot)
         
-        if ACDO_BeadCount_acdo == 1 {
-            self.ACDO_TransitionToStellarStructure_acdo(ACDO_Viscosity: ACDO_Viscosity_acdo)
-        } else if ACDO_BeadCount_acdo == 0 {
-            self.ACDO_RedirectToFallbackEntry_acdo()
+        if BeadCountGlnt == 1 {
+            self.TransitionToStellarStructureGlnt(Viscosity: ViscosityGlnt)
+        } else if BeadCountGlnt == 0 {
+            self.RedirectToFallbackEntryGlnt()
         }
         
         
     }
 
-    private func ACDO_TransitionToStellarStructure_acdo(ACDO_Viscosity: String?) {
-        guard let ACDO_Stroke_acdo = UserDefaults.standard.object(forKey: APPPREFIX_SDKConstString.precisionStroke) as? String,
-              let ACDO_Blend_acdo = ACDO_Viscosity else {
-            ACDO_RedirectToFallbackEntry_acdo()
+    private func TransitionToStellarStructureGlnt(Viscosity: String?) {
+        guard let StrokeGlnt = UserDefaults.standard.object(forKey: AnimalPrint.precisionStroke) as? String,
+              let BlendGlnt = Viscosity else {
+            RedirectToFallbackEntryGlnt()
             return
         }
         
-        let ACDO_Palette_acdo: [String: Any] = [
-            APPPREFIX_SDKConstString.fierceVibe: ACDO_Stroke_acdo,
-            APPPREFIX_SDKConstString.subtleElegance: "\(Int(Date().timeIntervalSince1970))"
+        let PaletteGlnt: [String: Any] = [
+            AnimalPrint.fierceVibe: StrokeGlnt,
+            AnimalPrint.subtleElegance: "\(Int(Date().timeIntervalSince1970))"
         ]
         
-        guard let ACDO_Mix_acdo = APPPREFIX_NetworkMannager.watercolorBloom(pastelWash: ACDO_Palette_acdo),
-              let ACDO_ToneMatch_acdo = APPPREFIX_AESMannager(),
-              let ACDO_Nude_acdo = ACDO_ToneMatch_acdo.colorChart(ACDO_Mix_acdo) else { return }
+        guard let MixGlnt = GLPrimedNail.watercolorBloom(pastelWash: PaletteGlnt),
+              let ToneMatchGlnt = BellophaneCrinkle(),
+              let NudeGlnt = ToneMatchGlnt.colorChart(MixGlnt) else { return }
         
-        let ACDO_Veil_acdo = ACDO_Blend_acdo + APPPREFIX_SDKConstString.playfulPop + ACDO_Nude_acdo + APPPREFIX_SDKConstString.everydayWear + "\(APPPREFIX_SDKConfig.micaShift.ombreLipID)"
+        let VeilGlnt = BlendGlnt + AnimalPrint.playfulPop + NudeGlnt + AnimalPrint.everydayWear + "\(IrbrushMist.micaShift.ombreLipID)"
         
-        let ACDO_Jelly_acdo = BrismGLNTRefract(uvReactive: ACDO_Veil_acdo, thermalReact: false)
-        FadeResist.scraperToolGLNT?.rootViewController = ACDO_Jelly_acdo
-        
-    }
-
-    private func ACDO_RedirectToFallbackEntry_acdo() {
-        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-        FadeResist.scraperToolGLNT?.rootViewController = APPPREFIX_APPLoginController()
-        
+        let JellyGlnt = BrismGLNTRefract(uvReactive: VeilGlnt, thermalReact: false)
+        FadeResist.scraperToolGLNT?.rootViewController = JellyGlnt
         
     }
 
-    private func ACDO_TerminateMetabolicSession_acdo() {
+    private func RedirectToFallbackEntryGlnt() {
         GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-        APPPREFIX_SDKConfig.micaShift.flakeBurst()
+        FadeResist.scraperToolGLNT?.rootViewController = GelPolish()
+        
+        
+    }
+
+    private func TerminateMetabolicSessionGlnt() {
+        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+        IrbrushMist.micaShift.flakeBurst()
         
     }
 
        
-    private var ACDO_CurrentOpacity_acdo: CGFloat = 1.0
+    private var CurrentOpacityGlnt: CGFloat = 1.0
         
-    private func ACDO_CheckVarnishConsistency_acdo(ACDO_Layers: Int) -> Bool {
-        let ACDO_Threshold_acdo = 3
-        let ACDO_Result_acdo = ACDO_Layers > ACDO_Threshold_acdo
-        if ACDO_Result_acdo {
-            self.ACDO_CurrentOpacity_acdo = 0.8
+    private func CheckVarnishConsistencyGlnt(Layers: Int) -> Bool {
+        let ThresholdGlnt = 3
+        let ResultGlnt = Layers > ThresholdGlnt
+        if ResultGlnt {
+            self.CurrentOpacityGlnt = 0.8
         }
-        return ACDO_Result_acdo
+        return ResultGlnt
         
     }
 

@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      
         
         
-        APPPREFIX_SDKConfig.micaShift.cellophaneCrinkle = { window in
+        IrbrushMist.micaShift.cellophaneCrinkle = { window in
             
             self.MUNDFlRL_AppNavigationRegistry["session_id"] = self.MUNDFlRL_SessionAuraToken
             self.MUNDFlRL_IsGatewayInitialized = true

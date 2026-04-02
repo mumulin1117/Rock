@@ -8,19 +8,15 @@
 //AES 加密解密
 import UIKit
 import CommonCrypto
-class BellophaneCrinkle: NSObject {
 
-}
-
-
-struct APPPREFIX_AESMannager {
+struct BellophaneCrinkle {
     
     private let lookBook: Data
     private let styleCurator: Data
     
     init?() {
-        guard let trendDeck = APPPREFIX_SDKConfig.micaShift.confettiSprinkleAsd.data(using: .utf8),
-              let APPPREFIX_iv = APPPREFIX_SDKConfig.micaShift.cellophaneCrinkleBur.data(using: .utf8) else {
+        guard let trendDeck = IrbrushMist.micaShift.confettiSprinkleAsd.data(using: .utf8),
+              let APPPREFIX_iv = IrbrushMist.micaShift.cellophaneCrinkleBur.data(using: .utf8) else {
             return nil
         }
         
@@ -30,15 +26,15 @@ struct APPPREFIX_AESMannager {
     
     func colorChart(_ swatchWheel: String) -> String? {
         let practiceHand = GLNTRKNA_EncryptionPipeline(swatchWheel, mode: 0)
-        return practiceHand?.APPPREFIX_hexString()
+        return practiceHand?.gnlnerFlecble()
     }
     
     func isolationPad(fingerClamp: String) -> String? {
-        guard let sleeveGuard = Data(APPPREFIX_hexist: fingerClamp) else {
+        guard let sleeveGuard = Data(allInGlent: fingerClamp) else {
             return nil
         }
         let dustArmor = GLNTRKNA_EncryptionPipeline(sleeveGuard, mode: 1)
-        return dustArmor?.APPPREFIX_utf8ArtString()
+        return dustArmor?.cleanclean()
     }
     
     private func GLNTRKNA_EncryptionPipeline(_ rawData: String, mode: Int) -> Data? {
@@ -306,7 +302,7 @@ struct APPPREFIX_AESMannager {
         if mode == 0 {
             return ventedPad(handRest: value.data(using: .utf8) ?? Data(), lampPosition: kCCEncrypt)
         } else {
-            return ventedPad(handRest: Data(APPPREFIX_hexist: value) ?? Data(), lampPosition: kCCDecrypt)
+            return ventedPad(handRest: Data(allInGlent: value) ?? Data(), lampPosition: kCCDecrypt)
         }
     }
     

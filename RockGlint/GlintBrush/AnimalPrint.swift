@@ -7,10 +7,7 @@
 
 import UIKit
 
-class AnimalPrint: NSObject {
-
-}
-struct APPPREFIX_SDKConstString {
+struct AnimalPrint {
     
     static let prismGlint =  "%02.2hhx"
     static let collageEffect = "%02hhx"

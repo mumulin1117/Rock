@@ -255,7 +255,6 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
                 
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
                 
-                // 触发成功回调
                 callbackLock.lock()
                 if let callback = paymentCallbacks.removeValue(forKey: productId) {
                     let result = GLNTRKNA_PaymentResult(
@@ -299,7 +298,7 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
                 let (transactionId, originalTransactionId) = GLNTRKNA_ExtractReceiptInfo(from: glnt_trans)
                 let receiptData = GLNTRKNA_FetchReceiptData()
                 
-                // 处理恢复交易
+               
                 GLNTRKNA_HandleRestoredFulfillment(for: productId, transactionId: transactionId, originalTransactionId: originalTransactionId, receiptData: receiptData)
                 
                 SKPaymentQueue.default().finishTransaction(glnt_trans)
@@ -339,12 +338,10 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         if glnt_add > 0 {
             GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_AdjustEssence(delta: glnt_add)
             
-            // 可选：记录交易日志
             if let transactionId = transactionId {
                 print("Payment fulfilled - Product: \(glnt_id), Transaction: \(transactionId)")
             }
             
-            // 可选：将收据发送到服务器验证
             if let receiptData = receiptData {
                 GLNTRKNA_VerifyReceiptWithServer(receiptData: receiptData, transactionId: transactionId)
             }
@@ -378,7 +375,6 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         if glnt_add > 0 {
             GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_AdjustEssence(delta: glnt_add)
             
-            // 记录恢复的交易
             if let originalId = originalTransactionId {
                 print("Restored transaction - Product: \(glnt_id), Original Transaction: \(originalId)")
             }
@@ -389,14 +385,8 @@ class GLNTRKNA_PaymentCore: NSObject, SKPaymentTransactionObserver {
         }
     }
     
-    // MARK: - 收据验证（可选，与服务器交互）
+  
     private func GLNTRKNA_VerifyReceiptWithServer(receiptData: Data, transactionId: String?) {
-        // 将收据发送到您的服务器进行验证
-        // 这里只是示例，实际需要实现网络请求
-        #if DEBUG
-        // 开发环境验证逻辑
-        #else
-        // 生产环境验证逻辑
-        #endif
+       
     }
 }

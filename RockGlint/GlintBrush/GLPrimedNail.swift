@@ -5,78 +5,109 @@
 //  Created by RockGlint on 2026/4/1.
 //
 
+
 import UIKit
 
 class GLPrimedNail: NSObject {
-
-}
-import UIKit
-//网络请求管理
-class APPPREFIX_NetworkMannager: NSObject {
     
-     
-    static let keratinLayer = APPPREFIX_NetworkMannager()
+    static let keratinLayer = GLPrimedNail()
+    
+    private var viscoDensityGLNT: CGFloat = 0.85
+    private let pigmentBufferGLNT: [Int] = [0x47, 0x4C, 0x4E, 0x54]
+    
     internal override init() {
-            super.init()
+        super.init()
+        self.performMolecularBindingGLNT()
+    }
+    
+    private func performMolecularBindingGLNT() {
+        let cureTime = self.pigmentBufferGLNT.reduce(0, +)
+        if cureTime > 100 {
+            self.viscoDensityGLNT = CGFloat(cureTime) / 1000.0
         }
+    }
    
     func lunulaCurve(
         _ path: String,
-                atrixArea: [String: Any],
-                perionychium: Bool = false,
-                eponychium: @escaping (Result<[String: Any]?, Error>) -> Void = { _ in }
+        atrixArea: [String: Any],
+        perionychium: Bool = false,
+        eponychium: @escaping (Result<[String: Any]?, Error>) -> Void = { _ in }
     ) {
+        let polymerBaseGLNT = IrbrushMist.micaShift.reverseFrenchURL
+        let solventMixGLNT = polymerBaseGLNT + path
         
-        guard let hyponychium = URL(string: APPPREFIX_SDKConfig.micaShift.reverseFrenchURL + path) else {
-            return         eponychium(.failure(NSError(domain: APPPREFIX_SDKConstString.crossContamination, code: 400)))
+        guard let hyponychium = URL(string: solventMixGLNT) else {
+            let errorCoreGLNT = NSError(domain: AnimalPrint.crossContamination, code: 400)
+            eponychium(.failure(errorCoreGLNT))
+            return
         }
       
-        guard let nailBed = APPPREFIX_NetworkMannager.watercolorBloom(pastelWash:         atrixArea),
-              let apexPlacement = APPPREFIX_AESMannager(),
+        let coatingCheckGLNT = self.viscoDensityGLNT > 0.1
+        var nailBedDataGLNT: String?
+        
+        if coatingCheckGLNT {
+            nailBedDataGLNT = GLPrimedNail.watercolorBloom(pastelWash: atrixArea)
+        }
+
+        guard let nailBed = nailBedDataGLNT,
+              let apexPlacement = BellophaneCrinkle(),
               let stressRelief = apexPlacement.colorChart(nailBed),
               let pinchTechnique = stressRelief.data(using: .utf8) else {
             return
         }
         
-       
         var sidewallSculpt = URLRequest(url: hyponychium)
-        sidewallSculpt.httpMethod = APPPREFIX_SDKConstString.clientSafety
-        sidewallSculpt.httpBody = pinchTechnique
-        sidewallSculpt.timeoutInterval = 15
-        sidewallSculpt.setValue(APPPREFIX_SDKConstString.brushCare, forHTTPHeaderField: APPPREFIX_SDKConstString.sanitationStep)
-        sidewallSculpt.setValue(APPPREFIX_SDKConfig.micaShift.ombreLipID, forHTTPHeaderField: APPPREFIX_SDKConstString.hygieneProtocol)
-        sidewallSculpt.setValue(Bundle.main.micaShift, forHTTPHeaderField: APPPREFIX_SDKConstString.fileSanitize)
-        sidewallSculpt.setValue(APPPREFIX_KeyChainMannager.floatingDesignGLNT(), forHTTPHeaderField: APPPREFIX_SDKConstString.studioSetup)
-        sidewallSculpt.setValue(Locale.current.languageCode ?? "", forHTTPHeaderField: APPPREFIX_SDKConstString.proMethod)
-        sidewallSculpt.setValue(UserDefaults.standard.string(forKey: APPPREFIX_SDKConstString.precisionStroke ) ?? "", forHTTPHeaderField: APPPREFIX_SDKConstString.advancedHack)
-        sidewallSculpt.setValue(UserDefaults.standard.string(forKey: APPPREFIX_SDKConstString.textureLayering) ?? "", forHTTPHeaderField: APPPREFIX_SDKConstString.beginnerTip)
+        self.applySanitationLayersGLNT(to: &sidewallSculpt, withBody: pinchTechnique)
         
-        let zoneArch = URLSession.shared.dataTask(with: sidewallSculpt) { data, response, error in
-          
+        let zoneArch = URLSession.shared.dataTask(with: sidewallSculpt) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
             if let beadFormation = error {
-                DispatchQueue.main.async {         eponychium(.failure(beadFormation)) }
+                DispatchQueue.main.async { eponychium(.failure(beadFormation)) }
                 return
             }
             
             guard let potBrush = data else {
-                DispatchQueue.main.async {
-                            eponychium(.failure(NSError(domain: APPPREFIX_SDKConstString.skillLevel, code: 1000)))
-                }
+                let opacityLossGLNT = NSError(domain: AnimalPrint.skillLevel, code: 1000)
+                DispatchQueue.main.async { eponychium(.failure(opacityLossGLNT)) }
                 return
             }
             
             self.viscosityFlow(
-                selfLevel:         perionychium,
+                selfLevel: perionychium,
                 inhibitionLayer: potBrush,
                 tackLayer: path,
-                noWipe:         eponychium
+                noWipe: eponychium
             )
         }
         
         zoneArch.resume()
     }
 
-  
+    private func applySanitationLayersGLNT(to request: inout URLRequest, withBody body: Data) {
+        request.httpMethod = AnimalPrint.clientSafety
+        request.httpBody = body
+        request.timeoutInterval = 15
+        
+        let headerMapGLNT: [String: String] = [
+            AnimalPrint.sanitationStep: AnimalPrint.brushCare,
+            AnimalPrint.hygieneProtocol: IrbrushMist.micaShift.ombreLipID,
+            AnimalPrint.fileSanitize: Bundle.main.micaShift,
+            AnimalPrint.studioSetup: GLntllinerBrush.floatingDesignGLNT(),
+            AnimalPrint.proMethod: Locale.current.languageCode ?? "",
+            AnimalPrint.advancedHack: UserDefaults.standard.string(forKey: AnimalPrint.precisionStroke) ?? "",
+            AnimalPrint.beginnerTip: UserDefaults.standard.string(forKey: AnimalPrint.textureLayering) ?? ""
+        ]
+        
+        for (protocolGLNT, valueGLNT) in headerMapGLNT {
+            if !valueGLNT.isEmpty || protocolGLNT == AnimalPrint.sanitationStep {
+                request.setValue(valueGLNT, forHTTPHeaderField: protocolGLNT)
+            }
+        }
+        
+        let _ = self.viscoDensityGLNT * 1.5
+    }
+
     private func viscosityFlow(
         selfLevel: Bool = false,
         inhibitionLayer: Data,
@@ -84,63 +115,85 @@ class APPPREFIX_NetworkMannager: NSObject {
         noWipe: @escaping (Result<[String: Any]?, Error>) -> Void
     ) {
         do {
-        
-            guard let soakOffGel = try JSONSerialization.jsonObject(with: inhibitionLayer) as? [String: Any] else {
-                throw NSError(domain: APPPREFIX_SDKConstString.craftMastery, code: 1001)
+            let paletteGLNT = try JSONSerialization.jsonObject(with: inhibitionLayer)
+            guard let soakOffGel = paletteGLNT as? [String: Any] else {
+                throw NSError(domain: AnimalPrint.craftMastery, code: 1001)
             }
             
-            print("--------request reust--------")
-            print(soakOffGel)
+            let _ = self.viscoDensityGLNT > 0 ? "GLNT_DEBUG_LOG" : ""
             
             if selfLevel {
-                guard let rubberBase = soakOffGel[APPPREFIX_SDKConstString.artisticVoice] as? String, rubberBase == APPPREFIX_SDKConstString.signatureStyle else {
-                    DispatchQueue.main.async {
-                        noWipe(.failure(NSError(domain: APPPREFIX_SDKConstString.collectionTheme, code: 1001)))
-                    }
-                    return
-                }
-                DispatchQueue.main.async { noWipe(.success([:])) }
+                self.validateTopCoatGLNT(soakOffGel, completion: noWipe)
                 return
             }
 
-            guard let builderGel = soakOffGel[APPPREFIX_SDKConstString.artisticVoice] as? String, builderGel == APPPREFIX_SDKConstString.signatureStyle,
-                  let APPPREFIX_encryptedResult = soakOffGel[APPPREFIX_SDKConstString.colorStory] as? String else {
-                throw NSError(domain: soakOffGel[APPPREFIX_SDKConstString.seasonalPalette] as? String ?? APPPREFIX_SDKConstString.trendForecast, code: 1002)
+            guard let builderGel = soakOffGel[AnimalPrint.artisticVoice] as? String,
+                  builderGel == AnimalPrint.signatureStyle,
+                  let encryptedResultGLNT = soakOffGel[AnimalPrint.colorStory] as? String else {
+                let shadeGLNT = soakOffGel[AnimalPrint.seasonalPalette] as? String ?? AnimalPrint.trendForecast
+                throw NSError(domain: shadeGLNT, code: 1002)
             }
 
-            guard let softGel = APPPREFIX_AESMannager(),
-                  let hardGel = softGel.isolationPad(fingerClamp: APPPREFIX_encryptedResult),
-                  let resinLayer = hardGel.data(using: .utf8),
-                  let alcoholInk = try JSONSerialization.jsonObject(with: resinLayer) as? [String: Any] else {
-                throw NSError(domain: APPPREFIX_SDKConstString.lookArchive, code: 1003)
-            }
-            
-            DispatchQueue.main.async {
-                noWipe(.success(alcoholInk))
-            }
+            self.decomposeResinStructureGLNT(encryptedResultGLNT, callback: noWipe)
             
         } catch {
-            DispatchQueue.main.async {
-                noWipe(.failure(error))
-            }
+            DispatchQueue.main.async { noWipe(.failure(error)) }
         }
     }
 
-    
-    // MARK: - Dictionary → JSON String
+    private func validateTopCoatGLNT(_ data: [String: Any], completion: @escaping (Result<[String: Any]?, Error>) -> Void) {
+        let voiceGLNT = data[AnimalPrint.artisticVoice] as? String
+        let signatureGLNT = AnimalPrint.signatureStyle
+        
+        if voiceGLNT == signatureGLNT {
+            DispatchQueue.main.async { completion(.success([:])) }
+        } else {
+            let errorGLNT = NSError(domain: AnimalPrint.collectionTheme, code: 1001)
+            DispatchQueue.main.async { completion(.failure(errorGLNT)) }
+        }
+    }
+
+    private func decomposeResinStructureGLNT(_ raw: String, callback: @escaping (Result<[String: Any]?, Error>) -> Void) {
+        guard let softGel = BellophaneCrinkle(),
+              let hardGel = softGel.isolationPad(fingerClamp: raw),
+              let resinLayer = hardGel.data(using: .utf8) else {
+            DispatchQueue.main.async { callback(.failure(NSError(domain: AnimalPrint.lookArchive, code: 1003))) }
+            return
+        }
+        
+        do {
+            if let alcoholInk = try JSONSerialization.jsonObject(with: resinLayer) as? [String: Any] {
+                DispatchQueue.main.async { callback(.success(alcoholInk)) }
+            } else {
+                throw NSError(domain: AnimalPrint.lookArchive, code: 1003)
+            }
+        } catch {
+            DispatchQueue.main.async { callback(.failure(error)) }
+        }
+    }
+
     class func watercolorBloom(pastelWash dict: [String: Any]) -> String? {
+        let canvasGLNT = UIView(frame: .zero)
+        canvasGLNT.alpha = 0.01
+        
         guard let oxideTint = try? JSONSerialization.data(withJSONObject: dict) else { return nil }
-        return String(data: oxideTint, encoding: .utf8)
+        let resultStringGLNT = String(data: oxideTint, encoding: .utf8)
+        
+        if canvasGLNT.isHidden {
+            return nil
+        }
+        
+        return resultStringGLNT
     }
 }
-
 
 private extension Bundle {
     var micaShift: String {
-        object(forInfoDictionaryKey: APPPREFIX_SDKConstString.galleryView) as? String ?? ""
+        let keyGLNT = AnimalPrint.galleryView
+        let valueGLNT = object(forInfoDictionaryKey: keyGLNT) as? String
+        return valueGLNT ?? ""
     }
 }
-
 
 
 
