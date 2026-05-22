@@ -28,7 +28,7 @@ class GLNTRKNA_NailAiBaseController: UIViewController {
         view.addSubview(gln_header)
       
         view.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.1, alpha: 1.0)
-        GLNTRKNA_MainCanvas.frame = CGRect(x: 0, y: GLNTRKNA_ScaleH(249), width: view.frame.width, height: view.frame.height - GLNTRKNA_ScaleH(249))
+        GLNTRKNA_MainCanvas.frame = CGRect(x: 0, y: polishCanvasH(249), width: view.frame.width, height: view.frame.height - polishCanvasH(249))
         GLNTRKNA_MainCanvas.showsVerticalScrollIndicator = false
         view.addSubview(GLNTRKNA_MainCanvas)
       
@@ -50,12 +50,12 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
     
     private func GLNTRKNA_RenderIntro() {
         GLNTRKNA_MainCanvas.contentSize = CGSize(width: view.frame.width, height: 600)
-        let gln_card = UIView(frame: CGRect(x: GLNTRKNA_ScaleW(20), y: GLNTRKNA_ScaleH(20), width: view.frame.width - GLNTRKNA_ScaleW(40), height: GLNTRKNA_ScaleH(480)))
+        let gln_card = UIView(frame: CGRect(x: polishCanvasW(20), y: polishCanvasH(20), width: view.frame.width - polishCanvasW(40), height: polishCanvasH(480)))
         gln_card.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         gln_card.layer.cornerRadius = 20
         GLNTRKNA_MainCanvas.addSubview(gln_card)
         
-        let gln_desc = MUNDFlRLTextView(frame: gln_card.bounds.insetBy(dx: 15, dy: 15))
+        let gln_desc = PolishDoneTextView(frame: gln_card.bounds.insetBy(dx: 15, dy: 15))
         gln_desc.backgroundColor = .clear
         gln_desc.isEditable = false
         gln_desc.textColor = .white
@@ -63,7 +63,7 @@ class GLNTRKNA_AiManifestoController: GLNTRKNA_NailAiBaseController {
         gln_desc.text = "Meet Naily AI ✨\nSimply tell me your nail design vision, and watch it transform into a beautiful visual concept within seconds. Whether you love soft, cute styles or refined, classy looks, Naily AI brings your imagination to life—effortlessly 💅 From everyday inspiration to bold creative ideas, explore endless styles and discover designs that match your mood, personality, and moments. Turn thoughts into visuals, refine your look, and let every manicure start with inspiration made just for you."
         gln_card.addSubview(gln_desc)
         
-        let gln_start = UIButton(frame: CGRect(x: GLNTRKNA_ScaleW(40), y: view.frame.height - GLNTRKNA_ScaleH(120), width: view.frame.width - GLNTRKNA_ScaleW(80), height: GLNTRKNA_ScaleH(60)))
+        let gln_start = UIButton(frame: CGRect(x: polishCanvasW(40), y: view.frame.height - polishCanvasH(120), width: view.frame.width - polishCanvasW(80), height: polishCanvasH(60)))
         gln_start.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_start"), for: .normal)
         gln_start.addTarget(self, action: #selector(GLNTRKNA_LaunchEngine), for: .touchUpInside)
         view.addSubview(gln_start)

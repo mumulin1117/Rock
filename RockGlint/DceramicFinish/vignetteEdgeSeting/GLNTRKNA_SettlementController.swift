@@ -87,12 +87,12 @@ class GLNTRKNA_SettlementController: UIViewController {
     @objc private func GLNTRKNA_OptionTriggered(_ sender: UIButton) {
         
         if sender.tag == 0 {
-            let go = GLNTRKNA_LegalViewer.init(docType:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"hKgpC2x6vJzZTSyiZPYzrd3c0TgN2bAwK26dlo1r5uq6TIoF"))
+            let go = RockPolicyScrollController.init(docType:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"hKgpC2x6vJzZTSyiZPYzrd3c0TgN2bAwK26dlo1r5uq6TIoF"))
             self.present(go, animated: true)
         }
         
         if sender.tag == 1 {
-            let go = GLNTRKNA_LegalViewer.init(docType:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"qeyK9/spVgt4rXLAPijSY/knrkBQDQnNtRodGWk0Yqu7R2l51fgj"))
+            let go = RockPolicyScrollController.init(docType:GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"qeyK9/spVgt4rXLAPijSY/knrkBQDQnNtRodGWk0Yqu7R2l51fgj"))
             self.present(go, animated: true)
         }
         
@@ -108,7 +108,7 @@ class GLNTRKNA_SettlementController: UIViewController {
         glnt_alert.GLNTRKNA_SyncCallback = {
             if let gln_win = self.view.window {
                 GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_EvacuateAura()
-                gln_win.rootViewController = GLNTRKNA_AccessGateway()
+                gln_win.rootViewController = GLNTRKNA_RootNavigation(rootViewController: RockWelcomeStudioController())
             }
         
         }
@@ -122,7 +122,7 @@ class GLNTRKNA_SettlementController: UIViewController {
         glnt_alert.GLNTRKNA_SyncCallback = {
             if let gln_win = self.view.window {
                 GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_TerminateAccount()
-                gln_win.rootViewController = GLNTRKNA_AccessGateway()
+                gln_win.rootViewController = GLNTRKNA_RootNavigation(rootViewController: RockWelcomeStudioController())
             }
         
         }

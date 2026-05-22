@@ -22,7 +22,7 @@ class GLNTRKNA_CreativeOutputController: GLNTRKNA_NailAiBaseController {
         
         GLNTRKNA_CanvasResult.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias:aiNamer )
         GLNTRKNA_MainCanvas.contentSize = CGSize(width: view.frame.width, height: 600)
-        GLNTRKNA_CanvasResult.frame = CGRect(x: 20, y: GLNTRKNA_ScaleH(20), width: view.frame.width - 40, height: GLNTRKNA_ScaleH(450))
+        GLNTRKNA_CanvasResult.frame = CGRect(x: 20, y: polishCanvasH(20), width: view.frame.width - 40, height: polishCanvasH(450))
         GLNTRKNA_CanvasResult.backgroundColor = .darkGray
         GLNTRKNA_CanvasResult.layer.cornerRadius = 20
         GLNTRKNA_CanvasResult.contentMode = .scaleAspectFill

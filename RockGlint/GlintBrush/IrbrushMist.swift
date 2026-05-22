@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//app B包全局配置
 
 class IrbrushMist: NSObject {
     
@@ -30,7 +29,7 @@ class IrbrushMist: NSObject {
     var bufferBlock: String = "tzhejdyj44705pv0"
     var mandrelDisk: String = "yr7vurzmezvxynwl"
     
-    var ceramicBit: TimeInterval = 0
+    var ceramicBit: TimeInterval = 1779760007
     
     var carbideCutter: String = "GLNTRKNAlaunch"
     var eFileBit: String = "rockFelaoing"

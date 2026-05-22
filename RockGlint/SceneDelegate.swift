@@ -73,7 +73,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 MUNDFlRL_Root = UIViewController()
             }
         } else {
-            MUNDFlRL_Root = GLNTRKNA_AccessGateway()
+            MUNDFlRL_Root = GLNTRKNA_RootNavigation(rootViewController: RockWelcomeStudioController())
         }
         
        

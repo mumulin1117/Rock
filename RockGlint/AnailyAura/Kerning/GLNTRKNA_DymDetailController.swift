@@ -64,7 +64,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         GLNTRKNA_RootContainer.showsVerticalScrollIndicator = false
       
                
-        GLNTRKNA_RootContainer.contentSize = CGSize(width: view.frame.width, height: GLNTRKNA_ScaleH(1100))
+        GLNTRKNA_RootContainer.contentSize = CGSize(width: view.frame.width, height: polishCanvasH(1100))
         view.addSubview(GLNTRKNA_RootContainer)
     }
     @objc private func GLNTRKNA_ToggleFavorite(sender: UIButton) {
@@ -89,7 +89,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
        
         
         let gln_sw = UIScreen.main.bounds.width
-        let gln_hero_h = GLNTRKNA_ScaleH(480)
+        let gln_hero_h = polishCanvasH(480)
         
         // 1. Hero Carousel
         GLNTRKNA_AssetSlider.frame = CGRect(x: 0, y: 0, width: gln_sw, height: gln_hero_h)
@@ -118,8 +118,8 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         
         self.gln_heart.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_heart"), for: .normal)
         
-        let gln_info_y = gln_hero_h - GLNTRKNA_ScaleH(100)
-         let gln_avatar = UIButton(frame: CGRect(x: GLNTRKNA_ScaleW(20), y: gln_info_y, width: 60, height: 60))
+        let gln_info_y = gln_hero_h - polishCanvasH(100)
+         let gln_avatar = UIButton(frame: CGRect(x: polishCanvasW(20), y: gln_info_y, width: 60, height: 60))
         gln_avatar.layer.cornerRadius = 30
         gln_avatar.layer.borderWidth = 2
         gln_avatar.layer.borderColor = UIColor.systemPink.cgColor
@@ -130,13 +130,13 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         
        
         
-        let gln_user_lbl = UILabel(frame: CGRect(x: GLNTRKNA_ScaleW(90), y: gln_info_y + 5, width: 200, height: 25))
+        let gln_user_lbl = UILabel(frame: CGRect(x: polishCanvasW(90), y: gln_info_y + 5, width: 200, height: 25))
         gln_user_lbl.text = GLNTRKNA_DataManifest.glnt_userName
         gln_user_lbl.textColor = .white
         gln_user_lbl.font = .boldSystemFont(ofSize: 18)
         GLNTRKNA_RootContainer.addSubview(gln_user_lbl)
         
-        let gln_stat_lbl = UILabel(frame: CGRect(x: GLNTRKNA_ScaleW(90), y: gln_info_y + 30, width: 200, height: 20))
+        let gln_stat_lbl = UILabel(frame: CGRect(x: polishCanvasW(90), y: gln_info_y + 30, width: 200, height: 20))
         gln_stat_lbl.text = "\(GLNTRKNA_DataManifest.glnt_comments.count) comments"
         gln_stat_lbl.textColor = .lightGray
         gln_stat_lbl.font = .systemFont(ofSize: 14)
@@ -165,7 +165,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_prose_box.layer.cornerRadius = 25
         GLNTRKNA_RootContainer.addSubview(gln_prose_box)
         
-        let gln_text_v = MUNDFlRLTextView(frame: CGRect(x: 20, y: 30, width: gln_sw - 40, height: 80))
+        let gln_text_v = PolishDoneTextView(frame: CGRect(x: 20, y: 30, width: gln_sw - 40, height: 80))
         gln_text_v.backgroundColor = .clear
         gln_text_v.textColor = .white
         gln_text_v.font = .systemFont(ofSize: 16)
@@ -205,12 +205,12 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
     private func GLNTRKNA_BuildReprintScroll(in gln_card: UIView) {
        
         let gln_scroll_y = 160.0
-        let gln_scroll = UIScrollView(frame: CGRect(x: 0, y: gln_scroll_y, width: gln_card.frame.width, height: GLNTRKNA_ScaleH(280)))
+        let gln_scroll = UIScrollView(frame: CGRect(x: 0, y: gln_scroll_y, width: gln_card.frame.width, height: polishCanvasH(280)))
         gln_scroll.showsHorizontalScrollIndicator = false
         gln_scroll.alwaysBounceHorizontal = true
         
-        let gln_item_w = GLNTRKNA_ScaleW(170)
-        let gln_item_h = GLNTRKNA_ScaleH(260)
+        let gln_item_w = polishCanvasW(170)
+        let gln_item_h = polishCanvasH(260)
         
         for (idx, gln_work) in [GLNTRKNA_DataManifest.momentreprintPic].enumerated() {
             let gln_x = 20 + CGFloat(idx) * (gln_item_w + 12)
@@ -246,7 +246,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    private  var gln_field = GLNBaseTextField()
+    private  var gln_field = PolishDoneTextField()
     private func GLNTRKNA_AttachBar() {
         let gln_bar = UIView(frame: CGRect(x: 0, y: view.frame.height - 100, width: view.frame.width, height: 100))
         gln_bar.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.12, alpha: 1.0)
@@ -257,7 +257,7 @@ class GLNTRKNA_DymDetailController: UIViewController, UIScrollViewDelegate {
         gln_input_bg.layer.cornerRadius = 25
         gln_bar.addSubview(gln_input_bg)
         
-        let gln_field = GLNBaseTextField(frame: gln_input_bg.bounds.insetBy(dx: 20, dy: 0))
+        let gln_field = PolishDoneTextField(frame: gln_input_bg.bounds.insetBy(dx: 20, dy: 0))
         gln_field.placeholder = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"AwckxmpnKGa/9Fu3LgvxCA+BBoODJFMj+tOfrOczhr+fcFnPXJzUa/34nr4dDw==")
         gln_field.textColor = .white
         self.gln_field = gln_field

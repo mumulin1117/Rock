@@ -12,14 +12,14 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
 
     var GLNTRKNA_SyncCallback: ((String, String, String, UIImage?) -> Void)?
     
-    private let GLNTRKNA_ScaleW = UIScreen.main.bounds.width / 393.0
-    private let GLNTRKNA_ScaleH = UIScreen.main.bounds.height / 852.0
+    private let polishCanvasW = UIScreen.main.bounds.width / 393.0
+    private let polishCanvasH = UIScreen.main.bounds.height / 852.0
     
     private let GLNTRKNA_BaseCanvas = UIView()
     private let GLNTRKNA_AuraPreview = UIImageView()
-    private let GLNTRKNA_AliasField = GLNBaseTextField()
+    private let GLNTRKNA_AliasField = PolishDoneTextField()
     private let GLNTRKNA_SolarDateLab = UILabel()
-    private let GLNTRKNA_BioEditor = MUNDFlRLTextView()
+    private let GLNTRKNA_BioEditor = PolishDoneTextView()
     private var GLNTRKNA_IsAuraChanged: Bool = false
     
     let info = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()
@@ -35,23 +35,23 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
     private func GLNTRKNA_InitializeScenery() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
         
-        let glnt_top_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * GLNTRKNA_ScaleH))
+        let glnt_top_bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100 * polishCanvasH))
         view.addSubview(glnt_top_bar)
         self.title = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"kAxUI7Akt8G1RgHIQyUbmQNNMiXypN0lqBrCmRKrYc0IOH5IW+2L0vMsElk=")
 
-        GLNTRKNA_AuraPreview.layer.cornerRadius = 55 * GLNTRKNA_ScaleW
+        GLNTRKNA_AuraPreview.layer.cornerRadius = 55 * polishCanvasW
         GLNTRKNA_AuraPreview.backgroundColor = .darkGray
         GLNTRKNA_AuraPreview.clipsToBounds = true
         GLNTRKNA_AuraPreview.isUserInteractionEnabled = true
         GLNTRKNA_AuraPreview.contentMode = .scaleAspectFill
-        GLNTRKNA_AuraPreview.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_DefaultAvatar")
+        GLNTRKNA_AuraPreview.image = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CurrentAvatarImage() ?? GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: unsealPolishText("29sR0a9elGeAlS38F+16P2n4CKlW/Dn+8sv81sq1yzMx7R/GOQzmfBJKcailGsFOa7Ji+eTd"))
         view.addSubview(GLNTRKNA_AuraPreview)
         
         let glnt_aura_mask = UIView(frame: GLNTRKNA_AuraPreview.bounds)
                 glnt_aura_mask.backgroundColor = UIColor.black.withAlphaComponent(0.2)
                 GLNTRKNA_AuraPreview.addSubview(glnt_aura_mask)
                 
-                let glnt_cam_icon = UIImageView(frame: CGRect(x: 35 * GLNTRKNA_ScaleW, y: 35 * GLNTRKNA_ScaleW, width: 40 * GLNTRKNA_ScaleW, height: 40 * GLNTRKNA_ScaleW))
+                let glnt_cam_icon = UIImageView(frame: CGRect(x: 35 * polishCanvasW, y: 35 * polishCanvasW, width: 40 * polishCanvasW, height: 40 * polishCanvasW))
                 glnt_cam_icon.image = UIImage(systemName: "camera.fill")
                 glnt_cam_icon.tintColor = .white
                 glnt_cam_icon.contentMode = .scaleAspectFit
@@ -60,22 +60,22 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
                 let glnt_tap_aura = UITapGestureRecognizer(target: self, action: #selector(GLNTRKNA_TriggerOptics))
                 GLNTRKNA_AuraPreview.addGestureRecognizer(glnt_tap_aura)
         
-        GLNTRKNA_AuraPreview.frame = CGRect(x: (UIScreen.main.bounds.width - 110 * GLNTRKNA_ScaleW)/2, y: 140 * GLNTRKNA_ScaleH, width: 110 * GLNTRKNA_ScaleW, height: 110 * GLNTRKNA_ScaleW)
-        GLNTRKNA_AuraPreview.layer.cornerRadius = 55 * GLNTRKNA_ScaleW
+        GLNTRKNA_AuraPreview.frame = CGRect(x: (UIScreen.main.bounds.width - 110 * polishCanvasW)/2, y: 140 * polishCanvasH, width: 110 * polishCanvasW, height: 110 * polishCanvasW)
+        GLNTRKNA_AuraPreview.layer.cornerRadius = 55 * polishCanvasW
         GLNTRKNA_AuraPreview.backgroundColor = .darkGray
         GLNTRKNA_AuraPreview.clipsToBounds = true
         GLNTRKNA_AuraPreview.isUserInteractionEnabled = true
         GLNTRKNA_AuraPreview.contentMode = .scaleAspectFill
-        GLNTRKNA_AuraPreview.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_DefaultAvatar")
+        GLNTRKNA_AuraPreview.image = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CurrentAvatarImage() ?? GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: unsealPolishText("29sR0a9elGeAlS38F+16P2n4CKlW/Dn+8sv81sq1yzMx7R/GOQzmfBJKcailGsFOa7Ji+eTd"))
         view.addSubview(GLNTRKNA_AuraPreview)
 
 
         GLNTRKNA_ComposeEntry(y: 300, title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"Y9J2SvcghDUt8+ReWXAiLeG7MbXzBaZXzr5vqyoO0gf1y1PnJ3k1BQ=="), val: info?.glnt_alias ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"c3YJobG+2r3RghzPHKCaQXcXtZaPqQz/6YXNizeWrsT8+Pzf5XIA"), isField: true)
         GLNTRKNA_ComposeEntry(y: 400, title: GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"BsFpEqclPf+lGbsW7pnCdNOsT5+qRzNUlCBo5I0eLfmqZs+mF9pmhg=="), val: info?.glnt_date ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"6Edi3hz1ymdEZHOkEQAtAf9FAJqbz2O+paBh18kGnXOVQFCUqRfWl9P2El4Z3g=="), isField: false)
         
-        let glnt_bio_box = UIView(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: 500 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 280 * GLNTRKNA_ScaleH))
+        let glnt_bio_box = UIView(frame: CGRect(x: 15 * polishCanvasW, y: 500 * polishCanvasH, width: UIScreen.main.bounds.width - 30 * polishCanvasW, height: 280 * polishCanvasH))
         glnt_bio_box.backgroundColor = UIColor(white: 1, alpha: 0.08)
-        glnt_bio_box.layer.cornerRadius = 20 * GLNTRKNA_ScaleH
+        glnt_bio_box.layer.cornerRadius = 20 * polishCanvasH
         view.addSubview(glnt_bio_box)
         
         let glnt_bio_title = UILabel(frame: CGRect(x: 15, y: 20, width: 100, height: 20))
@@ -91,9 +91,9 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         GLNTRKNA_BioEditor.text = info?.glnt_bio ?? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"EEbtvWopvv1eZORFYu+2USarJ2x4lYbpmbKQjsZjzXOQXvUa1cJuIBJHMt4mXH6kJPZs+vd9BLYc6gis7tCQw7vcJtw9BaPkfg==")
         glnt_bio_box.addSubview(GLNTRKNA_BioEditor)
 
-        let glnt_submit = UIButton(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: UIScreen.main.bounds.height - 100 * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 65 * GLNTRKNA_ScaleH))
+        let glnt_submit = UIButton(frame: CGRect(x: 15 * polishCanvasW, y: UIScreen.main.bounds.height - 100 * polishCanvasH, width: UIScreen.main.bounds.width - 30 * polishCanvasW, height: 65 * polishCanvasH))
         glnt_submit.layer.masksToBounds = true
-        glnt_submit.layer.cornerRadius = 32.5 * GLNTRKNA_ScaleH
+        glnt_submit.layer.cornerRadius = 32.5 * polishCanvasH
         glnt_submit.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"HjBG9vk/UiXBtY6PauBGitPl1WmkF+a3gcVXt1JdO57B4/7toraj"), for: .normal)
         glnt_submit.setTitleColor(.white, for: .normal)
         glnt_submit.titleLabel?.font = .boldSystemFont(ofSize: 18)
@@ -146,26 +146,26 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         }
     
     private func GLNTRKNA_ComposeEntry(y: CGFloat, title: String, val: String, isField: Bool) {
-        let glnt_wrap = UIView(frame: CGRect(x: 15 * GLNTRKNA_ScaleW, y: y * GLNTRKNA_ScaleH, width: UIScreen.main.bounds.width - 30 * GLNTRKNA_ScaleW, height: 85 * GLNTRKNA_ScaleH))
+        let glnt_wrap = UIView(frame: CGRect(x: 15 * polishCanvasW, y: y * polishCanvasH, width: UIScreen.main.bounds.width - 30 * polishCanvasW, height: 85 * polishCanvasH))
         glnt_wrap.backgroundColor = UIColor(white: 1, alpha: 0.08)
-        glnt_wrap.layer.cornerRadius = 20 * GLNTRKNA_ScaleH
+        glnt_wrap.layer.cornerRadius = 20 * polishCanvasH
         view.addSubview(glnt_wrap)
         
-        let glnt_tl = UILabel(frame: CGRect(x: 15, y: 0, width: 100, height: 85 * GLNTRKNA_ScaleH))
+        let glnt_tl = UILabel(frame: CGRect(x: 15, y: 0, width: 100, height: 85 * polishCanvasH))
         glnt_tl.text = title
         glnt_tl.textColor = .white
         glnt_tl.font = .boldSystemFont(ofSize: 18)
         glnt_wrap.addSubview(glnt_tl)
         
         if isField {
-            GLNTRKNA_AliasField.frame = CGRect(x: glnt_wrap.frame.width - 180, y: 0, width: 150, height: 85 * GLNTRKNA_ScaleH)
+            GLNTRKNA_AliasField.frame = CGRect(x: glnt_wrap.frame.width - 180, y: 0, width: 150, height: 85 * polishCanvasH)
             GLNTRKNA_AliasField.text = val
             GLNTRKNA_AliasField.textColor = .lightGray
             GLNTRKNA_AliasField.textAlignment = .right
             GLNTRKNA_AliasField.font = .systemFont(ofSize: 15)
             glnt_wrap.addSubview(GLNTRKNA_AliasField)
         } else {
-            GLNTRKNA_SolarDateLab.frame = CGRect(x: glnt_wrap.frame.width - 180, y: 0, width: 150, height: 85 * GLNTRKNA_ScaleH)
+            GLNTRKNA_SolarDateLab.frame = CGRect(x: glnt_wrap.frame.width - 180, y: 0, width: 150, height: 85 * polishCanvasH)
             GLNTRKNA_SolarDateLab.text = val
             GLNTRKNA_SolarDateLab.textColor = .lightGray
             GLNTRKNA_SolarDateLab.textAlignment = .right
@@ -176,7 +176,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
             glnt_wrap.addGestureRecognizer(glnt_gesture)
         }
         
-        let glnt_arrow = UIImageView(frame: CGRect(x: glnt_wrap.frame.width - 25, y: 35 * GLNTRKNA_ScaleH, width: 10, height: 15))
+        let glnt_arrow = UIImageView(frame: CGRect(x: glnt_wrap.frame.width - 25, y: 35 * polishCanvasH, width: 10, height: 15))
         glnt_arrow.image = UIImage(systemName: "chevron.right")
         glnt_arrow.tintColor = .gray
         glnt_wrap.addSubview(glnt_arrow)
@@ -196,7 +196,7 @@ class GLNTRKNA_IdentityRefiner: UIViewController, UITextFieldDelegate, UIImagePi
         
         GLNTRKNA_SyncCallback?(glnt_newName, glnt_newBio, glnt_newDate, glnt_newImg)
         
-        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ReviseProfile(alias: glnt_newName,bio: glnt_newBio,birthday: glnt_newDate)
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ReviseProfileVisual(alias: glnt_newName,bio: glnt_newBio,birthday: glnt_newDate, avatarImage: glnt_newImg)
         self.navigationController?.popViewController(animated: true)
         
     }

@@ -38,7 +38,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
        let info = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_GetCurrentProfile()
         self.GLNTRKNA_AliasLabel.text = info?.glnt_alias
         self.GLNTRKNA_BioProse.text = info?.glnt_bio
-        self.GLNTRKNA_PortraitNode.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "RocklogWithus")
+        self.GLNTRKNA_PortraitNode.image = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CurrentAvatarImage() ?? GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: unsealPolishText("OLvZPdpQWugWpm5QBHWe7hkZqLKkz0CwITgJj9qA39D7oKSPI5WFlKmxk1Xe"))
         
     }
     @objc private func GLNTRKNA_SyncWealth() {
@@ -171,7 +171,7 @@ class GLNTRKNA_PersonalOrbitController: GLNTRKNA_BasicController {
                                                   
             self.GLNTRKNA_AliasLabel.text = glnt_newName
             self.GLNTRKNA_BioProse.text = glnt_newBio
-            self.GLNTRKNA_PortraitNode.image = glnt_newImg
+            self.GLNTRKNA_PortraitNode.image = glnt_newImg ?? GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_CurrentAvatarImage() ?? GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: unsealPolishText("OLvZPdpQWugWpm5QBHWe7hkZqLKkz0CwITgJj9qA39D7oKSPI5WFlKmxk1Xe"))
         }
         self.navigationController?.pushViewController(editcontroller, animated: true)
      }

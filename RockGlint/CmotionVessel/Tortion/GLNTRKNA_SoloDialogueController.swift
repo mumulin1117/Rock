@@ -26,7 +26,7 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
 
     private let GLNTRKNA_ChatVault = UITableView()
     private let GLNTRKNA_EntryPlate = UIView()
-    private let GLNTRKNA_WriteField = GLNBaseTextField()
+    private let GLNTRKNA_WriteField = PolishDoneTextField()
     private let GLNTRKNA_RelayBtn = UIButton()
     
     private let GLNTRKNA_RatioW = UIScreen.main.bounds.width / 393.0
@@ -114,8 +114,12 @@ class GLNTRKNA_SoloDialogueController: UIViewController, UITableViewDataSource, 
             }
             
             let MUNDFlRL_TargetAura = MUNDFlRL_ExtractAura()
-            
-            
+            GLNTRKNA_MutualGlintGate.GLNTRKNA_RequestPassage(from: self, toward: MUNDFlRL_TargetAura, intent: .GLNTRKNA_VideoChat) { [weak self] in
+                self?.MUNDFlRL_OpenMirrorPortal(MUNDFlRL_TargetAura)
+            }
+        }
+    
+        private func MUNDFlRL_OpenMirrorPortal(_ MUNDFlRL_TargetAura: GLNTRKNA_MomentEntry) {
             let MUNDFlRL_MirrorPortal = GLNTRKNA_FaceMirrorController(GLNTRKNACelestialData: MUNDFlRL_TargetAura)
             
             

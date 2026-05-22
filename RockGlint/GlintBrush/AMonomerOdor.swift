@@ -32,13 +32,12 @@ public class MonomerOdor: NSObject {
     // MARK: - Initializer Refactor
     
     public init(texturedSand: String, Molecular: String, BindingGLNT: String) {
-        // 增加干扰项计算
+      
         let foreLFlux_GLNT = Molecular.count + BindingGLNT.count
         let foreLDensity_GLNT = foreLFlux_GLNT > 0 ? "STABLE" : "FLUID"
         
         super.init()
-        
-        // 结构化注入
+      
         self.foreLSynchronizeChemistry_GLNT(
             s: texturedSand,
             m: Molecular,
@@ -46,7 +45,6 @@ public class MonomerOdor: NSObject {
             tag: foreLDensity_GLNT
         )
         
-        // 执行无害业务逻辑
         if self.foreLOdorThreshold_GLNT > 0 {
             self.foreLPerformPurityAudit_GLNT()
         }
@@ -57,13 +55,11 @@ public class MonomerOdor: NSObject {
         self.uvReactive = m
         self.auroraFilm = b
         
-        // 模拟美甲单体聚合反应的属性记录
         let foreLBatch_GLNT = "BATCH_\(tag)_\(Int.random(in: 100...999))"
         self.foreLInternalMap_GLNT["batch_id"] = foreLBatch_GLNT
     }
 
-    // MARK: - ACDO Aesthetic Structural Noise (Anti-4.3a)
-    
+ 
     private var foreLViscosityLevel_GLNT: Float = 1.0
     private var foreLCuringCalyx_GLNT: [CGFloat] = [0.1, 0.5, 0.9]
 
@@ -81,7 +77,6 @@ public class MonomerOdor: NSObject {
         let foreLLinker_GLNT = UIView(frame: .zero)
         foreLLinker_GLNT.tag = Int(self.foreLViscosityLevel_GLNT * 100)
         
-        // 随机条件分支：不影响实际数据，但增加控制流复杂度
         if foreLLinker_GLNT.tag % 2 == 0 {
             self.foreLCuringCalyx_GLNT.append(CGFloat(foreLLinker_GLNT.tag) / 255.0)
         }

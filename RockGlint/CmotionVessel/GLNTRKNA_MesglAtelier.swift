@@ -29,17 +29,28 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
         let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
         ArtisanCell.gln_avatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: ArtisanCelldata.glnt_userId)
         ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
+        ArtisanCell.gln_action.tag = indexPath.row
+        ArtisanCell.gln_action.isSelected = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: ArtisanCelldata.glnt_userId)
+        ArtisanCell.gln_action.addTarget(self, action: #selector(GLNTRKNAToggleHorizonAlliance(Ubuaton:)), for: .touchUpInside)
         ArtisanCell.gln_vidus.tag = indexPath.row
-        ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink(Ubuaton:)), for: .touchUpInside)
+        ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEnterHorizonChat(Ubuaton:)), for: .touchUpInside)
         return ArtisanCell
         
     }
-    @objc private func GLNTRKNAEstablishVisualLink(Ubuaton:UIButton) {
+    @objc private func GLNTRKNAToggleHorizonAlliance(Ubuaton:UIButton) {
+        guard GLNTRKNAtopUsers.indices.contains(Ubuaton.tag) else { return }
         let ArtisanCelldata = GLNTRKNAtopUsers[Ubuaton.tag]
-        let yac_face_vc = GLNTRKNA_FaceMirrorController.init(GLNTRKNACelestialData: ArtisanCelldata)
-       
-        yac_face_vc.modalPresentationStyle = .fullScreen
-        self.present(yac_face_vc, animated: true)
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ToggleAdoration(targetEmail: ArtisanCelldata.glnt_userId)
+        Ubuaton.isSelected = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: ArtisanCelldata.glnt_userId)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
+    @objc private func GLNTRKNAEnterHorizonChat(Ubuaton:UIButton) {
+        guard GLNTRKNAtopUsers.indices.contains(Ubuaton.tag) else { return }
+        let ArtisanCelldata = GLNTRKNAtopUsers[Ubuaton.tag]
+        GLNTRKNA_MutualGlintGate.GLNTRKNA_RequestPassage(from: self, toward: ArtisanCelldata, intent: .GLNTRKNA_PrivateChat) { [weak self] in
+            self?.GLNTRKNAPushConversation(GLNTRKNAConverge: GLNTRKNA_ConvergeModel(userModel: ArtisanCelldata, convert: []))
+        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
@@ -64,7 +75,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        GLNTRKNA_SetupAesthetics()
+        buildPolicyChrome()
 
         GLNTRKNA_SetupObservers()
     }
@@ -81,8 +92,19 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
                 name: .GLNTRKNA_ObsidianListChanged,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_HandleAdoredUpdate),
+                name: .GLNTRKNA_AdoredListChanged,
+                object: nil
+            )
        
     }
+    @objc private func GLNTRKNA_HandleAdoredUpdate() {
+        GLNTRKNA_ArtisanHorizonStrip.reloadData()
+        GLNTRKNA_BaseTable.reloadData()
+    }
+    
     @objc private func GLNTRKNA_HandleBlacklistUpdate() {
 
        let logicEngine = GLNTRKNA_HomeLogicEngine()
@@ -113,7 +135,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
         NotificationCenter.default.removeObserver(self)
     }
  
-    private func GLNTRKNA_SetupAesthetics() {
+    private func buildPolicyChrome() {
         view.backgroundColor = UIColor(red: 0.05, green: 0.04, blue: 0.16, alpha: 1.0)
         MUNDFlRL_VoidChronicleLabel.frame = CGRect(x: 0, y: 0, width: GLNTRKNA_BaseTable.bounds.width, height: 100)
         let gln_header = UILabel(frame: CGRect(x: 20, y: GLNTRKNA_RatioH(40), width: 200, height: 40))
@@ -123,7 +145,7 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
         view.addSubview(gln_header)
         let gln_layout_h = UICollectionViewFlowLayout()
         gln_layout_h.scrollDirection = .horizontal
-        gln_layout_h.itemSize = CGSize(width: GLNTRKNA_ScaleW(100), height: GLNTRKNA_ScaleH(145))
+        gln_layout_h.itemSize = CGSize(width: polishCanvasW(100), height: polishCanvasH(145))
         gln_layout_h.minimumInteritemSpacing = 10
         GLNTRKNA_ArtisanHorizonStrip.frame = CGRect(x: 0, y: GLNTRKNA_RatioH(110), width: GLNTRKNA_ScrW, height: GLNTRKNA_RatioH(150))
         GLNTRKNA_ArtisanHorizonStrip.backgroundColor = .clear
@@ -172,8 +194,22 @@ class GLNTRKNA_ChatNexusController: GLNTRKNA_BasicController, UITableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 90 }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gln_chat = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[indexPath.row])
-
+        let gln_converge = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[indexPath.row]
+        GLNTRKNA_MutualGlintGate.GLNTRKNA_RequestPassage(from: self, toward: gln_converge.userModel, intent: .GLNTRKNA_PrivateChat) { [weak self] in
+            self?.GLNTRKNAPushConversation(GLNTRKNAConverge: gln_converge)
+        }
+    }
+    
+    private func GLNTRKNAPushConversation(GLNTRKNAConverge: GLNTRKNA_ConvergeModel) {
+        if let gln_index = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.firstIndex(where: {
+            $0.userModel.glnt_userId == GLNTRKNAConverge.userModel.glnt_userId
+        }) {
+            let gln_chat = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[gln_index])
+            self.navigationController?.pushViewController(gln_chat, animated: true)
+            return
+        }
+        
+        let gln_chat = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNAConverge)
         self.navigationController?.pushViewController(gln_chat, animated: true)
     }
     

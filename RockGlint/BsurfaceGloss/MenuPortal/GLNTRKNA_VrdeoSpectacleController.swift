@@ -43,7 +43,7 @@ class GLNTRKNA_VideoSpectacleController: UIViewController {
     private let GLNTRKNA_ProseBody = UILabel()
     private let GLNTRKNA_CommentStack = UIStackView()
     private let GLNTRKNA_InputHarbor = UIView()
-    private let GLNTRKNA_CommentField = GLNBaseTextField()
+    private let GLNTRKNA_CommentField = PolishDoneTextField()
     
     private var GLNTRKNA_IsPlaybackActive = false
 

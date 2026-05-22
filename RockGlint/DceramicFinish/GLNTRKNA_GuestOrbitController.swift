@@ -62,8 +62,19 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
                 name: .GLNTRKNA_ObsidianListChanged,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNARefreshAlliance),
+                name: .GLNTRKNA_AdoredListChanged,
+                object: nil
+            )
        
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
    @objc func gln_reportTraiiler()  {
        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_PrimarySelection,GLNTRKNA_useeID: GLNTRKNACelestialData.glnt_userId)
        self.present(safetyvc, animated: true)
@@ -181,19 +192,25 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
     // MARK: - Logic Interaction
     @objc private func GLNTRKNAToggleAlliance() {
         GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ToggleAdoration(targetEmail:  self.GLNTRKNACelestialData.glnt_userId)
-        
+        GLNTRKNARefreshAlliance()
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
+    @objc private func GLNTRKNARefreshAlliance() {
         if GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: self.GLNTRKNACelestialData.glnt_userId) {
             self.GLNTRKNALinkBtn.isSelected = true
         }else{
             self.GLNTRKNALinkBtn.isSelected = false
         }
-       
-      
-       
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 
     @objc private func GLNTRKNAEnterDeepChat() {
+        GLNTRKNA_MutualGlintGate.GLNTRKNA_RequestPassage(from: self, toward: GLNTRKNACelestialData, intent: .GLNTRKNA_PrivateChat) { [weak self] in
+            self?.GLNTRKNAPushDeepChat()
+        }
+    }
+    
+    private func GLNTRKNAPushDeepChat() {
         if let gln_index = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.firstIndex(where: {
             $0.userModel.glnt_userId == self.GLNTRKNACelestialData.glnt_userId
             
@@ -211,6 +228,12 @@ class GLNTRKNA_GuestOrbitController: UIViewController, UICollectionViewDelegate,
     }
 
     @objc private func GLNTRKNAEstablishVisualLink() {
+        GLNTRKNA_MutualGlintGate.GLNTRKNA_RequestPassage(from: self, toward: GLNTRKNACelestialData, intent: .GLNTRKNA_VideoChat) { [weak self] in
+            self?.GLNTRKNAOpenMirrorDeck()
+        }
+    }
+    
+    private func GLNTRKNAOpenMirrorDeck() {
         let yac_face_vc = GLNTRKNA_FaceMirrorController(GLNTRKNACelestialData: GLNTRKNACelestialData)
         yac_face_vc.GLNTRKNA_RemoteIdentity = GLNTRKNACelestialData.glnt_userName
         yac_face_vc.modalPresentationStyle = .fullScreen

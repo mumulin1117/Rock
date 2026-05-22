@@ -231,7 +231,7 @@ class GLNTRKNA_DiscoveryBoardController: GLNTRKNA_BasicController, UICollectionV
 class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
     
     private let GLNTRKNA_CoverArt = UIImageView()
-    private let GLNTRKNA_Avatar = UIImageView()
+    private let profileAvatarView = UIImageView()
     private let GLNTRKNA_BriefLabel = UILabel()
     private let GLNTRKNA_PlayIndicator = UIImageView()
     private let GLNTRKNA_LikeBox = UIButton()
@@ -266,13 +266,13 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_PlayIndicator.tintColor = .white.withAlphaComponent(0.8)
         contentView.addSubview(GLNTRKNA_PlayIndicator)
         
-        GLNTRKNA_Avatar.frame = CGRect(x: 15, y: GLNTRKNA_CoverArt.frame.height - 65, width: 50, height: 50)
-        GLNTRKNA_Avatar.layer.cornerRadius = 25
-        GLNTRKNA_Avatar.layer.borderWidth = 2
-        GLNTRKNA_Avatar.layer.borderColor = UIColor.systemPink.cgColor
-        GLNTRKNA_Avatar.clipsToBounds = true
-        GLNTRKNA_Avatar.backgroundColor = .gray
-        contentView.addSubview(GLNTRKNA_Avatar)
+        profileAvatarView.frame = CGRect(x: 15, y: GLNTRKNA_CoverArt.frame.height - 65, width: 50, height: 50)
+        profileAvatarView.layer.cornerRadius = 25
+        profileAvatarView.layer.borderWidth = 2
+        profileAvatarView.layer.borderColor = UIColor.systemPink.cgColor
+        profileAvatarView.clipsToBounds = true
+        profileAvatarView.backgroundColor = .gray
+        contentView.addSubview(profileAvatarView)
         
         GLNTRKNA_BriefLabel.frame = CGRect(x: 75, y: GLNTRKNA_CoverArt.frame.height - 65, width: contentView.bounds.width - 90, height: 50)
         GLNTRKNA_BriefLabel.textColor = .white
@@ -303,7 +303,7 @@ class GLNTRKNA_VideoVesselCell: UICollectionViewCell {
         GLNTRKNA_CommentBox.setTitle(" \(gln_data.glnt_comments.count)", for: .normal)
         GLNTRKNA_ConfigureVideoCell(with: gln_data.SPPuuuRRll)
         
-        GLNTRKNA_Avatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_data.glnt_userId)
+        profileAvatarView.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: gln_data.glnt_userId)
         
     }
     

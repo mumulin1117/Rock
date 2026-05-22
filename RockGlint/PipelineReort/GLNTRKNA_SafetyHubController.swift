@@ -12,7 +12,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     private let GLNTRKNA_BlurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let GLNTRKNA_SheetAnchor = UIView()
     private let GLNTRKNA_MainStack = UIStackView()
-    private let GLNTRKNA_InputField = MUNDFlRLTextView()
+    private let GLNTRKNA_InputField = PolishDoneTextView()
     private let GLNTRKNA_FeedbackGen = UINotificationFeedbackGenerator()
     
     private let GLNTRKNA_CornerRadius: CGFloat = 32
@@ -51,7 +51,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
         let gln_sw = UIScreen.main.bounds.width
         let gln_sh = UIScreen.main.bounds.height
         
-        GLNTRKNA_SheetAnchor.frame = CGRect(x: 0, y: gln_sh, width: gln_sw, height: GLNTRKNA_ScaleH(420))
+        GLNTRKNA_SheetAnchor.frame = CGRect(x: 0, y: gln_sh, width: gln_sw, height: polishCanvasH(420))
         GLNTRKNA_SheetAnchor.backgroundColor = UIColor(red: 0.10, green: 0.07, blue: 0.22, alpha: 1.0)
         GLNTRKNA_SheetAnchor.layer.cornerRadius = GLNTRKNA_CornerRadius
         GLNTRKNA_SheetAnchor.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -90,7 +90,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     @objc private func GLNTRKNA_GoToReasons() {
         GLNTRKNA_ClearAnchor()
         
-        let gln_new_h = GLNTRKNA_ScaleH(560)
+        let gln_new_h = polishCanvasH(560)
         GLNTRKNA_AdjustSheetHeight(gln_target_h: gln_new_h)
         
         let gln_header = UILabel(frame: CGRect(x: 0, y: 30, width: GLNTRKNA_SheetAnchor.frame.width, height: 30))
@@ -132,7 +132,7 @@ class GLNTRKNA_SafetyHubController: UIViewController {
     @objc private func GLNTRKNA_PrepareTestimony() {
         GLNTRKNA_ClearAnchor()
         
-        let gln_detail_h = GLNTRKNA_ScaleH(620)
+        let gln_detail_h = polishCanvasH(620)
         GLNTRKNA_AdjustSheetHeight(gln_target_h: gln_detail_h)
         
         let gln_title = UILabel(frame: CGRect(x: 20, y: 25, width: GLNTRKNA_SheetAnchor.frame.width - 40, height: 30))
@@ -173,13 +173,13 @@ class GLNTRKNA_SafetyHubController: UIViewController {
 
     
     private func GLNTRKNA_AttachFooterButtons(gln_y: CGFloat, gln_submit_title: String = GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"8osZCfXNNEVp6+tG89FJdLNRjUAMB3ml6zgsKFnsRWiVjbNdq+Y=")) {
-        let gln_cancel = UIButton(frame: CGRect(x: 24, y: gln_y, width: GLNTRKNA_ScaleW(160), height: 54))
+        let gln_cancel = UIButton(frame: CGRect(x: 24, y: gln_y, width: polishCanvasW(160), height: 54))
         gln_cancel.setTitle(GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64:"eXTbSLfVHzrg2ZitF+PXPm4r+uwQnM0aJsXhq6Oi6eX+zca+VIU="), for: .normal)
         gln_cancel.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         gln_cancel.layer.cornerRadius = 27
         gln_cancel.addTarget(self, action: #selector(GLNTRKNA_ExitPortal), for: .touchUpInside)
         
-        let gln_submit = UIButton(frame: CGRect(x: GLNTRKNA_SheetAnchor.frame.width - GLNTRKNA_ScaleW(184), y: gln_y, width: GLNTRKNA_ScaleW(160), height: 54))
+        let gln_submit = UIButton(frame: CGRect(x: GLNTRKNA_SheetAnchor.frame.width - polishCanvasW(184), y: gln_y, width: polishCanvasW(160), height: 54))
         gln_submit.setTitle(gln_submit_title, for: .normal)
         gln_submit.backgroundColor = .systemPink
         gln_submit.layer.cornerRadius = 27

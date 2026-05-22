@@ -45,8 +45,21 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
                 name: .GLNTRKNA_ObsidianListChanged,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(GLNTRKNA_RefreshAllianceDust),
+                name: .GLNTRKNA_AdoredListChanged,
+                object: nil
+            )
        
     }
+    
+    @objc private func GLNTRKNA_RefreshAllianceDust() {
+        GLNTRKNAfeedItems = logicEngine.GLNTRKNA_FilterFeed(by: GLNTRKNA_ActiveCategoryIndex)
+        GLNTRKNA_ArtisanHorizonStrip.reloadData()
+        GLNTRKNA_FeedMatrix.reloadData()
+    }
+    
     @objc private func GLNTRKNA_HandleBlacklistUpdate() {
        
         self.GLNTRKNAtopUsers = logicEngine.GLNTRKNA_FetchRandomArtisans()
@@ -84,20 +97,20 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
     
     private func GLNTRKNA_AssembleModules() {
         let gln_sw = view.frame.width
-        let gln_gap = GLNTRKNA_ScaleW(20)
+        let gln_gap = polishCanvasW(20)
         
-        let gln_title = UILabel(frame: CGRect(x: gln_gap, y: GLNTRKNA_ScaleH(50), width: 200, height: 40))
+        let gln_title = UILabel(frame: CGRect(x: gln_gap, y: polishCanvasH(50), width: 200, height: 40))
         gln_title.text = "Hi ~ Rock"
         gln_title.textColor = .white
-        gln_title.font = .systemFont(ofSize: GLNTRKNA_ScaleW(28), weight: .bold)
+        gln_title.font = .systemFont(ofSize: polishCanvasW(28), weight: .bold)
         GLNTRKNA_MasterScroller.addSubview(gln_title)
         
-        let gln_plus = UIButton(frame: CGRect(x: gln_sw - GLNTRKNA_ScaleW(60), y: GLNTRKNA_ScaleH(50), width: GLNTRKNA_ScaleW(40), height: GLNTRKNA_ScaleW(40)))
+        let gln_plus = UIButton(frame: CGRect(x: gln_sw - polishCanvasW(60), y: polishCanvasH(50), width: polishCanvasW(40), height: polishCanvasW(40)))
         gln_plus.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_plus"), for: .normal)
         gln_plus.addTarget(self, action: #selector(GLNTRKNA_RenderPostNodes), for: .touchUpInside)
         GLNTRKNA_MasterScroller.addSubview(gln_plus)
         
-        GLNTRKNA_AiCanvasTrigger.frame = CGRect(x: gln_gap, y: GLNTRKNA_ScaleH(110), width: gln_sw - (gln_gap * 2), height: GLNTRKNA_ScaleH(130))
+        GLNTRKNA_AiCanvasTrigger.frame = CGRect(x: gln_gap, y: polishCanvasH(110), width: gln_sw - (gln_gap * 2), height: polishCanvasH(130))
         GLNTRKNA_AiCanvasTrigger.setBackgroundImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "GLNTRKNA_AI_Entry_Banner"), for: .normal)
         GLNTRKNA_AiCanvasTrigger.imageView?.contentMode = .scaleAspectFill
         GLNTRKNA_AiCanvasTrigger.layer.cornerRadius = 16
@@ -107,10 +120,10 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         
         let gln_layout_h = UICollectionViewFlowLayout()
         gln_layout_h.scrollDirection = .horizontal
-        gln_layout_h.itemSize = CGSize(width: GLNTRKNA_ScaleW(100), height: GLNTRKNA_ScaleH(130))
+        gln_layout_h.itemSize = CGSize(width: polishCanvasW(100), height: polishCanvasH(130))
         gln_layout_h.minimumInteritemSpacing = 10
         
-        GLNTRKNA_ArtisanHorizonStrip.frame = CGRect(x: 0, y: GLNTRKNA_ScaleH(260), width: gln_sw, height: GLNTRKNA_ScaleH(150))
+        GLNTRKNA_ArtisanHorizonStrip.frame = CGRect(x: 0, y: polishCanvasH(260), width: gln_sw, height: polishCanvasH(150))
         GLNTRKNA_ArtisanHorizonStrip.backgroundColor = .clear
         GLNTRKNA_ArtisanHorizonStrip.collectionViewLayout = gln_layout_h
         GLNTRKNA_ArtisanHorizonStrip.delegate = self
@@ -119,7 +132,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         GLNTRKNA_ArtisanHorizonStrip.register(GLNTRKNA_ArtisanCell.self, forCellWithReuseIdentifier: "Artisan")
         GLNTRKNA_MasterScroller.addSubview(GLNTRKNA_ArtisanHorizonStrip)
         
-        GLNTRKNA_CategoryBridge.frame = CGRect(x: 0, y: GLNTRKNA_ScaleH(420), width: gln_sw, height: GLNTRKNA_ScaleH(40))
+        GLNTRKNA_CategoryBridge.frame = CGRect(x: 0, y: polishCanvasH(420), width: gln_sw, height: polishCanvasH(40))
          
         GLNTRKNA_MasterScroller.addSubview(GLNTRKNA_CategoryBridge)
         GLNTRKNA_RenderCategoryNodes()
@@ -131,11 +144,11 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
       
         GLNTRKNA_CategoryBridge.addSubview(backGroundImagPickin)
         let gln_layout_v = UICollectionViewFlowLayout()
-        gln_layout_v.itemSize = CGSize(width: (gln_sw - (gln_gap * 3)) / 2, height: GLNTRKNA_ScaleH(240))
+        gln_layout_v.itemSize = CGSize(width: (gln_sw - (gln_gap * 3)) / 2, height: polishCanvasH(240))
         gln_layout_v.minimumLineSpacing = gln_gap
         gln_layout_v.sectionInset = UIEdgeInsets(top: 0, left: gln_gap, bottom: 20, right: gln_gap)
         
-        GLNTRKNA_FeedMatrix.frame = CGRect(x: 0, y: GLNTRKNA_ScaleH(470), width: gln_sw, height: GLNTRKNA_ScaleH(600))
+        GLNTRKNA_FeedMatrix.frame = CGRect(x: 0, y: polishCanvasH(470), width: gln_sw, height: polishCanvasH(600))
         GLNTRKNA_FeedMatrix.backgroundColor = .clear
         GLNTRKNA_FeedMatrix.collectionViewLayout = gln_layout_v
         GLNTRKNA_FeedMatrix.delegate = self
@@ -144,7 +157,7 @@ class GLNTRKNA_MainDiscoveryHub: GLNTRKNA_BasicController {
         GLNTRKNA_FeedMatrix.register(GLNTRKNA_VibeMatrixCell.self, forCellWithReuseIdentifier: "Matrix")
         GLNTRKNA_MasterScroller.addSubview(GLNTRKNA_FeedMatrix)
         
-        GLNTRKNA_MasterScroller.contentSize = CGSize(width: gln_sw, height: GLNTRKNA_ScaleH(1100))
+        GLNTRKNA_MasterScroller.contentSize = CGSize(width: gln_sw, height: polishCanvasH(1100))
     }
     private let backGroundImagPickin:UIImageView = UIImageView.init(image: GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_ringball"))
     
@@ -201,8 +214,11 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
             let ArtisanCelldata = GLNTRKNAtopUsers[indexPath.row]
             ArtisanCell.gln_avatar.image = GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: ArtisanCelldata.glnt_userId)
             ArtisanCell.gln_name.text = ArtisanCelldata.glnt_userName
+            ArtisanCell.gln_action.tag = indexPath.row
+            ArtisanCell.gln_action.isSelected = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: ArtisanCelldata.glnt_userId)
+            ArtisanCell.gln_action.addTarget(self, action: #selector(GLNTRKNAToggleHorizonAlliance(Ubuaton:)), for: .touchUpInside)
             ArtisanCell.gln_vidus.tag = indexPath.row
-            ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEstablishVisualLink(Ubuaton:)), for: .touchUpInside)
+            ArtisanCell.gln_vidus.addTarget(self, action: #selector(GLNTRKNAEnterHorizonChat(Ubuaton:)), for: .touchUpInside)
             return ArtisanCell
         } else {
             let VibeMatrixCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Matrix", for: indexPath) as! GLNTRKNA_VibeMatrixCell
@@ -215,12 +231,33 @@ extension GLNTRKNA_MainDiscoveryHub: UICollectionViewDelegate, UICollectionViewD
             return VibeMatrixCell
         }
     }
-    @objc private func GLNTRKNAEstablishVisualLink(Ubuaton:UIButton) {
+    @objc private func GLNTRKNAToggleHorizonAlliance(Ubuaton:UIButton) {
+        guard GLNTRKNAtopUsers.indices.contains(Ubuaton.tag) else { return }
         let ArtisanCelldata = GLNTRKNAtopUsers[Ubuaton.tag]
-        let yac_face_vc = GLNTRKNA_FaceMirrorController.init(GLNTRKNACelestialData: ArtisanCelldata)
-       
-        yac_face_vc.modalPresentationStyle = .fullScreen
-        self.present(yac_face_vc, animated: true)
+        GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_ToggleAdoration(targetEmail: ArtisanCelldata.glnt_userId)
+        Ubuaton.isSelected = GLNTRKNA_CentralAuthority.GLNTRKNA_SharedOrb.GLNTRKNA_IsAdoring(targetEmail: ArtisanCelldata.glnt_userId)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
+    @objc private func GLNTRKNAEnterHorizonChat(Ubuaton:UIButton) {
+        guard GLNTRKNAtopUsers.indices.contains(Ubuaton.tag) else { return }
+        let ArtisanCelldata = GLNTRKNAtopUsers[Ubuaton.tag]
+        GLNTRKNA_MutualGlintGate.GLNTRKNA_RequestPassage(from: self, toward: ArtisanCelldata, intent: .GLNTRKNA_PrivateChat) { [weak self] in
+            self?.GLNTRKNAPushHorizonChat(GLNTRKNACelestialData: ArtisanCelldata)
+        }
+    }
+    
+    private func GLNTRKNAPushHorizonChat(GLNTRKNACelestialData: GLNTRKNA_MomentEntry) {
+        if let gln_index = GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.firstIndex(where: {
+            $0.userModel.glnt_userId == GLNTRKNACelestialData.glnt_userId
+        }) {
+            let yac_chat_vc = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData[gln_index])
+            self.navigationController?.pushViewController(yac_chat_vc, animated: true)
+            return
+        }
+        
+        let yac_chat_vc = GLNTRKNA_SoloDialogueController(GLNTRKNA_ContextCarrier: GLNTRKNA_ConvergeModel(userModel: GLNTRKNACelestialData, convert: []))
+        self.navigationController?.pushViewController(yac_chat_vc, animated: true)
     }
    @objc func gln_reportTraiiler()  {
        let safetyvc =  GLNTRKNA_SafetyHubController.init(GLNTRKNA_ActiveMode: .GLNTRKNA_ReasonCategorization)
@@ -267,11 +304,24 @@ class GLNTRKNA_ArtisanCell: UICollectionViewCell {
         gln_action.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_action_ed"), for: .selected)
         gln_action.isUserInteractionEnabled = true
         gln_vidus.frame = CGRect(x:77, y: 90, width: 24, height: 24)
-        gln_vidus.setImage(GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: "gln_vidus"), for: .normal)
+        let gln_message_icon = UIImage(named: unsealPolishText("aOC2AlF7Qq4ySzBwL2AGQ2+/K/NbtEzPTB1UV4EDv/hR9f93u7yDJBOuCqeZ6VRxe5hk2A==")) ?? GLNTRKnaAuraResourceVault.GLNTRKnaGetGlintyGraphic(GLNTRKnaAlias: unsealPolishText("H8azEY2Ya5SkYjDCD6ND4re2LdtPc9XXw5gKOSA0urIFcm+2ogC3H33LxDv5+Zkq"))
+        gln_vidus.setImage(gln_message_icon?.withRenderingMode(.alwaysTemplate), for: .normal)
+        gln_vidus.tintColor = UIColor(red: 0.42, green: 0.96, blue: 1, alpha: 1)
+        gln_vidus.imageView?.contentMode = .scaleAspectFit
         
         contentView.addSubview(gln_action)
         contentView.addSubview(gln_vidus)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        gln_action.removeTarget(nil, action: nil, for: .touchUpInside)
+        gln_vidus.removeTarget(nil, action: nil, for: .touchUpInside)
+        gln_action.isSelected = false
+        gln_avatar.image = nil
+        gln_name.text = nil
+    }
+    
     required init?(coder: NSCoder) { fatalError() }
 }
 

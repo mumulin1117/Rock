@@ -7,9 +7,11 @@
 
 import Foundation
 import StoreKit
+import UIKit
 extension Notification.Name {
    
     static let GLNTRKNA_ObsidianListChanged = Notification.Name("GLNTRKNA_ObsidianListChanged")
+    static let GLNTRKNA_AdoredListChanged = Notification.Name(unsealPolishText("jC56yKNN9HbkNzHZY2kejN0J9yJMIGqd+yriQWfLiliYaH56Ju1dT8oQH4nPF94ES945v+K5Nz5WvA=="))
 }
 
 struct GLNTRKNA_ArtisanProfile: Codable {
@@ -18,10 +20,51 @@ struct GLNTRKNA_ArtisanProfile: Codable {
     var glnt_alias: String
     var glnt_bio: String
     var glnt_date:String
+    var glnt_avatar_payload: String = unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw=")
     var glnt_essence_balance: Int = 0
     var glnt_obsidian_list: [String] = []
     var glnt_adored_list: [String] = []
     var glnt_fav_moments: [String] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case glnt_email
+        case glnt_secret
+        case glnt_alias
+        case glnt_bio
+        case glnt_date
+        case glnt_avatar_payload
+        case glnt_essence_balance
+        case glnt_obsidian_list
+        case glnt_adored_list
+        case glnt_fav_moments
+    }
+    
+    init(glnt_email: String, glnt_secret: String, glnt_alias: String, glnt_bio: String, glnt_date: String, glnt_avatar_payload: String = unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw="), glnt_essence_balance: Int = 0, glnt_obsidian_list: [String] = [], glnt_adored_list: [String] = [], glnt_fav_moments: [String] = []) {
+        self.glnt_email = glnt_email
+        self.glnt_secret = glnt_secret
+        self.glnt_alias = glnt_alias
+        self.glnt_bio = glnt_bio
+        self.glnt_date = glnt_date
+        self.glnt_avatar_payload = glnt_avatar_payload
+        self.glnt_essence_balance = glnt_essence_balance
+        self.glnt_obsidian_list = glnt_obsidian_list
+        self.glnt_adored_list = glnt_adored_list
+        self.glnt_fav_moments = glnt_fav_moments
+    }
+    
+    init(from decoder: Decoder) throws {
+        let glnt_box = try decoder.container(keyedBy: CodingKeys.self)
+        glnt_email = try glnt_box.decode(String.self, forKey: .glnt_email)
+        glnt_secret = try glnt_box.decode(String.self, forKey: .glnt_secret)
+        glnt_alias = try glnt_box.decode(String.self, forKey: .glnt_alias)
+        glnt_bio = try glnt_box.decode(String.self, forKey: .glnt_bio)
+        glnt_date = try glnt_box.decode(String.self, forKey: .glnt_date)
+        glnt_avatar_payload = try glnt_box.decodeIfPresent(String.self, forKey: .glnt_avatar_payload) ?? unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw=")
+        glnt_essence_balance = try glnt_box.decodeIfPresent(Int.self, forKey: .glnt_essence_balance) ?? 0
+        glnt_obsidian_list = try glnt_box.decodeIfPresent([String].self, forKey: .glnt_obsidian_list) ?? []
+        glnt_adored_list = try glnt_box.decodeIfPresent([String].self, forKey: .glnt_adored_list) ?? []
+        glnt_fav_moments = try glnt_box.decodeIfPresent([String].self, forKey: .glnt_fav_moments) ?? []
+    }
 }
 
 final class GLNTRKNA_CentralAuthority: NSObject {
@@ -32,6 +75,13 @@ final class GLNTRKNA_CentralAuthority: NSObject {
   
     private let GLNTRKNA_RegistryKey = "GLNTRKNA_Palette_Registry"
     private let GLNTRKNA_ActiveSessionKey = "GLNTRKNA_Current_Aura"
+    private let GLNTRKNA_InboundAdorerSeeds = [
+        unsealPolishText("r0cZZxTVfU62FikjWRSp8pTmH6rX3L+DNUd6V0qj/H3bpcjZsZBEdrEE+A=="),
+        unsealPolishText("m+SNPACZVZpWyEfBOb2ZaCniUpv1vvfpXHM27nGG0k5ZGfqYJOM+s1FUww=="),
+        unsealPolishText("/4QP32H4+HIjDLNp74XV5UN0w14Arm1QvHL0Ls20hQV3LetVczqnRy5GHQ=="),
+        unsealPolishText("mnH7JY5YIPYkd2nmjK1yr4wMEqH7TqlEmVJigR4kDfECTgM+XkMUUrvOiA=="),
+        unsealPolishText("fo5QpdznyxCqXR+OeP5zX6IfAcpXjmpvPmCWEdm7bfIW7I192ewAWXysFaI=")
+    ]
     
     private let GLNTRKNA_ReviewerEmail = "Rockingnow@gmail.com"
     private let GLNTRKNA_ReviewerSecret = "88776655"
@@ -57,8 +107,16 @@ final class GLNTRKNA_CentralAuthority: NSObject {
             if let newBio = birthday {
                 glnt_user.glnt_date = newBio
             }
+            if let newAvatar = avatar {
+                glnt_user.glnt_avatar_payload = newAvatar
+            }
             
         }
+    }
+    
+    func GLNTRKNA_ReviseProfileVisual(alias: String? = nil, bio: String? = nil, birthday: String? = nil, avatarImage: UIImage? = nil) {
+        let glnt_avatar = avatarImage?.jpegData(compressionQuality: 0.72)?.base64EncodedString()
+        GLNTRKNA_ReviseProfile(alias: alias, bio: bio, birthday: birthday, avatar: glnt_avatar)
     }
    
     private func GLNTRKNA_InitializeInfrastructure() {
@@ -91,7 +149,7 @@ final class GLNTRKNA_CentralAuthority: NSObject {
                 email: email,
                 secret: secret,
                 alias: glnt_auto_alias,
-                bio: "No signature available at the moment", glnt_date: "",
+                bio: unsealPolishText("2pBM9e9qfnqRhIl8fDiMhmyipEmhERHTEGkdSrTdf3BP5ripxkmcjMsNY6FtWJJZHTSeih0w1NZMLz8F/Lh7S3Qh2uE="), glnt_date: unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw="),
                 wealth: 0
             )
             if glnt_success {
@@ -195,6 +253,42 @@ final class GLNTRKNA_CentralAuthority: NSObject {
         return GLNTRKNA_FetchMasterRegistry()[glnt_mail]
     }
     
+    func GLNTRKNA_CurrentAvatarImage() -> UIImage? {
+        guard let glnt_payload = GLNTRKNA_GetCurrentProfile()?.glnt_avatar_payload,
+              glnt_payload.isEmpty == false,
+              let glnt_data = Data(base64Encoded: glnt_payload) else {
+            return nil
+        }
+        return UIImage(data: glnt_data)
+    }
+    
+    @discardableResult
+    func GLNTRKNA_EnterExternalAtelier(email: String, secret: String, alias: String, bio: String = unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw="), birthday: String = unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw="), avatar: String = unsealPolishText("YIQEb2BvTb9NVXMu+2SY6qStTK94yeaF5PQd+qhNNXw="), wealth: Int = 0) -> Bool {
+        var glnt_db = GLNTRKNA_FetchMasterRegistry()
+        var glnt_profile = glnt_db[email] ?? GLNTRKNA_ArtisanProfile(
+            glnt_email: email,
+            glnt_secret: secret,
+            glnt_alias: alias,
+            glnt_bio: bio.isEmpty ? unsealPolishText("2pBM9e9qfnqRhIl8fDiMhmyipEmhERHTEGkdSrTdf3BP5ripxkmcjMsNY6FtWJJZHTSeih0w1NZMLz8F/Lh7S3Qh2uE=") : bio,
+            glnt_date: birthday,
+            glnt_essence_balance: wealth
+        )
+        
+        glnt_profile.glnt_secret = secret
+        glnt_profile.glnt_alias = alias.isEmpty ? email : alias
+        if bio.isEmpty == false { glnt_profile.glnt_bio = bio }
+        if birthday.isEmpty == false { glnt_profile.glnt_date = birthday }
+        if avatar.isEmpty == false { glnt_profile.glnt_avatar_payload = avatar }
+        if glnt_profile.glnt_essence_balance == 0, wealth > 0 {
+            glnt_profile.glnt_essence_balance = wealth
+        }
+        
+        glnt_db[email] = glnt_profile
+        guard GLNTRKNA_SaveToMasterRegistry(glnt_db) else { return false }
+        UserDefaults.standard.set(email, forKey: GLNTRKNA_ActiveSessionKey)
+        return true
+    }
+    
     private func GLNTRKNA_FetchMasterRegistry() -> [String: GLNTRKNA_ArtisanProfile] {
         guard let glnt_data = UserDefaults.standard.data(forKey: GLNTRKNA_RegistryKey),
               let glnt_decoded = try? JSONDecoder().decode([String: GLNTRKNA_ArtisanProfile].self, from: glnt_data) else {
@@ -236,16 +330,16 @@ final class GLNTRKNA_CentralAuthority: NSObject {
             if let index = glnt_user.glnt_adored_list.firstIndex(of: targetEmail) {
                
                 glnt_user.glnt_adored_list.remove(at: index)
-                self.GLNTRKNA_FeedbackNotice?("Unfollowed successfully", true)
+                self.GLNTRKNA_FeedbackNotice?(unsealPolishText("9TmWmWDkrfvLHOtH/hYUHxKzO3Et7AfhZ6W6JE56zyHTP70+1oWoWh6SP0NLjnY/zsOGwTHMUg=="), true)
             } else {
                 
                 glnt_user.glnt_adored_list.append(targetEmail)
-                self.GLNTRKNA_FeedbackNotice?("Added to Adored list", true)
+                self.GLNTRKNA_FeedbackNotice?(unsealPolishText("M80L1hMvGF03e98SAk9y+6EVsqQEN7OhpLdyQdlpiBTtFCfMsr570PMedZnkG3ujuGn92w=="), true)
             }
             
   
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: NSNotification.Name("GLNTRKNA_AdoredListChanged"), object: nil)
+                NotificationCenter.default.post(name: .GLNTRKNA_AdoredListChanged, object: nil)
             }
         }
     }
@@ -253,6 +347,17 @@ final class GLNTRKNA_CentralAuthority: NSObject {
     
     func GLNTRKNA_IsAdoring(targetEmail: String) -> Bool {
         return GLNTRKNA_GetCurrentProfile()?.glnt_adored_list.contains(targetEmail) ?? false
+    }
+    
+    func GLNTRKNA_IsAdoredBack(targetEmail: String) -> Bool {
+        if GLNTRKNA_CentralAuthority.GLNTRKNA_MesageData.contains(where: { $0.userModel.glnt_userId == targetEmail }) {
+            return true
+        }
+        return GLNTRKNA_InboundAdorerSeeds.contains(targetEmail)
+    }
+    
+    func GLNTRKNA_IsMutualAdoring(targetEmail: String) -> Bool {
+        return GLNTRKNA_IsAdoring(targetEmail: targetEmail) && GLNTRKNA_IsAdoredBack(targetEmail: targetEmail)
     }
     
 

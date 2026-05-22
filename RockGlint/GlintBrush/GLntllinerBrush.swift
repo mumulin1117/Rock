@@ -7,7 +7,7 @@
 
 import UIKit
 
-//钥匙串管理持久化管理 UDID 和 登录password
+
 import Foundation
 import Security
 
