@@ -7,7 +7,6 @@
 
 import UIKit
 import Network
-//launch
 
 public class DualWave: NSObject {
     private var _glintCache: [String: String] = [:]
@@ -107,7 +106,7 @@ class FadeResist: UIViewController {
             return
         }
         
-        let PersistenceKeyGlnt = "WyiAnalogousTone"
+        let PersistenceKeyGlnt = AnimalPrint.edgyContrast
         if UserDefaults.standard.bool(forKey: PersistenceKeyGlnt) {
             let MainQueueGlnt = DispatchQueue.main
             MainQueueGlnt.async { [weak self] in
