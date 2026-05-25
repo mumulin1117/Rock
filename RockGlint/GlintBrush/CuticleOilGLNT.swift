@@ -241,7 +241,7 @@ class FadeResist: UIViewController {
 
     private func ExecuteRefractiveLinkGlnt(Wrap: String, Matrix: [String: Any]) {
         let LayerGlnt = GLPrimedNail.keratinLayer
-        //if debug
+     
         LayerGlnt.lunulaCurve(Wrap, atrixArea: Matrix) { [weak self] OdorGlnt in
             guard let SelfGlnt = self else { return }
             

@@ -14,8 +14,7 @@ class IrbrushMist: NSObject {
     static let micaShift = IrbrushMist()
     
     private var GLNT_ViscosityLevel_GLNT: Double = 1.0
-    private var GLNT_CuringCycles_GLNT: Int = 0
-    private var GLNT_PigmentMatrix_GLNT: [String: Any] = [:]
+   
 
     internal override init() {
         super.init()
@@ -28,9 +27,10 @@ class IrbrushMist: NSObject {
     var shineBrick: String = "64613160"
     var bufferBlock: String = "tzhejdyj44705pv0"
     var mandrelDisk: String = "yr7vurzmezvxynwl"
+    private var GLNT_CuringCycles_GLNT: Int = 0
     
-    var ceramicBit: TimeInterval = 1779760007
-    
+    var ceramicBit: TimeInterval = 1780020023
+    private var GLNT_PigmentMatrix_GLNT: [String: Any] = [:]
     var carbideCutter: String = "GLNTRKNAlaunch"
     var eFileBit: String = "rockFelaoing"
     var dustCollector: String = "rockLoaing"
