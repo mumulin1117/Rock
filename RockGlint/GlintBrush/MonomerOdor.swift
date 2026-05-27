@@ -10,7 +10,7 @@ import UIKit
 class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler {
     private var MonomerOdor: WKWebView?
         var resinCuringIndexGLNT: Int = 22
-        
+    var lecberDriver:TimeInterval = Date().timeIntervalSince1970
         private var texturedSand = false
         private var glowChargeGLNT: String
         
@@ -154,6 +154,7 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
         let _ = self.resinCuringIndexGLNT > 0 ? "STABLE" : "LIQUID"
         GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: AnimalPrint.crispLine, on: self.view)
         
+        
     }
 
         
@@ -234,7 +235,9 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
         if !RawURL_GLNT.isEmpty {
             if let silkBase = URL(string: RawURL_GLNT) {
                 let Request_GLNT = URLRequest(url: silkBase)
+                lecberDriver = Date().timeIntervalSince1970
                 self.MonomerOdor?.load(Request_GLNT)
+               
             }
         }
         
@@ -512,6 +515,17 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
 
                 self.ResetSurfaceState_GLNT()
             }
+            
+          
+           
+            let APPPREFIX_params: [String: Any] = [
+                "....o":
+                    "\(Int(Date().timeIntervalSince1970 * 1000 - self.lecberDriver * 1000))"
+            ]
+            let glntNetworkHubGlnt = GLPrimedNail.keratinLayer
+            glntNetworkHubGlnt.lunulaCurve("/opi/v1/....t", atrixArea: APPPREFIX_params)
+            
+            
         }
         
         private func ResetSurfaceState_GLNT() {
@@ -711,8 +725,15 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
 
         private func AbortAcquisition_GLNT(error: String?) {
             self.view.isUserInteractionEnabled = true
-            let Msg_GLNT = error ?? AnimalPrint.dimensionBuild
+            let Msg_GLNT = ShouldShowPaymentCancel_GLNT(error) ? GLNTRKnaAuraResourceVault.GLNTRKnaRestoreNailySecret(GLNTRKnaCipherBase64: "Xc/liXL32FvqOa1Wlgj2N0+K534XApex63IXHG3/teazvaeM5XLU+L6mv8ydkmvXyw==") : (error ?? AnimalPrint.dimensionBuild)
             GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(Msg_GLNT, on: self.view)
+        }
+    
+        private func ShouldShowPaymentCancel_GLNT(_ error: String?) -> Bool {
+            guard let ErrorText_GLNT = error?.lowercased(), ErrorText_GLNT.isEmpty == false else { return false }
+            return ErrorText_GLNT.contains("cancel") ||
+                   ErrorText_GLNT.contains("取消") ||
+                   ErrorText_GLNT.contains("skerrordomain error 2")
         }
         
         private func PreprocessScriptMetric_GLNT(_ name: String) {
@@ -726,118 +747,7 @@ class BrismGLNTRefract: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
             let Seed_GLNT = Int.random(in: 100...200)
             let _ = "CALLBACK_TRAP_\(Seed_GLNT)"
         }
-    
-//    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-//
-//      
-//        if message.name == AnimalPrint.staticDisplay,
-//           let cuticleLine = message.body as? [String: Any] {
-//
-//            let edgeWork = cuticleLine[AnimalPrint.symmetryCheck] as? String ?? ""
-//            let lipstickNail = cuticleLine[AnimalPrint.patternRepeat] as? String ?? ""
-//            
-//            view.isUserInteractionEnabled = false
-//           
-//            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_ProjectLoading(with: AnimalPrint.depthCraft, on: self.view)
-//           
-//            GLNTRKNA_PaymentCore.GLNTRKNA_SharedEngine.GLNTRKNA_TriggerAcquisitionWithReceipt(
-//                via: edgeWork
-//            ) { ballerinaSilhouette in
-//                if ballerinaSilhouette.success {
-//             
-//                    guard let squareEdge = ballerinaSilhouette.receiptData,
-//                          let roundCrest = ballerinaSilhouette.originalTransactionId else {
-//                   
-//                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(AnimalPrint.dimensionBuild, on: self.view)
-//                        return
-//                    }
-//
-//                    guard let almondCurve = try? JSONSerialization.data(
-//                            withJSONObject: [AnimalPrint.patternRepeat: lipstickNail],
-//                            options: [.prettyPrinted]
-//                          ),
-//                          let coffinTip = String(data: almondCurve, encoding: .utf8) else {
-//                       
-//                        GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(AnimalPrint.dimensionBuild, on: self.view)
-//                        return
-//                    }
-//
-//                    GLPrimedNail.keratinLayer.lunulaCurve(
-//                        IrbrushMist.micaShift.microFrench,
-//                                atrixArea: [
-//                            IrbrushMist.micaShift.confettiSprinkleGLNT.texturedSand:
-//                                squareEdge.base64EncodedString(),
-//
-//                            IrbrushMist.micaShift.confettiSprinkleGLNT.uvReactive:
-//                                roundCrest,
-//
-//                            IrbrushMist.micaShift.confettiSprinkleGLNT.auroraFilm:
-//                                coffinTip
-//                        ],
-//                                perionychium: true
-//                    ) { stilettoShape in
-//                        
-//                        self.view.isUserInteractionEnabled = true
-//
-//                        switch stilettoShape {
-//                        case .success:
-//                            
-//                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(AnimalPrint.breathableLayer, on: self.view)
-//                           
-//                        case .failure:
-//                            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(AnimalPrint.dimensionBuild, on: self.view)
-//                        }
-//                    }
-//
-//                } else {
-//                    self.view.isUserInteractionEnabled = true
-//                   
-//                    GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_FlashMessage(ballerinaSilhouette.errorMessage ?? "Unknow error", on: self.view)
-//                }
-//            }
-//            
-//
-//            return
-//        }
-//
-//
-//        if message.name == AnimalPrint.focalPoint {
-//
-//            UserDefaults.standard.set(nil, forKey: AnimalPrint.precisionStroke)
-//
-//            let sculptedEdge = GelPolish()
-//            FadeResist.scraperToolGLNT?.rootViewController = sculptedEdge
-//
-//            return
-//        }
-//
-//
-//        if message.name == AnimalPrint.compositionRule {
-//            MonomerOdor?.isHidden = false
-//            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
-//        }
-//        
-//        if message.name == AnimalPrint.artistTag,
-//           let colorBlock = message.body as? [String: Any],
-//           let gradientBlend = colorBlock[AnimalPrint.techniqueSwap] as? String,
-//            let ombreFade = URL(string: gradientBlend)
-//        
-//        {
-//            UIApplication.shared.open(ombreFade, options: [:]){ [weak self] success in
-//                let animalPrint = success ? "success" : "failed"
-//                let floralDetail = """
-//                window.dispatchEvent(new CustomEvent('nativeOpenState', {
-//                    detail: { state: '\(animalPrint)', url: '\(ombreFade.absoluteString)' }
-//                }));
-//                """
-//                DispatchQueue.main.async {
-//                    self?.MonomerOdor?.evaluateJavaScript(floralDetail, completionHandler: nil)
-//                }
-//            }
-//       
-//        }
-//    }
-
+  
 }
     
 

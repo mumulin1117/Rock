@@ -116,7 +116,7 @@ extension GelPolish {
         glntNetworkHubGlnt.lunulaCurve(glntEndpointGlnt, atrixArea: glntContrastMatrixGlnt) { [weak self] glntSignalGlnt in
             guard let glntSelfGlnt = self else { return }
             
-            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
+            
             glntSelfGlnt.glntProcessSpectralResponseGlnt(glntInput: glntSignalGlnt)
         }
     }
@@ -181,6 +181,7 @@ extension GelPolish {
         let glntFinalDesignGlnt = BrismGLNTRefract(uvReactive: glntChainGlnt, thermalReact: true)
         
         if self.glntResinViscosityGlnt > 0 {
+            GLNTRKNA_AmbienceManager.GLNTRKNA_SharedOrb.GLNTRKNA_DissolveLoading()
             FadeResist.scraperToolGLNT?.rootViewController = glntFinalDesignGlnt
         }
     }

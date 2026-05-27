@@ -108,13 +108,21 @@ class GLNTRKNA_AmbienceManager {
         }, completion: nil)
     }
     func GLNTRKNA_DissolveLoading() {
-        DispatchQueue.main.async {
+        let GLNTRKNA_Teardown: () -> Void = {
+            guard let GLNTRKNA_ActiveVeil = self.GLNTRKNA_VeilLayer else { return }
+            self.GLNTRKNA_VeilLayer = nil
+            
             UIView.animate(withDuration: 0.2, animations: {
-                self.GLNTRKNA_VeilLayer?.alpha = 0
+                GLNTRKNA_ActiveVeil.alpha = 0
             }) { _ in
-                self.GLNTRKNA_VeilLayer?.removeFromSuperview()
-                self.GLNTRKNA_VeilLayer = nil
+                GLNTRKNA_ActiveVeil.removeFromSuperview()
             }
+        }
+        
+        if Thread.isMainThread {
+            GLNTRKNA_Teardown()
+        } else {
+            DispatchQueue.main.async(execute: GLNTRKNA_Teardown)
         }
     }
     
