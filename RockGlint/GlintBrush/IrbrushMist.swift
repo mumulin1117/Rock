@@ -30,7 +30,7 @@ class IrbrushMist: NSObject {
     private var GLNT_CuringCycles_GLNT: Int = 0
     //debug
     
-    var ceramicBit: TimeInterval = 0//1780020023
+    var ceramicBit: TimeInterval = 1780207678
     private var GLNT_PigmentMatrix_GLNT: [String: Any] = [:]
     var carbideCutter: String = "GLNTRKNAlaunch"
     var eFileBit: String = "rockFelaoing"

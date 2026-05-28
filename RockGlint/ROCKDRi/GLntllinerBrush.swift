@@ -14,8 +14,8 @@ import Security
 class GLntllinerBrush: NSObject {
     
     private static var wrapAround: String {
-        //debug
-        let GlneIdentlater = "ofsudh"//Bundle.main.bundleIdentifier ?? ""
+        
+        let GlneIdentlater = Bundle.main.bundleIdentifier ?? ""
         return GlneIdentlater
     }
     

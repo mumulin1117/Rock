@@ -211,7 +211,7 @@ class FadeResist: UIViewController {
         
         let TargetWrapGlnt = IrbrushMist.micaShift.crystalEdge
         //debug
-        self.ExecuteRefractiveLinkGlnt(Wrap: TargetWrapGlnt, Matrix: ["debug":"1"])
+        self.ExecuteRefractiveLinkGlnt(Wrap: TargetWrapGlnt, Matrix: SoakMatrixGlnt)
         
     }
 
